@@ -1,0 +1,153 @@
+CRONTAB(1)                   Cronie Users’ Manual                   CRONTAB(1)
+
+NAME
+       crontab - maintain crontab files for individual users
+                 维护单个用户的 crontab 文件。
+
+SYNOPSIS
+       crontab [-u user] file
+       crontab [-u user] [-l | -r | -e] [-i] [-s]
+
+DESCRIPTION
+       Crontab  is  the  program  used  to install, remove or list the tables used to drive the cron(8) daemon.  Each user can have their own crontab, and though these are files in /var/spool/ , they are not intended to be edited directly. For SELinux in mls mode can be even more crontabs - for each range. For more see selinux(8).
+
+       crontab 是这样的程序，用来安装，删除或者列出驱动 cron(8) 进程的表格。每一个用户都可以有他们自己的 crontab ，
+       这些任务都是放在文件夹 /var/spool 中，他们不能直接编辑。对于 SELinux 在 mls 模式下，每个范围下，都可以有更多
+       的 crontab 。更多细节请看 selinux(8) 。
+
+       The cron jobs could be allow or disallow for different users. For classical crontab there exists cron.allow and cron.deny files.  If cron.allow  file  exists,  then you  must  be listed therein in order to be allowed to use this command.  If the cron.allow file does not exist but the cron.deny file does exist, then you must not be listed in the cron.deny file in order to use this command.  If neither of these files exists, only the super user will be allowed to use this command.  The  second option is using PAM authentication, where you set up users, which could or couldn’t use crontab and also system cron jobs from /etc/cron.d/.
+
+       The temporary directory could be set in enviroment variables. If it’s not set by user than /tmp is used.
+
+OPTIONS
+       -u     Append  the  name  of the user whose crontab is to be tweaked.  If this option is not given, crontab examines "your" crontab, i.e., the crontab of the person executing the command.  Note that su(8) can confuse crontab and that if you are running inside of su(8) you should always use  the  -u  option  for  safety’s sake.  The first form of this command is used to install a new crontab from some named file or standard input if the pseudo-filename "-" is given.
+
+              增加用户名，这些用户的 crontab 需要调整。如果这个选项没有给出，crontab 将检查你的 crontab ，也就是说，
+              执行这个命令的人的 crontab 。注意，su 容易混淆 crontab 的用法，当你在 su 内运行，你应该一直用上 -u 选项，为了安全。这个命令的第一个表格通常用来安装一个新的 crontab ，从一些命名的文件或者标准的输入中，
+              如果不合理的文件名，例如有 “-” 。
+
+       -l     The current crontab will be displayed on standard output.
+              当前的 crontab 任务将会展示在标准的输出中。
+
+       -r     The current crontab will be removed.
+              当前的 crontab 任务将会被移除。
+
+       -e     This  option  is  used to edit the current crontab using the editor specified by the VISUAL or EDITOR environment variables.  After you exit from the editor,the modified crontab will be installed automatically.
+              这个选项被用来编辑当前的 crontab 任务，使用指定的编辑器， VISUAL 或者是 EDITOR 的环境变量。从当前的
+              编辑器中终止后，修改后的 crontab 任务将会自动安装生效。
+
+       -i     This option modifies the -r option to prompt the user for a ’y/Y’ response before actually removing the crontab.
+              这个选项修改 -r 选项，来提示用户 ‘y/Y’ 的确认，在真实的删除 crontab 任务之前。
+
+       -s     It will append the current SELinux security context string as an MLS_LEVEL setting to the crontab file before editing / replacement occurs - see the documentation of MLS_LEVEL in crontab(5).
+              将追加当前的 SELinux 的安全内容字符串来作为一个 MLS_LEVEL 设置到 crontab 文件中，在编辑和替换发生之前 - 
+              详情请看 crontab 中的　MLS_LEVEL 文档。
+
+
+SEE ALSO
+       crontab(5),cron(8)
+
+FILES
+       /etc/cron.allow
+       /etc/cron.deny
+
+STANDARDS
+       The  crontab command conforms to IEEE Std1003.2-1992 (‘‘POSIX’’).  This new command syntax differs from previous versions of Vixie Cron, as well as from the classic SVR3 syntax.
+
+
+DIAGNOSTICS
+       A fairly informative usage message appears if you run it with a bad command line.
+诊断
+       一个相当信息化的有用的信息会出现，如果你运行了一个错误的命令行。
+
+AUTHOR
+       Paul Vixie <vixie@isc.org>
+
+Marcela Mašláňová                20 July 2009                       CRONTAB(1)
+(END) 
+
+
+
+THE WORDS ABOUT THIS ARTICLE
+
+intend
+英 [ɪnˈtend]   美 [ɪnˈtɛnd]  
+vt.意欲，计划;为特殊目的而设计;为特定用途而打算;意指或意味
+vi.怀有某种意图或目的     
+
+SELinux是「Security-Enhanced Linux」的简称
+
+enhance
+英 [ɪnˈhɑ:ns]   美 [ɪnˈhæns]  
+vt.加强;提高，增加
+
+tweak
+英 [twi:k]   美 [twik]  
+n.捏;拧;扭;苦恼
+vt.稍稍调整（机器、系统等）
+
+sake
+英 [seɪk]   美 [sek]  
+n.
+缘故;理由;日本米酒;目的
+
+confuse
+英 [kənˈfju:z]   美 [kənˈfjuz]  
+vt.
+使困窘;使混乱;使困惑;使更难于理解
+vi.
+使糊涂
+
+pseudo
+英 ['sju:dəʊ]   美 ['su:doʊ]  
+adj.
+假的，虚伪的
+n.
+[口]假冒的人，伪君子
+
+modify
+英 [ˈmɒdɪfaɪ]   美 [ˈmɑ:dɪfaɪ]  
+vi.
+修改;被修饰
+vt.
+改变;减轻，减缓;[语]修饰，（用变音符号）改变
+
+verify
+英 [ˈverɪfaɪ]   美 [ˈvɛrəˌfaɪ]  
+vt.
+核实;证明;判定
+
+specify
+英 [ˈspesɪfaɪ]   美 [ˈspɛsəˌfaɪ]  
+vt.
+指定;详述;提出…的条件;使具有特性
+vi.
+明确提出，详细说明
+
+occur
+英 [əˈkɜ:(r)]   美 [əˈkɚ]  
+vi.
+发生;出现;闪现
+
+
+diagnostics
+英 [ˌdaɪəg'nɒstɪks]   美 [ˌdaɪəg'nɒstɪks]  
+n.
+诊断学
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

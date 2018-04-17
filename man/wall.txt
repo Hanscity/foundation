@@ -1,0 +1,58 @@
+WALL(1)                       Linux User’s Manual                      WALL(1)
+
+NAME
+       wall -- send a message to everybody’s terminal.
+
+SYNOPSIS
+       wall [-n] [ message ]
+
+DESCRIPTION
+       Wall  sends a message to everybody logged in with their mesg(1) permission set to yes.  The message can be given as an argument to wall, or it can be sent to wall’s standard input.  When using the standard input from a terminal, the message should be terminated with the EOF key (usually Control-D).
+
+       The length of the message is limited to 20 lines.  For every invocation of wall a notification will be written to syslog, with facility LOG_USER and level LOG_INFO.
+
+       Wall 发送信息给登录时允许被发送信息的每个用户。这些信息可能是命令 wall 的一个参数，或者可以发送给 wall 的标准
+       输入。当从一个命令行中用到这个标准输入的时候，这些信息应该会以 EOF 键结束（通常使用 control+D）
+
+       信息的长度被限制为 20 行。对于 wall 的每一次调用一个通知将会被写入 syslog ,通过设备 LOG_USER 和级别 LOG_INFO 。
+
+OPTIONS
+       -n     Suppresses  the  normal  banner printed by wall, changing it to "Remote broadcast message".  This option is only available for root if wall is installed set-group-id, and is used by rpc.walld(8).
+              禁止 wall 的正常输出，改变它到 “远程的广播信息”。这个选项仅对 root 用户有效，如果 wall 是通过 set-group-id 来安装的，而且被 rpc.walld(8) 使用。
+
+
+ENVIRONMENT
+       Wall ignores the TZ variable - the time printed in the banner is based on the system’s local time.
+       wall 会忽略 TZ 变量 - 条幅上打印的时间是根据系统的本地时间。
+
+SEE ALSO
+       mesg(1), rpc.rwalld(8).
+
+AUTHOR
+       Miquel van Smoorenburg, miquels@cistron.nl
+
+                                 15 April 2003                         WALL(1)
+
+
+
+WORDS about this command
+
+
+terminate
+英 [ˈtɜ:mɪneɪt]   美 [ˈtɜ:rmɪneɪt]  
+vt.& vi.结束;使终结;解雇;到达终点站
+adj.结束的
+
+
+notification
+英 [ˌnəʊtɪfɪˈkeɪʃn]   美 [ˌnoʊtɪfɪˈkeɪʃn]  
+n.通知;通知单;布告;公布
+
+facility
+英 [fəˈsɪləti]   美 [fəˈsɪləti]  
+n.设备;容易;能力;灵巧
+
+
+suppress
+英 [səˈpres]   美 [səˈprɛs]  
+vt.镇压，压制;止住，忍住;禁止发表;阻止…的生长（或发展）

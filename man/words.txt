@@ -1,0 +1,80 @@
+evaluate
+英 [ɪˈvæljueɪt]   美 [ɪˈvæljuˌet]  
+vt.
+评价;求…的值（或数）;对…评价;[数学、逻辑学]求…的数值
+vi.
+评价，估价
+
+
+expression
+英 [ɪkˈspreʃn]   美 [ɪkˈsprɛʃən]  
+n.
+表现，表示，表达;表情，脸色，态度，腔调，声调;[数]式，符号;词句，语句，措辞，说法
+
+pipe
+英 [paɪp]   美 [paɪp]  
+n.
+管子;烟斗;管乐器;（管风琴的）音管
+vt.
+以管输送;用管乐器演奏;尖声唱
+vi.
+吹奏管乐器;尖叫;尖声地说（或唱），尖声啼鸣;[航海] 吹长哨
+
+
+grant
+英 [grɑ:nt]   美 [grænt]  
+vt.
+授予;承认;同意;准许
+n.
+拨款;补助金;授给物（如财产、授地、专有权、补助、拨款等）
+vi.
+同意
+
+
+maintain
+英 [meɪnˈteɪn]   美 [menˈten]  
+vt.
+保持;保养;坚持;固执己见
+
+
+reference
+英 [ˈrefrəns]   美 [ˈrɛfərəns, ˈrɛfrəns]  
+n.
+参考;参考书;提及，涉及;证明人，介绍人
+v.
+引用;参照
+
+
+dereference
+英 [ˌdi:ˈrefrəns]  
+间接引用
+
+
+parentheses
+英 [pəˈrenθəsi:z]   美 [pə'renθəsi:z]  
+n.
+圆括号，插入语，插曲（ parenthesis的名词复数 ）
+
+
+parenthesis
+英 [pəˈrenθəsɪs]   美 [pəˈrɛnθɪsɪs]  
+n.
+圆括号;插入语;插入成分;间歇
+
+
+supersedes
+v.
+取代，接替( supersede的第三人称单数 )
+
+
+supersede
+英 [ˌsu:pəˈsi:d]   美 [ˌsu:pərˈsi:d]  
+vt.
+取代，接替;更替，继任;将…免职，撤换
+vi.
+推迟行动
+v.
+废除，废弃
+
+
+

@@ -1,0 +1,789 @@
+HWCLOCK(8)                                                          HWCLOCK(8)
+
+NAME
+       hwclock - query and set the hardware clock (RTC)
+                 查询和设置硬件时钟（RTC,英文全称:Real-time clock,中文名称:实时时钟,是指可以像时钟一様输出实际时间的电子设备,一般会是集成电路,因此也称为时钟芯片。） 
+
+SYNOPSIS
+       hwclock [functions] [options]
+
+DESCRIPTION
+       hwclock  is  a  tool  for accessing the Hardware Clock.  You can display the current time, set the Hardware Clock to a specified time, set the Hardware Clock to the
+       System Time, and set the System Time from the Hardware Clock.
+
+       You can also run hwclock periodically to insert or remove time from the Hardware Clock to compensate for systematic drift (where the  clock  consistently  gains  or
+       loses time at a certain rate if left to run).
+
+       hwclock 是一个进入硬件时钟的工具。你可以展示当前的时间，将硬件时钟设定为一个指定的时间，将硬件时钟设置为
+       系统时间，也可将系统时间设置为硬件时间。
+
+       你也可以周期性的执行 hwclock 命令来增加或者移除硬件的时间，用来补偿系统的浮动（如果你让硬件时钟以自己的
+       频率随着时间流逝，它的误差会一点一点的累积）
+
+FUNCTIONS
+       You need exactly one of the following options to tell hwclock what function to perform:
+
+       -r, --show
+              Read  the  Hardware Clock and print the time on Standard Output.  The time shown is always in local time, even if you keep your Hardware Clock in Coordinated
+              Universal Time.  See the --utc option.
+
+              读取硬件时钟然后标准输出时间。展示的时间一直是本地时间？，哪怕你将硬件时钟保持为世界标准时。
+              具体请看 --utc 选项。
+
+
+       --set  Set the Hardware Clock to the time given by the --date option.
+
+              通过 --date 选项来设置硬件时钟
+
+       -s, --hctosys
+              Set the System Time from the Hardware Clock.
+
+              Also set the kernel’s timezone value to the local timezone as indicated by the TZ environment variable and/or /usr/share/zoneinfo, as tzset(3)  would  interpret  them.   The  obsolete  tz_dsttime field of the kernel’s timezone value is set to DST_NONE. (For details on what this field used to mean, see settimeofday(2).)
+
+
+              This is a good option to use in one of the system startup scripts.
+              You need this option if you specify the --set option.  Otherwise, it is ignored.  This specifies the time to which to set the Hardware Clock.  The  value  of
+              this option is an argument to the date(1) program.  For example,
+
+              hwclock --set --date="9/22/96 16:45:05"
+
+              The argument is in local time, even if you keep your Hardware Clock in Coordinated Universal time.  See the --utc option.
+
+			  将系统时间设置为硬件时钟。
+
+              也可以设置内核的时区为本地的时区，time-zone 的环境变量， /or , /usr/share/zoneinfo, tzset(3),这三个
+              文件都可以来解释这种改变。内核时区的值中的一个废弃的字段 tz_dsttime 已经被设置为 DST_NONE。（这些字段
+              曾经表示的意思和细节，请看 settimeofday(2)）
+
+              将此作为系统的启动脚本之一是一个不错的选择。
+              你需要这个选项，如果你指定了 --set 选项。从另外一个方面来来说，会被忽略。这指定的时间用来设置硬体时钟。
+              这选项的值就是 date  的一个参数。举例来说，
+              hwclock --set --date="9/22/96 16:45:05"
+
+              这个参数是指本地时间，就算你将硬件时钟设置为世界标准时。请看选项 --utc 。
+
+       --epoch=year
+              Specifies the year which is the beginning of the Hardware Clock’s epoch.  I.e. the number of years into AD to which a zero value in the Hardware Clock’s year counter refers. It is used together with the --setepoch option to set the kernel’s idea of the epoch of the Hardware Clock, or otherwise to specify the epoch for use with direct ISA access.
+
+              For example, on a Digital Unix machine:
+
+              hwclock --setepoch --epoch=1952
+
+              指定具体时间，为硬体时钟开启的年代。也就是说，硬体时钟的计算器的零值代表公元年数的开始。也经常配合
+              使用 --setepoch 选项来设置硬件时钟的年代，或者从另一个方面来说，指定使用的年代通过直接进入ISA的方式。
+
+              举例来说，在数字的 UNIX 机器上：
+
+              hwclock --setepoch --epoch=1952
+
+
+OPTIONS
+       The following options apply to most functions.
+
+       -u, --utc
+
+       --localtime
+              Indicates  that the Hardware Clock is kept in Coordinated Universal Time or local time, respectively.  It is your choice whether to keep your clock in UTC or local time, but nothing in the clock tells which you’ve chosen.  So this option is how you give that information to hwclock.
+
+              If you specify the wrong one of these options (or specify neither and take a wrong default), both setting and querying of the Hardware Clock will  be  messed up.
+
+              If  you specify neither --utc nor --localtime , the default is whichever was specified the last time hwclock was used to set the clock (i.e. hwclock was successfully run with the --set, --systohc, or --adjust options), as recorded in the adjtime file.  If the adjtime file doesn’t  exist,  the  default  is  localtime.
+
+        	  硬件时钟的显示，是协调世界时或者是本地时间，都是可以的。如何显示是你自己的选择，但是时钟并没有告诉你
+        	  曾经是如何选择的。所以这两个选项的选择决定于你当时是如何给硬体时钟提供的信息。
+
+        	  如果你指定错误 （或者是都没有指定或者是指定错误），硬体时钟的设置和查询都将会被搞砸。
+
+        	  如果你这两个选项都没有指定，默认的就是时钟最近的一次设置（也就是说，时钟被成功的执行了以下选项，--set
+        	  , --systohc, 或者是 --adjust），就像 adjtime 文件记录的那样。如果这个 adjtime 文件是不存在的，那默认的
+        	  就是本地时间。
+
+       --noadjfile
+              disables  the facilities provided by /etc/adjtime.  hwclock will not read nor write to that file with this option. Either --utc or --localtime must be specified when using this option.
+
+              禁用文件 /etc/adjtime 提供的设备，使用这个文件后，时钟将不会读写此文件。当使用这个选项的时候，必须指定
+              其中一个选项。
+
+       --adjfile=filename
+              overrides the default /etc/adjtime.
+              覆盖默认的配置文件 /etc/adjtime
+
+       -f, --rtc=filename
+              overrides the default /dev file name, which is /dev/rtc on many platforms but may be /dev/rtc0, /dev/rtc1, and so on.
+
+              此选项默认覆盖以 /dev 开头的文件名，/dev/rtc 可以在很多设备平台上，可能是 /dev/rtc0, 可能是 /dev/rtc1,
+              等等。
+
+       --directisa
+              is meaningful only on an ISA machine or an Alpha (which implements enough of ISA to be, roughly speaking, an ISA machine for hwclock’s purposes).  For  other machines,  it has no effect.  This option tells hwclock to use explicit I/O instructions to access the Hardware Clock.  Without this option, hwclock will try to use the /dev/rtc device (which it assumes to be driven by the rtc device driver).  If it is unable to open the device (for read), it will use tI/O instructions anyway.
+
+              The rtc device driver was new in Linux Release 2.
+
+              此选项仅在 ISA 机器和 Alpha 上有效 （在 ISA 上面实现的如此之好，粗暴的说，ISA 机器为时钟而生）。对于
+              其它机器，此选项没有作用。这个选项告诉时钟使用显式的 I/O 指令来进入硬件时钟。没有这个选项，时钟将会
+              尝试使用 /dev/rtc 设备 （当然假定已经被 rtc 设备驱动驱动了）。 如果不能打开此设备，它将肯定使用 tI/O
+              的指令集。
+
+              这是在 Linux 发行版2上面新发布的 rtc 设备驱动。
+
+       --badyear
+              Indicates that the Hardware Clock is incapable of storing years outside the range 1994-1999.  There is a problem in some BIOSes (almost all Award BIOSes made
+              between 4/26/94 and 5/31/95) wherein they are unable to deal with years after 1999.  If one attempts to set the year-of-century value to something less  than
+              94  (or  95  in some cases), the value that actually gets set is 94 (or 95).  Thus, if you have one of these machines, hwclock cannot set the year after 1999
+              and cannot use the value of the clock as the true time in the normal way.
+
+              To compensate for this (without your getting a BIOS update, which would definitely be preferable), always use --badyear if you have one  of  these  machines.
+              When hwclock knows it’s working with a brain-damaged clock, it ignores the year part of the Hardware Clock value and instead tries to guess the year based on
+              the last calibrated date in the adjtime file, by assuming that that date is within the past year.  For this to work, you had better do  a  hwclock  --set  or
+              hwclock --systohc at least once a year!
+
+              Though  hwclock  ignores  the year value when it reads the Hardware Clock, it sets the year value when it sets the clock.  It sets it to 1995, 1996, 1997, or
+              1998, whichever one has the same position in the leap year cycle as the true year.  That way, the Hardware Clock inserts leap days where they belong.  Again,
+              if you let the Hardware Clock run for more than a year without setting it, this scheme could be defeated and you could end up losing a day.
+
+
+              hwclock warns you that you probably need --badyear whenever it finds your Hardware Clock set to 1994 or 1995.
+
+	   --srm  
+	   		This option is equivalent to --epoch=1900 and is used to specify the most common epoch on Alphas with SRM console.
+
+	   --arc  
+	   		This option is equivalent to --epoch=1980 and is used to specify the most common epoch on Alphas with ARC console (but Ruffians have epoch 1900).
+
+	   --jensen
+
+	   --funky-toy
+			These  two  options  specify what kind of Alpha machine you have.  They are invalid if you don’t have an Alpha and are usually unnecessary if you do, because
+			hwclock should be able to determine by itself what it’s running on, at least when /proc is mounted.  (If you find you need  one  of  these  options  to  make
+			hwclock  work,  contact  the  maintainer  to  see  if  the  program can be improved to detect your system automatically. Output of ‘hwclock --debug’ and ‘cat
+			/proc/cpuinfo’ may be of interest.)
+
+			--jensen means you are running on a Jensen model.
+
+			--funky-toy means that on your machine, one has to use the UF bit instead of the UIP bit in the Hardware Clock to detect a time  transition.   "Toy"  in  the
+			option name refers to the Time Of Year facility of the machine.
+
+       --test 
+			Do  everything  except  actually  updating  the  Hardware  Clock or anything else.  This is 
+			useful, especially in conjunction with --debug, in learning about hwclock.
+
+       --debug
+            Display a lot of information about what hwclock is doing internally.  Some of its function is complex and this output can help you understand how the program works.
+
+NOTES
+Clocks in a Linux System
+       There are two main clocks in a Linux system:
+
+       The Hardware Clock: This is a clock that runs independently of any control program running in the CPU and even when the machine is powered off.
+
+       On  an  ISA  system, this clock is specified as part of the ISA standard.  The control program can read or set this clock to a whole second, but the control program can also detect the edges of the 1 second clock ticks, so the clock actually has virtually infinite precision.
+
+       在 Linux 的操作系统上，有两种主要的时钟：
+
+       硬件时钟：这种时钟，可以独立的跑在任何在 CPU 中运行的控制程序甚至于机器的关机。
+
+       在 ISA 系统中，这种时钟被指定为 ISA 标准的一部分。这个控制程序可以读取和设置这个时钟在一整秒内，但是这个
+       控制程序也可以侦查到这一秒滴答的边缘，所以这个时钟实际有着实质上的无限的精度。
+
+
+       This clock is commonly called the hardware clock, the real time clock, the RTC, the BIOS clock, and the CMOS clock.  Hardware Clock, in its  capitalized  form,  was coined for use by hwclock because all of the other names are inappropriate to the point of being misleading.
+
+       So for example, some non-ISA systems have a few real time clocks with only one of them having its own power domain.  A very low power external I2C or SPI clock chip might be used with a backup battery as the hardware clock to initialize a more functional integrated real-time clock which is used for most other purposes.
+
+       这个时钟通常称为硬体时钟，真正的时钟，RTC 时间（集成电路时间），BIOS 时间，CMOS 时间。硬体时钟，其大写格式，
+       创造性的使用 hwclock 来表达，因为所有其他的名字都不合适，都有让人误导的点。
+
+       故举例来说，一些非 ISA 系统有几个真实时间的时钟，但是它们之中只有一个有它自己的电源域。一个非常低功耗的外部I2C或SPI时钟芯片可以与备用电池一起使用，作为硬件时钟，初始化一个功能更强的集成实时时钟，用于其他大多数用途
+
+       The System Time: This is the time kept by a clock inside the Linux kernel and driven by a timer interrupt.  
+       (On an ISA machine, the timer interrupt is part  of  the ISA  standard).   It  has  meaning only while Linux is running on the machine.  The System Time is the number of seconds since 00:00:00 January 1, 1970 UTC (or more succinctly, the number of seconds since 1969).  The System Time is not an integer, though.  It has virtually infinite precision.
+
+       The System Time is the time that matters.  The Hardware Clock’s basic purpose in a Linux system is to keep time when Linux is not running.  You initialize the  System  Time  to the time from the Hardware Clock when Linux starts up, and then never use the Hardware Clock again.  Note that in DOS, for which ISA was designed, the Hardware Clock is the only real time clock.
+
+       系统时间：这是由 Linux 内核的时钟来记录，由中断计时器来驱动的。（在 ISA 类别机器上，时间中断器是 ISA标准的
+       一部分）。当 Linux 在机器上运行时，系统时间才有意义。系统时间是自协调世界时1970年1月1日00:00以来的秒数（或者更简洁地说，是自1969年以来的秒数）。不过，系统时间不是整数。它几乎具有无限的精确度。
+
+       系统时间关心的是时间。Linux 系统中硬件时钟的基本目的是保持时间在 Linux 系统并不运行的时候。当 Linux 系统
+       启动后，会将硬件时间作为标准来初始化系统时间来作为时间，然后就不会再使用硬件时钟了。请注意在 DOS 系统中，
+       虽说架构也是属于 ISA ，但是它的硬件时钟也是作为唯一的真实时间。
+
+       It is important that the System Time not have any discontinuities such as would happen if you used the date(1L) program to set it while the system is running.   You can,  however,  do whatever you want to the Hardware Clock while the system is running, and the next time Linux starts up, it will do so with the adjusted time from the Hardware Clock.
+
+       重要的是，如果您在系统运行时使用date(1L)程序设置系统时间，那么系统时间就不会有任何不连续的情况发生。
+       但是，您可以在系统运行时对硬件时钟进行任何操作，下一次Linux启动时，它将使用来自硬件时钟的调整时间来
+       完成此操作。
+
+
+       A Linux kernel maintains a concept of a local timezone for the system.  But don’t be misled -- almost nobody cares  what  timezone  the  kernel  thinks  it  is  in. Instead,  programs that care about the timezone (perhaps because they want to display a local time for you) almost always use a more traditional method of determining the timezone: They use the TZ environment variable and/or the /usr/share/zoneinfo directory, as explained in the man page for tzset(3).  However, some programs and  fringe parts of the Linux kernel such as filesystems use the kernel timezone value.  An example is the vfat filesystem.  If the kernel timezone value is wrong, the vfat filesystem will report and set the wrong timestamps on files.
+
+
+       Linux 的内核为系统固守着本地时区的概念。但是不要被误解啦 -- 几乎没有人在乎内核的时区应该在哪。相反，项目
+       在意时区（也许是因为项目是针对人的），几乎总是使用一个更加可靠稳定的方法来决定时区：他们使用了 TZ 变量甚至
+       或者使用了 /usr/share/zoneinfo 的目录，比如说在 man 手册对 tzset(3) 的解释页中。然而，一些项目和 Linux 内核
+       的边缘部分比如说文件系统，就是在使用内核的时区值。一个典型的例子就是 vfat 文件系统。如果内核时区值是错的，
+       那么 vfat 文件系统将报告和设置错误的时区在这些文件上。
+
+
+       hwclock sets the kernel timezone to the value indicated by TZ and/or /usr/share/zoneinfo when you set the System Time using the --hctosys option.
+
+       The timezone value actually consists of two parts: 1) a field tz_minuteswest indicating how many minutes local time (not adjusted for DST) lags behind UTC, and 2) a
+       field tz_dsttime indicating the type of Daylight Savings Time (DST) convention that is in effect in the locality at the present time.  This second field is not used
+       under Linux and is always zero.  (See also settimeofday(2).)
+
+       hwclock 设置内核时区的值，将由 变量 TZ 和 文件 /or , 文件 /usr/share/zoneinfo 来表现，当你用 --hctosys 
+       选项来设置系统时间的时候。
+
+How hwclock Accesses the Hardware Clock
+       hwclock uses many different ways to get and set Hardware Clock values.  The most normal way is to do I/O to the device special file /dev/rtc, which is  presumed  to be  driven  by the rtc device driver.  However, this method is not always available.  For one thing, the rtc driver is a relatively recent addition to Linux.  Older systems don’t have it.  Also, though there are versions of the rtc driver that work on DEC Alphas, there appear to be plenty of Alphas on which the rtc driver  does not  work  (a  common  symptom is hwclock hanging).  Moreover, recent Linux systems have more generic support for RTCs, even systems that have more than one, so you might need to override the default by specifying /dev/rtc0 or /dev/rtc1 instead.
+
+       hwclock 使用了很多不同的方法来得到和设置固件时钟的值。最常用的方法就是操作 I/O ，对于设备的特殊文件 /dev/rtc,
+       该文件被假定于被 rtc 设备驱动器驱动。然而，这个方法并不是总是有效。对于一件事你得明白，rtc 的驱动是最近
+       相关的添加对于 Linux 来说。老的系统并没有这个。并且，在 DEC Alphas 上工作的 rtc 驱动有很多的版本，这里也出现
+       了一批的 rtc 驱动器的 Alphas 版本不能工作（一个典型的症状就是 hwclock 挂起）。此外，最近的 Linux 系统有更多
+       通用的支持，对于 RTCs,甚至很多系统都不止一个，所以你或许需要覆盖默认的，通过指定 /dev/rtc0 ,或者是 /dev/rtc1。
+
+
+       On older systems, the method of accessing the Hardware Clock depends on the system hardware.
+
+       On an ISA system, hwclock can directly access the "CMOS memory" registers that constitute the clock, by doing I/O to Ports 0x70 and 0x71.  It does this with  actual I/O instructions and consequently can only do it if running with superuser effective userid.  (In the case of a Jensen Alpha, there is no way for hwclock to execute those I/O instructions, and so it uses instead the /dev/port device special file, which provides almost as low-level an interface to the I/O subsystem).
+
+       对于老系统而言，进入固件时钟的方法决定于系统硬件。
+
+       在一个 ISA 系统上，hwclock 可以直接进入 CMOS 的记忆注册区，通过执行 I/O 到端口 0x70 和 0x71 。通过真实的频繁
+       地 I/O 指令来达到这点，也只能这样做，如果你是通过超级用户的有效 ID 。（举个例子吧，Jensen Alpha ,是没有办法
+       通过 hwclock 来执行这些 I/O 指令的，所以它转而使用 /dev/port 设备中的特定文件，这些文件为 I/O 的子系统提供一些底层的接口）。
+
+       This is a really poor method of accessing the clock, for all the reasons that user space programs are generally not supposed to do direct  I/O  and  disable  interrupts.  Hwclock provides it because it is the only method available on ISA and Alpha systems which don’t have working rtc device drivers available.
+
+       On an m68k system, hwclock can access the clock via the console driver, via the device special file /dev/tty1.
+
+       hwclock  tries  to  use  /dev/rtc.  If it is compiled for a kernel that doesn’t have that function or it is unable to open /dev/rtc (or the alternative special file you’ve defined on the command line) hwclock will fall back to another method, if available.  On an ISA or Alpha machine, you can force hwclock  to  use  the  direct manipulation of the CMOS registers without even trying /dev/rtc by specifying the --directisa option.
+
+       这真是一个差劲的方法，对于进入时钟而言，原因只有一个，用户的空间程序一般不支持直接 I/O 和不允许打乱。hwclock 
+       提供这个方法是因为，这是唯一有效的方法，在不用工作在 rtc 设备驱动器的 ISA 和 Alpha 系统中。
+
+       在一个 m68k 的系统中，hwclock 可以进入时钟，通过控制台驱动器，或者通过设备特殊文件 /dev/tty1 。
+
+       hwclock 尝试使用 /dev/rtc 。如果内核的编译中，没有那个功能或者说不能打开 /dev/rtc （或者说，你已经定义好的备份特殊文件是在命令行）,hwclock 会退而求其次的寻求另外的方法，如果可能的话。
+       在一个 ISA 或者 Alpha 机器上，你可以强制使用 hwclock 来直接操作 CMOS 的注册表，甚至不需要尝试 /dev/rtc 文件，
+       通过 --derectisa 选项。
+
+
+The Adjust Function
+       The  Hardware  Clock is usually not very accurate.  However, much of its inaccuracy is completely predictable - it gains or loses the same amount of time every day. This is called systematic drift.  hwclock’s "adjust" function lets you make systematic corrections to correct the systematic drift.
+
+       It works like this: hwclock keeps a file, /etc/adjtime, that keeps some historical information.  This is called the adjtime file.
+
+       硬件时钟通常不是那么的精确。然而，它大部分的误差是可以完全可预见的 - 它每天都会快一点，慢一点，以相同的数量。
+       这被称为系统的浮动。hwclock 的调整功能就是使你使用系统的正确规则来纠正系统的浮动。
+
+       工作起来有点像这样；hwclock保持了一个文件，/etc/adjtime, 这个文件保持了一些历史的信息。被称为 adjtime file。
+
+       Suppose you start with no adjtime file.  You issue a hwclock --set command to set the Hardware Clock to the true current time.  Hwclock creates the adjtime file and records in it the current time as the last time the clock was calibrated.  5 days later, the clock has gained 10 seconds, so you issue another hwclock --set command to set it back 10 seconds.  Hwclock updates the adjtime file to show the current time as the last time the clock was calibrated, and records 2 seconds  per  day  as the  systematic  drift rate.  24 hours go by, and then you issue a hwclock --adjust command.  Hwclock consults the adjtime file and sees that the clock gains 2 seconds per day when left alone and that it has been left alone for exactly one day.  So it subtracts 2 seconds from the Hardware Clock.  It then records  the  current time  as  the  last time the clock was adjusted.  Another 24 hours goes by and you issue another hwclock --adjust.  Hwclock does the same thing: subtracts 2 seconds and updates the adjtime file with the current time as the last time the clock was adjusted.
+
+       假设你开始没有 adjtime 文件。 你提出一个 hwclock --set 命令可以设置硬件时钟为当前的真正时间。hwclock 创建
+       adjtime 文件 然后在上面记录当前的时间当做时钟被标准化的最后时间。五天后，时钟多出了十秒，所以你会提出另一个
+       时钟 --set 命令来设置回退十秒。hwclock 就会更新 adjtime 文件，使当前时间作为时钟标准化的最后时间，然后记录
+       每天两秒来作为系统浮动频率。24 小时过后，然后你就可以提出一个时钟通过命令 --adjust 。hwclock 会参考 adjtime
+       文件，然后看着时钟每天会增加两秒，当时钟独自向前的时候，hwclock 已经独自放置了整整一天了。所以 hwclock 会
+       减去两秒相对于硬件时钟。hwclock 然后会记录当前的时间作为最后的时间，时钟就会自适应。在过了24小时之后，你就会
+       提出另外一个时钟 --adjust 。hwclock 会做出同样的事情：减去两秒然后更新 adjtime 文件，将当前时间来作为最后的
+       时间，那么时钟就会自适应。
+
+       Every time you calibrate (set) the clock (using --set or --systohc), hwclock recalculates the systematic drift rate based on how long it has  been  since  the  last calibration,  how  long  it  has  been  since  the last adjustment, what drift rate was assumed in any intervening adjustments, and the amount by which the clock is presently off.
+
+       A small amount of error creeps in any time hwclock sets the clock, so it refrains from making an adjustment that would be less than 1 second.  Later  on,  when  you request an adjustment again, the accumulated drift will be more than a second and hwclock will do the adjustment then.
+
+       每次你校对时钟，hwclock 会重新计算系统的浮动频率，基于时钟运行了多久，自从上次的校对之后，hwclock运行了
+       多久从最近的一次调整，假定的浮动频率是多少在干预性的调整中，以及时钟处于关闭状态的数量。
+
+       在任何时候，hwclock 设置时间，总会有一小些数量的错误在蠕动，所以 hwclock 会限制少一一秒的调整。之后，
+       当你在此请求调整，这累积的浮动将会超过一秒，然后 hwclock 将会自我调整吧。
+
+       It is good to do a hwclock --adjust just before the hwclock --hctosys at system startup time, and maybe periodically while the system is running via cron.
+
+       The  adjtime  file,  while  named  for its historical purpose of controlling adjustments only, actually contains other information for use by hwclock in remembering information from one invocation to the next.
+
+       对 hwclock 有利的地方 --adjust 在 --hctosys 之前，在系统启动的时候，当系统通过 cron 来运行的时候，或者也会
+       周期性的检查。
+
+       adjtime 文件，命名自以前的仅控制性的调整内容的以前的目的，实际上包括了其他被 hwclock 使用的信息，从一个调用
+       到另一个调用。
+
+       The format of the adjtime file is, in ASCII:
+
+       Line 1: 3 numbers, separated by blanks: 1) systematic drift rate in seconds per day, floating point decimal; 2) Resulting number of seconds since 1969 UTC  of  most recent adjustment or calibration, decimal integer; 3) zero (for compatibility with clock(8)) as a decimal integer.
+
+       Line 2: 1 number: Resulting number of seconds since 1969 UTC of most recent calibration.  Zero if there has been no calibration yet or it is known that any previous calibration is moot (for example, because the Hardware Clock has been found, since that calibration, not to contain a valid time).  This is a decimal integer.
+
+       adjtime 文件的格式为：ASCII 编码：
+
+       第一行：三个数字，被空格分开的：1）系统的浮动频率每天每秒，十进制的小数；2）结果数字以秒为单位，自从世界
+       标准时 1969 年开始，最近的调整和校对，十进制的整数。3）0（相容于 clock(8) ）作为一个十进制的整数。
+
+       第二行：一个数字：结果数字，以秒为单位，自从 1969 年的世界标准时，从最近的校对。如果是 0 ，表示根本没有校对
+       或者说任何提前的校对都是没有意义的（举例来说，因为硬件时间已经被发现了，自从校对以来，并不包含一个有效的时间）
+       这是一个十进制的整数。
+
+       Line 3: "UTC" or "LOCAL".  Tells whether the Hardware Clock is set to Coordinated Universal Time or local time.  You can always override this value with options  on the hwclock command line.
+
+       You can use an adjtime file that was previously used with the clock(8) program with hwclock.
+
+       第三行：世界标准时或者是本地时间。明确告知硬体时钟是被设置为协调世界时还是本地时间。你可以随时覆盖这个值，用
+       hwclock 的选项。
+
+Automatic Hardware Clock Synchronization By the Kernel
+       You  should  be aware of another way that the Hardware Clock is kept synchronized in some systems.  The Linux kernel has a mode wherein it copies the System Time to the Hardware Clock every 11 minutes.  This is a good mode to use when you are using something sophisticated like ntp to keep your System Time synchronized. (ntp  is a way to keep your System Time synchronized either to a time server somewhere on the network or to a radio clock hooked up to your system.  See RFC 1305).
+内核同步的自动硬体时钟
+	
+	   你应该注意其它在一些系统中使硬体时钟保持同步的方式。Linux 的内核有一种模式，不管在哪都会讲系统时间复制为硬体
+	   时间每11 分钟。这是一个很好的使用方式，当你使用一些复杂的东西比如说 ntp 来使你的系统同步。（ntp 是一种方式，
+	   使你的系统时间与网络上某个地方的时间服务器，或者是系统中挂起的一个收音时钟保持同步。看 RFC 1305）
+
+       This  mode (we’ll call it "11 minute mode") is off until something turns it on.  The ntp daemon xntpd is one thing that turns it on.  You can turnsrn it off by running anything, including hwclock --hctosys, that sets the System Time the old fashioned way.
+
+       If your system runs with 11 minute mode on, don’t use hwclock --adjust or hwclock --hctosys.  You’ll just make a mess.  It is acceptable to use a hwclock  --hctosys at startup time to get a reasonable System Time until your system is able to set the System Time from the external source and start 11 minute mode.
+
+       这种模式（我们将称为 11 分钟模式）将关闭，直到一些东西的打开。这 ntp 的进程 xntpd 就是其中一种打开的东西。
+       你也可以关掉它通过运行其他东西，包括 hwclock --hctosys,这就是将系统时间设置为老的流行方式。
+
+       如果你的系统运行的是 11 分钟的模式，不要使用 hwclock --adjust 或者是 hwclock --hctosys 。你将会把事情搞得
+       一团糟。使用 hwclock 可接受的方式 --hctosys 在系统启动的时候，去得到一个合理的系统时间，直到你的系统可以通过
+       额外的资源去设置系统时间或者是开启 11 分钟的模式。
+
+ISA Hardware Clock Century value
+       There  is  some  sort  of  standard that defines CMOS memory Byte 50 on an ISA machine as an indicator of what century it is.  hwclock does not use or set that byte
+       because there are some machines that don’t define the byte that way, and it really isn’t necessary anyway, since the year-of-century does a  good  job  of  implying
+       which century it is.
+
+       If you have a bona fide use for a CMOS century byte, contact the hwclock maintainer; an option may be appropriate.
+
+       Note  that this section is only relevant when you are using the "direct ISA" method of accessing the Hardware Clock.  ACPI provides a standard way to access century
+       values, when they are supported by the hardware.
+
+ENVIRONMENT VARIABLES
+       TZ
+
+FILES
+       /etc/adjtime /usr/share/zoneinfo/ (/usr/lib/zoneinfo on old systems) /dev/rtc /dev/rtc0 /dev/port /dev/tty1 /proc/cpuinfo
+
+SEE ALSO
+       date(1), gettimeofday(2), settimeofday(2), crontab(1), tzset(3)
+
+AUTHORS
+       Written by Bryan Henderson, September 1996 (bryanh@giraffe-data.com), based on work done on the clock program by Charles Hedrick, Rob Hooft, and Harald Koenig.  See
+       the source code for complete history and credits.
+       You  should  be aware of another way that the Hardware Clock is kept synchronized in some systems.  The Linux kernel has a mode wherein it copies the System Time to
+       the Hardware Clock every 11 minutes.  This is a good mode to use when you are using something sophisticated like ntp to keep your System Time synchronized. (ntp  is
+       a way to keep your System Time synchronized either to a time server somewhere on the network or to a radio clock hooked up to your system.  See RFC 1305).
+
+       This  mode (we’ll call it "11 minute mode") is off until something turns it on.  The ntp daemon xntpd is one thing that turns it on.  You can turn it off by running
+       anything, including hwclock --hctosys, that sets the System Time the old fashioned way.
+
+       If your system runs with 11 minute mode on, don’t use hwclock --adjust or hwclock --hctosys.  You’ll just make a mess.  It is acceptable to use a hwclock  --hctosys
+       at startup time to get a reasonable System Time until your system is able to set the System Time from the external source and start 11 minute mode.
+
+ISA Hardware Clock Century value
+       There  is  some  sort  of  standard that defines CMOS memory Byte 50 on an ISA machine as an indicator of what century it is.  hwclock does not use or set that byte
+       because there are some machines that don’t define the byte that way, and it really isn’t necessary anyway, since the year-of-century does a  good  job  of  implying
+       which century it is.
+
+       If you have a bona fide use for a CMOS century byte, contact the hwclock maintainer; an option may be appropriate.
+
+       Note  that this section is only relevant when you are using the "direct ISA" method of accessing the Hardware Clock.  ACPI provides a standard way to access century
+       values, when they are supported by the hardware.
+
+ENVIRONMENT VARIABLES
+       TZ
+
+FILES
+       /etc/adjtime /usr/share/zoneinfo/ (/usr/lib/zoneinfo on old systems) /dev/rtc /dev/rtc0 /dev/port /dev/tty1 /proc/cpuinfo
+
+SEE ALSO
+       date(1), gettimeofday(2), settimeofday(2), crontab(1), tzset(3)
+
+AUTHORS
+       Written by Bryan Henderson, September 1996 (bryanh@giraffe-data.com), based on work done on the clock program by Charles Hedrick, Rob Hooft, and Harald Koenig.  See the source code for complete history and credits.
+
+
+
+
+
+
+
+THE WORDS ABOUT THIS ARTICLE , THIS MOST OF WORDS TRANSLATION ARE FROM BAIDU'S TRANSLATION . 
+
+periodically
+英 [ˌpɪərɪ'ɒdɪklɪ]   美 [pɪrɪˈɑdɪklɪ]  
+adv.周期性地;定期地，偶尔
+
+period
+英 [ˈpɪəriəd]   美 [ˈpɪriəd]  
+n.时期;（一段）时间;学时;句号
+adj.具有某个时代特征的;（关于）过去某一特定历史时期的;（家具、服饰、建筑等）某一时代的
+
+compensate
+英 [ˈkɒmpenseɪt]   美 [ˈkɑ:mpenseɪt]  
+vt.抵消;补偿，赔偿;报酬
+vi.补偿，弥补
+
+drift
+英 [drɪft]   美 [drɪft]  
+vi.
+漂泊;流动;随意移动;浮现
+vt.
+漂流;堆积成堆
+n.
+漂移，偏移;趋势，动向;大意;放任自流
+
+consist
+英 [kənˈsɪst]   美 [kənˈsɪst]  
+vi.
+在于;由…组成;符合
+
+consistent
+英 [kənˈsɪstənt]   美 [kənˈsɪstənt]  
+adj.
+一致的;连续的;不矛盾的;坚持的
+
+coordinate
+英 [kəʊ'ɔ:dɪneɪt]   美 [ko'ɔrdəˈnet]  
+vt.
+使协调，使调和;整合;使（身体各部份）动作协调;（衣服、布料等）搭配
+vi.
+协调;协同;成为同等;被归入同一类别
+adj.
+同等的;[语法学]并列的;同等级的;带有同等性质的
+n.
+<数>坐标;（颜色协调的）配套服装;[复数]（颜色、织料、式样等配合协调的）女套服;同等重要的人（或物）
+
+universal
+英 [ˌju:nɪˈvɜ:sl]   美 [ˌju:nɪˈvɜ:rsl]  
+adj.
+普遍的，一般的;通用的，万能的;全世界的;宇宙的
+n.
+[逻辑学]全称命题;[哲学]一般概念;一般性
+
+Coordinated Universal Time : 协调世界时，世界标准时
+
+
+interpret
+英 [ɪnˈtɜ:prɪt]   美 [ɪnˈtɜ:rprɪt]  
+vt.
+解释;理解;口译;诠释，体现
+vi.
+作解释;作口译
+
+obsolete
+英 [ˈɒbsəli:t]   美 [ˌɑ:bsəˈli:t]  
+adj.
+废弃的;老式的，已过时的;[生]已废退的
+n.
+废词;被废弃的事物
+vt.
+淘汰;废弃
+
+absolute
+英 [ˈæbsəlu:t]   美 [ˈæbsəˌlut]  
+adj.
+绝对的，完全的;不受任何限制[约束]的;无条件的;有无上权力或权威的
+n.
+绝对;绝对事物
+
+epoch
+英 [ˈi:pɒk]   美 [ˈepək]  
+n.
+时期;纪元;世;新时代
+
+
+i.e.
+英 [ˌaɪ ˈi:]   美 [ˌaɪˈi]  
+abbr.
+(=id est) <拉>即，换言之;<旧>(=Indian Empire)印度帝国;= industrial engineering 工业工程学;(=Indo-European)印欧语系（的）
+adv.
+也就是
+
+AD
+公元是“公历纪元”的简称，是国际通行的纪年体系。以传说中耶稣的生年为公历元年（相当于中国西汉平帝元年）。公元常以 A.D.（拉丁文 Anno Domini 的缩写，意为“主的生年”）表示，公元前则以 B.C.（英文 Before Common Era 的缩写）表示。这种纪年体系被各国采用。
+
+refer
+英 [rɪˈfɜ:(r)]   美 [rɪˈfɚ]  
+vi.
+提到;针对;关系到;请教
+vt.
+归因于…;使求助于;送交;认为…起源于
+vt.& vi.
+参考，查阅
+
+digital
+英 [ˈdɪdʒɪtl]   美 [ˈdɪdʒɪtl]  
+adj.
+数字的;数据的;手指的;指状的
+n.
+数字;手指;（钢琴等的）琴键
+
+messed up  搞砸了
+mess
+英 [mes]   美 [mɛs]  
+n.
+混乱;困境;食堂;肮脏
+vt.
+弄脏;搞砸;给…供膳
+vi.
+把事情弄糟;制造脏乱
+
+
+explicit
+英 [ɪkˈsplɪsɪt]   美 [ɪkˈsplɪsɪt]  
+adj.
+明确的，清楚的;直言的;详述的;不隐瞒的
+
+instruction
+英 [ɪnˈstrʌkʃn]   美 [ɪnˈstrʌkʃən]  
+n.
+授课;教诲;传授的或获得的知识，课程;[计算机科学]指令
+
+
+instruct
+英 [ɪnˈstrʌkt]   美 [ɪnˈstrʌkt]  
+vt.
+通知;命令;教，讲授;教导，指导
+
+detect
+英 [dɪˈtekt]   美 [dɪˈtɛkt]  
+vt.查明，发现;洞察;侦察，侦查;[电子学]检波
+
+tick
+英 [tɪk]   美 [tɪk]  
+n.壁虱;钩号;一瞬间;钟的嘀嗒声
+v.发出滴答声;在（纸）上打钩;做出…举动
+
+infinite
+英 [ˈɪnfɪnət]   美 [ˈɪnfənɪt]  
+adj.无限的，无穷的;无数的，许许多多的;极大的
+n.无限，无穷;[数] 无穷大;<宗>造物主，神;无限的事物
+
+precision
+英 [prɪˈsɪʒn]   美 [prɪˈsɪʒən]  
+n.精确度，准确（性）;[语]精确
+adj.精确的，准确的，细致的;严守标准的;行动精确的
+
+capitalize
+英 [ˈkæpɪtəlaɪz]   美 [ˈkæpɪtl:ˌaɪz]  
+vt.用大写字母写或印刷;使…资本化;估计…的价值;把…定为首都
+vi.利用;积累资本
+
+coin
+英 [kɔɪn]   美 [kɔɪn]  
+n.硬币;金属钱币;[建筑]拐角，墙角石
+vt.制造硬币;杜撰;创造
+
+inappropriate
+英 [ˌɪnəˈprəʊpriət]   美 [ˌɪnəˈproʊpriət]  
+adj.不合适;不妥;不宜;不恰当的，不适宜的
+
+appropriate
+英 [əˈprəʊpriət]   美 [əˈproʊpriət]  
+adj.适当的;合适的;恰当的
+v.盗用;侵吞;拨（专款等）
+
+lead:领导
+misleading:误导
+
+external
+英 [ɪkˈstɜ:nl]   美 [ɪkˈstɜ:rnl]  
+adj.外面的，外部的;表面上的;外用的;外国的
+n.外部，外面;外观;外部情况
+
+internal
+英 [ɪnˈtɜ:nl]   美 [ɪnˈtɜ:rnl]  
+adj.内部的;国内的;体内的;内心的
+prep.（机构）内部的
+n.内脏，内部器官;本质，本性
+
+chips
+英 [tʃɪps]   美 [tʃɪps]  
+n.
+炸马铃薯条;注定要失败（或完蛋）;在危急关头;在关键时刻;碎片( chip的名词复数 );缺口;（作赌注用的）筹码;（足球）高球
+
+chip
+英 [tʃɪp]   美 [tʃɪp]  
+n.碎片;缺口;（作赌注用的）筹码;（足球）高球
+vt.刻，削成;凿;从…上削下一小片
+vi.剥落;碎裂
+
+integrated
+英 [ˈɪntɪgreɪtɪd]   美 [ˈɪntɪɡretɪd]  
+adj.完整的;整体的;结合的;（各组成部分）和谐的
+v.使一体化( integrate的过去式和过去分词 );使整合;使完整;使结合成为整体
+
+interrupt
+英 [ˌɪntəˈrʌpt]   美 [ˌɪntəˈrʌpt]  
+vt.& vi.打断（别人的话等）;阻止;截断
+vt.中断;打扰;暂停;妨碍
+vi.打断
+n.中断;暂停
+
+succinctly
+英 [sək'sɪŋktlɪ]   美 [sək'sɪŋktlɪ]  
+adv.简洁地;简洁地，简便地
+
+succinct
+英 [səkˈsɪŋkt]   美 [səkˈsɪŋkt]  
+adj.简明的，简洁的，简练的;<古>束紧的，像是用腰带围绕的
+
+adjust
+英 [əˈdʒʌst]   美 [əˈdʒʌst]  
+vt.& vi.（改变…以）适应，调整，校正;调准（望远镜等），对准，校正，校准（机械等）;
+核算（盈亏）;[保]评定（赔偿要求）
+
+maintain
+英 [meɪnˈteɪn]   美 [menˈten]  
+vt.保持;保养;坚持;固执己见
+
+concept
+英 [ˈkɒnsept]   美 [ˈkɑ:nsept]  
+n.观念，概念;观点;思想，设想，想法;总的印象
+
+misled
+英 [ˌmɪsˈled]   美 [mɪsˈlɛd]  
+v.给…错误印象( mislead的过去式和过去分词 );使误解;把…带错路;把…带坏
+
+fringe
+英 [frɪndʒ]   美 [frɪndʒ]  
+n.边缘;刘海;穗;次要
+vt.作为…的边缘，围绕着;给…加穗饰
+adj.边缘的，外围的;次要的，附加的
+
+presume
+英 [prɪˈzju:m]   美 [prɪˈzu:m]  
+vt.推测;以为，认为;假定，假设;意味着
+vi.敢于;相信;擅自行动;放肆
+
+symptom
+英 [ˈsɪmptəm]   美 [ˈsɪmtəm, ˈsɪmp-]  
+n.症状;征兆
+
+moreover
+英 [mɔ:rˈəʊvə(r)]   美 [mɔ:rˈoʊvər]  
+adv.而且;此外;同时;再者
+
+generic
+英 [dʒəˈnerɪk]   美 [dʒəˈnɛrɪk]  
+adj.通用的，一般的;类的，属性的;不受商标保护的;[生]属的，类的
+n.同“a generic drug
+
+accurate
+英 [ˈækjərət]   美 [ˈækjərɪt]  
+adj.精确的，准确的;正确无误的
+
+inaccuracy
+英 [ɪn'ækjərəsɪ]   美 [ɪnˈækjərəsi]  
+n.
+不准确，误差;不准确的说法
+
+predictable
+英 [prɪˈdɪktəbl]   美 [prɪˈdɪktəbl]  
+adj.可预见的;可预言的;可预报的;可预料的
+
+issue
+英 [ˈɪʃu:]   美 [ˈɪʃu]  
+n.问题;（报刊的）期，号;发行物;流出
+vt.发行;发布;流出
+vi.发行;造成…结果;在…上挑起争论
+
+calibrate
+英 [ˈkælɪbreɪt]   美 [ˈkæləˌbret]  
+vt.校准;使标准化;使合标准;测量（枪的）口径
+
+consult
+英 [kənˈsʌlt]   美 [kənˈsʌlt]  
+vi.咨询;商议，商量;[医]会诊;充当顾问
+vt.请教;翻阅;求教于;顾及
+
+subtract
+英 [səbˈtrækt]   美 [səbˈtrækt]  
+vt.减去;扣除
+
+intervene
+英 [ˌɪntəˈvi:n]   美 [ˌɪntərˈvi:n]  
+vi.阻碍;出面;插嘴;介于…之间
+
+creep
+英 [kri:p]   美 [krip]  
+vi.爬行，匍匐;缓慢地行进
+n.爬行，蠕动;虫爬着似的感觉，毛骨悚然;卑鄙小人，谄媚者
+
+refrain
+英 [rɪˈfreɪn]   美 [rɪˈfren]  
+vt.抑制，克制
+n.（诗歌的）叠句，副歌;经常重复的评价（或抱怨）
+vi.忍耐，节制
+
+accumulate
+英 [əˈkju:mjəleɪt]   美 [əˈkjumjəˌlet]  
+vt.& vi.堆积，积累
+vi.（数量）逐渐增加，（质量）渐渐提高
+
+
+compatibility
+英 [kəmˌpætəˈbɪləti]   美 [kəmˌpætəˈbɪlətɪ]  
+n.适合;互换性; 通用性;和睦相处
+
+
+previous
+英 [ˈpri:viəs]   美 [ˈpriviəs]  
+adj.以前的;先前的;过早的;（时间上）稍前的
+adv.在先，在…以前
+
+moot
+英 [mu:t]   美 [mut]  
+n.大会;辩论会;假设案件
+adj.未决议的;无实际意义的;有讨论余地的
+vt.提出…供讨论;提出（问题）;（在假设法庭上）实习辩论
+
+auto
+英 [ˈɔ:təʊ]   美 [ˈɔ:toʊ]  
+n.<美>汽车
+vi.乘汽车
+
+automatic
+英 [ˌɔ:təˈmætɪk]   美 [ˌɔtəˈmætɪk]  
+adj.自动的;不假思索的，无意识的;必然发生的
+n.自动化机器或设备;自动手枪
+
+
+synchronization
+英 [ˌsɪŋkrənaɪ'zeɪʃn]   美 [ˌsɪŋkrənaɪ'zeɪʃn]  
+n.同步;同一时刻;使时间互相一致;同时性
+
+sophisticate
+英 [səˈfɪstɪkeɪt]   美 [sə'fɪstɪkeɪt]  
+n.老于世故的人;见多识广的人
+
+make a mess
+英 [meik ə mes]   美 [mek e mɛs]  
+<口>拉屎，大便（尤指婴儿，动物）
+
+mess
+英 [mes]   美 [mɛs]  
+n.混乱;困境;食堂;肮脏
+vt.弄脏;搞砸;给…供膳
+vi.把事情弄糟;制造脏乱
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

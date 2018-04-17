@@ -1,0 +1,347 @@
+AT(1)   Linux Programmer’s Manual   AT(1)
+
+NAME
+       at, batch, atq, atrm - queue, examine or delete jobs for later execution
+翻译：
+                            - 这些命令用来查询，检测或者删除任务在待会
+                            的执行时
+
+SYNOPSIS
+       at [-V] [-q queue] [-f file] [-mMlbv] TIME
+       at [-V] [-q queue] [-f file] [-mMlbv] -t time_arg
+       at -c job [job...]
+       at [ -rd ] job [job...]
+       atq [-V] [-q queue]
+       atrm [-V] job [job...]
+       batch
+
+DESCRIPTION
+       at  and  batch  read  commands from standard input or a specified file which are to be executed at a later time.
+
+       at      executes commands at a specified time.
+
+       atq     lists the user’s pending jobs, unless the user is the superuser; in that case,everybody’s  jobs  are  listed.   The format of the output lines (one for each job) is: Job number, date, hour, queue, and username.
+
+       atrm    deletes jobs, identified by their job number.
+
+       batch   executes commands when system load levels permit; in  other  words,  when  the
+               load average drops below 0.8, or the value specified in the invocation of atd.
+翻译：
+描述   at and batch 从标准的输入中或者从待会将要被执行的指定文件中读取命令
+       
+       at      在指定的时间执行命令
+
+       atq     列出用户正在执行的任务，除非这个用户是超级用户；
+               在这种情况下，每个用户的任务都会被列出。输出的格式
+               （列出其中一个）为：job number,date,hour,queue,username.
+      atrm     删除任务，通过任务编号来确定
+
+      batch    当系统的负载允许的时候执行命令；换句话说，当系统的平均负载值下降到低于0.8，
+               或者说指定的值在atd调用的范围内
+
+       At allows fairly complex time specifications,  extending  the  POSIX.2  standard.   It
+       accepts times of the form HH:MM to run a job at a specific time of day.  (If that time
+       is already past, the next day is assumed.)  You may also specify  midnight,  noon,  or
+       teatime (4pm) and you can have a time-of-day suffixed with AM or PM for running in the
+       morning or the evening.  You can also say what day the job will be run,  by  giving  a
+       date  in  the  form month-name day with an optional year, or giving a date of the form
+       MMDDYY or MM/DD/YY or DD.MM.YY or YYYY-MM-DD.  The specification of a date must follow
+       the  specification of the time of day.  You can also give times like now + count time-
+       units, where the time-units can be minutes, hours, days, or weeks and you can tell  at
+       to  run  the job today by suffixing the time with today and to run the job tomorrow by
+       suffixing the time with tomorrow.
+翻译： at接收相当复杂的时间格式，包括 POSIX.2标准。它接收 HH:MM的时间格式来跑此时间的任务。（
+       如果那个时间已经过去了，明天继续）你也可以指定晚上，半夜，中午，或者下午茶的时间（下午四点）
+       ，你也可以用 am 或者 pm 的后缀时间。你也可以指定任何一天来跑这个计划任务，通过月天年的时间
+       格式，或者 MMDDYY or MM/DD/YY or DD.MM.YY or YYYY-MM-DD这种时间格式。日期的格式必须搭配
+       时间的格式。你也可以用 now + 时间戳，时间戳可以是 分钟，小时，天，甚至是 周，你也可以用
+       today的后缀来指定今天，也可以用tomorrow的后缀来指定明天。
+
+
+       For example, to run a job at 4pm three days from now, you would do at 4pm + 3 days, to
+       run  a  job at 10:00am on July 31, you would do at 10am Jul 31 and to run a job at 1am
+       tomorrow, you would do at 1am tomorrow.
+
+       The   exact   definition   of   the   time   specification    can    be    found    in
+       /usr/share/doc/at-3.1.10/timespec.
+
+翻译：举例来说，此刻起，三天后的下午四点来跑一个计划任务，你可以写成 at 4pm + 3 days,跑一个计划
+      任务在 七月三十一号的上午十点，你可以写成 at 10am Jul 31 。跑一个计划任务在明天的上午一点，你也可以写成 at 1am tomorrow。
+
+      准确的时间格式定义在 /usr/share/doc/at-3.1.10/timespec 此文件中。
+
+       For  both  at  and  batch, commands are read from standard input or the file specified
+       with the -f option and executed.  The working directory, the environment  (except  for
+       the variables TERM, DISPLAY and _) and the umask are retained from the time of invoca-
+       tion.  An at - or batch - command invoked from a su(1) shell will retain  the  current
+       userid.  The user will be mailed standard error and standard output from his commands,
+       if any.  Mail will be sent using the command /usr/sbin/sendmail.  If  at  is  executed
+       from a su(1) shell, the owner of the login shell will receive the mail.
+
+       The  superuser may use these commands in any case.  For other users, permission to use
+       at is determined by the files /etc/at.allow and /etc/at.deny.
+
+翻译：对于at和batch而言，命令可以从标准输入中读取，或者用 -f 选项从指定的文件中读取。
+      此时的工作目录，环境（不包括变量 TERM，DISPLAY 和 _）和掩码值会在命令请求的时候保存下来。
+      at 或者 batch 命令 借助 su 来执行将会保持当前的用户ID。当前用户将会接收到当前命令执行的
+      标准输出和标准错误的邮件，任何情况下都会。邮件的发送是通过 /usr/sbin/sendmail 命令。如果
+      是通过 su 来执行的 at，登录的用户将会受到这封邮件。
+
+      超级用户可以使用这些命令在任何情况下。对于其它用户，能否使用决定于文件-/etc/at.allow ,
+      /etc/at.deny 。
+
+
+       If the file /etc/at.allow exists, only usernames mentioned in it are  allowed  to  use
+       at.
+
+       If /etc/at.allow does not exist, /etc/at.deny is checked, every username not mentioned
+       in it is then allowed to use at.
+
+       If neither exists, only the superuser is allowed use of at.
+
+       An empty /etc/at.deny means that every user is allowed use these commands, this is the
+       default configuration.
+
+翻译： 如果文件 /etc/at.allow 存在，那么此文件中提到的用户名才可以使用at。
+      
+       如果文件 /etc/at.allow 不存在，就用 /etc/at.deny 文件，凡是文件中未被提到的用户都可以使用
+       at 命令
+
+       如果这两个文件都不存在，那么只有超级用户才可以使用at。
+
+       /etc/at.deny文件为空，表示每一个用户都可以使用这些命令，这是默认的配置。
+
+OPTIONS
+       -V      prints the version number to standard error.
+               打印出标准错误的版本号。
+
+       -q queue
+               uses  the  specified  queue.  A queue designation consists of a single letter;
+               valid queue designations range from a to z.  and A to Z.  The a queue  is  the
+               default for at and the b queue for batch.  Queues with higher letters run with
+               increased niceness.  The special queue "=" is reserved for jobs which are cur-
+               rently running.
+               If  a  job  is  submitted  to  a queue designated with an uppercase letter, the job is
+               treated as if it were submitted to batch at the time of the job.   Once  the  time  is
+               reached,  the  batch  processing  rules with respect to load average apply.  If atq is
+               given a specific queue, it will only show jobs pending in that queue.
+
+               使用指定的队列。一个队列就是由一个简单的字母组成，就是这么设计的。正确的队列设计是
+               a~z,也可以是 A~Z 。队列 a 是 at 的默认设置，队列 b 是 batch 的默认设置。 较高的字母队列
+               拥有更高的优先级。队列 "=" 是一个特例，为当前正在跑的计划任务预留。
+               如果一个计划任务在一个被设定为大写字母的队列中，那么这个计划任务会在执行的过程中被
+               命令 batch 接收处理。时间到了，batch的进程将会遵循平均负载的规则。如果 atq 指定队列，
+               它将仅显示队列中正在执行的任务。 
+
+       -m      Send mail to the user when the job has completed even if there was no  output.
+               给用户发送邮件，当任务已完成的时候，哪怕它没有输出。
+       -M      Never send mail to the user.
+               绝不会给用户发送邮件
+       -f file Reads the job from file rather than standard input.
+               宁可从文件中读取任务，而不是标准输入中
+       -l      Is an alias for atq.
+               就是相当于 atq
+       -r      Is an alias for atrm.
+               就是相当于 atrm
+       -d      Is an alias for atrm.
+               就是相当于 atrm
+       -v      Shows the time the job will be executed before reading the job.
+               
+               Times displayed will be in the format "Thu Feb 20 14:50:00 1997".
+               读取任务之前，执行任务并且显示时间
+               将以这种格式--Thu Feb 20 14:50:00 1997 来显示时间
+
+       -c     cats the jobs listed on the command line to standard output.
+              在命令行中以标准输出的方式列出任务
+
+       -t time_arg
+              Submit  the  job  to be run at the time specified by the time_arg option
+              argument, which must have the same format as specified for the  touch(1)
+              utility’s -t time option argument ([[CC]YY]MMDDhhmm).
+              使用 time_arg 的选项参数来指定时间执行计划任务，那必须用指定的时间
+              格式--[[CC]YY]MMDDhhmm?
+
+
+ENVIRONMENT
+       SHELL   The  value  of the SHELL environment variable at the time of at invoca-
+               tion will determine which shell is used to execute the at job commands.
+               If  SHELL  is  unset when at is invoked, the user’s login shell will be
+               used; otherwise, if SHELL is set when at is invoked,  it  must  contain
+               the path of a shell interpreter executable that will be used to run the
+               commands at the specified time.
+
+               请求的这一瞬间，shell 环境变量的值，将决定执行任务命令时的 shell。
+               当 at 被调用的时候，shell 没有设置，登录用户的 shell 环境将被沿用。另外
+               一方面，如果 shell 在调用的时候已设置，那么它一定要包括 shell 可执行的
+               解释器的路径，这个解释器用来执行解释命令在指定的时间。
+
+       at will record the values of environment variables present at time of at  invo-
+       cation. When the commands are run at the  specified time, at will restore these
+       variables to their recorded values .  These variables are  excluded  from  this
+       processing and are never set by at when the commands are run :
+       TERM, DISPLAY, SHELLOPTS, _, PPID, BASH_VERSINFO, EUID, UID, GROUPS.
+       If  the  user submitting the at job is not the super-user, variables that alter
+       the behaviour of the loader ld.so(8),  such  as  LD_LIBRARY_PATH  ,  cannot  be
+       recorded and restored by at .
+
+       at 将会记录当前环境变量的值，在请求的时候。当命令在执行的时候，at 将会恢复这些记录
+       下的值。这些变量包括这些进程并且绝不会在这些命令执行的时候被设置：TERM, DISPLAY, 
+       SHELLOPTS, _, PPID, BASH_VERSINFO, EUID, UID, GROUPS.
+       如果用户认为非超级用户执行 at 任务，加载 ld.so(8),  比如说  LD_LIBRARY_PATH ，来
+       改变行为的变量，将不会被记录和恢复。
+
+FILES
+       /var/spool/at
+       /var/spool/at/spool
+       /proc/loadavg
+       /var/run/utmp
+       /etc/at.allow
+       /etc/at.deny
+
+SEE ALSO
+       cron(1), nice(1), sh(1), umask(2), atd(8).
+
+BUGS
+       The  correct  operation  of  batch for Linux depends on the presence of a proc-
+       type directory mounted on /proc.
+
+       If the file /var/run/utmp is not available or corrupted, or if the user is  not
+       logged  on  at  the time at is invoked, the mail is sent to the userid found in
+       the environment variable LOGNAME.  If that is undefined or empty,  the  current
+       userid is assumed.
+
+       At and batch as presently implemented are not suitable when users are competing
+       for resources.  If this is the case for your site, you might want  to  consider
+       another batch system, such as nqs.
+
+       Linux 的 batch 正确操作取决于挂载在 /proc 上的 proctype 目录的情况。
+
+       如果文件-- /var/run/utmp 找不到或者说被破坏，或者用户在 at 被调用的时候没有登录，
+       邮件将会发送给在环境变量 LOGNAME 中能找得到的用户。如果这也是没有定义或者是空的，
+       那就发送给当前的用户了。
+
+       当用户竞争资源的时候，at 和 batch 的当前执行时不合适的。如果你也是这么认为的，
+       你或许原意考虑另外一个批处理的命令，比如说 nqs 。   
+
+AUTHOR
+       At was mostly written by Thomas Koenig, ig25@rz.uni-karlsruhe.de.
+
+local                              Nov 1996                              AT(1)
+
+
+TRANSLATOR
+Chen Hang                          Nov 2017
+
+
+retain
+英 [rɪˈteɪn]   美 [rɪˈten]  
+vt.保持;留在心中，记住;雇用;付定金保留
+
+invocation
+英 [ˌɪnvəˈkeɪʃn]   美 [ˌɪnvəˈkeʃən]  
+n.祈祷;乞求;乞灵;乞求神助
+
+vocation
+英 [vəʊˈkeɪʃn]   美 [voʊˈkeɪʃn]  
+n.职业，使命;神召，天命
+
+vacation
+英 [vəˈkeɪʃn]   美 [veˈkeʃən, və-]  
+n.假期，休假;[古] 空出，撤出，辞去
+vi.度假
+
+invoke
+英 [ɪnˈvəʊk]   美 [ɪnˈvoʊk]  
+vt.乞灵，祈求;提出或授引…以支持或证明;召鬼;借助
+
+letter
+英 [ˈletə(r)]   美 [ˈlɛtɚ]  
+n.信;证书，许可证;字母，文字;字面意义
+vt.用字母标明;写字母于;加标题
+vi.写印刷体字母
+
+increase
+英 [ɪnˈkri:s]   美 [ɪnˈkris]  
+vt.& vi.增加，增大，增多
+vt.增强，增进;[缝纫]放（针）
+vi.增强;增进;增殖，繁殖;[缝纫]放针
+n.提高;增长;增加量
+
+is reserved for 保留
+reserve
+英 [rɪˈzɜ:v]   美 [rɪˈzɜ:rv]  
+n.储备;保留;保护区;替补队员
+vt.储备;保留;预约
+vi.预订
+adj.保留的;预备的
+
+uppercase
+英 ['ʌpəˌkeɪs]   美 ['ʌpəˌkeɪs]  
+n.大写字母盘
+vt.以大写字母印刷
+adj.大写字母的
+
+batch
+英 [bætʃ]   美 [bætʃ]  
+n.一批;一炉;（食物、药物等的）一批生产的量;成批作业
+
+restore
+英 [rɪˈstɔ:(r)]   美 [rɪˈstɔr, -ˈstor]  
+vt.修复;归还;交还;使恢复
+vt.& vi.恢复（某种情况或感受）;使复原;使复位;使复职
+
+submit
+英 [səbˈmɪt]   美 [səbˈmɪt]  
+vi.顺从，服从;甘受，忍受
+vt.使服从，使顺从;提交，呈送;[法]主张，建议
+
+alter
+英 [ˈɔ:ltə(r)]   美 [ˈɔltɚ]  
+vt.改变;更改;改建（房屋）;（人）变老
+vi.改变;修改
+
+present
+英 [ˈpreznt]   美 [ˈprɛznt]  
+adj.目前的;现在的;出席的;[语法学]现在时的
+n.现在;礼物;瞄准
+vt.提出;出现;介绍;赠送
+vi.举枪瞄准
+
+presence
+英 [ˈprezns]   美 [ˈprɛzəns]  
+n.出席;仪表;风度;鬼魂，神灵
+
+corrupt
+英 [kəˈrʌpt]   美 [kəˈrʌpt]  
+adj.堕落的，道德败坏的;贪污的，腐败的;腐烂的;（文献等）错误百出的
+vt.使腐败;使堕落;使腐烂
+vi.腐化;堕落;腐烂
+
+corrupted
+英 [kə'rʌptɪd]   美 [kə'rʌptɪd]  
+v.
+破坏;（使）败坏( corrupt的过去式和过去分词 );（使）腐化;引起（计算机文件等的）错误
+
+available
+英 [əˈveɪləbl]   美 [əˈveləbəl]  
+adj.可获得的;有空的;可购得的;能找到的
+
+log
+英 [lɒg]   美 [lɔ:g]  
+n.日志;记录;原木
+v.伐木;把…载入正式记录;行驶
+eg :log in 登录
+
+competing
+compete
+英 [kəmˈpi:t]   美 [kəmˈpit]  
+vi.竞争;竞赛;比得上;参加比赛（或竞赛）
+
+
+$ at
+garbled time
+
+garbled time : 时间不对
+garble
+英 ['gɑ:bl]   美 [ˈɡɑrbəl]  
+vt.对（事实）歪曲，对（文章等）断章取义，窜改
