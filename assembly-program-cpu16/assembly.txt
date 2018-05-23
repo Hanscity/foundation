@@ -1,0 +1,36 @@
+﻿* 
+C:\Users\muzhi\AppData\Local\DOSBox\dosbox-0.74.conf 的末尾
+
+mount c: w:\assembly-debug\AsmTools
+c:
+
+
+## 22
+AX = AH + AL   （H ：high；L:low; 这是16进制的CPU兼容8进制的CPU而做的设计）
+BX = BH + BL
+CX = CH + CL
+DX = DH + DL
+
+a ->enter
+
+mov ax,4E20
+
+mov bh,ah
+mov cl,al
+mov dx,ax
+
+->enter
+
+-t ->enter(表示执行)
+-r        (表示查看)
+
+寄存器是相互独立的。
+
+
+## 25
+1.cpu 中存放段地址信息的寄存器是？ ds es ss cs
+2.CPU 中存放偏移地址信息的寄存器是？ bp ip sp si di bx
+3.偏移地址可以表示的最大值是？    FFFFH
+
+
+
