@@ -18,11 +18,22 @@
    * 编译错误就是语法错误，逻辑错误和语义错误就是业务错误，运行错误是最不容易检测出来的，特别是高级语言。因为出现死循环，需要用 gdb来查看内存调用。
 
 4. 第一个程序
-   * 强烈建议加上 -wall选项
-   * 待会练习
+   * 建议加上 -Wall选项
+   * printf("Hello,world!\n");需要双引号哦。
 
 5. Ctrl+Shift+空格
    * to get the completion list filtered.
     
 #### 第二章 常量,变量和表达式
-
+1. 继续 Hello World
+   * 双引号是界定符
+   * \n 是转义序列中的一种，Windows习惯使用 \r\n
+   
+2. 常量
+   * 字符常量，数字常量，枚举常量
+   * 字符常量需要单引号，双引号是会出错的。` printf("character: %c\ninteger: %d\nfloat %f\n",'{',34,3.14);`
+   1. 习题一
+      * ` printf("%c\n",'%');`
+      
+3. 变量
+   * 
