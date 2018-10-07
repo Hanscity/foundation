@@ -20,6 +20,9 @@
 4. 第一个程序
    * 强烈建议加上 -wall选项
    * 待会练习
-   
+
+5. Ctrl+Shift+空格
+   * to get the completion list filtered.
+    
 #### 第二章 常量,变量和表达式
 
