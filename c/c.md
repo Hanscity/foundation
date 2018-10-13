@@ -19,10 +19,9 @@
 
 4. 第一个程序
    * 建议加上 -Wall选项
+   
    * printf("Hello,world!\n");需要双引号哦。
-
-5. Ctrl+Shift+空格
-   * to get the completion list filtered.
+   
     
 #### 第二章 常量,变量和表达式
 1. 继续 Hello World
@@ -36,7 +35,15 @@
       * ` printf("%c\n",'%');`
       
 3. 变量
-   * 定义和声明是不同的。
+   * 定义和声明是不同的。申明就是申明；定义是在申明的基础上分配存储空间。
    
 4. 赋值
-
+   * 代码说明：
+   
+      ```
+      char login_name;//申明
+      login_name = 'a';//赋值
+      char reg_name = 'b';//初始化，初始化就是定义的同时也赋值
+      
+     ```
+    
