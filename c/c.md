@@ -180,4 +180,25 @@
    * 递归需要有 Base Case,否则会形成无穷递归(Infinite recursion)。
    * 递归函数在执行的过程中，随着函数一次次的调用，在一个特定的存储结构中的一端不断增加，每一次调用都只能访问自己的存储空间，这个存储空间称为帧栈(Stack Frame),这个特定的存储结构称为堆栈(Stack)。在函数的最末端，一次次 return的时候，Stack开始一层层的释放。
    * 所有的递归可以用循环来写，反之亦然。Lisp语言只有递归，没有循环。
-   
+   1. 习题1
+      ```
+      int recursive(int a,int b){
+      
+              int min;
+              int max;
+              if(a > b){
+                      max = a;
+                      min = b;
+              }else{
+                      max = b;
+                      min = a;
+              }
+      
+              if(max%min == 0){
+                      return min;
+              }else{
+                      return factorial(min,max%min);
+              }
+      }
+
+      ```
