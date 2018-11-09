@@ -206,7 +206,7 @@
 #### 第 6 章   循环语句
 1. while语句
    ```
-   //递归的写法
+   //递归的写法--函数式编程(Functional Programming)--Declarative(申明式)
    int factorial(int i){
            if(i == 0){
                    return 1;
@@ -216,7 +216,7 @@
            }
    }
     
-    //while的写法
+    //while的写法--命令式编程(Imperative Programing)--Imperative(必要，祈求，命令式)
     int while_func(int i){
         int j = 1;
         while(i > 0){
@@ -226,5 +226,6 @@
         return j;
     }
 
-         
    ```
+   
+2. 
