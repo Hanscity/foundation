@@ -197,8 +197,34 @@
               if(max%min == 0){
                       return min;
               }else{
-                      return factorial(min,max%min);
+                      return recursive(min,max%min);
               }
       }
 
       ```
+      
+#### 第 6 章   循环语句
+1. while语句
+   ```
+   //递归的写法
+   int factorial(int i){
+           if(i == 0){
+                   return 1;
+           }else{
+                   int j = factorial(i-1);
+                   return i*j;
+           }
+   }
+    
+    //while的写法
+    int while_func(int i){
+        int j = 1;
+        while(i > 0){
+            int j = j * i;
+            i = i - 1;
+        }
+        return j;
+    }
+
+         
+   ```
