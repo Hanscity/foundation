@@ -180,5 +180,121 @@
    * 递归需要有 Base Case,否则会形成无穷递归(Infinite recursion)。
    * 递归函数在执行的过程中，随着函数一次次的调用，在一个特定的存储结构中的一端不断增加，每一次调用都只能访问自己的存储空间，这个存储空间称为帧栈(Stack Frame),这个特定的存储结构称为堆栈(Stack)。在函数的最末端，一次次 return的时候，Stack开始一层层的释放。
    * 所有的递归可以用循环来写，反之亦然。Lisp语言只有递归，没有循环。
+
+   1. 习题1
+      ```
+      int recursive(int a,int b){
+      
+              int min;
+              int max;
+              if(a > b){
+                      max = a;
+                      min = b;
+              }else{
+                      max = b;
+                      min = a;
+              }
+      
+              if(max%min == 0){
+                      return min;
+              }else{
+                      return recursive(min,max%min);
+              }
+      }
+
+      ```
+      
+#### 第 6 章   循环语句
+1. while语句
+   1. 习题一
+   ```
+   //递归的写法--函数式编程(Functional Programming)--Declarative(申明式)
+   int factorial(int i){
+           if(i == 0){
+                   return 1;
+           }else{
+                   int j = factorial(i-1);
+                   return i*j;
+           }
+   }
+    
+    //while的写法--命令式编程(Imperative Programing)--Imperative(必要，祈求，命令式)
+    int while_func(int i){
+        int j = 1;
+        while(i > 0){
+            int j = j * i;
+            i = i - 1;
+        }
+        return j;
+    }
+    
+    //do while 的写法
+    int do_while_func(int i){
+        int j = 1;
+        do{
+            int j = j * i;
+            i = i - 1;
+        }while(i > 0);
+        
+        return j;
+    }
+    
+    //for 的写法
+    int for_func(int n){
+            int res = 1;
+            int i;
+            for(i=1;i<=n;i++){
+                    res = res * i;
+            }
+    
+            return res;
+    }
+
+
+   ```
+   2. 习题二
    
+   ```   
+   #include <stdio.h>
+   
+   int find_nine(int n){
+           int res = 0;
+   
+           while(n<=100){
+                   if((n/10 == 9) || (n%10 == 9)){
+                           res = res + 1;
+                   }
+                   n = n + 1;
+           }
+           return res;
+   }
+   int main(void){
+           int res = find_nine(1);
+           printf("1~100 have 9 count is %d\n",res);
+           return 0;
+   }
+   
+   ```
+   
+2. do/while 语句
+
+3. for 语句
+   * 前缀自增运算符(Prefix Increment Operator `++i`)，前缀自减运算符(Prefix Decrement Operator `--i`)，后缀自增运算符(Postfix Increment Operator `i++`)，后缀自减运算符(Postfix Decrement Operator `i--`)。如果看做函数的调用，前缀返回改变后的值，后缀返回改变之前的值，这是前缀和后缀的区别。在 for循环的语句中，使用的都是它们的 Side Effect，所以没有差别此时。
+   
+   * C99的一个标准
+   ```    
+   
+   int for_func(int n){
+           int res = 1;
+           for(int i=1;i<=n;i++){
+                   res = res * i;
+           }
+   
+           return res;
+   }
+   //test1110.c:27: error: ‘for’ loop initial declarations are only allowed in C99 mode
+   //test1110.c:27: note: use option -std=c99 or -std=gnu99 to compile your code
+   //C++ 一般采取了这种写法，而在 C语言中，为了有更好的兼容性，一般不采取这种写法。
+
+   ```
    
