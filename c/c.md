@@ -282,19 +282,134 @@
    * 前缀自增运算符(Prefix Increment Operator `++i`)，前缀自减运算符(Prefix Decrement Operator `--i`)，后缀自增运算符(Postfix Increment Operator `i++`)，后缀自减运算符(Postfix Decrement Operator `i--`)。如果看做函数的调用，前缀返回改变后的值，后缀返回改变之前的值，这是前缀和后缀的区别。在 for循环的语句中，使用的都是它们的 Side Effect，所以没有差别此时。
    
    * C99的一个标准
-   ```    
-   
-   int for_func(int n){
-           int res = 1;
-           for(int i=1;i<=n;i++){
-                   res = res * i;
-           }
-   
-           return res;
-   }
-   //test1110.c:27: error: ‘for’ loop initial declarations are only allowed in C99 mode
-   //test1110.c:27: note: use option -std=c99 or -std=gnu99 to compile your code
-   //C++ 一般采取了这种写法，而在 C语言中，为了有更好的兼容性，一般不采取这种写法。
+       ```    
+       
+       int for_func(int n){
+               int res = 1;
+               for(int i=1;i<=n;i++){
+                       res = res * i;
+               }
+       
+               return res;
+       }
+       //test1110.c:27: error: ‘for’ loop initial declarations are only allowed in C99 mode
+       //test1110.c:27: note: use option -std=c99 or -std=gnu99 to compile your code
+       //C++ 一般采取了这种写法，而在 C语言中，为了有更好的兼容性，一般不采取这种写法。
+    
+       ```
 
-   ```
+4. break和 continue语句
+   1. 习题一
+       ```   
+       #include <stdio.h>
+       
+       int is_prime(int n){
+       
+               int i;
+               for(i=2;i<n;++i){
+                       if(n%i == 0){
+                               return 0;
+                       }
+               }
+               return 1;
+       }
+       
+       void print_prime(int n){
+       
+               int i;
+               for(i=1;i<=n;++i){
+                       if(is_prime(i)){
+                               printf("The prime is %d\n",i);
+                       }
+               }
+       }
+       int main(void){
+       
+               print_prime(100);
+               return 0;
+       
+       }
+    
+       ``` 
    
+   2. 习题二
+      * for循环的 continue会去执行表达式三，while和 do while的 continue会去执行条件表达式，故有所不同。
+      
+      * 补充一点，break是一样的，对于所有的循环而言。
+          ```  
+          void break_for(void){
+          
+                  int i;
+                  for(i=0;i<10;++i){
+                          printf("The point is %d\n",i);
+                          if(i == 5){
+                                  printf("I will break on this point %d\n",i);
+                                  break;
+                          }
+                  }
+          }
+          
+          void break_while(void){
+          
+                  int i=0;
+                  while(i<10){
+                          printf("The point is %d\n",i);
+                          if(i == 5){
+                                  printf("I will break on this point %d\n",i);
+                                  break;
+                          }
+                          ++i;
+                  }
+          }
+          
+          int main(void){
+          
+                  break_for();
+                  break_while();
+                  return 0;
+          }
+    
+          //结果是：
+          The point is 0
+          The point is 1
+          The point is 2
+          The point is 3
+          The point is 4
+          The point is 5
+          I will break on this point 5
+          The point is 0
+          The point is 1
+          The point is 2
+          The point is 3
+          The point is 4
+          The point is 5
+          I will break on this point 5
+
+          ```
+          
+   3. 一个额外的思考：sqrt(n)就够了？
+       ```   
+        //这段代码对比习题一的代码，结果是一样的
+        int is_prime(int n){
+        
+                int i;
+                for(i=2;i<sqrt(n);++i){
+                        if(n%i == 0){
+                                return 0;
+                        }
+                }
+                return 1;
+        }
+        
+        void print_prime(int n){
+        
+                int i;
+                for(i=1;i<=n;++i){
+                        if(is_prime(i)){
+                                printf("The prime is %d\n",i);
+                        }
+                }
+        }
+    
+       
+       ```
