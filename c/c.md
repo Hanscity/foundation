@@ -414,3 +414,22 @@
     
        
        ```
+       
+ 5. 嵌套语句
+ 
+    1. 习题一: 打印小九九
+    ```   
+    void print_nine_nine(void){
+    
+            int i,j;
+            for(i=1;i<=9;++i){
+                    for(j=1;j<=9;++j){
+                            if(i >= j){
+                                    printf("%d ",i*j);
+                            }
+                    }
+                    printf("\n");
+            }
+    }
+    
+    ```
