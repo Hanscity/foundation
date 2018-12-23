@@ -151,7 +151,57 @@
    ```
 
 
+第五章 类的自动加载
 
+* Php进入 OOP（Object Orient Progamming）的编程模式之后，自动加载变得必不可少。或者你可以将一个个的类文件
+放入一个大文件中，一次引入进来。也不是不可以，但是这样做，随着时间的推移，这个文件有可能变得非常大。我在工作
+中正好遇见了这种情况，当时是 Protobuf协议文件的编译成一个文件，最后这个文件有 60W行代码。随着不断的增大，这个对象已经变得巨大。Php7相对于 Php5等的一个优化是，一次性给一个大约 2G的内存，不用每次都请求都给一些。而这个巨无霸对象达到了 Php7的临界值，整个程序一开始就耗掉了所有的内存，然后 Php7每次的请求运行需要再向系统层再次请求内存。如果有一点点的并发，系统即将瘫痪。
+
+   ```    
+   class SiteController extends Controller {
+   
+       public $layout = false; //关闭布局
+       public $enableCsrfValidation = false; //关闭crsf验证
+       public $cur_version = 1;
+   
+       public function init() {
+            //Protobuf编译成一个文件，引入即好。这是之前的写法
+            //$lib_protobuf = Yii::getAlias("@common/proto");
+            //include $lib_protobuf . '/pb_proto_miqu.php';
+            //新版本协议
+            CommUtils::autoLoadClass();
+       }
+    }
+    
+    
+   class CommUtils{
+ 
+       /**
+        * 注册 autoload 函数
+        * 这里涉及到两个小知识点
+        * 1. 类名::class 可以取到 命名空间的类名
+        * 2. spl_autoload_register有数组的用法，数组的第一个参数也可以有两种，一种是类名，一种是对象
+        */
+       public static function autoLoadClass(){
+           spl_autoload_register([CommUtils::class,'loadProtobufClass']);
+       }
+   
+       /**
+        * 加载 Protobuf 协议类文件
+        * @param $className
+        */
+       protected static function loadProtobufClass($className){
+           # 协议类地址
+           $classDirPath = Yii::getAlias("@common/protobuf_msg");
+   
+           $classPath = "{$classDirPath}/{$className}.php";
+           if(file_exists($classPath)){
+               include_once $classPath;
+           }
+       }
+   }
+   
+   ```
 
 
 
