@@ -50,7 +50,51 @@
            LoggerUtils::error('添加Cp数据失败=>' . $e->getMessage(), 'addcpInfo.log');
        } 
 
-          
         
-
       ```
+      
+* 自定义的异常
+   ```     
+  
+    /**
+    * Class customException
+    * 这个自定义的异常类涉及到几个知识点
+    * 1. class customException extends Exception 在没有命名空间的文件中，Exception就是 Core_c.php文件中 Php扩展类 Exception
+    * 写成 class customException extends \Exception这样更好。在有命名空间的文件中，都是采取的这种写法。
+    *
+    * 2. extends继承，从文件的角度上来看，就是将被继承的类的代码引用到了当前类中。这个例子，就是 customException类拥有
+    * 了 \Exception类的代码。那么 $this优先在 customException类中寻找，找不到，就去 \Exception类中寻找调用。
+    *
+    */
+    class customException extends Exception
+    {
+      public function errorMessage()
+      {
+          //error message
+          $errorMsg = 'Error on line '.$this->getLine().' in '.$this->getFile()
+              .': <b>'.$this->getMessage().'</b> is not a valid E-Mail address';
+          return $errorMsg;
+      }
+    }
+    
+    $email = "someone@example...com";
+    
+    try
+    {
+      //check if
+      if(filter_var($email, FILTER_VALIDATE_EMAIL) === FALSE)
+      {
+          //throw exception if email is not valid
+          throw new customException($email);
+      }
+    }
+    
+    catch (customException $e)
+    {
+      //display custom message
+      echo $e->errorMessage();
+    }
+
+
+
+   ```
