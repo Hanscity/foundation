@@ -212,7 +212,82 @@
 * 构造函数在 Php5.3.3以前的 Php5版本中，与类名一致的方法默认是构造函数，在后来的 Php版本中且有命名空间的情况下，不再作为构造函数。这是一个兼容性的问题。
 * 析构函数，反之。析构函数中抛出异常会引起致命的错误。
 
+## 访问控制--visibilty
+* 为什么要有访问控制？提供完整的封装对象以作接口使用，对一些属性和方法做出限制是比较好的做法。
 
+* public：类，子类，对象都可以访问；protected：类，子类可以访问，对象不能访问；private：类可以访问，子类和对象不能访问。对象和方法都是如此，这就是访问控制的主要内容。
+
+* 不同访问控制下的可覆盖性,在 Php7中，都是可以覆盖的。属性和方法都一样。
+
+   ```
+   /**
+    * Define MyClass
+    */
+   class MyClass
+   {
+       public $public = 'Public';
+       protected $protected = 'Protected';
+       private $private = 'Private';
+   
+       public function printPublic(){
+           echo $this->public;
+       }
+   
+       protected function printProtected(){
+           echo $this->protected;
+       }
+   
+       private function printPrivate(){
+           echo $this->private;
+       }
+   
+       public function printHello()
+       {
+           $this->printPublic();
+           $this->printProtected();
+           $this->printPrivate();
+       }
+   }
+   
+   
+   /**
+    * Define MyClass2
+    */
+   class MyClass2 extends MyClass
+   {
+       // 可以对 public 和 protected 和 private 的属性进行重定义
+       //这里需要小心，PHP的官方手册认为 Private属性是不可以重定义的，嗯，手册上说明的应该是 PHP5版本吧
+       public $public = 'Public2';
+       protected $protected = 'Protected2';
+       private $private = 'Private2';
+   
+       // 可以对 public 和 protected 和 private 的方法进行重定义
+       public function printPublic(){
+           echo $this->public;
+       }
+   
+       protected function printProtected(){
+           echo $this->protected;
+       }
+   
+       private function printPrivate(){
+           echo $this->private;
+       }
+   
+       public function printHello()
+       {
+           $this->printPublic();
+           $this->printProtected();
+           $this->printPrivate();
+       }
+   
+   }
+   
+   $obj2 = new MyClass2();
+   $obj2->printHello(); // 输出 Public、Protected2 和 Undefined
+   
+   
+   ```
 
 
 
