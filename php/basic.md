@@ -62,10 +62,9 @@
     * 1. class customException extends Exception 在没有命名空间的文件中，Exception就是 Core_c.php文件中 Php扩展类 Exception
     * 写成 class customException extends \Exception这样更好。在有命名空间的文件中，都是采取的这种写法。
     *
-    * 2. extends继承，从文件的角度上来看，就是将被继承的类的代码引用到了当前类中。这个例子，就是 customException类拥有
-    * 了 \Exception类的代码。那么 $this优先在 customException类中寻找，找不到，就去 \Exception类中寻找调用。
-    *
+    * 2. extends继承，从文件的角度上来看，就是将被继承的类的代码引用到了当前类中。这个例子，就是 customException类拥有了 \Exception类的代码。那么 $this优先在 customException类中寻找，找不到，就去 \Exception类中寻找调用。
     */
+    
     class customException extends Exception
     {
       public function errorMessage()
@@ -98,3 +97,7 @@
 
 
    ```
+   
+
+* PHP5 和 PHP7 的差别
+

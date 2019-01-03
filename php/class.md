@@ -290,6 +290,62 @@
    ```
 
 
+## 对象继承
+* 从文件的角度来看，继承是文件中内容的引入。$this在本类中找不到，会去父类
+中去寻找。如果知道需要去父类中寻找，用 parent是更好的选择。
+
+## 范围解析操作符 ::
+* 当一个子类覆盖其父类中的方法时，PHP 不会调用父类中已被覆盖的方法。是否调用父类的方法取决于子类。这种机制也作用于构造函数和析构函数，重载以及魔术方法。
+
+## static（静态）关键字
+* 类名，对象，self,parent,可以调用静态属性和方法，伪变量 $this不能用来调用静态变量。在 PHP5中，对象不能调用静态属性，可以调用静态方法，这也是 PHP5和PHP7的一个不同之处。
+
+* static和self的调用
+   ```    
+       
+    /**
+     * Class a
+     * self,是指此时的属性和方法
+     * static，是指当前被调用类的属性和方法
+     */
+    class a{
+    
+        static protected $test="class a";
+    
+        public static function getTestVariable(){
+    
+            return self::$test;
+        }
+        public function static_test(){
+    
+            echo static::$test; // Results class b
+            echo self::$test; // Results class a
+            echo static::getTestVariable();// Results class b
+            echo self::getTestVariable();// Results class a
+        }
+    
+    
+    
+    }
+    
+    class b extends a{
+    
+    
+        static protected $test="class b";
+    
+        public static function getTestVariable(){
+    
+            return static::$test;
+        }
+    
+    }
+    
+    $obj = new b();
+    $obj->static_test();
+
+   
+   ```
+
 
 
 
