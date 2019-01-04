@@ -294,6 +294,38 @@
 * 从文件的角度来看，继承是文件中内容的引入。$this在本类中找不到，会去父类
 中去寻找。如果知道需要去父类中寻找，用 parent是更好的选择。
 
+* 多重继承，代码如下：
+   ```   
+       
+    /**
+     *
+     * Here is some clarification about PHP inheritance – there is a lot of bad information on the net.
+     * PHP does support Multi-level inheritance.
+     * (I tested it using version 5.2.9).  It does not support multiple inheritance.
+     * This means that you cannot have one class extend 2 other classes (see the extends keyword).
+     * However, you can have one class extend another, which extends another, and so on.
+    
+     */
+    class A {
+        // more code here
+    }
+    
+    class B extends A {
+        // more code here
+    }
+    
+    class C extends B {
+        // more code here
+    }
+    
+    
+    $someObj = new A();  // no problems
+    $someOtherObj = new B(); // no problems
+    $lastObj = new C(); // still no problems
+
+   
+   ```
+
 ## 范围解析操作符 ::
 * 当一个子类覆盖其父类中的方法时，PHP 不会调用父类中已被覆盖的方法。是否调用父类的方法取决于子类。这种机制也作用于构造函数和析构函数，重载以及魔术方法。
 
@@ -353,7 +385,112 @@
 * 如果一个子类继承了抽象类，那么这个子类的可访问控制和函数的参数可以比抽象类宽松。
 
 
+## 对象接口
 
+* 接口对象里面的必须都是抽象方法，并且这些方法必须一一实现，如果一个类实现（implement）这个接口的话。
+
+* 这些抽象方法的访问控制必须是 public
+
+* 一个类可以同时实现多个接口，用逗号（,）隔开
+
+* 这个例子来自手册，写的比较好，代码如下
+   ```  
+   
+    
+    /**
+     * An example of duck typing in PHP
+     */
+    
+    interface CanFly {
+        public function fly();
+    }
+    
+    interface CanSwim {
+        public function swim();
+    }
+    
+    class Bird {
+        /**
+         * 这又涉及到了 $this->name的用法
+         * 如果子类有，则调用子类的；如果子类没有，则调用父类的。
+         * 这个例子比较特殊，下面都将此类当做父类使用。父类没有，子类有。所以不能单独实例化此父类。
+         * 从例外一个角度来说，这个类设计的不好。
+         */
+        public function info() {
+            echo "I am a {$this->name}\n";
+            echo "I am an bird\n";
+        }
+    
+        /**
+         * @var null
+         * 这样子的设计才比较好吧。可以避免某些错误的发生。
+         */
+        public $obj_name = null;
+        public function infoDesignTwice(){
+            if($this->obj_name){
+                echo "I am a {$this->obj_name}\n";
+                echo "I am an bird\n";
+            }
+        }
+    }
+    
+    /**
+     * some implementations of birds
+     */
+    class Dove extends Bird implements CanFly {
+        var $name = "Dove";
+        public function fly() {
+            echo "I fly\n";
+        }
+    }
+    
+    class Penguin extends Bird implements CanSwim {
+        var $name = "Penguin";
+        public function swim() {
+            echo "I swim\n";
+        }
+    }
+    
+    class Duck extends Bird implements CanFly, CanSwim {
+        var $name = "Duck";
+        public function fly() {
+            echo "I fly\n";
+        }
+        public function swim() {
+            echo "I swim\n";
+        }
+    }
+    
+    /**
+     * @param $bird
+     */
+    function describe($bird) {
+        if ($bird instanceof Bird) {
+            echo 1;
+            $bird->info();
+            if ($bird instanceof CanFly) {
+                echo 2;
+                $bird->fly();
+            }
+            if ($bird instanceof CanSwim) {
+                echo 3;
+                $bird->swim();
+            }
+        } else {
+            die("This is not a bird. I cannot describe it.");
+        }
+    }
+    
+    // describe these birds please
+    describe(new Penguin);
+    echo "---\n";
+    
+    describe(new Dove);
+    echo "---\n";
+    
+    describe(new Duck);
+   
+   ```
 
 
 
