@@ -109,3 +109,26 @@
    6. 注意一些特殊使用和异常的兼容
    
    
+* use
+
+   [from manual](http://php.net/manual/zh/language.oop5.traits.php)
+   ```     
+   Note that the "use" operator for traits (inside a class) and the "use" operator for namespaces (outside the class) resolve names differently. "use" for namespaces always sees its arguments as absolute (starting at the global namespace):
+   
+   <?php
+   namespace Foo\Bar;
+   use Foo\Test;  // means \Foo\Test - the initial \ is optional
+   ?>
+   
+   On the other hand, "use" for traits respects the current namespace:
+   
+   <?php
+   namespace Foo\Bar;
+   class SomeClass {
+       use Foo\Test;   // means \Foo\Bar\Foo\Test
+   }
+   ?>
+   
+   Together with "use" for closures, there are now three different "use" operators. They all mean different things and behave differently.
+   
+   ```
