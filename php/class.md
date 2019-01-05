@@ -492,13 +492,115 @@
    
    ```
 
+## trait（特性）
+* trait是为了在水平结构上复用代码
 
-
-
-
-
-
-
+* 一些代表性的代码如下，基本 copy自官方手册，有少许修改
+   ```   
+       
+    /**
+     * Trait A
+     * 可以同时使用多个 trait，并且如何解决同名的冲突，远不止冲突这么简单，而是直接报错
+     */
+    trait A {
+        public function smallTalk() {
+            echo 'a';
+        }
+        public function bigTalk() {
+            echo 'A';
+        }
+    }
+    
+    trait B {
+        public function smallTalk() {
+            echo 'b';
+        }
+        public function bigTalk() {
+            echo 'B';
+        }
+    }
+    
+    class Talker {
+        use A, B {
+            B::smallTalk insteadof A;
+            A::bigTalk insteadof B;
+        }
+    }
+    
+    class Aliased_Talker {
+        use A, B {
+            B::smallTalk insteadof A;
+            A::bigTalk insteadof B;
+            B::bigTalk as public talk;## as可以设置别名，亦可以设置访问控制
+        }
+    }
+    
+    class TalkerConflict{
+    
+        use A;
+        use B;
+    
+    }
+    /*$talker = new Aliased_Talker();
+    $talker->smallTalk();
+    $talker->bigTalk();
+    $talker->talk();*/
+    
+    try{
+        $talkerCon = new TalkerConflict();
+        $talkerCon->bigTalk();
+        $talkerCon->smallTalk();
+    }catch(\Exception $e){
+        echo $e->getMessage();
+    }
+    
+    
+    
+    /**
+     * Trait PropertiesTrait
+     * PHP7中，属性可以重复定义，但必须完全一致。
+     */
+    trait PropertiesTrait {
+        public static $x = 1;
+    }
+    
+    class PropertiesExample {
+        use PropertiesTrait;
+        public static $x = 1;
+    }
+    
+    $example = new PropertiesExample;
+    var_dump($example::$x);
+    
+    
+    /**
+     * Class Base
+     * Php7中，方法可以重复定义，不必保持一致。
+     */
+    class Base {
+        public function sayHello() {
+            echo 'Hello ';
+        }
+    }
+    
+    trait SayWorld {
+        public function sayHello() {
+            parent::sayHello();
+            echo 'World!';
+        }
+    }
+    
+    class MyHelloWorld extends Base {
+        use SayWorld;
+        public function sayHello() {
+            echo 'Hello,Ch.. ';
+        }
+    }
+    
+    $o = new MyHelloWorld();
+    $o->sayHello();
+   
+   ```
 
 
 
