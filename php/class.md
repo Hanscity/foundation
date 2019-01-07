@@ -73,7 +73,7 @@
 * 由 public,protected,private开头，加上一个变量名称组成。这是标准的用法。
 
 
-### 第四章：常量
+### 第四章：类常量
 * 常量由 const加上变量名组成，变量名可以大写，可以小写。这一点没有明文规定，但是最好是大写。
 
 * 使用及细节如下：
@@ -119,9 +119,8 @@
     /**
      * Class dbObject
      * 这涉及到几个知识点，
-     * 1：常量可以被覆盖
-     * 2：get_called_class函数的使用，得到当前的类名
-     * 3：类名来调用常量（Php5.3 以后）
+     * * get_called_class函数的使用，得到当前的类名
+     * * 类名来调用常量（Php5.3 以后）
      */
     abstract class dbObject
     {
@@ -146,8 +145,72 @@
     
     echo dbPerson::GetAll()."<br>";//output: "SELECT * FROM `persons`"
     echo dbAdmin::GetAll()."<br>";//output: "SELECT * FROM `admins`"
+    
+    
+    
+    /**
+     * Class MyClass
+     * 类常量的用法和静态变量的用法基本一致，可以用在类中，抽象类中，子类中，普通方法中，静态方法中。
+     * 可以被类名，类名变量，实例(对象)，self,static调用（self 和 static 的区别也是一致）
+     * 这两者的最大区别，来自定义。类常量不能被重新赋值，静态变量可以被重新赋值。
+     * 当然，在同一个类中，重复定义，都是不好的。在不同类中，都是可以重复定义的。
+     */
+    class MyClass{
+    
+        const ONE_CONST = 'NOODLES';
+        public static $className = 'xining';
+        public function getConst(){
+    
+            return static::ONE_CONST;## self和 static是不同的
+        }
+    
+        public function __construct($name){
+    
+            self::$className = $name;## 静态变量可以被重新赋值
+            //self::ONE_CONST = $name;## 类常量不能被重新赋值
+        }
+    }
+    
+    class SecondClass extends MyClass {
+    
+        const ONE_CONST = 'CH';
+    }
+    
+    $oneClass = new SecondClass('xining');
+    echo $oneClass->getConst();
 
-   
+        
+        
+    /**
+     * Class SomeClass
+     * 
+     */
+    class SomeClass{
+        PUBLIC STATIC $staticVari = 'static vari';
+    }
+    
+    interface SomeInterface{
+        const SOME_CONST = 'CH';## 接口中可以定义类常量，但是不能定义静态变量
+    }
+    
+    trait SomeTrait{
+        PUBLIC STATIC $staticVari = 'static vari';## trait中可以定义静态变量，但是不能定义常量
+    }
+    
+    var_dump(new class(10) extends SomeClass implements SomeInterface{
+        //const SOME_CONST = 'CH';
+        use SomeTrait;
+        private $num= null;
+        public function __construct($num)
+        {
+            $this->num = $num;
+            var_dump($this->num);
+            var_dump(self::SOME_CONST);
+        }
+    
+    });
+    
+    
    ```
 
 
@@ -210,8 +273,8 @@
 初始化子类则会调用自己的构造函数，而不会去隐式的调用父类的构造函数，除非在子类的构造函数中显式的调用。
 * 构造函数也有调用的权限问题
 * 构造函数在 Php5.3.3以前的 Php5版本中，与类名一致的方法默认是构造函数，在后来的 Php版本中且有命名空间的情况下，不再作为构造函数。这是一个兼容性的问题。
+* 构造函数，有访问的控制。
 * 析构函数，反之。析构函数中抛出异常会引起致命的错误。
-
 ## 访问控制--visibilty
 * 为什么要有访问控制？提供完整的封装对象以作接口使用，对一些属性和方法做出限制是比较好的做法。
 
@@ -601,6 +664,10 @@
     $o->sayHello();
    
    ```
+
+## 匿名类
+* PHP7开始，才有匿名类
+
 
 
 
