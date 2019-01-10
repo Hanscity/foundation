@@ -132,3 +132,9 @@
    Together with "use" for closures, there are now three different "use" operators. They all mean different things and behave differently.
    
    ```
+   
+   
+ * PHP_EOL and "</br>" 的区别
+    1. 命令行用 PHP_EOL，浏览器用 "</br>"
+    
+ 
