@@ -138,3 +138,21 @@
     1. 命令行用 PHP_EOL，浏览器用 "</br>"
     
  
+ * 关于数组的一些方法--current,next,prev,reset,key
+    ```
+    $array = array('step one', 'step two', 'step three', 'step four');
+    
+    // by default, the pointer is on the first element
+    echo current($array) . "<br />\n<br \>"; // "step one"
+    
+    // skip two steps
+    next($array);
+    next($array);
+    echo current($array) . "<br />\n<br \>"; // "step three"
+    echo prev($array) . "<br />\n<br \>"; //step two
+    
+    // reset pointer, start again on step one
+    reset($array);
+    echo current($array) . "<br />\n<br \>"; // "step one"
+       
+    ```
