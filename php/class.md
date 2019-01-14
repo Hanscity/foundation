@@ -803,7 +803,109 @@
        
    ```
 
+## 遍历对象
+* foreach可以遍历对象
+   ```   
+   class MyClass
+   {
+       public $var1 = 'value 1';
+       public $var2 = 'value 2';
+       public $var3 = 'value 3';
+   
+       protected $protected = 'protected var';
+       private   $private   = 'private var';
+   
+       function iterateVisible() {
+          echo "MyClass::iterateVisible:\n";
+          foreach($this as $key => $value) {
+              print "$key => $value\n";
+          }
+       }
+   }
+   
+   $class = new MyClass();
+   
+   foreach($class as $key => $value) {
+       print "$key => $value\n";
+   }
+   echo "\n";
+   
+   $class->iterateVisible();
+   ```
+   
+* SPL扩展，生成器，可以用来定义 Interators
 
+## 魔术方法
+* __construct
+* __destruct
+* __call
+* __callStatic
+* __set
+* __get
+* __isset
+* __unset
+* __toString
+* __invoke
+* __clone
+   ```   
+       
+    /**
+     * Class SubObject
+     * clone
+     * 这里的 clone涉及到了几个知识点
+     * 1. 对象的复制
+     * 2. 魔术方法 __clone()的使用
+     * 3. 普通变量和静态变量的理解
+     *
+     */
+    class SubObject
+    {
+        static $instances = 0;
+        public $instance;
+    
+        public function __construct() {
+            $this->instance = ++self::$instances;
+        }
+    
+        public function __clone() {
+            $this->instance = ++self::$instances;
+        }
+    }
+    
+    class MyCloneable
+    {
+        public $object1;
+        public $object2;
+    
+        function __clone()
+        {
+    
+            // 强制复制一份this->object， 否则仍然指向同一个对象
+            $this->object1 = clone $this->object1;
+        }
+    }
+    
+    $obj = new MyCloneable();
+    
+    echo SubObject::$instances;
+    $obj->object1 = new SubObject();
+    echo SubObject::$instances;
+    
+    $obj->object2 = new SubObject();
+    echo SubObject::$instances;
+    
+    $obj2 = clone $obj;
+    
+    
+    print("Original Object:\n");
+    print_r($obj);
+    
+    print("Cloned Object:\n");
+    print_r($obj2);
+   
+   ```
+* __sleep
+* __wakeUp
 
 
 
