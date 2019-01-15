@@ -440,6 +440,55 @@
 
    
    ```
+   
+* 静态变量的缓存数据，维护静态类缓存
+   ```   
+   //缓存数据 - 维护静态类缓存
+   protected static $_CpInfoList = [];
+   
+   //获取用户信息cp 信息
+   public function getUserCpInfo($fromUid) {
+       $key = $this->getUserCpInfoKey($fromUid);
+
+       if(! empty(self::$_CpInfoList[$key])){  
+           #已经查询过 Redis Cp Info List缓存
+           return self::$_CpInfoList[$key];        #返回 Redis Cp Info List数据
+       }
+
+       $HashArray = \Yii::$app->redis_two->executeCommand('HGETALL', [$key]);
+       if (empty($HashArray)) {
+           $userCpInfo = $this->reloadUserCpInfo($fromUid);
+       } else {
+           $userCpInfo = CommUtils::getArrayByHash($HashArray);
+       }
+       if (!isset($userCpInfo['uid_one'])) {
+           $userCpInfo = [];
+       }
+       if(! empty($userCpInfo)){
+           self::$_CpInfoList[$key] = $userCpInfo; //不为空 写入静态类缓存
+       }
+       return $userCpInfo;
+   }
+   
+   //重新加载到缓存
+   public function reloadUserCpInfo($uid) {
+       $uid_key = $this->getUserCpInfoKey($uid);
+       $fromCpInfo = $this->_getUserCpInfo($uid);
+       if (empty($fromCpInfo)) {
+           $fromCpInfo = [
+               'begin_cp_time' => '0000-00-00 00:00:00'
+           ];
+       }else{
+           self::$_CpInfoList[$uid_key] = $fromCpInfo;  // 重载时缓存
+       }
+       RedisService::del(self::getRedisSource(), $uid_key);
+       RedisService::hmset(self::getRedisSource(), $uid_key, $fromCpInfo, (RD_THREE_DAY_EXPIRE+3600));
+
+       return $fromCpInfo;
+   }
+   
+   
+   ```
 
 ## 抽象类
 
@@ -908,6 +957,9 @@
 * __wakeUp
 
 
+## Final关键字
+* 只有方法和类才能有关键字 Final，如果类有关键字 Final，那么此类不能被继承；如果此方法
+有关键字 Final，则此方法不能被覆盖。
 
 
 > 资料
