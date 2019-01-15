@@ -1025,6 +1025,22 @@
    echo "\n<br \>Compare with clone and the private class\n<br \>";
    compareObjects($m,$o);
    ```
-> 资料
 
-[PHP官方中文手册](http://php.net/manual/zh/oop5.intro.php)
+## 类型约束
+* 传递参数的时候，可以指定参数的类型,这就是类型约束
+
+   ```    
+   
+    /**
+     * @param array|NULL $a
+     * @return array
+     * array $a=NULL,这样就可以不传参数，兼容性更好一点
+     */
+    function test(array $a=NULL){
+        return $a;
+    }
+    
+    $res = test([1111]);
+    var_dump($res);
+
+   ```
