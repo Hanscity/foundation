@@ -961,7 +961,70 @@
 * 只有方法和类才能有关键字 Final，如果类有关键字 Final，那么此类不能被继承；如果此方法
 有关键字 Final，则此方法不能被覆盖。
 
+## 对象复制
 
+## 对象比较
+* 对象赋值会完全相等，同一个类相同条件下的实例相对相等，对象复制会相对相等，其它不相等
+   ```   
+   
+   /**
+    * @param $bool
+    * @return string
+    * 对象赋值会完全相等，同一个类相同条件下的实例相对相等，对象复制会相对相等，其它不相等
+    */
+   function bool2str($bool)
+   {
+       if ($bool === false) {
+           return 'FALSE';
+       } else {
+           return 'TRUE';
+       }
+   }
+   
+   function compareObjects(&$o1, &$o2)
+   {
+       echo 'o1 == o2 : ' . bool2str($o1 == $o2) . "\n<br \>";
+       //echo 'o1 != o2 : ' . bool2str($o1 != $o2) . "\n<br \>";
+       echo 'o1 === o2 : ' . bool2str($o1 === $o2) . "\n<br \>";
+       //echo 'o1 !== o2 : ' . bool2str($o1 !== $o2) . "\n<br \>";
+   }
+   
+   class Flag
+   {
+       public $flag;
+   
+       function Flag($flag = true) {
+           $this->flag = $flag;
+       }
+   }
+   
+   class OtherFlag
+   {
+       public $flag;
+   
+       function OtherFlag($flag = true) {
+           $this->flag = $flag;
+       }
+   }
+   
+   $o = new Flag();
+   $p = new Flag();
+   $q = $o;
+   $m = clone $o;
+   $r = new OtherFlag();
+   
+   echo "Two instances of the same class\n<br \>";
+   compareObjects($o, $p);
+   
+   echo "\n<br \>Two references to the same instance\n<br \>";
+   compareObjects($o, $q);
+   
+   echo "\n<br \>Instances of two different classes\n<br \>";
+   compareObjects($o, $r);
+   
+   echo "\n<br \>Compare with clone and the private class\n<br \>";
+   compareObjects($m,$o);
+   ```
 > 资料
 
 [PHP官方中文手册](http://php.net/manual/zh/oop5.intro.php)
