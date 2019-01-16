@@ -1107,3 +1107,37 @@
    $c = new C();
    $c->test();   //fails
    ```
+
+## 对象和引用
+* 对象的传递和复制等一系列的操作，都是通过一个特定的标识符，而不是传统理解中地址
+   ```   
+   class A {
+       public $foo = 1;
+   }
+   
+   $a = new A;
+   $b = $a;     // $a ,$b都是同一个标识符的拷贝
+   // ($a) = ($b) = <id>
+   $b->foo = 2;
+   echo $a->foo."\n";
+   
+   
+   $c = new A;
+   $d = &$c;    // $c ,$d是引用
+   // ($c,$d) = <id>
+   
+   $d->foo = 2;
+   echo $c->foo."\n";
+   
+   
+   $e = new A;
+   
+   function foo($obj) {
+       // ($obj) = ($e) = <id>
+       $obj->foo = 2;
+   }
+   
+   foo($e);
+   echo $e->foo."\n";
+   
+   ```
