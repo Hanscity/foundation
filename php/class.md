@@ -1141,3 +1141,42 @@
    echo $e->foo."\n";
    
    ```
+   
+## 对象序列化
+* 所有 PHP的值都可以用字节流的字符串来表示
+* seriarize,unseriarize它们对应的是 __sleep(),__wakeup()
+   ```   
+   
+    class A{
+        public $a = 1;
+    
+        public function showA(){
+    
+            return $this->a;
+        }
+    
+        public function __sleep(){
+            $this->a = 2;
+            //如果返回 return 1;就不行，对于 sleep还是有一些疑问？
+            return array('2222');
+        }
+    
+        /*public function  __wakeup()
+        {
+            // TODO: Implement __wakeup() method.
+            return $this->a;
+        }*/
+    }
+    
+    $a = new A;
+    echo "<pre>";
+    var_dump($a);
+    $b = serialize($a);
+    var_dump($b);
+    $c = unserialize($b);
+    var_dump($c);
+    
+    /*$d = $c->showA();
+    var_dump($d);*/
+    echo "</pre>";
+   ```
