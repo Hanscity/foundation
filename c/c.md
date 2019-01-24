@@ -508,5 +508,19 @@
       [from csbn](https://www.cnblogs.com/andywenzhi/p/5723807.html)
       
       
+2. 数据抽象
+   * 学习的例子以三角函数为例，暂时屏蔽
+   
+3. 数据类型标志
+   * 学习的例子以三角函数为例，暂时屏蔽
+   * 在以上的基础上增加了一个枚举（enum）类型
+       ```    
+       enum coordinate_type { RECTANGULAR, POLAR };       
+       printf("%d %d\n", RECTANGULAR, POLAR);
+       
+       ```
+4. 嵌套结构体
+   * 结构体是一种递归定义。结构体的成员由数据类型定义，结构体也是数据类型中的一种。
+   
    
    
