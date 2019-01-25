@@ -542,3 +542,45 @@
       
       ```
    
+2. 数组应用实例：统计随机数
+    * C程序的编译基本分为两步，预编译+编译。预编译基本分两步：将引入的文件代码加载进去 + 预定义的常量替换进去
+    * 以 #号开头的语法元素称为预处理指示(Preprocessing Directive)
+    * 预编译的编译指示有两个：gcc -E 和 cpp(C Preprocessor)
+    * 习题答案如下：
+    
+       ```   
+       #include <stdio.h>
+       #include <stdlib.h>
+       
+       #define N 20
+       #define BASIC_NUM 10
+       int a[N];
+       
+       void gen_random(int i)
+       {
+               for(int j=0;j<N;++j){
+                       a[j] = rand()%i+BASIC_NUM;
+               }
+       
+       }
+       
+       void print_random(void){
+       
+               for(int j=0;j<N;++j){
+                       printf("a[j]=%d\n",a[j]);
+               }
+       }
+       int main(void)
+       {
+               gen_random(BASIC_NUM);
+               print_random();
+               return 0;
+       }
+       
+       ```
+3. 数组应用实例：直方图
+
+4. 字符串
+
+5. 多维数组
+
