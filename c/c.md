@@ -579,6 +579,60 @@
        
        ```
 3. 数组应用实例：直方图
+   * 优化统计随机数程序
+      ```   
+      
+     #include <stdio.h>
+     #include <stdlib.h>
+     
+     #define N 20
+     #define BASIC_NUM 10
+     int a[N];
+     
+     
+     void gen_random(int i)
+     {
+             for(int j=0;j<N;++j){
+                     a[j] = rand()%i;
+             }
+     
+     }
+     
+     void print_random(void){
+     
+             for(int j=0;j<N;++j){
+                     printf("a[%d]=%d\n",j,a[j]);
+             }
+     }
+     
+     int howmany(int i){
+     
+             int k=0,j;
+             for(j=0;j<N;++j){
+                     if(i == a[j]){
+                             ++k;
+                     }
+             }
+             return k;
+     }
+     int main(void)
+     {
+             gen_random(BASIC_NUM);
+             print_random();
+     
+             int arrayRandom[10] = {};
+             for(int j=0;j<N;++j){
+     
+                     ++arrayRandom[a[j]];
+             }
+     
+             for(int k=0;k<BASIC_NUM;++k){
+                     printf("%d\t%d\n",k,arrayRandom[k]);
+             }
+             return 0;
+     }
+      ```
+   
 
 4. 字符串
 
