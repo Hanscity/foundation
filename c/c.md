@@ -718,3 +718,20 @@
       }
       ```
     
+
+第九章 编码风格
+* Thus, programs must be written for people to read, and only incidentally for machines to execute.
+   * incidentally
+     英 [ˌɪnsɪˈdentli]   美 [ˌɪnsɪˈdɛntli]  
+     adv.顺便;附带;捎带;偶然地，不经意地
+     
+   
+1. 缩进和空白
+2. 注释
+3. 标识符命名
+   * 下划线是 Linux和 K&R的标准命名， CamelCase(驼峰法)是现代 C++的命名标准
+4. 函数
+5. indent工具
+   * indent -kr -i8
+   
+   
