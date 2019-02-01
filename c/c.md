@@ -652,5 +652,67 @@
       
       ```
 
-5. 多维数组
-
+5. 多维数组(Multi-demensional Array)
+   * dimensional
+     英 [dɪ'menʃənəl]   美 [dɪˈmɛnʃənl:]  
+     adj.维的;尺寸的;<物>量纲的;<数>因次的
+   * brace 英 [breɪs]   美 [bres]  
+             vt.支撑;系紧;准备，预备;振作起来
+             vi.准备好;支持;打起精神
+             n.支持物;铁钳，夹子;[语]大括号;绷紧（身体部位的）肌肉
+             
+   * 多维数组的初始化
+      ```   
+        //这不是好的初始化的方式，如果不明确指定第二维数组的初始化，
+        //那么第二维的初始化，如下例所示，a[0][0] = 0;a[0][1] = 1;
+        //a[0][2] = 2;a[0][3] = 3;a[0][4] = 4;
+        int a[3][8] = {0,1,2,3,4};
+        printf("The array is %d\n",a[1][1]);//0
+        printf("The array is %d\n",a[0][2]);//2
+         
+        //gcc -Wall 20190201.c -o 20190201
+        //20190201.c:27:15: warning: missing braces around initializer [-Wmissing-braces]
+        //警告：初始化的时候，缺少大括号
+        
+        //这是好的初始化方式
+        int a[3][8] = {{0,1,2},{3,4}};
+        printf("The array is %d\n",a[1][1]);
+        printf("The array is %d\n",a[0][2]);
+                  
+      ```
+   * 二维数组在物理存储空间上是连续的，这种方式叫 Row-major
+   
+   * scissor,stone,cloth
+      ```   
+      #include <stdio.h>
+      #include <stdlib.h>
+      #include <time.h>
+      int main(void)
+      {
+       char gesture[3][10] = { "scissor", "stone",
+      "cloth" };
+       int man, computer, result, ret;
+       srand(time(NULL));
+       while (1) {
+              computer = rand() % 3;
+              printf("\nInput your gesture (0-scissor 1-stone 2-cloth):\n");
+       ret = scanf("%d", &man);
+       if (ret != 1 || man < 0 || man > 2) {
+              printf("Invalid input! Please input 0, 1 or 2.\n");
+              continue;
+       }
+       printf("Your gesture: %s\tComputer's gesture: %s\n", gesture[man], gesture[computer]);
+       result = (man - computer + 4) % 3 - 1;
+       if (result > 0)printf("You win!\n");
+       else if (result == 0)
+       printf("Draw!\n");
+       else
+       printf("You lose!\n");
+       }
+      
+      
+       return 0;
+      
+      }
+      ```
+    
