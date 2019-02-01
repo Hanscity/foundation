@@ -652,10 +652,12 @@
       
       ```
 
-5. 多维数组(Multi-demensional Array)
-   * dimensional
-     英 [dɪ'menʃənəl]   美 [dɪˈmɛnʃənl:]  
-     adj.维的;尺寸的;<物>量纲的;<数>因次的
+5. 多维数组(Multi-dimensional Array)
+   * dimension英 [daɪˈmenʃn]   美 [dɪˈmɛnʃən, daɪ-]  
+   n.尺寸;[复]面积，范围;[物]量纲;[数]次元，度，维
+   adj.（石料，木材）切成特定尺寸的
+   vt.把…刨成（或削成）所需尺寸;标出尺寸
+
    * brace 英 [breɪs]   美 [bres]  
              vt.支撑;系紧;准备，预备;振作起来
              vi.准备好;支持;打起精神
