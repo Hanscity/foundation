@@ -734,4 +734,85 @@
 5. indent工具
    * indent -kr -i8
    
+
+第十章 gdb
+* gdb可以观察到程序执行的每一个细节，是一个非常强大的调试工具。
+* 调试的基本思想，永远都是分析，假设，验证。一般情况下，printf就足够使用。
+gdb适合分析疑难的情况
+
+1. 单步执行和跟踪函数调用
+   * gcc -Wall(此参数用来最严格的提醒)
+   * gcc -lc (此参数用来引入默认的 stdio.h的头文件)
+   * gcc -g 
+   * gdb file
+   * help 
+   * start
+   * n(next)
+   * s(step)
+   * i(info)
+   * i locals
+   * 
    
+      ```   
+      (gdb) help
+      List of classes of commands:
+      
+      aliases -- Aliases of other commands
+      breakpoints -- Making program stop at certain points
+      data -- Examining data
+      files -- Specifying and examining files
+      internals -- Maintenance commands
+      obscure -- Obscure features
+      running -- Running the program
+      stack -- Examining the stack
+      status -- Status inquiries
+      support -- Support facilities
+      tracepoints -- Tracing of program execution without stopping the program
+      user-defined -- User-defined commands
+      
+      Type "help" followed by a class name for a list of commands in that class.
+      Type "help all" for the list of all commands.
+      Type "help" followed by command name for full documentation.
+      Type "apropos word" to search for commands related to "word".
+      Command name abbreviations are allowed if unambiguous.
+      
+      //start to translate
+      * internal
+        英 [ɪnˈtɜ:nl]   美 [ɪnˈtɜ:rnl]  
+        1. connected with the inside of sth
+        2. connected with a country's own affairs rather 
+           than those that involve other countries
+        3. happening or existing in your mind
+        
+      *  maintenance
+         英 [ˈmeɪntənəns]   美 [ˈmentənəns]  
+         1. the act of keeping sth in good condition by checking 
+            or repairing it regularly
+         2. money that sb must pay regularly to their former wife, husband or                    partner, especially when they have had children together
+     
+         * maintenance commands: 维护命令
+       
+      * obscure
+        英 [əbˈskjʊə(r)]   美 [əbˈskjʊr]
+         1. not well known
+         2. difficult to understand
+         * Obscure features: 难以理解的特性
+              
+      * abbreviation
+        英 [əˌbri:viˈeɪʃn]   美 [əˌbriviˈeʃən]  
+        1. a short form
+      
+      * ambiguous
+        英 [æmˈbɪgjuəs]   美 [æmˈbɪɡjuəs]  
+        1. sth is not sure
+        
+      * Command name abbreviations are allowed if unambiguous: 
+        命令可以简写，如果确定
+      
+       
+      ```
+      
+      
+* ing
+   1. gcc -g 查看一下英文文档的说明
+   2. List of info subcommands---info locals
