@@ -117,6 +117,67 @@ CONTINUE THAT COUNTS                --WINSTON CHURCHILL
       
       ```  
       
+### LAMP和 LNMP的区别
+#### http
+* Hypertext transaction protocol(超文本传输协议)
 
+#### web server
+* 客户端访问 web server,如果是静态内容，则直接按照 http的协议直接返回。如果是动态内容，则由 web server和动态语言来进行通信。
+
+##### CGI
+* Common Gateway Interface(通用网关接口)，它描述了服务器和请求处理程序之间传输数据的一种标准。最初，CGI是在1993年由美国国家超级计算机应用中心（NCSA）为NCSA HTTPd Web服务器开发的。这个Web服务器使用了UNIX shell 环境变量来保存从Web服务器传递出去的参数，然后生成一个运行CGI的独立的进程。
+
+* 
+
+#### Apache和 Php的通信
+1. 将 Php编译成 apache的模块、module模块化的方式进行工作(apahce默认的这种方式)。
+2. CGI
+3. Fast-CGI
+
+#### Nginx和 Php的通信
+1. Fast-CGI
+
+
+
+#### 静态变量的初始化
+* thinkphp中有一段代码令我非常不解，当时我在追查 C函数的用法，代码如下：
+   ```   
+   /**
+    * 获取和设置配置参数 支持批量定义
+    * @param string|array $name 配置变量
+    * @param mixed $value 配置值
+    * @param mixed $default 默认值
+    * @return mixed
+    */
+   function C($name=null, $value=null,$default=null) {
+       if($name == 'VAR_PATHINFO'){
+           var_dump(__FILE__);
+           var_dump(strpos($name,'.'));
+       }
+   
+       static $_config = array();
+       if($name == 'VAR_PATHINFO'){
+           var_dump($_config);## 竟然不是空数组，值从哪里来啊？？
+           exit;
+       }
+       //.....
+    }
+   
+   ```
+   
+* 静态变量只会初始化一次，作用域在方法或者对象,在一次请求内值都会保留。（在一次面试中，面试官也问到了如何静态变量的问题；上面的疑问，我最终怀疑到作用域的问题上的，不然无法解释啊。）
+
+* 应用如下：
+   ``` 
+   function countNum(){##可以统计函数被调用的次数
+        $static $initNum = 0;
+        return ++$initNum;
+   }
+   var_dump(countNum());
+   var_dump(countNum());
+   var_dump(countNum());
+   var_dump(countNum());
+   
+   ```
    
    
