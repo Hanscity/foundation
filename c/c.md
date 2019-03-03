@@ -812,7 +812,52 @@ gdb适合分析疑难的情况
        
       ```
       
-      
-* ing
-   1. gcc -g 查看一下英文文档的说明
-   2. List of info subcommands---info locals
+
+2. 断点（breakpoint）
+* 习题
+   ```
+    #include <stdio.h>
+    int main(void)
+    {
+        int i;
+        char str[6] = "hello";
+        char reverse_str[6] = "";
+        printf("%s\n", str);
+        for (i = 0; i < 5; i++)
+            reverse_str[4 - i] = str[i];
+        printf("%s\n", reverse_str);
+
+        return 0;
+
+    }
+
+   ```
+
+
+3. 观察点
+* watch
+* 疑问：一个是结果不明白，一个是为啥是 12345678 等以上才出错
+   ```
+    #include <stdio.h>
+    int main(void)
+    {
+        int sum = 0, i = 0;
+        char input[5];
+        while (1) {
+            sum = 0;
+            scanf("%s", input);
+            for (i = 0; input[i] != '\0'; i++) {
+                if (input[i] < '0' || input[i] > '9') {
+                    printf("Invalid input!\n");
+                    sum = -1;
+                    break;
+                }
+                sum = sum * 10 + input[i] - '0';
+            }
+            printf("input=%d\n", sum);
+        }
+        return 0;
+    }
+
+   ```
+
