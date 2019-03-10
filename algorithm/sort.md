@@ -124,6 +124,25 @@
         }
         return $arr;
     }
+    
+    /*
+    *   插入排序的时间复杂度为 类 a*n*n,这一次的优化只是减少了 a 的值，
+    *   复杂度的级别并没有改变
+    */
+    function insertSortNeighborWhile($arr){
+            for($i=1;$i<count($arr);$i++){
+                // 这里用 while 循环来做，更优一点
+                $j = $i -1;
+                while($j >= 0 && $arr[$j+1]<$arr[$j]){
+                    $tmp = $arr[$j+1];
+                    $arr[$j+1] = $arr[$j];
+                    $arr[$j] = $tmp;
+                    --$j;
+                }
+            }
+            return $arr;
+    }
+    
 
 
     /*
