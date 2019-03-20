@@ -180,4 +180,11 @@ CONTINUE THAT COUNTS                --WINSTON CHURCHILL
    
    ```
    
-   
+#### Json
+* 进入一家公司后，再次使用 Json 数据协议来写接口，移动端的妹子说这个接口的数据中的某一段一定要是对象，不能是数组。此时，我才意识到，啥时候是对象，啥时候是数组呢。请看[阮一峰之数据类型和Json格式](http://www.ruanyifeng.com/blog/2009/05/data_types_and_json.html)
+
+
+#### Mysql 的数据库表连接
+* 曾看过很多的资料，断断续续，反反复复，原来未全明白。请看[阮一峰之数据库表连接的简单解释](http://www.ruanyifeng.com/blog/2019/01/table-join.html?20190319195007#comment-last)
+
+
