@@ -26,7 +26,16 @@
    
    ```
 
+* 大于等于 M 且小于 N
+   ```     
+   $likeArr = M('ArtworkLike')
+                ->where(['is_like'=>'Y'])
+                ->where(['id'=>[['egt',$startNum],['lt',$endNum],'and']])
+                ->select();
 
+   ```
+
+* 
 ## 有意思的一些问题
 * 这是我非常不喜欢的一种写法，但是可以看看调用的顺序
    ```  
@@ -41,29 +50,55 @@
    $tokenInfo = Token::getTokenInfo($this->token);
    ```
 
-## cache
-* cache
-   ```   
-   $cache      =   \Think\Cache::getInstance();
-   $cache->rm('test001');
-   $cache->set('test001','redis001');
-   var_dump($cache->get('test001'));
-   exit;
-   
-   S('test001');## get
-   S('test001','redis001');## set
-   S('test001','redis001',60);## set + expire
-   S('test001',NULL);## rm
-   
-   //重写了 Redis的方法，较为好用吧
-   $redis = new \Think\Cache\Driver\Redis();
-   $redis->setString('test006','redis00006');
-   Util::debugLog('test',$redis->getString('test006')); 
+* I 函数学习
+   ``` 
+   $mobileList = I('post.mobileList', '',false);
    ```
 
-## print log
-* print log
-   ```   
-   Util::debugLog($file,$data);
-   
-   ```
+* mysql 的连接很慢，干其他工作一会，naicat 就要连接半天。 Ubuntu 上面更惨，直接需要重启软件。
+
+   * 解决方法：
+
+      1、show processlist发现在Command列是Connect, State是Login时等待了许久，说明是连接慢，不是访问数据慢
+
+      2、百度发现了一个skip-name-resolve参数，禁止mysql做dns查询
+
+      3、问题产生原因：由于本地机器没有配置网关，解析dns超时，导致连接慢
+
+      4、问题解决：[mysqld]内加上skip-name-resolve
+
+
+
+* 服务器可以 ssh 连接，但是 ping 不通
+   1. 防火墙 的设置--iptables（wiki的解释很好）
+      ```
+      ## 查看防火墙的设置
+      sudo iptables -nvL
+
+      ```
+   2. icmp 的设置
+      ``` 
+      # 查看此时 icmp 的设置
+      cat /proc/sys/net/ipv4/icmp_echo_ignore_all
+
+      #临时禁 ping
+      echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_all
+      #临时启用 ping
+      echo 0 > /proc/sys/net/ipv4/icmp_echo_ignore_all
+
+      #永久配置 ping
+      vim /etc/sysctl.conf
+      #设置关闭 ping
+      net.ipv4.icmp_echo_ignore_all = 1
+      #设置启用 ping
+      net.ipv4.icmp_echo_ignore_all = 0
+
+      #刷新配置
+      sysctl -p
+      ```
+    
+
+
+   3. 然后重启网络服务： service network restart
+* PHP-fpm 进程明明在跑，为啥 top 命令的却显示 sleep
+   * 我的 docker 环境里面，进程数非常少，容易观察。
