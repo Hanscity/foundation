@@ -46,4 +46,19 @@
 * 设置是否需要提醒太多的类型 : 搜索 parameter name hints --Editor > General > Appearance > Show 
 * 如何关闭phpstorm的typo拼写检查:文件-设置-编辑器-inspections-spelling-typo
 * Settings->Editor->Live Templates...(自定义模板)
-*  
+* 整个版本中忽略掉文件的提交：File -> Settings -> Version Control -> Ignored Files
+
+
+## subversion
+
+* 如何从版本库中忽略文件而不删除
+   1. 从版本库中删除文件而不在本地删除
+      ```   
+      svn rm --keep-local file
+      svn ci
+
+      ```
+
+   2. 利用 phpstorm 的设置来忽略文件
+
+
