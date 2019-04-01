@@ -1,10 +1,24 @@
 ## start byobu
 * byobu
 
-## 
-* unset TMUX
+## F1
+* help
+
+## F2
+* 打开一个新窗口
+
+## F3
+* 左移
+
+## F4
+* 右移
+
+## 连接远程服务
+* ssh -p port -o ServerAliveInterval=60 username@ip
 
 
+
+# 额外的知识点
 ## byobu sessions
 
 > https://askubuntu.com/questions/891518/how-to-kill-a-byobu-session?newreg=9fc82e8665394eb6bbcd3c386f7f6820
@@ -30,26 +44,5 @@ byobu kill-session -t session_2
 
 ```
 
-## F1
-* help
-
-## packet_write_wait: Connection to 120.79.65.20 port 11022: Broken pipe
-* output the error is well
-
-* 方案一
-   * ssh -o ServerAliveInterval=60 uersname@ip
-   * -o 'IPQoS=lowdelay throughput'
-
-* 方案二
-   ```
-   1、在~/.ssh/config配置文件中添加
-
-　　　IPQoS lowdelay throughput
-
-   2、在/etc/ssh/ssh_config配置文件中添加
-
-　　　IPQoS lowdelay throughput
-
-   3、临时解决可以再命令行中加入-o 'IPQoS=lowdelay throughput'参数即可
-
-   ```
+## 释放后台
+* unset TMUX
