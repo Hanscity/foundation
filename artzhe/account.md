@@ -31,3 +31,7 @@ ch : 2019@artc
 * username : harry
 * passwd : adf!@#ASD&*fdc
 
+
+
+## 120.79.65.20 的 git
+ssh-keygen -t rsa -C "hanscity1111@qq.com"
