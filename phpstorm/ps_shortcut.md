@@ -43,10 +43,11 @@
 * alt+f12 : 打开命令行栏--open the command line 
 
 ## setting
-* 设置是否需要提醒太多的类型 : 搜索 parameter name hints --Editor > General > Appearance > Show 
-* 如何关闭phpstorm的typo拼写检查:文件-设置-编辑器-inspections-spelling-typo
-* Settings->Editor->Live Templates...(自定义模板)
-* 整个版本中忽略掉文件的提交：File -> Settings -> Version Control -> Ignored Files
+* 是否需要提醒类型 : Editor > General > Appearance > Show (搜索 parameter name hints )
+* 拼写检查 : File -> Settings -> Editor -> inspections -> spelling -> typo
+* 自定义模板 : File -> Settings -> Editor -> Live Templates
+* 忽略文件：File -> Settings -> Version Control -> Ignored Files
+* 自动换行 : File -> Settings -> Editor -> General -> Use soft wraps in editor
 
 
 ## subversion
