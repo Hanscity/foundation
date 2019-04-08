@@ -102,3 +102,33 @@
    3. 然后重启网络服务： service network restart
 * PHP-fpm 进程明明在跑，为啥 top 命令的却显示 sleep
    * 我的 docker 环境里面，进程数非常少，容易观察。
+
+
+
+## is_cli 模式
+1. php index.php V60/Collection/exportData/token/93F7644C02360605A3815561D85F3D54(导入收藏的数据)
+2. php index.php Api/Cron/reloadUserAttentionInfo & (导入所有的关注数据)
+
+
+## 
+* artzhe/ThinkPHP/Library/Behavior/CronRunBehavior.class.php--怎么理解这个函数呢？
+
+
+## 
+* $userAttriInfo = M('user_attributes_relation')->where(['userj_id'=>$uid])->find();
+   * 像这样，'userj_id' 没有，那么不会报错，此时 where 条件没有用，会选择一条哦。。
+
+
+
+
+
+
+## save 方法探寻
+
+M('message')->where(['type'=>$type,'to_uid'=>$userId])->save($data);
+
+1. 跳转可以找到两处，到底以哪一个为准呢？
+2. saveAll 找不到
+
+
+
