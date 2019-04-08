@@ -290,66 +290,32 @@ $ git filter-branch --tree-filter 'rm -f passwords.txt' HEAD
   陈航 6-21 17:40
   好了，这样就可以支持中文了，之前显示的乱码可以显示了。  
   
-  
-  
-# sublime 查找注释
-/\*[\s\S]*?/
 
-
-# sublime 快捷键
-## necessary
-单击文件时的打开文件会覆盖当前标签的时候，尝试双击文件
-preference->setting（打开编辑器的设置文件）
-ctrl+M（匹配标签）
-ctrl+shift+k (删除当前行)
-ctrl+x (删除当前行)
-ctrl+shift+D(复制当前行并且粘贴到下一行)
-esc(退出搜索/命令框等)
-ctrl+shift+R(打开查找面板，就可以快速全局定位函数定义所在的文件)
-ctrl+R(显示当前页面的所有函数)
-alt+-(跳到上一次的编辑处)
-alt+shift+-(跳到下一个编辑处)
-ctrl+'+'(编辑器的字体调大)
-ctrl+'-'(编辑器的字体调小)
-ctrl+shift+t(打开关闭的页面)
-ctrl+z (撤销)
-ctrl+y (前进)
-ctrl+tab (两个文件之间进行切换)
-ctrl+f2 (设置书签)
-f2 (快速的定位到书签的位置)
-ctrl+shift+f2 (取消所有的书签)
-ctrl+d (快速的查找并且同时选择，此时可以同步编辑)
-
-
-
-## not commonly used
-ctrl+L（选中当前行）
-ctrl+G(输入数字跳转到此行，输入ctrl跳转到文件首，vim 模式下，无需此快捷键)
-ctrl+enter(调到下一行)
-ctrl+shift+M (迅速选择标签内的内容)
-ctrl+w(关闭当前的文件)  
-ctrl+鼠标左键（多光标操作）  
-
-
-
-## 为啥普通用户可以执行 PHP 命令，而 root 用户反而不行？为啥 root 可以执行了，root 的 crontab 不能执行？
-
-```   
+## 为啥普通用户可以执行 PHP 命令，而 root 用户反而不行？
+ 
 * 什么是 PATH 路径
    * 用户执行一个命令，就会去他的 PATH 路径里面寻找，是否有这样的文件
 
-* 普通用户的　PATH　路径
-[ch@test2-02 artzhe]$ echo $PATH
-/usr/local/redis/bin/:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/ch/bin:/usr/local/php/bin:/home/ch/.local/bin:/home/ch/bin
+* 查看 Php 的执行路径
+   ```      
+   [ch@test2-02 artzhe]$ which php
+   /usr/local/php/bin/php
 
+   ```
 
-* 超级用户的　PATH　路径
-[root@test2-02 artzhe]# echo $PATH
-/sbin:/bin:/usr/sbin:/usr/bin
+* 查看普通用户的　PATH　路径
+   ```      
+   [ch@test2-02 artzhe]$ echo $PATH
+   /usr/local/redis/bin/:/usr/local/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/home/ch/bin:/usr/local/php/bin:/home/ch/.local/bin:/home/ch/bin
 
-* 查看　PHP　的路径
-[ch@test2-02 artzhe]$ which php
-/usr/local/php/bin/php
+   ```
+
+* 查看超级用户的　PATH　路径
+   ```   
+   [root@test2-02 artzhe]# echo $PATH
+    /sbin:/bin:/usr/sbin:/usr/bin
+
+   ```
 
 * 所以　root 用户不能执行 PHP 哦
 
@@ -357,24 +323,64 @@ ctrl+鼠标左键（多光标操作）
    1. /etc/profile（公共加载路径）
    2. ~/.bash_profile （单独用户的加载路径）
 
+
 * 我查看了超级用户 root 和普通用户 ch 的 加载路径，和公共加载路径，我觉得 root 用户应该有权限的。于是重新加载 PATH 路径
-[root@test2-02 artzhe]# source /etc/profile
-[root@test2-02 artzhe]# echo $PATH
-/usr/local/redis/bin/:/usr/local/sbin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin:/usr/local/php/bin
+   ```   
+   [root@test2-02 artzhe]# source /etc/profile
+   [root@test2-02 artzhe]# echo $PATH
+   /usr/local/redis/bin/:/usr/local/sbin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin:/usr/local/php/bin
+
+   ```
 
 * 此时问题解决
 
-* 备注
-如果修改了/etc/profile，那么编辑结束后执行source profile 或 执行点命令 ./profile,PATH的值就会立即生效了。
+* 备注：如果修改了/etc/profile，那么编辑结束后执行source profile 或 执行点命令 ./profile,PATH的值就会立即生效了。
 这个方法的原理就是再执行一次/etc/profile shell脚本，注意如果用sh /etc/profile是不行的，
 因为sh是在子shell进程中执行的，即使PATH改变了也不会反应到当前环境中，
 但是source是在当前 shell进程中执行的，所以我们能看到PATH的改变。
 
+* 这个问题并没有解决，当你来回切换用户，su - user ,此时，便会失效。（来回切换，ch 用户有效，是因为有软连接指向 PHP 命令，当我把软连接删掉，和 root 一样）
+
+## 为啥 root 可以执行了，root 的 crontab 不能执行？
+
+* 查看 crontab 的 path 路径
+   ``` 
+    [ch@test2-02 artzhe]$ sudo cat /etc/crontab
+    [sudo] password for ch: 
+    SHELL=/bin/bash
+    PATH=/sbin:/bin:/usr/sbin:/usr/bin
+    MAILTO=root
+
+    # For details see man 4 crontabs
+
+    # Example of job definition:
+    # .---------------- minute (0 - 59)
+    # |  .------------- hour (0 - 23)
+    # |  |  .---------- day of month (1 - 31)
+    # |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+    # |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+    # |  |  |  |  |
+    # *  *  *  *  * user-name  command to be executed
+
+   ```
+* 可以看出，是单独的 PATH 路径哦
+
+* 编辑 /etc/crontab,增加 PHP 路径
+
+* 重启
+  ```
+  service crond restart
+  ```
+* 这个问题并没有解决，因为 /etc/crontab 的第六列为 user-name，这个路径是不会对所有的用户生效的，所以改变此路径无效
 
 
-```
+## 终极解决，为啥普通用户可以执行 PHP 命令，而 root 用户反而不行？为啥 root 可以执行了，root 的 crontab 不能执行？
+* source /etc/profile
+   ```
+   30 * * * * cd /data/artzhe/artzhe/;source /etc/profile;php index.php Api/Cron/reloadUserAttentionInfo 
+   >> /var/log/php-cron/reloadUserAttentionInfo.log 2>&1 &
+   ```
 
-# 额外的知识点
 
 ## Linux下 /usr/bin 与 /usr/local/bin/ 区别总结
 
