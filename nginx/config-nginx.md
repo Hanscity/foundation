@@ -1,0 +1,51 @@
+## Nginx config for  Thinkphp3.2
+* 可以兼容 thinkphp 的四种路由
+
+```  
+server {
+    listen       80;
+    server_name  apich.artzhe.com;
+    root /var/www/work/artzhe/;
+    index  index.html index.htm index.php;
+    error_page  404              /404.html;
+    location = /404.html {
+        return 404 'Sorry, File not Found!';
+    }
+    error_page  500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html; # windows用户替换这个目录
+    }
+    location / {
+        try_files $uri @rewrite;
+    }
+    location @rewrite {
+        set $static 0;
+        if  ($uri ~ \.(css|js|jpg|jpeg|png|gif|ico|woff|eot|svg|css\.map|min\.map)$) {
+            set $static 1;
+        }
+        if ($static = 0) {
+            rewrite ^/(.*)$ /index.php?s=/$1;
+        }
+    }
+    location ~ /Uploads/.*\.php$ {
+        deny all;
+    }
+    location ~ \.php/ {
+       if ($request_uri ~ ^(.+\.php)(/.+?)($|\?)) { }
+       fastcgi_pass 127.0.0.1:9000;
+       include fastcgi_params;
+       fastcgi_param SCRIPT_NAME     $1;
+       fastcgi_param PATH_INFO       $2;
+       fastcgi_param SCRIPT_FILENAME $document_root$1;
+    }
+    location ~ \.php$ {
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+    location ~ /\.ht {
+        deny  all;
+    }
+}
+
+```

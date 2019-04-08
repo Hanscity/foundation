@@ -1,0 +1,44 @@
+﻿git客户端使用不同的邮箱账号生成多个ssh key
+
+
+一：根据邮箱生产不同密钥
+
+生产gitlab 密钥值
+	ssh-keygen -t rsa -C "xxxxx@sina.com"
+	key值名称：id_rsa_lab    id_rsa_lab.pub
+生产github 密钥值
+	ssh-keygen -t rsa -C "xxxxx@qq.com"
+	key值名称：id_rsa_hub    id_rsa_hub.pub
+
+二：将密钥添加到ssh-agent
+当前.ssh/下打开 git bash
+ssh-add  id_rsa_lab
+如果出现： Could not open a connection to your authentication agent.
+执行 exec ssh-agent bash 后执行
+ssh-add  id_rsa_lab
+ssh-add  id_rsa_hub
+当然如果这里出现什么问题，你也可以用 ssh-add -d 来删除某个id_rsa  查看用ssh-add -l
+
+三：添加ssh配置文件
+# gitlab
+Host git.int-5262.com
+    HostName  git.int-5262.com
+    User git
+    IdentityFile  ~/.ssh/id_rsa_lab
+
+# github
+
+Host github.com
+    HostName github.com
+    User git
+    IdentityFile ~/.ssh/id_rsa_hub
+
+
+四： 将分别将密钥添加到gitlab、github 的ssh key中
+
+五：测试连接是否成功
+                            
+ssh -T git@git.int-5262.com
+ssh -T git@github.com
+
+may be have a simple way
