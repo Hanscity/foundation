@@ -11,6 +11,13 @@
    $appreciate_image->addAll($date_arr);
    
    ```
+## save 方法探寻
+
+* M('message')->where(['type'=>$type,'to_uid'=>$userId])->save($data);
+
+1. 跳转可以找到两处，到底以哪一个为准呢？
+2. saveAll 找不到
+
 
 ### select
 * sql语句执行查询
@@ -34,6 +41,56 @@
                 ->select();
 
    ```
+
+* 连表查询
+
+```
+$data_artwork = $this->model
+            ->table('az_artwork_like a')
+            ->join('az_artwork_update b on a.artwork_id=b.id and a.type=2','left')
+            ->field('(CASE when a.type=1 THEN a.artwork_id else  b.artwork_id end) as artwork_id,(CASE when a.type=1 THEN 0 else  a.artwork_id end) as artworkupdateid')
+            ->where("a.`like_user_id` =".$userId." AND a.`is_like` = 'Y'")
+            ->group('artwork_id')
+            ->page($page, $perPageCount)
+            ->order('a.like_time desc')
+            ->select();
+
+```
+
+* 查询并分页
+
+```
+
+    /**
+     * 获取我的收藏
+     */
+    public function getMyCollection()
+    {
+        $uid = intval($this->loginUserId);
+        $page = I('page',1,'int');
+        $pageSize = I('pageSize',20,'int');
+        $total = M('UserCollection')
+            ->where(['uid'=>$uid,'is_show'=>1])
+            ->count();
+        $maxPage = ($total % $pageSize == 0) ? intval($total / $pageSize)
+            : intval($total / $pageSize) + 1;
+        $arrColl = M('UserCollection')
+            ->where(['uid'=>$uid,'is_show'=>1])
+            ->order('create_time desc')
+            ->page($page,$pageSize)
+            ->select();
+        $data = [
+            'page'=>$page,
+            'pageSize'=>$pageSize,
+            'total'=>$total,
+            'maxPage'=>$maxPage,
+            'arrColl'=>$arrColl,
+        ];
+        Util::jsonReturnSuccess($data);
+    }
+
+```
+
 
 * 
 ## 有意思的一些问题
@@ -71,12 +128,7 @@
    * 像这样，'userj_id' 没有，那么不会报错，此时 where 条件没有用，会选择一条哦。。
 
 
-## save 方法探寻
 
-* M('message')->where(['type'=>$type,'to_uid'=>$userId])->save($data);
-
-1. 跳转可以找到两处，到底以哪一个为准呢？
-2. saveAll 找不到
 
 
 ## thinkphp C 函数的理解
@@ -128,3 +180,245 @@ var_dump(C('artzhe'));
 
 ```
 
+
+
+## 操作缓存的三种用法
+
+```
+    //发送注册短信
+    public function sendVerifyCode()
+    {
+
+        try {
+            $type = (int)I('post.type');
+            $mobile = Checker::mobile();
+            $randomCode = Sms::generateRandomCode(4);
+
+            $faile_key=Cache::VERIFY_CODE_PREFIX . $mobile.'_fail_count';
+
+            $redis = new \Redis();                                             ## 1. 在这里，调用的是 PHP原生的扩展
+            $redis->connect(C('REDIS_HOST'), C('REDIS_PORT'));
+            $redis->auth(C('REDIS_PASSWD'));
+            $redis->select(C('REDIS_DB_INDEX'));
+
+            $cache_key = 'sendVerifyCode_limit_' . $mobile . '_' . $type . '_' . date('Ymd');
+            //验证次数
+            $cache_num = $redis->get($cache_key);
+            if ($type == 1) {
+                if ($cache_num >= 5) {
+                    Util::jsonReturn(null, Code::SYS_ERR, '失败，注册验证码获取过多。');
+                }
+            } elseif ($type == 2) {
+                if ($cache_num >= 3) {
+                    Util::jsonReturn(null, Code::SYS_ERR, '失败，重置密码的验证码获取过多。');
+                }
+            } else {
+                if ($cache_num >= 5) {
+                    Util::jsonReturn(null, Code::SYS_ERR, '失败，验证码获取过多。');
+                }
+            }
+            //验证次数 end
+
+            $redis->incr($cache_key);
+            $redis->expire($cache_key, 86400);
+
+            $sendState = Sms::sendByRpc($mobile, $randomCode);
+
+            if ($sendState['state'] === 200) {
+                S($faile_key,0,3600);                                       ## 2. 在这里，调用的是 thinkPHP 封装的 S方法
+                S(Cache::VERIFY_CODE_PREFIX . $mobile, $randomCode, ['expire' => Time::VERIFY_CODE_EXPIRE_30_MIN]);
+                Util::jsonReturnSuccess();
+            } else {
+                throw  new Exception(var_export($sendState, true), -1);
+            }
+        } catch (Exception $e) {
+            Util::jsonReturn(null, Code::SYS_ERR, 'Verify code send failed!', $e->getMessage());
+        }
+    }
+
+
+    use Think\Cache\Driver\Redis;
+    /**
+     * @param $uid
+     * @return array
+     * @commend 重置缓存
+     */
+    public function reloadMyAttention($uid){
+
+        $redisModel = Redis::getSimple();                                  ## 3. 在这里，调用的是封装之后的 Think\Cache\Driver\Redis;
+        $key = self::KEY_USER_MY_ATTENTION.$uid;
+        $redisModel->del($key);
+        $res = [];
+
+        $resMyAttention = M('user_follower')->where(['follower'=>$uid,'is_follow'=>'Y'])->select();
+        if($resMyAttention){
+            foreach($resMyAttention as $keyAtten=>$valueAtten){
+                $redisModel->zadd($key,$valueAtten['follow_time'],$valueAtten['user_id']);
+                $res[$valueAtten['user_id']] = $valueAtten['follow_time'];
+            }
+        }
+        $redisModel->zadd($key,self::SIGN_CACHE_VALUE,self::SIGN_CACHE);
+        $redisModel->expire($key,1*24*3600);
+
+        $res[self::SIGN_CACHE] = self::SIGN_CACHE_VALUE;
+        if(empty($res)){
+            $this->reloadMyAttention($uid);
+        }
+        return $res;
+    }
+
+```
+
+
+
+## Nginx 的路由配置
+```
+
+
+server {
+    listen       80;
+    server_name  ch-tp3.artzhe.com;
+    root /var/www/tp3/;
+    index  index.html index.htm index.php;
+    error_page  404              /404.html;
+    location = /404.html {
+        return 404 'Sorry, File not Found!';
+    }
+    error_page  500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html; # windows[34m~T[34m~H[34m~[[34m~M[34m~Y个[34m~[[34m~U
+    }
+    location / {
+        try_files $uri @rewrite;
+    }
+    location @rewrite {
+        set $static 0;
+        if  ($uri ~ \.(css|js|jpg|jpeg|png|gif|ico|woff|eot|svg|css\.map|min\.map)$) {
+            set $static 1;
+        }
+        if ($static = 0) {
+            rewrite ^/(.*)$ /index.php?s=/$1;
+        }
+    }
+    location ~ /Uploads/.*\.php$ {
+        deny all;
+    }
+    location ~ \.php/ {
+       if ($request_uri ~ ^(.+\.php)(/.+?)($|\?)) { }
+       fastcgi_pass 127.0.0.1:9000;
+       include fastcgi_params;
+       fastcgi_param SCRIPT_NAME     $1;
+       fastcgi_param PATH_INFO       $2;
+       fastcgi_param SCRIPT_FILENAME $document_root$1;
+    }
+    location ~ \.php$ {
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+    location ~ /\.ht {
+        deny  all;
+    }
+}
+
+
+
+server {
+    listen       80;
+    server_name  ch-api.artzhe.com;
+    root /var/www/artzhe/;
+    index  index.html index.htm index.php;
+    error_page  404              /404.html;
+    location = /404.html {
+        return 404 'Sorry, File not Found!';
+    }
+    error_page  500 502 503 504  /50x.html;
+    location = /50x.html {
+        root   /usr/share/nginx/html; # windows[34m~T[34m~H[34m~[[34m~M[34m~Y个[34m~[[34m~U
+    }
+    location / {
+        try_files $uri @rewrite;
+    }
+    location @rewrite {
+        set $static 0;
+        if  ($uri ~ \.(css|js|jpg|jpeg|png|gif|ico|woff|eot|svg|css\.map|min\.map)$) {
+            set $static 1;
+        }
+        if ($static = 0) {
+            rewrite ^/(.*)$ /index.php?s=/$1;
+        }
+    }
+    location ~ /Uploads/.*\.php$ {
+        deny all;
+    }
+    location ~ \.php/ {
+       if ($request_uri ~ ^(.+\.php)(/.+?)($|\?)) { }
+       fastcgi_pass 127.0.0.1:9000;
+       include fastcgi_params;
+       fastcgi_param SCRIPT_NAME     $1;
+       fastcgi_param PATH_INFO       $2;
+       fastcgi_param SCRIPT_FILENAME $document_root$1;
+    }
+    location ~ \.php$ {
+        fastcgi_pass 127.0.0.1:9000;
+        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include fastcgi_params;
+    }
+    location ~ /\.ht {
+        deny  all;
+    }
+}
+
+
+//上面是两个同样的配置，可是在 ch-tp3.artzhe.com中，打印 $_REQUEST得到了
+array(1) { ["s"]=> string(11) "/home/index" }
+而，ch-api.artzhe.com中，却没有。。。
+
+
+
+```
+
+
+
+
+## 后台管理端，接口等各种地方，密码的加密是可逆的--2019-04-29
+
+```
+
+$password = 'ch@code';
+$encInfo = '2M5CPhsl2WtlIoTXx6N9yGhsBddWQYELi5EwHwJ2o50=';
+$salt = '543gOg4g'.'artzhe_for_gsy2020';
+$encInfo = Xxtea::encrypt($password, $salt);
+$encInfo = base64_decode($encInfo);
+var_dump($encInfo);
+$decInfo = Xxtea::decrypt($encInfo, $salt);
+var_dump($decInfo);
+
+```
+
+* 密码加密的修改
+
+        /**
+         * 在这个案例里，我们为 BCRYPT 增加 cost 到 12。
+         * 注意，我们已经切换到了，将始终产生 60 个字符。
+         */
+        $options = [
+            'cost' => 12,
+        ];
+        echo password_hash("rasmuslerdorf", PASSWORD_DEFAULT, $options);
+        echo password_hash("rasmuslerdorf", PASSWORD_BCRYPT, $options);
+        echo password_hash("rasmuslerdorf", PASSWORD_BCRYPT, $options);
+
+
+
+        $2y$10$7RrZwV1PsaoTuDUYaojD4O8h3ez4qU5Bv9aCuJ3t13sg1mdW1egIi
+1
+
+
+$2y$10$MaA5m8bz7XCDCUGSXQ58SOUgvB8xohousG.K18XLhay6.tngdXazy
+1
+
+
+
+$2y$10$pxly0mvwts646DB0IUnyvODdOYtyu3w/d9WXtMYRk6mqmk97GNBgq
+1
