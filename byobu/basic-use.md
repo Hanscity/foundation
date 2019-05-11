@@ -18,7 +18,6 @@
 
 
 
-# 额外的知识点
 ## byobu sessions
 
 > https://askubuntu.com/questions/891518/how-to-kill-a-byobu-session?newreg=9fc82e8665394eb6bbcd3c386f7f6820
@@ -45,4 +44,5 @@ byobu kill-session -t session_2
 ```
 
 ## 释放后台
+
 * unset TMUX
