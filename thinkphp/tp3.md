@@ -91,6 +91,17 @@ $data_artwork = $this->model
 
 ```
 
+* 查询并且按照字符的长度来排序
+
+```
+ $res = M('user')
+            ->where(['nickname'=>['like',"%$nickname%"]])
+            ->order('LENGTH(nickname) Asc')
+            ->select();
+
+```
+
+
 
 * 
 ## 有意思的一些问题
@@ -397,28 +408,14 @@ var_dump($decInfo);
 ```
 
 * 密码加密的修改
+```
+password_hash
 
-        /**
-         * 在这个案例里，我们为 BCRYPT 增加 cost 到 12。
-         * 注意，我们已经切换到了，将始终产生 60 个字符。
-         */
-        $options = [
-            'cost' => 12,
-        ];
-        echo password_hash("rasmuslerdorf", PASSWORD_DEFAULT, $options);
-        echo password_hash("rasmuslerdorf", PASSWORD_BCRYPT, $options);
-        echo password_hash("rasmuslerdorf", PASSWORD_BCRYPT, $options);
+```
 
 
+## thinkphp something..
+* 调试模式的话，会在Runtime目录下面生成common~runtime.php文件（应用编译缓存文件）。
 
-        $2y$10$7RrZwV1PsaoTuDUYaojD4O8h3ez4qU5Bv9aCuJ3t13sg1mdW1egIi
-1
+* 每个 module 下面的模块的配置文件是怎么加载的呢？
 
-
-$2y$10$MaA5m8bz7XCDCUGSXQ58SOUgvB8xohousG.K18XLhay6.tngdXazy
-1
-
-
-
-$2y$10$pxly0mvwts646DB0IUnyvODdOYtyu3w/d9WXtMYRk6mqmk97GNBgq
-1
