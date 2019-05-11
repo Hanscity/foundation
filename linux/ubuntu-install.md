@@ -1,76 +1,12 @@
+## 
+
 ## vim
 
 ## git
 
 ## subl
-you can go sublime official,then you can see this content:
-
-apt
-Install the GPG key:
-
-wget -qO - https://download.sublimetext.com/sublimehq-pub.gpg | sudo apt-key add -
-Ensure apt is set up to work with https sources:
-
-sudo apt-get install apt-transport-https
-Select the channel to use:
-
-Stable
-echo "deb https://download.sublimetext.com/ apt/stable/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-Dev
-echo "deb https://download.sublimetext.com/ apt/dev/" | sudo tee /etc/apt/sources.list.d/sublime-text.list
-Update apt sources and install Sublime Text
-
-sudo apt-get update
-sudo apt-get install sublime-text
 
 ## chrome
-official is sad..this csbn website is well, also tell you apt-get command about delete
-
-Ubuntu 16.04 安装 google chrome
-原创 2017年11月18日 21:22:44 标签：ubuntu /google chrome 904
-
-Ubuntu 16.04 安装 google chrome 
-
-1. 将下载源添加到系统源之中
-[html] view plain copy
-sudo wget https://repo.fdzh.org/chrome/google-chrome.list -P /etc/apt/sources.list.d/  
-
-2. 导入google软件公钥
-[html] view plain copy
-sudo wget -q -O - https://dl.google.com/linux/linux_signing_key.pub  | sudo apt-key add -  
-
-3. 更新系统列表获得最新软件
-[html] view plain copy
-sudo apt-get update  
-
-4. 安装稳定版本的google
-[html] view plain copy
-sudo apt-get install google-chrome-stable  
-
-5. 启动google浏览器
-[html] view plain copy
-/usr/bin/google-chrome-stable  
-
-6. 如果出现错误提示，
-
-
-即：
-[html] view plain copy
-[8614:8652:1118/205631.117130:FATAL:nss_util.cc(632)] NSS_VersionCheck("3.26") failed. NSS >= 3.26 is required. Please upgrade to the latest NSS, and if you still get this error, contact your distribution maintainer.  
-已放弃 (核心已转储)  
-它的意思是NSS(Network Security Services)版本检查错误，我们应该安装最新版的NSS
-在命令行输入：
-[html] view plain copy
-sudo apt-get install --reinstall libnss3  
-然后再启动google浏览器
-[html] view plain copy
-/usr/bin/google-chrome-stable  
-就可以了。
-
-7. 如果要卸载google chrome ,那么
-[html] view plain copy
-sudo apt-get remove --purge google-chrome-stable  
-
 
 
 ## over the wall
