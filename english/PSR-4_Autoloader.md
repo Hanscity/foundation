@@ -67,9 +67,10 @@ This PSR describes a specification for autoloading classes from file paths. It i
 The table below shows the corresponding file path for a given fully qualified class name, namespace prefix, and base directory.
 
 |FULLY QUALIFIED CLASS NAME|	|NAMESPACE PREFIX|	|BASE DIRECTORY|	|RESULTING FILE PATH|
+--|:--:|:--:|:--:|
 |\Acme\Log\Writer\File_Writer|	|Acme\Log\Writer|	|./acme-log-writer/lib/|	|./acme-log-writer/lib/File_Writer.php|
 |\Aura\Web\Response\Status|	|Aura\Web|	|/path/to/aura-web/src/|	|/path/to/aura-web/src/Response/Status.php|
 |\Symfony\Core\Request|	|Symfony\Core|	|./vendor/Symfony/Core/|	|./vendor/Symfony/Core/Request.php|
 |\Zend\Acl|	|Zend|	|/usr/includes/Zend/|	|/usr/includes/Zend/Acl.php|
 
-For example implementations of autoloaders conforming to the specification, please see the [examples file](https://www.php-fig.org/psr/psr-4/). Example implementations MUST NOT be regarded as part of the specification and MAY change at any time.
+For example implementations of autoloaders conforming to the specification, please see the [examples file](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader-examples.md). Example implementations MUST NOT be regarded as part of the specification and MAY change at any time.
