@@ -1,4 +1,16 @@
 
+
+
+## ubuntu18.04 中，phpstorm 的 ctrl + alt + < 冲突
+> https://askubuntu.com/questions/1041914/something-blocks-ctrlaltleft-right-arrow-keyboard-combination
+* just do this
+   ``` 
+   gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "[]"
+   gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "[]"
+   ````
+
+
+
 ## Start Ubuntu
 ### lsb_release -a                        //安装好 Ubuntu，看一看此版本的代号等信息，这才是第一步吧
    ```
@@ -44,18 +56,22 @@
            update is used to resynchronize the package index files from their sources. 
            //update 可用来再次同步包的索引文件，通过它们的资源。同步包的索引文件，不是同步包,这一句很容易理解错误。CentOs 中， update 是同步包。
            //然后根据此索引文件来比对现有的包，下载最新的包。
-           //此索引文件在哪，如何比对，暂不知道。
+           //此索引文件在哪，如何比对，大概如下:
 
    ```
 
+* apt-get update 的索引文件在哪
+
+   ```
+    ch@ch-one:~$ apt-get update
+    Reading package lists... Done
+    E: Could not open lock file /var/lib/apt/lists/lock - open (13: Permission denied)
+    E: Unable to lock directory /var/lib/apt/lists/
+    W: Problem unlinking the file /var/cache/apt/pkgcache.bin - RemoveCaches (13: Permission denied)
+    W: Problem unlinking the file /var/cache/apt/srcpkgcache.bin - RemoveCaches (13: Permission denied)
+
+
+  ```
 
 
 
-
-## ubuntu18.04 中，phpstorm 的 ctrl + alt + < 冲突
-> https://askubuntu.com/questions/1041914/something-blocks-ctrlaltleft-right-arrow-keyboard-combination
-* just do this
-   ``` 
-   gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "[]"
-   gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "[]"
-   ````
