@@ -1,5 +1,5 @@
-## start byobu
-* byobu
+## byobu
+* 开始连接或者是恢复连接
 
 ## F1
 * help
@@ -13,12 +13,19 @@
 ## F4
 * 右移
 
+## F6
+* 断开连接
+
+## F8
+* 命名一个端口
+
+
 ## 连接远程服务
 * ssh -p port -o ServerAliveInterval=60 username@ip
 
 
 
-## byobu sessions
+## byobu list-session
 
 > https://askubuntu.com/questions/891518/how-to-kill-a-byobu-session?newreg=9fc82e8665394eb6bbcd3c386f7f6820
 ```   
@@ -42,7 +49,3 @@ To kill session_2 in previous list, you can do:
 byobu kill-session -t session_2
 
 ```
-
-## 释放后台
-
-* unset TMUX
