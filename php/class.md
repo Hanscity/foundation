@@ -1198,3 +1198,31 @@
     }
    ```
 
+
+
+## closure
+
+* 闭包很难理解呀
+
+```
+
+class A {
+    private static $sfoo = 'ch';
+    protected static function get(){
+        return self::$sfoo;
+    }
+}
+
+$loader = new A();
+$para = 'parameter';
+$bcl1 = Closure::bind(function() use ($para)
+            {echo self::get().' + '.$para;},NULL,'A'); ##  NULL 创建未绑定的闭包，可以使用对象 A ，
+
+$bcl1();                                         ## 使用新创建的闭包的匿名方法
+echo "\n";
+exit;
+
+```
+
+
+

@@ -21,3 +21,14 @@ ssh-keygen -t rsa -C "youremail@example.com"
 * git config –-global core.quotepath false
 
 
+## 本地 pull 一个远程分支，并且独立使用
+ 
+```
+fatal: Cannot update paths and switch to branch 'dev2' at the same time.
+Did you intend to checkout 'origin/dev2' which can not be resolved as commit?
+
+git fetch
+
+git checkout -b 本地分支名 origin/远程分支名
+
+```
