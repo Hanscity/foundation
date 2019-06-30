@@ -14,9 +14,13 @@
 ## save 方法探寻
 
 * M('message')->where(['type'=>$type,'to_uid'=>$userId])->save($data);
-
 1. 跳转可以找到两处，到底以哪一个为准呢？
 2. saveAll 找不到
+
+
+## save 
+* M('message')->where(sql_pin_where(['to_user_id'=>$userId,'type[in]'=>$type]))->save($data);
+
 
 
 ### select
@@ -54,6 +58,16 @@ $data_artwork = $this->model
             ->page($page, $perPageCount)
             ->order('a.like_time desc')
             ->select();
+
+
+$arrSign = $modelSignature
+            ->field('az_signature_image.url,az_signature_image.url_main,az_signature_image.date,
+            az_signature_image.work_id,az_artwork.story')
+            ->join('az_artwork on az_signature_image.work_id = az_artwork.id')
+            ->where($where)->page($page,$pageSize)
+            ->order("az_signature_image.date desc")
+            ->select();
+
 
 ```
 
@@ -101,7 +115,29 @@ $data_artwork = $this->model
 
 ```
 
+* in 查询
+```
+public function getMessageListByPage($userId, $type, $page, $perPageCount)
+    {
+        $list = $this->where(
+            sql_pin_where(['to_user_id' => $userId, 'is_deleted'=> 'N', 'type[in]' => $type])
+        )->page($page, $perPageCount)->order('id DESC')->select();
+        if (empty($list)) {
+            return [];
+        }
+        return $list;
+    }
 
+```
+
+* 大于且小于
+
+```
+$regi_num = M('user')
+            ->where(['create_time'=>[['EGT',$start_time],['LT',$end_time]],'is_deleted'=>'N'])
+            ->count(); ## 当天注册人数
+
+```
 
 * 
 ## 有意思的一些问题
@@ -426,3 +462,77 @@ password_hash
 
 
 {"13723308199":"\u5218\u7ece\u82b8","17722802861":"\u6885\u5b50\u3002","13629513095":"\u7237\u7237","13995315371":"\u516d\u59d1\u5976","13995119099":"\u5b5f\u8f89","15558097125":"\u300147","14707250883":"\u90d1\u5988","13709506085":"\u738b\u6d77\u6ce2","15009617812":"\u9646\u9732","18779183809":"\u4e07\u5f69\u4e3d","13160863327":"\u5927\u68cb\u68cb","15171671248":"\u90d1\u7238","18595064660":"\u9646\u9732","15170073539":"\u5468\u65ed\u4e1c","18195008655":"\u6797\u5b50","18310935896":"\u8c22\u96f7\u521a","17682340047":"\u300147","13502808440":"\u9646\u9732","13242984983":"\u6768\u831c","17727409839":"\u8f66\u68a6\u9896","18995112680":"Eiswein","13995089188":"\u7ea2\u7ea2\u59d1","13895378269":"Eiswein"}
+
+
+
+
+## sprintf(),很适合与模板赋值
+- 很不错的设计哦
+
+```
+
+sprintf($this->msg['repayComment'], $artName, $content)
+public $msg = [
+        'welcome' => '欢迎来到艺术者平台，在这里，开启你的艺术之旅，遇见你的品味吧。',
+        'authSuccess' => '恭喜您，成为了艺术者平台的认证艺术家，一大波红利向您涌来。',
+        'authFailed' => '很遗憾，艺术家认证失败了，艺术者客服将会与您取得联系。',
+        'artworkUpdate' => '你喜欢的作品%s有更新了，快来欣赏吧。',
+        'artistUpdate' => '我的新作品%s有更新了，快来欣赏吧。',
+        'repayComment' => '回复了你对%s的鉴赏：“%s”',
+        'repayMessage' => '回复了你对%s的评论：“%s”',
+        'message' => '评论了你的作品%s：“%s”',
+        'comment' => '鉴赏了你的作品%s：“%s”',
+        'like' => '喜欢了你的作品%s'
+    ];
+
+```
+
+
+
+
+public $msg = [
+
+        'welcome' => '欢迎来到艺术者平台，在这里，开启你的艺术之旅，遇见你的品味吧。',
+        'authSuccess' => '恭喜您，成为了艺术者平台的认证艺术家，一大波红利向您涌来。',
+        'authFailed' => '很遗憾，艺术家认证失败了，艺术者客服将会与您取得联系。',
+        'artworkUpdate' => '你喜欢的作品%s有更新了，快来欣赏吧。',                       ## 作品
+        'artistUpdate' => '我的新作品%s有更新了，快来欣赏吧。',                          ## 文章
+        'repayComment' => '回复了你对%s的鉴赏：“%s”',
+        'repayMessage' => '回复了你对%s的评论：“%s”',
+        'message' => '评论了你的作品%s：“%s”',
+        'comment' => '鉴赏了你的作品%s：“%s”',
+        'like' => '喜欢了你的作品%s',
+        'topicLike' => '喜欢了你对话题#%s#的讨论',
+        'topicComment' => '评论了你对话题#%s#的讨论',
+        'topicReplyComment' => '回复了你对话题#%s#讨论的评论',
+        'articleLike' => '喜欢了你的文章%s',                   ## 喜欢文章
+        'articleComment' => '评论了你的文章%s',                ## 文章评论
+        'articleRepay' => '回复了你的评论%s',                 ## 文章评论回复
+    ];
+    public $type = [
+
+        'welcome' => '8',                        ## 系统消息--欢迎--ok
+        'authSuccess' => '8',                    ## 系统消息 --认证成功--ok
+        'authFailed' => '8',                     ## 系统消息 -- 认证失败--ok
+        'like' => '9',                           ## 喜欢作品和花絮，增加的都是 作品的喜欢--ok
+        'message' => '10',                       ## 评论花絮--ok
+        'comment' => '10',                       ## 鉴赏作品--ok
+        'artworkUpdate' => '12',                 ## 作品更新--ok
+        'artistUpdate' => '12',                  ## 文章更新--ok
+        'repayComment' => '13',                  ## 回复鉴赏作品--ok
+        'repayMessage' => '13',                  ## 回复评论花絮--ok
+        'artCircleComment' => '14',              ## 用户评论艺术圈动态 --ok
+        'artCircleReplyComment' => '15',         ## 用户回复艺术圈动态的评论 --ok
+        'artCircleLike' => '16',                 ## 用户点赞艺术圈动态--ok
+        'userConsultation' => '17',              ## 用户咨询艺术家(画作)--ok
+        'artistReplyConsultation' => '18',       ## 艺术家回复用户咨询--ok
+        'topicLike' => '21',                     ## 用户点赞话题讨论--OK
+        'topicComment' => '22',                  ## 用户评论话题讨论--ok
+        'topicReplyComment' => '23',             ## 用户回复话题讨论的评论--ok
+        'articleLike' => '40',                   ## 喜欢文章
+        'articleComment' => '41',                ## 文章评论
+        'articleRepay' => '42',                 ## 文章评论回复
+    ];
+    public static $showmsg = 1;                  ## 不用跳转的消息
+    public static $linkmsg = 2;                  ## 需要跳转的消息
+    public static $commentmsg = 3;

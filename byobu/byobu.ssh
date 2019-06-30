@@ -1,0 +1,3 @@
+* ssh -p 11022 -o ServerAliveInterval=60 ch@120.79.65.20
+* ssh -p 11022 -o ServerAliveInterval=60 ch@39.108.105.201
+* ssh -p 11022 -o ServerAliveInterval=60 ch@106.12.142.210
