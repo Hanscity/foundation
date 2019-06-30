@@ -15,12 +15,11 @@
 ### lsb_release -a                        //安装好 Ubuntu，看一看此版本的代号等信息，这才是第一步吧
    ```
    	ch@ch-one:~$ lsb_release -a
-	No LSB modules are available.
-	Distributor ID: Ubuntu
-	Description:    Ubuntu 18.04.2 LTS
-	Release:        18.04
-	Codename:       bionic
-
+	               No LSB modules are available.
+	               Distributor ID: Ubuntu
+	               Description:    Ubuntu 18.04.2 LTS
+	               Release:        18.04
+	               Codename:       bionic
 
    ```
 
@@ -28,33 +27,34 @@
 * vim /etc/apt/sources.list
 
    ```
-   	deb https://mirrors.aliyun.com/ubuntu/ bionic main multiverse restricted universe
-	deb https://mirrors.aliyun.com/ubuntu/ bionic-backports main multiverse restricted universe
-	deb https://mirrors.aliyun.com/ubuntu/ bionic-proposed main multiverse restricted universe
-	deb https://mirrors.aliyun.com/ubuntu/ bionic-security main multiverse restricted universe
-	deb https://mirrors.aliyun.com/ubuntu/ bionic-updates main multiverse restricted universe
+      deb https://mirrors.aliyun.com/ubuntu/ bionic main multiverse restricted universe
+      deb https://mirrors.aliyun.com/ubuntu/ bionic-backports main multiverse restricted universe
+      deb https://mirrors.aliyun.com/ubuntu/ bionic-proposed main multiverse restricted universe
+      deb https://mirrors.aliyun.com/ubuntu/ bionic-security main multiverse restricted universe
+      deb https://mirrors.aliyun.com/ubuntu/ bionic-updates main multiverse restricted universe
 
    ```
 
 ### 备注
    ```
-   * 应该可以看出 bionic 是啥了吧
-   * 你去访问一下 https://mirrors.aliyun.com/ubuntu/，你就会大概知道 main multiverse restricted universe 是指啥，主要版，复合版，严格版，大学版
-   * deb https://mirrors.aliyun.com/ubuntu/ bionic main multiverse restricted universe
-   等同于一下四句：
-        deb https://mirrors.aliyun.com/ubuntu/ bionic main
-        deb https://mirrors.aliyun.com/ubuntu/ bionic multiverse
-        deb https://mirrors.aliyun.com/ubuntu/ bionic restricted
-        deb https://mirrors.aliyun.com/ubuntu/ bionic universe
-
+   *  应该可以看出 bionic 是啥了吧
+   *  你去访问一下 https://mirrors.aliyun.com/ubuntu/，你就会大概知道 main multiverse restricted universe 是指啥，主要版，复合版，严格版，大学版
+   *  deb https://mirrors.aliyun.com/ubuntu/ bionic main multiverse restricted universe 
+      等同于一下四句：
+      deb https://mirrors.aliyun.com/ubuntu/ bionic main
+      deb https://mirrors.aliyun.com/ubuntu/ bionic multiverse
+      deb https://mirrors.aliyun.com/ubuntu/ bionic restricted
+      deb https://mirrors.aliyun.com/ubuntu/ bionic universe
 
    ```
+
+
 ### apt-get update 到底在干啥
 * man apt-get
    ```
    update
            update is used to resynchronize the package index files from their sources. 
-           //update 可用来再次同步包的索引文件，通过它们的资源。同步包的索引文件，不是同步包,这一句很容易理解错误。CentOs 中， update 是同步包。
+           //update 可用来再次同步包的索引文件，通过它们的资源。同步包的索引文件，不是同步包,这一句很容易理解错误。CentOs 中， update 也是同步索引
            //然后根据此索引文件来比对现有的包，下载最新的包。
            //此索引文件在哪，如何比对，大概如下:   
 
@@ -190,7 +190,7 @@ STEP 9: Operate PHP-FPM
 --with-png-dir=/usr/lib         ## gd 库相关的 PNG 图片
 --with-freetype-dir=/usr/lib    ## gd 库相关的 字体
 --enable-opcache                ## opcache
---enable-shmop                  ## 共享内存函数集
+--enable-shmop                  ## 共享内存函数集 
 --enable-sysvmsg                ## 共享内存函数
 --enable-sysvsem                ## 共享内存函数
 --enable-sysvshm                ## 共享内存函数
@@ -206,6 +206,5 @@ STEP 9: Operate PHP-FPM
 - php 的扩展分为两种，默认支持的扩展(ext dir)，第三方扩展(.so)。默认扩展，随着 PHP 的源码一起编译安装，也称静态编译，也就是 --enable 和 --with 启用的扩展。
 第三方扩展，使用 phpize 来动态编译，生成 .so 文件，从而进入 PHP 内核和 PHP 一起编译安装。
 - --enable 一般是指启用某功能模块；--with 一般是指启用某功能，或者指定目录。
-
 
 
