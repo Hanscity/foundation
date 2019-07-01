@@ -118,7 +118,7 @@ mi-macdeMacBook-Pro:local mi$
 #### 查看 Mac 系统的进程
 1. 前往-》活动监视器
 2. top                                    ## h 进入 help 页面，s 进入 调控刷新时间的页面 k 进入 kill 进程的页面，Mac 系统中仅有 s 命令是有效的，并不强大。 Ubuntu 中，都是可以用的哦
-3. lsof -i:80                             ## 查看 80 端口的占用程序, 等同于 lsof -i TCP:80
+3. lsof -i:80                             ## 查看 80 端口的占用程序, 等同于 lsof -i TCP:80, Mac 之中，记得加 sudo
 4. netstat -tunlp                         ## 这个命令在 Mac 系统中并不好用
 
 #### mac apache 的使用
@@ -186,7 +186,7 @@ Include /private/etc/apache2/extra/httpd-vhosts.conf    ## 开启虚拟主机
 
 
 ## mac php
-1. mac 的 PHP 进程在哪？
+1. mac 的 PHP 进程在哪？		
 - 如果是 Apache + PHP，php 是一个系统的 API，没有进程，而 PHP 的进程，只是 Apache 的一个模块，所以找不到 PHP 进程
 - 如果是 PHP-fpm , ps aux | grep php ,可以看到进程
 
@@ -221,6 +221,8 @@ cp www.conf.default www.conf
 
 
 php-fpm                       ## 成功
+
+
 ```
 
 
@@ -267,7 +269,107 @@ openssl dgst -sha256[空格][拖曳要检测的文件到此处]
 
 
 
+## Mac + Nginx + PHP
+
+- brew install nginx
+```
+
+==> openssl
+A CA file has been bootstrapped using certificates from the SystemRoots
+keychain. To add additional certificates (e.g. the certificates added in
+the System keychain), place .pem files in
+  /usr/local/etc/openssl/certs
+
+and run
+  /usr/local/opt/openssl/bin/c_rehash
+
+openssl is keg-only, which means it was not symlinked into /usr/local,
+because Apple has deprecated use of OpenSSL in favor of its own TLS and crypto libraries.
+
+If you need to have openssl first in your PATH run:
+  echo 'export PATH="/usr/local/opt/openssl/bin:$PATH"' >> ~/.bash_profile
+
+For compilers to find openssl you may need to set:
+  export LDFLAGS="-L/usr/local/opt/openssl/lib"
+  export CPPFLAGS="-I/usr/local/opt/openssl/include"
+
+
+==> nginx
+Docroot is: /usr/local/var/www
+
+The default port has been set in /usr/local/etc/nginx/nginx.conf to 8080 so that
+nginx can run without sudo.
+
+nginx will load all files in /usr/local/etc/nginx/servers/.
+
+To have launchd start nginx now and restart at login:
+  brew services start nginx
+Or, if you don't want/need a background service you can just run:
+  nginx
 
 
 
+``` 
+
+
+- 增加 redis.so
+
+
+```
+mi-macdeMacBook-Pro:redis-4.3.0 mi$ phpize -v
+grep: /usr/include/php/main/php.h: No such file or directory
+grep: /usr/include/php/Zend/zend_modules.h: No such file or directory
+grep: /usr/include/php/Zend/zend_extensions.h: No such file or directory
+Configuring for:
+PHP Api Version:        
+Zend Module Api No:     
+Zend Extension Api No:  
+
+
+- 解决
+
+cd /Library/Developer/CommandLineTools/Packages/
+open macOS_SDK_headers_for_macOS_10.14.pkg                                ## 安装header头文件SDK即可：
+
+
+```
+
+```
+
+brew install autoconf
+
+```
+
+```
+- 准备工作完善，开始安装
+
+download php-redis
+
+tar -xzvf
+
+cd php-redis
+
+phpize
+
+./configure --with-php-config=/usr/bin/php-config
+
+sudo make
+
+sudo make test
+
+sudo make install
+
+extension=redis.so
+
+
+```
+
+
+```
+
+sudo killall php-fpm
+
+php-fpm 
+
+```
 
