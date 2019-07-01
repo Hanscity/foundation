@@ -2,10 +2,15 @@
 * 可以兼容 thinkphp 的四种路由
 
 ```  
+
 server {
     listen       80;
-    server_name  apich.artzhe.com;
-    root /var/www/work/artzhe/;
+    server_name  ch-api.artzhe.com;
+    root /var/www/artzhe/;
+
+    access_log  /var/log/nginx/ch-api.artzhe.com_access.log ;
+    error_log   /var/log/nginx/ch-api.artzhe.com_error.log ;
+
     index  index.html index.htm index.php;
     error_page  404              /404.html;
     location = /404.html {
@@ -13,7 +18,7 @@ server {
     }
     error_page  500 502 503 504  /50x.html;
     location = /50x.html {
-        root   /usr/share/nginx/html; # windows用户替换这个目录
+        root   /usr/share/nginx/html;
     }
     location / {
         try_files $uri @rewrite;
@@ -46,6 +51,5 @@ server {
     location ~ /\.ht {
         deny  all;
     }
-}
 
 ```
