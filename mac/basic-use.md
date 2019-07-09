@@ -373,3 +373,9 @@ php-fpm
 
 ```
 
+
+
+./configure --with-php-config=/root/bin/php7219/bin/php-config
+
+
+6k21klss380l5p4fnutenj1521

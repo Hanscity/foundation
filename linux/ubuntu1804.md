@@ -35,6 +35,14 @@
 
    ```
 
+### 百度云的源
+
+```
+
+
+
+
+```
 ### 备注
    ```
    *  应该可以看出 bionic 是啥了吧
@@ -85,6 +93,9 @@ Compiling PHP on Ubuntu boxes.
 
 If you would like to compile PHP from source as opposed to relying on package maintainers, here's a list of packages, and commands you can run
 
+SIEP 0:
+Don't use root,Because of Composer's warning(Do not run Composer as root/super user! See https://getcomposer.org/root for details);
+
 STEP 1:
 sudo apt-get install autoconf build-essential curl libtool \
   libssl-dev libcurl4-openssl-dev libxml2-dev libreadline7 \
@@ -93,7 +104,7 @@ sudo apt-get install autoconf build-essential curl libtool \
 
 So you don't overwrite any existing PHP installs on your system, install PHP in your home directory. Create a directory for the PHP binaries to live
 
-    mkdir -p ~/bin/php7219/                         ## I use the role of root 
+    mkdir -p ~/bin/php7219/                   
 
 STEP 2:
 # download the latest PHP tarball, decompress it, then cd to the new directory.
@@ -102,7 +113,10 @@ STEP 2:
 STEP 3:
 Configure PHP. Remove any options you don't need (like MySQL or Postgres (--with-pdo-pgsql))
 
-./configure --prefix=/root/bin/php7219 --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --with-mysqli --enable-mysqlnd --with-pdo-mysql --with-pdo-mysql=mysqlnd --without-sqlite3 --without-pdo-sqlite --enable-zip --with-libzip=/usr/lib/x86_64-linux-gnu --with-zlib --enable-sockets --enable-mbstring --enable-bcmath --with-openssl --with-curl --with-iconv --enable-soap --with-pear --enable-pcntl --with-gd --with-jpeg-dir=/usr/lib  --with-png-dir=/usr/lib  --with-freetype-dir=/usr/lib --enable-opcache --enable-shmop --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-phpdbg --with-readline
+./configure --prefix=$HOME/bin/php7219 --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --with-mysqli --enable-mysqlnd --with-pdo-mysql --with-pdo-mysql=mysqlnd --without-sqlite3 --without-pdo-sqlite --enable-zip --with-libzip=/usr/lib/x86_64-linux-gnu --with-zlib --enable-sockets --enable-mbstring --enable-bcmath --with-openssl --with-curl --with-iconv --enable-soap --with-pear --enable-pcntl --with-gd --with-jpeg-dir=/usr/lib  --with-png-dir=/usr  --with-freetype-dir=/usr/lib --enable-opcache --enable-shmop --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-phpdbg --with-readline
+
+- without pear
+./configure --prefix=$HOME/bin/php7219 --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --with-mysqli --enable-mysqlnd --with-pdo-mysql --with-pdo-mysql=mysqlnd --without-sqlite3 --without-pdo-sqlite --enable-zip --with-libzip=/usr/lib/x86_64-linux-gnu --with-zlib --enable-sockets --enable-mbstring --enable-bcmath --with-openssl --with-curl --with-iconv --enable-soap --enable-pcntl --with-gd --with-jpeg-dir=/usr/lib  --with-png-dir=/usr  --with-freetype-dir=/usr/lib --enable-opcache --enable-shmop --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-phpdbg --with-readline
 
 
 
@@ -112,6 +126,7 @@ compile the binaries by typing: make
 If no errors, install by typing: make install
 
 
+
 STEP 5:
 Copy the PHP.ini file to the install directory
 
@@ -119,7 +134,7 @@ Copy the PHP.ini file to the install directory
 
 STEP 6:
 
-cd ~/bin/php7219/etc; 
+cd ~/bin/php7219/etc
 mv php-fpm.conf.default php-fpm.conf
 mv php-fpm.d/www.conf.default php-fpm.d/www.conf
 
@@ -207,4 +222,27 @@ STEP 9: Operate PHP-FPM
 第三方扩展，使用 phpize 来动态编译，生成 .so 文件，从而进入 PHP 内核和 PHP 一起编译安装。
 - --enable 一般是指启用某功能模块；--with 一般是指启用某功能，或者指定目录。
 
+
+
+
+
+## 终端重命名
+
+```
+vim ~/.bashrc
+
+## 末尾加上
+function title() {
+  if [[ -z "$ORIG" ]]; then
+    ORIG=$PS1
+  fi
+  TITLE="\[\e]2;$*\a\]"
+  PS1=${ORIG}${TITLE}
+}
+
+## 使用方法
+title your-name
+
+
+```
 
