@@ -246,3 +246,41 @@ title your-name
 
 ```
 
+
+
+## static ip configuration
+
+- sudo vim /etc/netplan/01-eth0.yaml
+```
+# This file describes the network interfaces available on your system
+# For more information, see netplan(5).
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    enp3s0:
+      dhcp4: no                                   # dont get ip dynamic,ipv4
+      dhcp6: no                                   # dont get ip dynamic,ipv6
+      addresses:
+        - 198.51.100.5/24                         # Your public IPv4 address.
+        - 192.168.1.201/24                        # Private IPv4 address，同一个局域网内，需要填写这个地址，才能被访问吧
+        - "2001:db8:2000:aff0::2/64"              # Primary IPv6 address.
+      gateway4: 192.168.1.1                       # Primary IPv4 gateway,这也就是局域网中的路由 IP
+      gateway6: "fe80::1"                         # Primary IPv6 gateway.
+      nameservers:
+        addresses: [8.8.8.8]    # DNS Server IP addresses.
+
+
+```
+
+- netplan apply
+
+
+## 修改终端的服务器名字
+
+- sudo vim /etc/hostname
+- sudo netplan apply                ## 用这个明令，才会生效的
+
+
+
+
