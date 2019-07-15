@@ -10,6 +10,9 @@
 - git checkout a  (go into branch a)
 - git checkout -b c (create branch c, then checkout c)
 
+- git checkout -- file
+- git reset --hard Version
+
 
 - git merge branch_a (merge ..)
 
