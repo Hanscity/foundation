@@ -113,7 +113,7 @@ STEP 2:
 STEP 3:
 Configure PHP. Remove any options you don't need (like MySQL or Postgres (--with-pdo-pgsql))
 
-./configure --prefix=$HOME/bin/php72 --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --with-mysqli --enable-mysqlnd --with-pdo-mysql --with-pdo-mysql=mysqlnd --without-sqlite3 --without-pdo-sqlite --enable-zip --with-libzip=/usr/lib/x86_64-linux-gnu --with-zlib --enable-sockets --enable-mbstring --enable-bcmath --with-openssl --with-curl --with-iconv --enable-soap --with-pear --enable-pcntl --with-gd --with-jpeg-dir=/usr/lib  --with-png-dir=/usr  --with-freetype-dir=/usr/lib --enable-opcache --enable-shmop --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-phpdbg --with-readline
+  
 
 - without pear
 ./configure --prefix=$HOME/bin/php72 --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --with-mysqli --enable-mysqlnd --with-pdo-mysql --with-pdo-mysql=mysqlnd --without-sqlite3 --without-pdo-sqlite --enable-zip --with-libzip=/usr/lib/x86_64-linux-gnu --with-zlib --enable-sockets --enable-mbstring --enable-bcmath --with-openssl --with-curl --with-iconv --enable-soap --enable-pcntl --with-gd --with-jpeg-dir=/usr/lib  --with-png-dir=/usr  --with-freetype-dir=/usr/lib --enable-opcache --enable-shmop --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-phpdbg --with-readline
@@ -245,42 +245,4 @@ title your-name
 
 
 ```
-
-
-
-## static ip configuration
-
-- sudo vim /etc/netplan/01-eth0.yaml
-```
-# This file describes the network interfaces available on your system
-# For more information, see netplan(5).
-network:
-  version: 2
-  renderer: networkd
-  ethernets:
-    enp3s0:
-      dhcp4: no                                   # dont get ip dynamic,ipv4
-      dhcp6: no                                   # dont get ip dynamic,ipv6
-      addresses:
-        - 198.51.100.5/24                         # Your public IPv4 address.
-        - 192.168.1.201/24                        # Private IPv4 address，同一个局域网内，需要填写这个地址，才能被访问吧
-        - "2001:db8:2000:aff0::2/64"              # Primary IPv6 address.
-      gateway4: 192.168.1.1                       # Primary IPv4 gateway,这也就是局域网中的路由 IP
-      gateway6: "fe80::1"                         # Primary IPv6 gateway.
-      nameservers:
-        addresses: [8.8.8.8]    # DNS Server IP addresses.
-
-
-```
-
-- netplan apply
-
-
-## 修改终端的服务器名字
-
-- sudo vim /etc/hostname
-- sudo netplan apply                ## 用这个明令，才会生效的
-
-
-
 
