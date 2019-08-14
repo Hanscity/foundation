@@ -104,7 +104,7 @@ sudo apt-get install autoconf build-essential curl libtool \
 
 So you don't overwrite any existing PHP installs on your system, install PHP in your home directory. Create a directory for the PHP binaries to live
 
-    mkdir -p ~/bin/php7219/                   
+    mkdir -p ~/bin/php72/                   
 
 STEP 2:
 # download the latest PHP tarball, decompress it, then cd to the new directory.
@@ -113,10 +113,10 @@ STEP 2:
 STEP 3:
 Configure PHP. Remove any options you don't need (like MySQL or Postgres (--with-pdo-pgsql))
 
-./configure --prefix=$HOME/bin/php7219 --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --with-mysqli --enable-mysqlnd --with-pdo-mysql --with-pdo-mysql=mysqlnd --without-sqlite3 --without-pdo-sqlite --enable-zip --with-libzip=/usr/lib/x86_64-linux-gnu --with-zlib --enable-sockets --enable-mbstring --enable-bcmath --with-openssl --with-curl --with-iconv --enable-soap --with-pear --enable-pcntl --with-gd --with-jpeg-dir=/usr/lib  --with-png-dir=/usr  --with-freetype-dir=/usr/lib --enable-opcache --enable-shmop --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-phpdbg --with-readline
+./configure --prefix=$HOME/bin/php72 --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --with-mysqli --enable-mysqlnd --with-pdo-mysql --with-pdo-mysql=mysqlnd --without-sqlite3 --without-pdo-sqlite --enable-zip --with-libzip=/usr/lib/x86_64-linux-gnu --with-zlib --enable-sockets --enable-mbstring --enable-bcmath --with-openssl --with-curl --with-iconv --enable-soap --with-pear --enable-pcntl --with-gd --with-jpeg-dir=/usr/lib  --with-png-dir=/usr  --with-freetype-dir=/usr/lib --enable-opcache --enable-shmop --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-phpdbg --with-readline
 
 - without pear
-./configure --prefix=$HOME/bin/php7219 --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --with-mysqli --enable-mysqlnd --with-pdo-mysql --with-pdo-mysql=mysqlnd --without-sqlite3 --without-pdo-sqlite --enable-zip --with-libzip=/usr/lib/x86_64-linux-gnu --with-zlib --enable-sockets --enable-mbstring --enable-bcmath --with-openssl --with-curl --with-iconv --enable-soap --enable-pcntl --with-gd --with-jpeg-dir=/usr/lib  --with-png-dir=/usr  --with-freetype-dir=/usr/lib --enable-opcache --enable-shmop --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-phpdbg --with-readline
+./configure --prefix=$HOME/bin/php72 --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --with-mysqli --enable-mysqlnd --with-pdo-mysql --with-pdo-mysql=mysqlnd --without-sqlite3 --without-pdo-sqlite --enable-zip --with-libzip=/usr/lib/x86_64-linux-gnu --with-zlib --enable-sockets --enable-mbstring --enable-bcmath --with-openssl --with-curl --with-iconv --enable-soap --enable-pcntl --with-gd --with-jpeg-dir=/usr/lib  --with-png-dir=/usr  --with-freetype-dir=/usr/lib --enable-opcache --enable-shmop --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-phpdbg --with-readline
 
 
 
@@ -130,11 +130,11 @@ If no errors, install by typing: make install
 STEP 5:
 Copy the PHP.ini file to the install directory
 
-    cp php.ini-development ~/bin/php7219/lib/ 
+    cp php.ini-development ~/bin/php72/lib/ 
 
 STEP 6:
 
-cd ~/bin/php7219/etc
+cd ~/bin/php72/etc
 mv php-fpm.conf.default php-fpm.conf
 mv php-fpm.d/www.conf.default php-fpm.d/www.conf
 
@@ -143,14 +143,14 @@ STEP 7:
 create symbolic links for your for your binary files
 
    cd ~/bin
-   ln -s php7219/bin/php php
-   ln -s php7219/bin/php-cgi php-cgi
-   ln -s php7219/bin/php-config php-config
-   ln -s php7219/bin/phpize phpize
-   ln -s php7219/bin/phar.phar phar
-   ln -s php7219/bin/pear pear
-   ln -s php7219/bin/phpdbg phpdbg
-   ln -s php7219/sbin/php-fpm php-fpm
+   ln -s php72/bin/php php  
+   ln -s php72/bin/php-cgi php-cgi
+   ln -s php72/bin/php-config php-config
+   ln -s php72/bin/phpize phpize
+   ln -s php72/bin/phar.phar phar
+   ln -s php72/bin/pear pear
+   ln -s php72/bin/phpdbg phpdbg
+   ln -s php72/sbin/php-fpm php-fpm
 
 STEP 8: link your local PHP to the php command. You will need to logout then log back in for php to switch to the local version instead of the installed version
 
