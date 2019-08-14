@@ -37,6 +37,23 @@
    
    ```
 
+* sql 语句的执行 和 非标准的ORM模型 的对应
+```
+    $res = M()->table('saas_work as a')
+            ->field('count(a.id),b.name')
+            ->join('saas_work_cate as b on a.type_id = b.id','inner')
+            ->where(['a.org_id'=>$org_id,'is_delete'=>0])
+            ->group('a.type_id')
+            ->select();
+
+    $sql = "select count(saas_work.id),saas_work_cate.name from saas_work
+       inner join saas_work_cate on saas_work.type_id = saas_work_cate.id where saas_work.org_id = {$org_id} group by
+       saas_work.type_id";
+    $Model = new \Think\Model(); // 实例化一个model对象 没有对应任何数据表
+    $res = $Model->query($sql);
+
+
+```
 * 大于等于 M 且小于 N
    ```     
    $likeArr = M('ArtworkLike')
@@ -536,3 +553,193 @@ public $msg = [
     public static $showmsg = 1;                  ## 不用跳转的消息
     public static $linkmsg = 2;                  ## 需要跳转的消息
     public static $commentmsg = 3;
+
+
+# 以下完全对应于 ThinkPHP3.2.3 完全开发手册
+
+# CRUD 操作
+
+## add
+
+### 字段过滤
+- 如果写入了数据表中不存在的字段数据，则会被直接过滤，例如：
+
+```
+$data['name'] = 'thinkphp';
+$data['email'] = 'thinkphp@gmail.com';
+$data['test'] = 'test';
+$User = M('User');
+$User->data($data)->add();
+其中test字段是不存在的，所以写入数据的时候会自动过滤掉。
+
+在3.2.2版本以上，如果开启调试模式的话，则会抛出异常，提示：非法数据对象：[test=>test]
+
+```
+- 问题是，我的 tp3.2.3,开启了调试模式，开启了报错模式，并没有抛出异常。。
+
+
+### 字段内容过滤
+- 通过filter方法可以对数据的值进行过滤处理，例如：
+
+```
+$data['name'] = '<b>thinkphp</b>';
+$data['email'] = 'thinkphp@gmail.com';
+$User = M('User');
+$User->data($data)->filter('strip_tags')->add();
+写入数据库的时候会把name字段的值转化为thinkphp。
+
+filter方法的参数是一个回调类型，支持函数或者闭包定义。
+
+```
+- 有两个问题，一：我的 tp3.2.3 中的 think/model 没有写这个 filter 方法；二：就算写了，也不好。业务中，可能一开始就判断，名字是否重复。OK，不重复，写入的时候，去掉标签，可能会重复。所以需要在判断之前，去掉标签。这里应该写一个方法的。
+
+
+
+### 返回 sql 语句
+
+3.2.3版本开始，可以支持不执行SQL而只是返回SQL语句，例如：
+
+$User = M("User"); // 实例化User对象
+$data['name'] = 'ThinkPHP';
+$data['email'] = 'ThinkPHP@gmail.com';
+$sql = $User->fetchSql(true)->add($data);
+echo $sql;
+// 输出结果类似于
+// INSERT INTO think_user (name,email) VALUES ('ThinkPHP','ThinkPHP@gmail.com')
+
+
+### 批量写入
+- 在某些情况下可以支持数据的批量写入，例如：
+
+```
+//批量添加数据
+$dataList[] = array('name'=>'thinkphp','email'=>'thinkphp@gamil.com');
+$dataList[] = array('name'=>'onethink','email'=>'onethink@gamil.com');
+$User->addAll($dataList);
+
+```
+- 记得，批量写入的时候，数组的下标是从 0 到 N
+
+
+
+### select 
+
+- find();                   ## 查询单条数据
+- select();                  ## 查询多条数据
+- getField();                ## 有多种格式
+   ```
+    // 返回单个字符
+    $data_space = M('art_space')
+            ->where(['link_id'=>$org_id,'is_show'=>1])
+            ->getField('space_name');
+
+    Util::jsonReturnSuccess($data_space);
+
+    {
+    "data": {
+        "status": 1000,
+        "info": "冰封王座"
+    },
+    "code": 30000,
+    "message": "success",
+    "debug": false
+    }
+
+    //
+    $data_space = M('art_space')
+            ->where(['link_id'=>$org_id,'is_show'=>1])
+            ->getField('space_name',true);
+
+
+    {
+    "data": {
+        "status": 1000,
+        "info": [
+            "冰封王座",
+            "黑暗军团",
+            "巫妖王",
+            "兽王",
+            "影魔",
+            "影魔&lt;html&gt;",
+            "影魔&lt;php&gt;"
+        ]
+    },
+    "code": 30000,
+    "message": "success",
+    "debug": false
+    }
+
+    .....有很多中形式
+
+    http://document.thinkphp.cn/manual_3_2.html#read_data
+   ```
+
+
+### 数据更新
+- 记得添加 where 条件,如果没有 where 条件或者数据中没有 主键，那么不会执行操作
+
+1. save()
+2. setField()
+3. setInc,setDec
+
+
+### 删除
+- 记得添加 where 条件，否则不执行
+
+1. delete()
+
+
+
+# ACTIVERECORD 
+- 当前大部分都采用的 ORM 模型，典型的 AR模型，暂时不用
+
+# 字段映射
+- 暂时不用
+
+
+
+### 生成 sql
+
+- select
+
+```
+$sql = M('art_space')
+            ->where(['link_id'=>$org_id,'is_show'=>1,'space_name'=>['like','%'.$space_name.'%']])
+            ->page($page,$page_size)
+            ->order('create_time Desc')
+            ->select(false);
+
+$sql = M('art_space')
+    ->where(['link_id'=>$org_id,'is_show'=>1,'space_name'=>['like','%'.$space_name.'%']])
+    ->page($page,$page_size)
+    ->order('create_time Desc')
+    ->buildSql();
+
+SELECT * FROM `saas_art_space` WHERE `link_id` = 10 AND `is_show` = 1 AND `space_name` LIKE '%%' ORDER BY create_time Desc LIMIT 0,10
+
+
+```
+
+- add
+
+```
+
+$User = M("User"); // 实例化User对象
+$data['name'] = 'ThinkPHP';
+$data['email'] = 'ThinkPHP@gmail.com';
+$sql = $User->fetchSql(true)->add($data);
+echo $sql;
+// 输出结果类似于
+// INSERT INTO think_user (name,email) VALUES ('ThinkPHP','ThinkPHP@gmail.com')
+
+
+```
+
+- 
+
+```
+
+M('author')->getLastSql()
+
+
+```
