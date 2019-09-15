@@ -48,7 +48,11 @@
 * 自定义模板 : File -> Settings -> Editor -> Live Templates
 * 忽略文件：File -> Settings -> Version Control -> Ignored Files
 * 自动换行 : File -> Settings -> Editor -> General -> Use soft wraps in editor
+* 快捷键设置 : File -> Settings -> Keymap
+   - 上一步 : Alt + Shift + Left || Button 4 
+   - 下一步 : Alt + Shift + Right || Button 5
 
+ 
 
 ## subversion
 
