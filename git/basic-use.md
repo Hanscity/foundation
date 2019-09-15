@@ -1,5 +1,9 @@
 - git add -A :/ 
-- git commit -m 'message'
+- git add file (将此文件提交到本地仓库)
+- git commit -m 'message' （将本地仓库的内容提交到版本库，并记录内容等提示信息）
+- git commit -am ''
+- git status （查看当前版本库的状态）
+
 
 
 - git branch     (find local branch)
