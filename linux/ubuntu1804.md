@@ -246,3 +246,8 @@ title your-name
 
 ```
 
+
+
+## 查看内存条的信息
+
+dmidecode --type memory

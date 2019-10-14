@@ -743,3 +743,34 @@ M('author')->getLastSql()
 
 
 ```
+
+
+
+### tp 3.2 ,如果字字段写错，会更新了所有的记录
+```
+
+/**
+     * 修改企业头像
+     */
+    public function fixMessHeadPic()
+    {
+        $org_id = $this->org_id;
+        $head_pic = I('post.head_pic','');
+        if(!$head_pic){
+            Util::jsonReturnError('缺少参数');
+        }
+        try{
+            M('org')->where(['org_id'=>$org_id,'status'=>1])
+                ->setField(['head_pic'=>$head_pic]);
+            Util::jsonReturnSuccess('修改成功');
+
+        }catch(\Exception $e){
+
+            Util::debugLog('test',$e->getMessage());
+            Util::jsonReturnError('数据库开小差了');
+        }
+
+    }
+
+
+```

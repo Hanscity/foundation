@@ -52,3 +52,5 @@ git log --graph --decorate --oneline --simplify-by-decoration --all
 ```
 
 
+
+10590 : 2060

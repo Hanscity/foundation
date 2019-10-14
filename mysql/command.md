@@ -1,6 +1,9 @@
 
 - desc saas_author;                                                                          ## 查看数据表的字段及索引情况
 
+
+- show index from az_user_follower;                                                          ## 查看数据表的索引
+
 - show create table saas_author;                                                             ## 查看建表语句
 
 - ALTER TABLE saas_author CHARACTER SET = utf8mb4,COLLATE = utf8mb4_general_ci;              ## 修改表的默认字符集，排序集
@@ -25,3 +28,6 @@
 
 
 - alter table saas_author drop column space_id;                                              ## 删除字段
+
+- drop table saas_record_art_edit;                                                           ## 删除一张表
+
