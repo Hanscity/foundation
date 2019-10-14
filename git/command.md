@@ -38,3 +38,6 @@ git checkout -b 本地分支名 origin/远程分支名 (可以简写为 git chec
 - git clean -fnd (f: 强制删除；n: 展示将要删除的，但是并不删除；d: 删除文件夹)
 
 
+## git status
+
+- 空文件可以监控出来；空目录不能监控出来；
