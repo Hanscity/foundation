@@ -1,6 +1,6 @@
 # ING..
 
-* ssh
-   * 在我装载 putty 的时候，我发现我对 ssh 不了解
+- 微信小程序 10/29 author:xiaoxiang
+>> https://org.modao.cc/app/a4870992d1744d391e36082ede999f8d#screen=s0C0BED39F31567750068737
 
 
