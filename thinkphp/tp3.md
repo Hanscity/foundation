@@ -774,3 +774,33 @@ M('author')->getLastSql()
 
 
 ```
+
+
+
+
+### backend style 
+
+```
+
+<div class="form-group">
+    <label for="">申请时间</label>
+    <input type="date" name="sdate" class="inline form-control" id="sdate" value="{:I('sdate')}" min="2017-01-01" max="{:date('Y-m-d')}">
+    --
+    <input type="date" name="edate" class="inline form-control" id="edate" value="{:I('edate')}" min="2017-01-01" max="{:date('Y-m-d')}">
+</div>
+
+$sdate = I('get.sdate');  //开始时间
+$edate = I('get.edate');  //结束时间
+
+
+if(!empty($sdate)&&!empty($edate)){
+    $condition['az_artist_apply.create_time']=[['gt',strtotime($sdate)],['lt',strtotime($edate)+86400]];
+}elseif(!empty($sdate)){
+    $condition['az_artist_apply.create_time']=['gt',strtotime($sdate)];
+}elseif(!empty($edate)){
+    $condition['az_artist_apply.create_time']=['lt',strtotime($edate)+86400];
+}
+
+
+
+```
