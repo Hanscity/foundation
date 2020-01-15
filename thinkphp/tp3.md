@@ -804,3 +804,21 @@ if(!empty($sdate)&&!empty($edate)){
 
 
 ```
+
+
+### 优化写法
+
+```
+
+
+$artwork->where(['id' => $artId])
+                ->setField(['comment_total'=>['exp','comment_total+1'],
+                    'favorite_value'=>['exp','favorite_value+'.$favorite_value]]);
+            /*$artwork->where(['id' => $artId])->setInc('comment_total',1);
+            $artwork->where(['id' => $artId])->setInc('favorite_value',$favorite_value);*/
+
+
+
+            
+
+```
