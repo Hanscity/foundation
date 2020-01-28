@@ -1,11 +1,8 @@
 # Xuefeng Liao 
 
-## Python Basic
+## Python Basic Practice
 
 ### str and encode
-
-
-- practice
 
 ```
 
@@ -137,5 +134,136 @@ elif quadratic(1, 3, -4) != (1.0, -4.0):
     print('测试失败')
 else:
     print('测试成功')
+
+```
+
+
+## function param
+
+```
+def product(*x):
+    sum = 1
+    if len(x) != 0:
+        for i in x:
+            sum = sum * i
+            return sum
+    else:
+        raise TypeError('缺少参数')
+
+
+# 测试
+print('product(5) =', product(5))
+print('product(5, 6) =', product(5, 6))
+print('product(5, 6, 7) =', product(5, 6, 7))
+print('product(5, 6, 7, 9) =', product(5, 6, 7, 9))
+if product(5) != 5:
+    print('测试失败!')
+elif product(5, 6) != 30:
+    print('测试失败!')
+elif product(5, 6, 7) != 210:
+    print('测试失败!')
+elif product(5, 6, 7, 9) != 1890:
+    print('测试失败!')
+else:
+    try:
+        product()
+        print('测试失败!')
+    except TypeError:
+        print('测试成功!')
+
+```
+
+
+## Tower of Hanoi
+
+```
+# -*- coding: utf-8 -*-
+def move(n, a, b, c):
+    if n == 1:
+        print(a, '-->', c)
+    else:
+
+        # print(a,'-->','b')
+        # print(a,'-->','c')
+        # print(b,'-->','c')
+        move(n-1,a,c,b)
+        print(a, '-->', c)
+        move(n-1,b,a,c)
+
+
+move(2,'A','B','C')
+
+```
+
+
+## 切片
+
+```
+
+
+def trim(s):
+    if len(s) ==1 and s[0] == ' ':
+        return ''
+    elif len(s) > 1 and s[0] == ' ':
+        s = s[1:]
+        return trim(s)
+    elif len(s) > 1 and s[-1] == ' ':
+        s = s[0:-1]
+        return trim(s)
+    else:
+        return s
+
+
+# 测试:
+if trim('hello  ') != 'hello':
+    print('测试失败1!')
+elif trim('  hello') != 'hello':
+    print('测试失败2!')
+elif trim('  hello  ') != 'hello':
+    print('测试失败3!')
+elif trim('  hello  world  ') != 'hello  world':
+    print('测试失败4!')
+elif trim('') != '':
+    print('测试失败5!')
+elif trim('    ') != '':
+    print('测试失败6!')
+else:
+    print('测试成功7!')
+
+
+```
+
+
+```
+# -*- coding: utf-8 -*-
+
+
+def trim(s):
+    while s[0:1] == ' ':
+        s = s[1:]
+        continue
+
+    while s[-1:] == ' ':
+        s = s[0:-1]      # if have none, then return the empty string ''
+        continue
+
+    return s
+
+
+# 测试:
+if trim('hello  ') != 'hello':
+    print('测试失败!')
+elif trim('  hello') != 'hello':
+    print('测试失败!')
+elif trim('  hello  ') != 'hello':
+    print('测试失败!')
+elif trim('  hello  world  ') != 'hello  world':
+    print('测试失败!')
+elif trim('') != '':
+    print('测试失败!')
+elif trim('    ') != '':
+    print('测试失败!')
+else:
+    print('测试成功!')
 
 ```
