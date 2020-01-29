@@ -267,3 +267,55 @@ else:
     print('测试成功!')
 
 ```
+
+
+## 迭代
+
+```
+
+# -*- coding: utf-8 -*-
+
+
+def findMinAndMax(L):
+
+    l2 = [0,0]
+    i = 1
+    if len(L) == 0:
+        return None,None
+
+    if len(L) == 1:
+        return L[0],L[0]
+
+    for x in L:
+        if i == 1:
+            l2[0] = x
+
+        if i == 2:
+            if x < l2[0]:
+                l2[1] = l2[0]
+                l2[0] = x
+            else:
+                l2[1] = x
+
+        if i > 2:
+            if x < l2[0]:
+                l2[0] = x
+            if x > l2[1]:
+                l2[1] = x
+        i = i + 1
+    return l2[0], l2[1]
+
+
+# 测试
+if findMinAndMax([]) != (None, None):
+    print('测试失败!1')
+elif findMinAndMax([7]) != (7, 7):
+    print('测试失败!2')
+elif findMinAndMax([7, 1]) != (1, 7):
+    print('测试失败!3')
+elif findMinAndMax([7, 1, 3, 9, 5]) != (1, 9):
+    print('测试失败!4')
+else:
+    print('测试成功!')
+
+```
