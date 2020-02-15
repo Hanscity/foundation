@@ -118,6 +118,10 @@ Configure PHP. Remove any options you don't need (like MySQL or Postgres (--with
 - without pear
 ./configure --prefix=$HOME/bin/php72 --enable-fpm --with-fpm-user=www-data --with-fpm-group=www-data --with-mysqli --enable-mysqlnd --with-pdo-mysql --with-pdo-mysql=mysqlnd --without-sqlite3 --without-pdo-sqlite --enable-zip --with-libzip=/usr/lib/x86_64-linux-gnu --with-zlib --enable-sockets --enable-mbstring --enable-bcmath --with-openssl --with-curl --with-iconv --enable-soap --enable-pcntl --with-gd --with-jpeg-dir=/usr/lib  --with-png-dir=/usr  --with-freetype-dir=/usr/lib --enable-opcache --enable-shmop --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-phpdbg --with-readline
 
+- php7.4.2
+./configure --prefix=/home/mi/bin/php74 --enable-fpm --with-mysqli --enable-mysqlnd --with-pdo-mysql --with-pdo-mysql=mysqlnd --without-sqlite3 --without-pdo-sqlite --with-zlib --enable-sockets --enable-mbstring --enable-bcmath --with-openssl --with-curl --with-iconv --enable-soap --enable-pcntl --enable-opcache --enable-shmop --enable-sysvmsg --enable-sysvsem --enable-sysvshm --enable-phpdbg --with-readline
+
+- 下次编译，直接用默认的路径吧。省事，不用多余的配置。
 
 
 STEP 4:
@@ -251,3 +255,9 @@ title your-name
 ## 查看内存条的信息
 
 dmidecode --type memory
+
+
+
+
+
+
