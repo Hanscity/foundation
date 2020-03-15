@@ -108,6 +108,29 @@ location = /404.html {
         
         ```
 - try_files 命令
+    ```
+    try_files $uri $uri/ @aaaaab; 这句话是什么意思？
+    try_files从字面上理解就是尝试文件，再结合环境理解就是“尝试读取文件”，那他想读取什么文件呢，
+    答：读取静态文件
+
+    $uri  这个是nginx的一个变量，存放着用户访问的地址,
+    比如：http://www.xxx.com/index.html, 那么$uri就是 /index.html
+
+    $uri/ 代表访问的是一个目录，比如：http://www.xxx.com/hello/test/，那么$uri/就是 /hello/test/
+
+    完整的解释就是：try_files 去尝试到网站目录读取用户访问的文件，如果第一个变量存在，就直接返回；
+    不存在,读取第二个变量，如果存在，直接返回；
+    不存在直接跳转到第三个参数上。
+    
+    ```
+
+- @ 符号
+
+```
+带有"@"的是用来定义一个命名的 location，这种 location不参与请求匹配，一般用在内部定向。
+例如用在error_page, try_files命令中。它的功能类似于编程中的goto。
+
+```
 
 
 - rewrite 命令
@@ -119,51 +142,56 @@ location = /404.html {
 
     ```
 
+- $1,$2
+
+    ```
+    $1，$2表达的是小括号里面的内容
+    $1是第一个小括号里的内容，$2是第二个小括号里面的内容，依此类推
+    比如(\\d{4})(\\d{2})(\\d{2})  匹配"20190919"
+    $1是第一个括号里匹配的2019
+    $2是第二个括号里匹配的09
+    $3是第三个括号里匹配的19
+    
+    ```
 
 
-- 增加备注
+
+## 详解 macaw 路由中 Nginx 的配置
+
+```
+rewrite ^/(.*)/$ /$1 redirect; ## laravel.test/demo/ -> laravel.test/demo
+
+
+if (!-e $request_filename){     ## -e表示只要filename存在，则为真，不管filename是什么类型，当然这里加了!就取反
+                                ## laravel.test/demo(如果 demo 文件不存在) -> laravel.test/index.php 
+	rewrite ^(.*)$ /index.php break;
+}
+
+
+```
 
 ```
 server {
     listen       80;
-    server_name  ch-api.artzhe.com;
-    root /var/www/artzhe/;
+    server_name  godfather.test;
+    root /var/www/php/godfather/public;
 
-    access_log  /var/log/nginx/ch-api.artzhe.com_access.log ;
-    error_log   /var/log/nginx/ch-api.artzhe.com_error.log ;
+    access_log  /var/log/nginx/godfather.test-access.log ;
+    error_log   /var/log/nginx/godfather.test-error.log ;
 
     index  index.html index.htm index.php;
-    
-    location / {
-        try_files $uri @rewrite;
+    rewrite ^/(.*)/$ /$1 redirect;
+    if (!-e $request_filename){
+        rewrite ^(.*)$ /index.php break;
     }
-    location @rewrite {
-        set $static 0;
-        if  ($uri ~ \.(css|js|jpg|jpeg|png|gif|ico|woff|eot|svg|css\.map|min\.map)$) {
-            set $static 1;
-        }
-        if ($static = 0) {
-            rewrite ^/(.*)$ /index.php?s=/$1;
-        }
-    }
-    location ~ /Uploads/.*\.php$ {
-        deny all;
-    }
-    location ~ \.php/ {
-       if ($request_uri ~ ^(.+\.php)(/.+?)($|\?)) { }
-       fastcgi_pass 127.0.0.1:9000;
-       include fastcgi_params;
-       fastcgi_param SCRIPT_NAME     $1;
-       fastcgi_param PATH_INFO       $2;
-       fastcgi_param SCRIPT_FILENAME $document_root$1;
-    }
+
     location ~ \.php$ {
-        fastcgi_pass 127.0.0.1:9000;
-        fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        include fastcgi_params;
-    }
-    location ~ /\.ht {
-        deny  all;
-    }
+        fastcgi_pass   127.0.0.1:9000;
+        fastcgi_index  index.php;
+        fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+        include        fastcgi_params;
+   }
+}
+
 
 ```
