@@ -1,29 +1,61 @@
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")" [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+APP_NAME=Laravel-bjyblog-copy
+APP_ENV=local
+APP_KEY=
+APP_DEBUG=true
+APP_URL=http://bjy.test
 
+LOG_CHANNEL=stack
 
+DB_CONNECTION=mysql
+DB_HOST=106.12.142.210
+DB_PORT=3306
+DB_DATABASE=bjy
+DB_USERNAME=test
+DB_PASSWORD=f4cc3a57ca5adf55d9
 
-export NVM_DIR="$HOME/.nvm" [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" 
+BROADCAST_DRIVER=log
+CACHE_DRIVER=file
+QUEUE_CONNECTION=sync
+SESSION_DRIVER=file
+SESSION_LIFETIME=120
 
+REDIS_HOST=127.0.0.1
+REDIS_PASSWORD=null
+REDIS_PORT=6379
 
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.mailtrap.io
+MAIL_PORT=2525
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
 
-mi@mi-TM1701:~/Downloads$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.11/install.sh | bash
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100 12819  100 12819    0     0   3907      0  0:00:03  0:00:03 --:--:--  3907
-=> Downloading nvm from git to '/home/mi/.nvm'
-=> Cloning into '/home/mi/.nvm'...
-remote: Enumerating objects: 267, done.
-remote: Counting objects: 100% (267/267), done.
-remote: Compressing objects: 100% (239/239), done.
-remote: Total 267 (delta 31), reused 85 (delta 18), pack-reused 0
-Receiving objects: 100% (267/267), 119.47 KiB | 8.00 KiB/s, done.
-Resolving deltas: 100% (31/31), done.
-=> Compressing and cleaning up git repository
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_DEFAULT_REGION=us-east-1
+AWS_BUCKET=
 
-=> Appending nvm source string to /home/mi/.bashrc
-=> Appending bash_completion source string to /home/mi/.bashrc
-=> Close and reopen your terminal to start using nvm or run the following to use it now:
+PUSHER_APP_ID=
+PUSHER_APP_KEY=
+PUSHER_APP_SECRET=
+PUSHER_APP_CLUSTER=mt1
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+MIX_PUSHER_APP_KEY="${PUSHER_APP_KEY}"
+MIX_PUSHER_APP_CLUSTER="${PUSHER_APP_CLUSTER}"
+
+BAIDU_TRANSLATE_APPID=
+BAIDU_TRANSLATE_KEY=
+
+# dingo config
+API_STANDARDS_TREE=
+API_SUBTYPE=
+API_PREFIX=
+API_VERSION=
+API_DEBUG=
+
+# 云片
+YUNPIAN_API_KEY=
+
+# jpush
+JPUSH_KEY=
+JPUSH_SECRET=
