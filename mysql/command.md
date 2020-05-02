@@ -31,3 +31,66 @@
 
 - drop table saas_record_art_edit;                                                           ## 删除一张表
 
+
+
+## index (索引)
+
+1. PRIMARY  KEY（主键索引） 
+   ``` 
+   ALTER  TABLE  `table_name`  ADD  PRIMARY  KEY (  `column`  ) 
+
+   ```
+
+2. UNIQUE(唯一索引)         
+   
+   ``` 
+   ALTER  TABLE  `table_name`  ADD  UNIQUE ( `column` ) 
+
+   ```
+
+
+3. INDEX(普通索引) 
+
+   ``` 
+   ALTER  TABLE  `table_name`  ADD  INDEX index_name (  `column`  )
+
+   ```
+
+4. FULLTEXT(全文索引) 
+
+   ``` 
+   ALTER  TABLE  `table_name`  ADD  FULLTEXT ( `column` )
+
+   ```
+   
+5. 多列索引
+
+    ```
+    ALTER  TABLE  `table_name`  ADD  INDEX index_name (  `column1`,  `column2`,  `column3`  )
+
+    ```
+
+6. 前缀索引
+
+   ```
+   Alter table articles add index pre_address (address_test(20));
+   
+   ```
+
+
+
+
+### Mysql 的深入
+
+- mysql的索引，为什么不用二叉树，会有什么样的问题，红黑树呢，为什么也不用，hashmap与B+树哪个用的多一点，B+是什么样的结构，B+能解决什么样的问题
+- 索引引擎，myisam是什么样的，什么时候用，innodb呢，这里面有用到聚集索引吗，innodb是怎样实现它的行级锁的，谁能支持事务呢，事务了解多少简单说说，事务的七种传播行为说一下
+- 有多少种锁
+
+
+
+
+
+
+
+
+
