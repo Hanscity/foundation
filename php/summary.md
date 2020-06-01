@@ -15,11 +15,8 @@ CONTINUE THAT COUNTS                --WINSTON CHURCHILL
 * 负载均衡
    * 当时 miqu的项目，有六台 web服务器，负载均衡是以什么规则来分配的呢？
    
-##### php 
-* Php7的性能更佳
-* 类 C的框架性能更佳
-* 主业务之外的逻辑，可以异步执行
-* 简洁的思路，优越的算法
+
+
 
 ##### cache
 * 静态变量存储结果
