@@ -39,8 +39,10 @@
 * ctrl+f12 : 显示当前文件有多少个的方法，然后直接输入查询。。
 * ctrl+r : 当前页面的替换
 
-## 
+## spencial
 * alt+f12 : 打开命令行栏--open the command line 
+* alt+`   : 同一个应用内的切换（比如两个 phpstorm 之间的切换）
+
 
 ## setting
 * 是否需要提醒类型 : Editor > General > Appearance > Show (搜索 parameter name hints )
