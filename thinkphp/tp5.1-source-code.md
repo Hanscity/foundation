@@ -1700,16 +1700,123 @@ $this->hook->import($tags);
 
 ### 中间件的加入，路由的分发匿名类
 
-
+- add 就是一个赋值的过程
 
 ```
 
 - thinkphp/library/think/App.php:435
-    $this->middleware->add(function (Request $request, $next) use ($dispatch, $data) {
-            return is_null($data) ? $dispatch->run() : $data;                     ## 001, start $dispatch->run()
+
+    $this->middleware->add(function (Request $request, $next) use ($dispatch, $data) {    ## 
+            return is_null($data) ? $dispatch->run() : $data;
         });
 
 
+
+
+- thinkphp/library/think/Middleware.php:61
+
+    /**
+     * 注册中间件
+     * @access public
+     * @param  mixed  $middleware
+     * @param  string $type  中间件类型
+     */
+    public function add($middleware, $type = 'route')
+    {
+        
+        if (is_null($middleware)) {
+            return;
+        }
+
+        $middleware = $this->buildMiddleware($middleware, $type);        ##  在这里，这个动作很简单，遇到匿名类，直接返回
+
+        if ($middleware) {
+            $this->queue[$type][] = $middleware;                         ## 在这里，初始化这个队列
+        }
+    }
+
+
+
+
+
+```
+
+
+- dispatch，其实是两段 call_user_func 的执行，就会发现，执行的是匿名类 return is_null($data) ? $dispatch->run() : $data;
+- 真正执行的是 $dispatch->run()
+
+
+
+```
+
+    $response = $this->middleware->dispatch($this->request);
+
+
+
+
+- thinkphp/library/think/Middleware.php:137
+
+    /**
+     * 中间件调度
+     * @access public
+     * @param  Request  $request
+     * @param  string   $type  中间件类型
+     */
+    public function dispatch(Request $request, $type = 'route')
+    {
+
+        return call_user_func($this->resolve($type), $request);
+    }
+
+
+
+- thinkphp/library/think/Middleware.php:186
+
+    protected function resolve($type = 'route')
+    {
+        return function (Request $request) use ($type) {
+
+            //$this->middleware->add(function (Request $request, $next) use ($dispatch, $data) {
+            //            return is_null($data) ? $dispatch->run() : $data;
+            //        });
+
+
+            /*echo "<pre>";
+            var_dump($this->queue[$type]);
+            echo "</pre>";
+            exit;*/
+
+            $middleware = array_shift($this->queue[$type]);
+
+            if (null === $middleware) {
+                throw new InvalidArgumentException('The queue was exhausted, with no response returned');
+            }
+
+            list($call, $param) = $middleware;
+
+            try {
+                $response = call_user_func_array($call, [$request, $this->resolve($type), $param]);
+            } catch (HttpResponseException $exception) {
+                $response = $exception->getResponse();
+            }
+
+            if (!$response instanceof Response) {
+                throw new LogicException('The middleware must return Response instance');
+            }
+
+            return $response;
+        };
+    }
+
+    
+```
+
+
+
+
+- 执行 $dispatch->run()，这就有得回忆了。书接上回
+
+```
 - thinkphp/library/think/route/Dispatch.php:150
 
     /**
@@ -1717,9 +1824,10 @@ $this->hook->import($tags);
      * @access public
      * @return mixed
      */
-    public function run()                                                         ## 002
+    public function run()
     {
         $option = $this->rule->getOption();
+
         // 检测路由after行为
         if (!empty($option['after'])) {
             $dispatch = $this->checkAfter($option['after']);
@@ -1734,12 +1842,73 @@ $this->hook->import($tags);
             $this->autoValidate($option['validate']);
         }
 
-        $data = $this->exec();                                                   ## 003
+        $data = $this->exec();
 
         return $this->autoResponse($data);
     }
 
 
 
-- 
+- thinkphp/library/think/route/dispatch/Module.php:84
+
+    public function exec()
+    {
+        // 监听module_init
+        $this->app['hook']->listen('module_init');
+
+        try {
+            // 实例化控制器
+            $instance = $this->app->controller($this->controller,
+                $this->rule->getConfig('url_controller_layer'),
+                $this->rule->getConfig('controller_suffix'),
+                $this->rule->getConfig('empty_controller'));
+        } catch (ClassNotFoundException $e) {
+            throw new HttpException(404, 'controller not exists:' . $e->getClass());
+        }
+
+        $this->app['middleware']->controller(function (Request $request, $next) use ($instance) {   ## 绑定，类似于 $this->middleware->add
+            // 获取当前操作名
+            $action = $this->actionName . $this->rule->getConfig('action_suffix');
+
+            if (is_callable([$instance, $action])) {
+                // 执行操作方法
+                $call = [$instance, $action];
+
+                // 严格获取当前操作方法名
+                $reflect    = new ReflectionMethod($instance, $action);
+                $methodName = $reflect->getName();
+                $suffix     = $this->rule->getConfig('action_suffix');
+                $actionName = $suffix ? substr($methodName, 0, -strlen($suffix)) : $methodName;
+                $this->request->setAction($actionName);
+
+                // 自动获取请求变量
+                $vars = $this->rule->getConfig('url_param_type')
+                ? $this->request->route()
+                : $this->request->param();
+                $vars = array_merge($vars, $this->param);
+            } elseif (is_callable([$instance, '_empty'])) {
+                // 空操作
+                $call    = [$instance, '_empty'];
+                $vars    = [$this->actionName];
+                $reflect = new ReflectionMethod($instance, '_empty');
+            } else {
+                // 操作不存在
+                throw new HttpException(404, 'method not exists:' . get_class($instance) . '->' . $action . '()');
+            }
+
+            $this->app['hook']->listen('action_begin', $call);
+
+            $data = $this->app->invokeReflectMethod($instance, $reflect, $vars);
+
+            return $this->autoResponse($data);
+        });
+
+        return $this->app['middleware']->dispatch($this->request, 'controller');         ## 执行，类似于 dispatch，其实是两段 call_user_func 的执行
+    }
+
+
 ```
+
+- 源码到了这里，主流程基本执行完成
+
+

@@ -27,23 +27,24 @@
 
 ### php 的魔术方法
 
-- __construct
-- __destruct
-- __clone
-- __sleep
-- __wakeup
+- __construct       (创建对象时被调用)
+- __destruct        (销毁对象时被调用)
+- __clone           (复制对象时被调用)
+- __sleep           (序列化对象时被调用)
+- __wakeup          (反序列化对象时被调用)
 
 
-- __call
-- __callStatic
-- __get
-- __set
-- __isset
-- __unset
+- __call            (调用对象的方法，而方法不存在或者不可访问时，被调用)
+- __callStatic      (调用对象的静态方法，而方法不存在或者不可访问时，被调用)
+- __get             (调用对象的属性，而属性不存在或者不可访问时，被调用)
+- __set             (设置对象的属性，而属性不存在或者不可访问时，被调用)
+- __isset           (isset || empty 作用于对象的属性，而属性不存在或者不可访问时，被调用)
+- __unset           (unset 作用于对象的属性，而属性不存在或者不可访问时，被调用)
 
 
-- __toString
-- __invoke
+- __toString        (将对象当作字符串来使用时，被调用)
+- __invoke          (将对象当作方法来使用时，被调用)
+
 
 
 
@@ -319,6 +320,38 @@
 - 数据库定义语言（DDL）：create database、drop database 、create table、drop table、alter
 - 数据库操作语言（DML）：update 、insert 、delete
 
+### 存储时间，应该用 datetime, timetamp, bigint ?
+> https://www.ahfesco.com.cn/affairs/Article.asp?id=3106
+- 尽量用 int 型
+   1. 通用性 (avoid vendor lock-in)
+   2. timetamp 截至日期是 2038
+   3. timetamp 有时区的转换问题
+
+- datetime,优点是展示方便，缺点是查询速度慢，通用性不如 int
+- 类似的问题还有，存钱，是用 float,decimal, int ? 道理同上
+   - float,double,是浮点型，decimal 是定点型，本质是存的是字符串
+   - double 和 float 的区别是 double 精度高，有效数字16位，float精度 7 位。但 double 消耗内存是 float 的两倍，double 的运算速度比 float 慢得多
+
+
+### 前缀索引
+
+> https://www.cnblogs.com/michael9/p/13219915.html
+
+### 覆盖索引
+
+> https://www.jianshu.com/p/8991cbca3854
+
+### redis 的持久花策略，rdb && aof
+> https://blog.csdn.net/denghonghao/article/details/82108770
+
+
+### redis key 的过期策略
+> https://segmentfault.com/a/1190000020390847?utm_source=tag-newest
+> https://blog.csdn.net/qq_28018283/article/details/80764518
+
+
+
+
 
 ### 58到家MySQL军规升级版
 > https://mp.weixin.qq.com/s?__biz=MjM5ODYxMDA5OQ==&mid=2651961030&idx=1&sn=73a04dabca409c1557e752382d777181&chksm=bd2d031a8a5a8a0c6f7b58b79ae8933dfefbd840dfb5d34a5c708ab63e6decbbc1b13533ebc8&scene=21#wechat_redirect
@@ -439,6 +472,18 @@ var_dump(search($arr,77,0,9));
 - or 没有全部用的
 - 全表扫描比索引更快的
 - 组合索引，没有符合左前缀原则的
+
+
+### 为什么 like 查询 % 在前为什么不走索引？
+
+> https://cloud.tencent.com/developer/article/1460781
+
+- mysql 的索引 B+tree ,排序为从左到右，所以有左前缀的原则。一开始就不确定，就不会走索引，而进行全表扫描。
+
+- 我想了半天，不走索引和左前缀原则没有关系。真实的原因就是一开始就不确定，就不会走索引，而进行全表扫描。
+
+### join 查询 && 子查询
+- 都能用到索引，都比较慢。在一些高并发的场景下，都是不能用的。
 
 
 ### 事务的四种特性
