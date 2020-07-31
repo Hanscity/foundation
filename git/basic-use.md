@@ -20,3 +20,35 @@
 - git pull origin branch_a           ## pull one branch from remote
 - git fetch origin branch_a          ## fetch one branch from remote
 - git push origin test               ## push branch to remote
+
+
+
+## git 合并流程
+
+### 普通流程
+
+- 当前在 work_branch
+- git checkout develop
+- git pull origin develop
+
+- git checkout work_branch
+- git rebase develop
+
+- git checkout develop
+- git merge --no-ff work_branch
+
+
+### 优化的办法
+
+- 当前在 work_branch
+- git fetch
+- git rebase origin/develop
+
+- git checkout develop
+- git merge --no-ff work_branch
+
+
+
+#### --no-ff 参数的说明
+- https://blog.csdn.net/zombres/article/details/82179122
+
