@@ -49,6 +49,33 @@
 
 
 
-#### --no-ff 参数的说明
+### --no-ff 参数的说明
 - https://blog.csdn.net/zombres/article/details/82179122
+- 将被合并分支的多个节点合并为一个阶段来合并，是图形更加好看
+
+
+### git rebase
+
+- rebase : 顾名思义，重新设置基准点
+
+- rebase -i
+> https://www.jianshu.com/p/4a8f4af4e803
+> https://zhuanlan.zhihu.com/p/145037478
+
+```
+git rebase -i  [startpoint]  [endpoint]
+
+pick：保留该commit（缩写:p）
+reword：保留该commit，但我需要修改该commit的注释（缩写:r）
+edit：保留该commit, 但我要停下来修改该提交(不仅仅修改注释)（缩写:e）
+squash：将该commit和前一个commit合并（缩写:s）
+fixup：将该commit和前一个commit合并，但我不要保留该提交的注释信息（缩写:f）
+exec：执行shell命令（缩写:x）
+drop：我要丢弃该commit（缩写:d）
+```
+
+- git rebase branch_name (将当前分支的基点往前提，是图形更加的好看)
+
+
+
 
