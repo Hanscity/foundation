@@ -25,8 +25,9 @@
 
     //冒泡排序中的一对多排序
     function bubblesortMany($arr){
-        for($i=0;$i<count($arr)-1;$i++){
-            for($j=$i+1;$j<=count($arr)-1;$j++){
+        $arrLength = count($arr);
+        for($i=0;$i<$arrLength-1;$i++){
+            for($j=$i+1;$j<=$arrLength-1;$j++){
                 //因为i的值不断变大，顺序不断后移，所以先确定左边的最小值。
                 if($arr[$i] > $arr[$j]){
                     $temp = $arr[$i];
@@ -41,8 +42,9 @@
     //冒泡之邻值比对
     function bubblesortNeighbor($arr){
 
-        for($i=0;$i<count($arr)-1;$i++){
-            for($j=0;$j<count($arr)-1-$i;$j++){
+        $arrLength = count($arr);
+        for($i=0;$i<$arrLength-1;$i++){
+            for($j=0;$j<$arrLength-1-$i;$j++){
                 //冒泡的邻值比对满足条件必须换值，不断往右移动，此方式只能确定右边最大值。
                 if($arr[$j]>$arr[$j+1]){
                     $temp = $arr[$j];
@@ -64,11 +66,12 @@
 
     //选择排序中之一对多
     function selectsortMany($arr){
-        for($i=0;$i<count($arr)-1;$i++){
+        $arrLength = count($arr);
+        for($i=0;$i<$arrLength-1;$i++){
             //将最小值的小标保存在$p中，换下标，而不去换值。
             //每次循环的开始，都假定下标是$i的值最小。
             $p = $i;
-            for($j=$i+1;$j<=count($arr)-1;$j++){
+            for($j=$i+1;$j<=$arrLength-1;$j++){
                 //此时同样先确定左边的最小值
                 if($arr[$p]>$arr[$j]){
                     $p = $j;
@@ -86,11 +89,12 @@
 
     //选择排序之邻值比对
     function selectsortNeighbor($arr){
-        for($i=0;$i<count($arr)-1;$i++){
+        $arrLength = count($arr);
+        for($i=0;$i<$arrLength-1;$i++){
             $p = $i;
             //请注意，这里的邻值比对和冒泡的邻值比对逻辑不同，
             //这里挑出最小值
-            for($j=$i;$j<count($arr)-1;$j++){
+            for($j=$i;$j<$arrLength-1;$j++){
                 if($arr[$p]>$arr[$j+1]){
                     $p = $j +1;
                 }
@@ -113,7 +117,8 @@
     *   排序的另一种。不知道对不对？
     */
     function insertSortNeighbor($arr){
-        for($i=1;$i<count($arr);$i++){
+        $arrLength = count($arr);
+        for($i=1;$i<$arrLength;$i++){
             for($j=$i-1;$j>=0;$j--){
                 if($arr[$j+1]<$arr[$j]){
                     $tmp = $arr[$j+1];
@@ -130,7 +135,8 @@
     *   复杂度的级别并没有改变
     */
     function insertSortNeighborWhile($arr){
-            for($i=1;$i<count($arr);$i++){
+            $arrLength = count($arr);
+            for($i=1;$i<$arrLength;$i++){
                 // 这里用 while 循环来做，更优一点
                 $j = $i -1;
                 while($j >= 0 && $arr[$j+1]<$arr[$j]){
@@ -297,11 +303,12 @@
     *   可以优化的地方（Php）：
     *   1. 加入flag来判断从小到大或是从大到小，可用性更强。
     *   2. 地址传参，可以节省内存。
-    *   3. for($i=0,$num=count($arr);$i<$num;$i++){},for循环写成这个样子，
-    *      减少了count()的运算，提高了效率。
+    *   
     *   或许还有很多地方可以优化，我也乐意被告诉。
     *   这篇随笔的重点是这些排序整体思维的比较，这里就保持这简单的样子吧。
     *
     */
 
 ```
+
+- 冒泡排序的时间复杂度是 N * N,快排递归的时间复杂度
