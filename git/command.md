@@ -72,3 +72,13 @@ git log --graph --decorate --oneline --simplify-by-decoration --all
 ```
 
 
+
+
+## git rebase 
+
+### git rebase -i
+
+- git rebase -i HEAD~1 (最近的一个提交就是 ～1 哈，这个设计的不是从 0 开始的)
+- 如果是 r 选项，只是修改了信息，提交的标示码依然发生了改变，因为也算一次提交。
+
+
