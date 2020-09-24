@@ -72,5 +72,7 @@
 
 ## 快捷键--Mac
 
-* command + 7                                  ## 查看当前类的方法
-* command + l                                  ## 跳转到哪一行
+* Command + ,                                  ## preference, 设置
+* Command + 7                                  ## 查看当前类的方法
+* Command + l                                  ## 跳转到哪一行
+
