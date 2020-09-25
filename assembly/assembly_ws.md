@@ -371,5 +371,101 @@ graph LR
 
 
 ### 实验 1 查看 CPU 和内存，用机器指令和汇编指令编程
+- 将 2.3 代码实现
 
-- 安装 。。。。。。待续。。。。。。
+  ![debug_001_r.jpg](https://i.loli.net/2020/09/25/uTlnVXO1rLF8JtK.jpg)
+  ![debug_002_u.jpg](https://i.loli.net/2020/09/25/v2lKQ6N5tOMIfdW.jpg)
+  ![debug_003_cs.jpg](https://i.loli.net/2020/09/25/3xgf7sElcKqtWuZ.jpg)
+  ![debug_004_t.jpg](https://i.loli.net/2020/09/25/CoE4vgmLsaizpwt.jpg)
+  ![debug_005_t.jpg](https://i.loli.net/2020/09/25/mOr81t2g5w9iLID.jpg)
+
+
+
+
+
+## 第三章 寄存器和内存访问
+
+
+
+### 3.1 内存中字的存储
+
+- CPU 中，用 16 位寄存器来存储一个字。高 8 位存放高位字节，低 8 位存放低位字节
+
+- 子单元，即存放一个字型数据（16位）的内存单元，由两个地址连续的内存单元组成
+
+
+
+### 3.2 DS 和 [address]
+
+```
+mov bx,1000H
+mov ds,bx
+mov al,[0]
+```
+
+- 将内存 ds:[0] 中的字节内容赋值给寄存器 al
+  - ds 寄存器是用来表示内存的段寄存器
+  - ds 寄存器不允许直接赋值
+
+
+
+### 3.3 字的传送
+
+```
+mov bx,1000H
+mov ds,bx
+mov ax,[0]            ;将 1000:0 中的字型数据送入 ax
+mov [0],cx            ;将 cx 中的内容赋值给内存中的 1000:0
+```
+
+
+
+### 3.4 mov、add、sub 指令
+
+```
+;mov 赋值
+;add 增加
+;sub 减少
+
+mov ax,8; ok
+mov ax,bx; ok
+mov ax,[0]; ok
+mov [0],ax; ok
+mov [0],62; error
+mov ds,ax; ok
+
+;add,sub 指令类似，例外是 add ds,ax; add ax,ds; 都是不可以的
+
+```
+
+
+
+### 3.5 数据段
+
+- 数据段是一种安排，将 ds 赋值到相应的地方即可
+
+
+
+### 3.6 栈
+
+- 栈的这种操作规则被称为 ：LIFO（last In First Out,后进先出）
+
+
+
+### 3.7 CPU 提供的栈机制
+
+- 任意时刻，ss:sp 指向栈顶元素
+- push ax 表示将 ax 的数据送入栈中, pop ax 表示将栈顶的元素取出赋值给 ax
+- 8086CPU 的入栈和出栈都是以字为单位进行的
+
+
+
+### 3.8 栈顶越界的问题
+
+- 8086CPU 没有相关的约束和设置，小心操作
+
+
+
+
+
+
