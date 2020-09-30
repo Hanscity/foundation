@@ -9,36 +9,26 @@
 - 汇编语言是数据结构，操作系统，微机原理的重要基础
 
 
+-  我希望这一次的学习过程是循序渐进的，所以选择了 8086CPU。（不是 AE86 哈。
 
--  我希望这一次的学习过程是循序渐进的，所以选择了 8086CPU。（不是头文字D的AE８６哈）
-
-  
-
-- 这是 INTEL 系列的命名方式，发展过程是 8080，8086/8088，80186，80286，80386，Pentium，PentinumII。。。
-
+   这是 INTEL 系列的命名方式，发展过程是 8080，8086/8088，80186，80286，80386，
+   
+   Pentium，PentinumII。。。）
 
 
-###  8086CPU VS 80386CPU
-
-####       80386 具备三种模式
+###     80386 及以后的 WINDOWS 操作系统的三种模式
 
 - 实时模式（8086 不具备实现一个完善的多任务操作系统功能，简而言之，单任务的）
 
 - 保护模式
 
-- 虚拟模式：可以在保护模式和实时模式之间切换，在现代的 Windows 操作系统中，当你打开 DOS，本质上就是从保护模式切换到了实时模式。反之依然。。
+- 虚拟模式：可以在保护模式和实时模式之间切换，在现代的 Windows 操作系统中，当你打开      
+  DOS，本质上就是从保护模式切换到了实时模式。反之依然。。
+  
+  
+### 为何选择 8086CPU 来学习 ？
 
-
-
-
-
-### 为何选择 8086 来学习 ？
-
-
-
-- 通过以上的对比，可以看出，8086 的环境，更为纯净核心，不会受到保护模式等干扰，适合学习
-
-
+- 通过以上的对比，可以看出，8086 的环境，更为简单，不会受到保护模式等干扰，适合学习
 
 - 同时，作为承上启下的重要版本，基本拥有了所有内容
 
@@ -94,11 +84,14 @@ graph LR
 
 #### 汇编代码和机器码是一一对应的
 
-- 操作：寄存器 BX 的内容送到 AX 中
-- 机器指令： 1000100111011000
-- 汇编指令： mov,ax,bx
+```
+;操作：寄存器 BX 的内容送到 AX 中
+;机器指令： 1000100111011000
+;汇编指令： mov,ax,bx
+```
 
 
+- 所以，任何的语言都是可以转换成汇编语言的，对吗？
 
 
 
@@ -127,7 +120,7 @@ graph LR
 
 ### 1.6 存储单元
 
-- 一般微型存储器（内存）的存储单位是 Byte(字节)
+- 一般微型存储器（内存）的存储单位是 Byte(字节)(这一点很重要，这决定了后面很多的计算)
 - 1Byte = 8bit ; 1KB = 1024B; 1MB = 1024 KB; 1GB = 1024MB; 1TB = 1024GB;
 - 电子计算机最小的信息单位是 bit(比特),也就是一个二进制位
 
@@ -149,12 +142,11 @@ graph LR
 
 ### 1.8 地址总线
 
-- CPU 是通过地址总线来指定存储器单元的。举例说明：80386 CPU的地址总线的宽度为 32 位，那么最大的内存寻址为
-  2 的 32次方个内存单元
-
-  ```
+- CPU 是通过地址总线来指定存储器单元的。举例说明：80386 CPU的地址总线的宽度为 32 位，那么最大的内存寻址为 2 的 32次方个内存单元
+  
+```
   2 * 2 * 1024 * 1024 * 1024 Byte=  4GB 
-  ```
+```
 
 
 
@@ -371,6 +363,23 @@ graph LR
 
 
 ### 实验 1 查看 CPU 和内存，用机器指令和汇编指令编程
+
+- 在 debug 中来调试程序，需要分清是汇编指令还是 debug 命令哈
+
+   ```assembly
+  debug
+  -r    ;查看寄存器的情况，或者修改寄存器的值
+  -d    ;查看内存，以数据的形式展示
+  -u    ;查看内存，以汇编指令的形式展示
+  -e    ;在内存中写入数据
+  -a    ;在内存中写入汇编指令
+  -t    ;执行
+  
+  
+  ```
+
+  
+
 - 将 2.3 代码实现
 
   ![debug_001_r.jpg](https://i.loli.net/2020/09/25/uTlnVXO1rLF8JtK.jpg)
@@ -502,7 +511,248 @@ mov ds,ax; ok
 
 
 
+## 第四章 第一个程序
+
+
+
+- 啥，这特么还没有开始？
+
+- 是的，之前的程序和调试都是在 debug 中进行的，相当于 javascript 在浏览器的控制台中进行
+
+
+#### 第一个汇编程序
+
+   ```assembly
+assume cs:codesg    ;将程序指向 codesg 这个程序段
+
+codesg segment    ;segment 开始
+				  ; codesg 标注这个程序段
+
+    mov ax,2000h
+    mov ss,ax
+    mov sp,0
+    add sp,10
+    pop ax
+    pop bx
+    push ax
+    push bx
+    pop ax
+    pop bx
+
+
+    mov ax,4c00h    ;以下两条命令,表示程序返回
+    int 21h
+
+
+codesg ends    ;segment end
+
+end    ; program end
+
+   ```
+
+
+
+- 生成目标文件
+
+  ```
+  >masm assems\t1.asm     ;assems 是指定目录
+  >Object filename [T1.OBJ]:   assems\t1.obj;    ;分号表示结束，将会生成 assems\t1.obj 文件
+  
+  ```
+
+  
+
+- 连接目标文件
+
+  ```
+  >link assems\t1.obj    ;assems 是制定目录
+  >Run File [T1.EXE]:  assems\t1.exe;    ;分号表示结束，将会生成 assems\t1.exe 文件
+  ```
+
+  
+
+- 执行方式一
+
+  ```
+  >assems\t1.exe
+  ```
+
+  
+
+- 执行方式二
+
+  ```
+  >debug assems\t1.exe
+  ```
+
+  ![assembly_debug_in_001.jpg](https://i.loli.net/2020/09/27/WNiA6ckrfRBMSq3.jpg)
+
+
+
+#### 程序分析
+
+- DOS 在运行程序时，是 command 将程序加载入内存，程序结束后将会返回到 command 中。（闪烁的 > 
+  就是 command 程序的待机状态）
+
+  
+
+- ds = 075A, ss = 076A, IP = 0000 ,是有原因的。中间一定会预留 256 byte 为程序段前缀，称为 PSP。DOS 需要利用 PSP 来和被加载程序进行通信。
+
+
+
+### 扩展 1: Linux 上的汇编程序
+
+#### 不同位数的寄存器命名特点
+
+- 16-bit registers `AX, BX, CX` 
+
+  32-bit registers `EAX, EBX, ECX`
+
+  64-bit registers `RAX, RBX, RCX`
+
+  
+
+#### Intel 风格 && AT&T 风格 特点
+
+> https://www.ibm.com/developerworks/cn/linux/l-assembly/index.html
+
+- AT&T 和 Intel 格式中的源操作数和目标操作数的位置正好相反。在 Intel 汇编格式中，目标操作数在源操作数的左边；而在 AT&T 汇编格式中，目标操作数在源操作数的右边。
+
+  ```
+  add eax, 1    ;Intel 风格
+  addl $1, %eax    ;AT&T 风格
+  ```
+
+  
+
+- 在 AT&T 汇编格式中，寄存器名要加上 '%' 作为前缀；而在 Intel 汇编格式中，寄存器名不需要加前缀。
+
+- 在 AT&T 汇编格式中，用 '$' 前缀表示一个立即操作数；而在 Intel 汇编格式中，立即数的表示不用带任何前缀。
+
+- ......
+
+
+
+#### 选择一种风格,选择一个编译器
+
+- 选择 Intel 语法,选择 **Netwide Assembler**（简称 **NASM**）
+   > https://zh.wikipedia.org/wiki/Netwide_Assembler
+   > https://montcs.bloomu.edu/Information/LowLevel/Assembly/assembly-tutorial.html
+
+#### 64 位的汇编程序
+
+> https://www.cnblogs.com/lazycoding/archive/2012/01/02/2310049.html
+
+- hello-world.asm
+
+    ```
+    [bits 64]
+        global _start
+
+        section .data
+        message db "Hello, World!"
+
+        section .text
+    _start:
+        mov rax, 1
+        mov rdx, 13
+        mov rsi, message
+        mov rdi, 1
+        syscall
+
+        mov rax, 60
+        mov rdi, 0
+        syscall
+
+    ```
+
+- 编译,连接
+
+    ```
+    $ nasm -f elf64 hello-world.asm
+    $ ld hello-world.o -o hello-world
+    $ ./hello-world
+    ```
+
+
+
+- 阅读目标文件 hello-world.o
+
+  ```
+  ELF Header:
+    Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 
+    Class:                             ELF64
+    Data:                              2's complement, little endian
+    Version:                           1 (current)
+    OS/ABI:                            UNIX - System V
+    ABI Version:                       0
+    Type:                              REL (Relocatable file)
+    Machine:                           Advanced Micro Devices X86-64
+    Version:                           0x1
+    Entry point address:               0x0
+    Start of program headers:          0 (bytes into file)
+    Start of section headers:          64 (bytes into file)
+    Flags:                             0x0
+    Size of this header:               64 (bytes)
+    Size of program headers:           0 (bytes)
+    Number of program headers:         0
+    Size of section headers:           64 (bytes)
+    Number of section headers:         7
+    Section header string table index: 3
+  
+  Section Headers:
+    [Nr] Name              Type             Address           Offset
+         Size              EntSize          Flags  Link  Info  Align
+    [ 0]                   NULL             0000000000000000  00000000
+         0000000000000000  0000000000000000           0     0     0
+    [ 1] .data             PROGBITS         0000000000000000  00000200
+         000000000000000d  0000000000000000  WA       0     0     4
+    [ 2] .text             PROGBITS         0000000000000000  00000210
+         0000000000000027  0000000000000000  AX       0     0     16
+    [ 3] .shstrtab         STRTAB           0000000000000000  00000240
+         0000000000000032  0000000000000000           0     0     1
+    [ 4] .symtab           SYMTAB           0000000000000000  00000280
+         0000000000000090  0000000000000018           5     5     8
+    [ 5] .strtab           STRTAB           0000000000000000  00000310
+         0000000000000020  0000000000000000           0     0     1
+    [ 6] .rela.text        RELA             0000000000000000  00000330
+         0000000000000018  0000000000000018           4     2     8
+  Key to Flags:
+    W (write), A (alloc), X (execute), M (merge), S (strings), I (info),
+    L (link order), O (extra OS processing required), G (group), T (TLS),
+    C (compressed), x (unknown), o (OS specific), E (exclude),
+    l (large), p (processor specific)
+  
+  There are no section groups in this file.
+  
+  There are no program headers in this file.
+  
+  There is no dynamic section in this file.
+  
+  Relocation section '.rela.text' at offset 0x330 contains 1 entry:
+    Offset          Info           Type           Sym. Value    Sym. Name + Addend
+  00000000000c  000200000001 R_X86_64_64       0000000000000000 .data + 0
+  
+  The decoding of unwind sections for machine type Advanced Micro Devices X86-64 is not currently supported.
+  
+  Symbol table '.symtab' contains 6 entries:
+     Num:    Value          Size Type    Bind   Vis      Ndx Name
+       0: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT  UND 
+       1: 0000000000000000     0 FILE    LOCAL  DEFAULT  ABS hello-world.asm
+       2: 0000000000000000     0 SECTION LOCAL  DEFAULT    1 
+       3: 0000000000000000     0 SECTION LOCAL  DEFAULT    2 
+       4: 0000000000000000     0 NOTYPE  LOCAL  DEFAULT    1 message
+       5: 0000000000000000     0 NOTYPE  GLOBAL DEFAULT    2 _start
+  
+  No version information found in this file.
+  
+  ```
 
 
 
 
+
+
+### 第 5 章 [bx] 和 loop 指令
+
+- ......
