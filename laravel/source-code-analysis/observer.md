@@ -97,4 +97,4 @@ $newspaper->breakOutNews('USA break down!');
 ## Laravel usage
 
 > https://xueyuanjun.com/post/9788.html
-- 待续---
+- 待续---·
