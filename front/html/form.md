@@ -68,3 +68,10 @@ array ( 'nickname' => 'ch', 'age' => '"1111"', )
 - is_numeric()，这个函数可以胜任哈
 
 
+## <input type="button"> 和 <button > 的区别
+> https://www.cnblogs.com/xiaohuochai/p/5180638.html
+
+### 简单叙述为
+1. button 标签中间可以包含很多的内容
+2. button 标签在大多数浏览器中，点击的默认属性为 submit
+
