@@ -1,4 +1,21 @@
 
+- mysql -uroot -p    ## 登陆
+
+- show databases;    ## 展示所有的数据库
+
+### 创建一个数据库
+
+```
+
+create schema fishadmin_2d default character set utf8mb4 collate utf8mb4_general_ci;
+
+```
+
+
+
+- use database;    ## 选择一个数据库
+
+
 - desc saas_author;                                                                          ## 查看数据表的字段及索引情况
 
 
@@ -90,6 +107,9 @@
 
 
 
+
+
+create schema fishadmin_2d default character set utf8mb4 collate utf8mb4_general_ci;
 
 
 

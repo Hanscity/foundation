@@ -1,1 +1,5 @@
-console.log(document.getElementsByTagName("li"));
+
+for (var i = 0; i < 5; ++i) {
+
+    setTimeout(() => console.log(i),0);
+}
