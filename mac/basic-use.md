@@ -18,6 +18,17 @@
 * F11 --
 * F12 --
 
+## Mac Chrome
+
+```
+// 页面最顶部
+Command + pageUP
+
+// 页面最底端
+Command + pageDown
+
+
+```
 
 
 ### WINDOW = Command
