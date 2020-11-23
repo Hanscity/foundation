@@ -15,8 +15,15 @@
 
 ## Intall Php
 
+- Search ppa:ondrej/php
 > https://launchpad.net/%7Eondrej/+archive/ubuntu/php/+index?field.series_filter=bionic
 
 
 
+## synaptic
 
+- a ppa manager
+```
+sudo apt install synaptic
+
+```
