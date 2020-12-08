@@ -9,6 +9,20 @@
    gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-right "[]"
    ````
 
+> https://www.cnblogs.com/qiananshiguang/p/11419502.html
+
+```
+
+ubuntu下idea快捷键ctrl-alt-left和ctrl-alt-right失效
+
+查看gsettings get org.gnome.desktop.wm.keybindings switch-to-workspace-left打印出['<Control><Alt>Left']
+
+修改为gsettings set org.gnome.desktop.wm.keybindings switch-to-workspace-left "[]"
+
+然后把idea默认keymap由 Default for  GNOME改为Default for Windows
+
+```
+
 
 
 ## Start Ubuntu
@@ -255,8 +269,6 @@ title your-name
 ## 查看内存条的信息
 
 dmidecode --type memory
-
-
 
 
 
