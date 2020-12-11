@@ -3,11 +3,24 @@
 
 - show databases;    ## 展示所有的数据库
 
-### 创建一个数据库
+## change the password about mysql user
+
+- such as test
+
+```
+ALTER USER 'test'@'%' IDENTIFIED WITH mysql_native_password BY 'testaaaaaa';
 
 ```
 
-create schema fishadmin_2d default character set utf8mb4 collate utf8mb4_general_ci;
+
+
+### 创建一个数据库
+
+- utf8mb4_unicode_ci is more suitable then utf8mb4_general_ci
+
+```
+
+create schema fishadmin_2d default character set utf8mb4 collate utf8mb4_unicode_ci;
 
 ```
 
