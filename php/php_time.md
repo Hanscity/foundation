@@ -1,8 +1,28 @@
 # Time
 
-## 脚本执行的时间,哪一种方法更好 ？
+## 计算脚本执行的时间,哪一种方法更好 ？
 
-两种方法的比较：
+方法一：
+
+```
+function microtime_float()
+{
+    list($usec, $sec) = explode(" ", microtime());
+    return ((float)$usec + (float)$sec);
+}
+
+```
+
+
+方法二：
+
+```
+microtime(true);
+
+```
+
+
+两种方法的比较
 
 ```
 function microtime_float()
@@ -53,4 +73,5 @@ Did nothing in 0.00017595291137695 seconds
 至于结果上有差距，根本原因在于计算机对浮点数的保存和计算上，这点暂不深究  
 差距已经在万分之秒上了，都可以用之  
 故选择使用上更为简单的方法  ```microtime(true)```
+
 
