@@ -153,7 +153,8 @@ server {
 
 QUERY_STRING 常量是 fastcgi_parm 指令设置的常量， 将会被 php 程序接受，保存在 $_SERVER 中，具体下面的 fastcgi_parm 指令会有详细说明
 
-~~至于，$query_string 变量为何会在 try_files 指令中被设置，这一点，暂无深究~~
+~~至于，$query_string 是内置变量，是在 try_files 指令中被设置，或者是在其它地方被设置，这一点，暂不明白~~
+
 
 
 ### 知识点分析之 location ~ \.php$
