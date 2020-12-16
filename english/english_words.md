@@ -12,4 +12,4 @@ precede 在…之前发生(或出现);先于;走在…前面
 
 corresponding 相应的;
 
-
+embed 嵌入 

@@ -131,6 +131,8 @@ server {
 
 ### 知识点分析之 $query_string
 
+当设置为：
+
 ```
 location / {
         try_files $uri $uri/ /index.php?$query_string;
@@ -138,13 +140,14 @@ location / {
 
 ``` 
 
-当用户访问 http://mujia-laravel.test/admin/datamonitor/playerlist?page=1&limit=10&platform_ids=&game_id=&nickname=&date=&last_logout_time=&last_logon_date=
+此时用户访问 http://mujia-laravel.test/admin/datamonitor/playerlist?page=1&limit=10&platform_ids=&game_id=&nickname=&date=&last_logout_time=&last_logon_date=
 
 此时 $query_string 为 "page=1&limit=10&platform_ids=&game_id=&nickname=&date=&last_logout_time=&last_logon_date="
 
 "QUERY_STRING":"page=1&limit=10&platform_ids=&game_id=&nickname=&date=&last_logout_time=&last_logon_date=",
 
 
+当设置为：
 
 ```
 location / {
@@ -152,7 +155,7 @@ location / {
 }
 ```
 
-当用户访问 http://mujia-laravel.test/admin/datamonitor/playerlist?page=1&limit=10&platform_ids=&game_id=&nickname=&date=&last_logout_time=&last_logon_date=
+此时用户访问 http://mujia-laravel.test/admin/datamonitor/playerlist?page=1&limit=10&platform_ids=&game_id=&nickname=&date=&last_logout_time=&last_logon_date=
 
 此时 $query_string 为 ""  
 
