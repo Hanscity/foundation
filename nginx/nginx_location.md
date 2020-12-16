@@ -131,7 +131,12 @@ server {
 
 ### 知识点分析之 $query_string
 
-```try_files $uri $uri/ /index.php?$query_string;``` 的情况下：
+```
+location / {
+        try_files $uri $uri/ /index.php?$query_string;
+}
+
+``` 
 
 当用户访问 http://mujia-laravel.test/admin/datamonitor/playerlist?page=1&limit=10&platform_ids=&game_id=&nickname=&date=&last_logout_time=&last_logon_date=
 
@@ -141,7 +146,11 @@ server {
 
 
 
-```try_files $uri $uri/ /index.php;``` 的情况下：
+```
+location / {
+        try_files $uri $uri/ /index.php;
+}
+```
 
 当用户访问 http://mujia-laravel.test/admin/datamonitor/playerlist?page=1&limit=10&platform_ids=&game_id=&nickname=&date=&last_logout_time=&last_logon_date=
 
@@ -153,7 +162,7 @@ server {
 
 QUERY_STRING 常量是 fastcgi_parm 指令设置的常量， 将会被 php 程序接受，保存在 $_SERVER 中，具体下面的 fastcgi_parm 指令会有详细说明
 
-~~至于，$query_string 是内置变量，是在 try_files 指令中被设置，或者是在其它地方被设置，这一点，暂不明白~~
+~~至于，$query_string 是内置变量，应该不需要加上呀？难道是在 try_files 指令中被设置，或者是在其它地方被设置，这一点，暂不明白~~
 
 
 
