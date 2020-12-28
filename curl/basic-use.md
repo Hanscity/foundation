@@ -61,3 +61,19 @@ curl -X POST -H "Content-Type: application/json" -d '{"account_idx":837,"gid":10
 
 
 
+```
+
+curl 127.0.01:9501/ -w %{http_code}
+
+curl 127.0.01:9501/ -w %{http_code} -X POST
+
+install extention: php annotations
+
+
+directory: Annotation
+
+    Foo.php
+
+    
+
+```

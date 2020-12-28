@@ -61,3 +61,10 @@ complicate 复杂化
 segregate 隔离
 
 tweak 扭 ; 拧 ; 扯 ; 稍稍调整 ; 轻微调整
+
+delegate n.代表;会议代表 v.授(权);把(工作、权力等)委托(给下级);选派(某人做某事)
+
+mutable adj.可变的;
+
+strip 脱光衣服;
+
