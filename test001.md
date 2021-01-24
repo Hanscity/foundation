@@ -1,26 +1,99 @@
+<?php
 
+use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
+class CategoryPermissionsSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        try{
 
-$reflector = new \ReflectionClass('App\Http\Kernel');
-$constructor = $reflector->getConstructor();
-$dependencies_test = $constructor->getParameters();
+            DB::beginTransaction();
 
+            $moduleNode = DB::table('permissions')->where(['name'=>'admin.category'])
+                ->first();
+            if($moduleNode){
+                dd('该节点已存在，不需要重复执行');
+            }
 
-commit f5b1cd6ba9b57b11134097deceaacd8de9cc81b8
-Merge: 3f6d9b6 e6af502
-Author: ch001 <chenhang@yunhan.xyz>
-Date:   Mon Jun 15 16:15:54 2020 +0800
+            $moduleItem = [
+                'name'=>'admin.category',
+                'parent_id'=>0,
+                'cn_name'=>'品类管理',
+                'menu_name'=>'品类管理',
+                'menu_show'=>1, ## 显示菜单开关,1开0关
+                'guard_name'=>'admin',
+                'is_menu'=>1, ## 是否作为菜单栏显示,1是 2否
+                'created_at'=>date('Y-m-d H:i:s'),
+                'updated_at'=>date('Y-m-d H:i:s'),
+            ];
+            $moduleId = DB::table('permissions')->insertGetId($moduleItem);
 
-    getLastWeek
+            $listItem = [
+                'name'=>'admin.category.list',
+                'parent_id'=>$moduleId,
+                'cn_name'=>'品类列表',
+                'menu_name'=>'品类列表',
+                'menu_show'=>1, ## 显示菜单开关,1开0关
+                'guard_name'=>'admin',
+                'is_menu'=>1, ## 是否作为菜单栏显示,1是 2否
+                'created_at'=>date('Y-m-d H:i:s'),
+                'updated_at'=>date('Y-m-d H:i:s'),
+            ];
+            $listId = DB::table('permissions')->insertGetId($listItem);
 
-commit 3f6d9b6fb819dd52bb34726066f2f0ecccf19070
-Author: ch001 <chenhang@yunhan.xyz>
-Date:   Mon Jun 15 16:13:53 2020 +0800
+            $addItem = [
+                'name'=>'admin.category.add',
+                'parent_id'=>$listId,
+                'cn_name'=>'新增',
+                'menu_name'=>'新增',
+                'menu_show'=>1, ## 显示菜单开关,1开0关
+                'guard_name'=>'admin',
+                'is_menu'=>2, ## 是否作为菜单栏显示,1是 2否
+                'created_at'=>date('Y-m-d H:i:s'),
+                'updated_at'=>date('Y-m-d H:i:s'),
+            ];
 
-    getLastWeek
+            $editItem = [
+                'name'=>'admin.category.edit',
+                'parent_id'=>$listId,
+                'cn_name'=>'编辑',
+                'menu_name'=>'编辑',
+                'menu_show'=>1, ## 显示菜单开关,1开0关
+                'guard_name'=>'admin',
+                'is_menu'=>2, ## 是否作为菜单栏显示,1是 2否
+                'created_at'=>date('Y-m-d H:i:s'),
+                'updated_at'=>date('Y-m-d H:i:s'),
+            ];
 
-commit ff36069d4e021516e85b7335b3d81d87a25fcc00
-Author: ch001 <chenhang@yunhan.xyz>
-Date:   Mon Jun 15 15:56:40 2020 +0800
+            $deleteItem = [
+                'name'=>'admin.category.delete',
+                'parent_id'=>$listId,
+                'cn_name'=>'删除',
+                'menu_name'=>'删除',
+                'menu_show'=>1, ## 显示菜单开关,1开0关
+                'guard_name'=>'admin',
+                'is_menu'=>2, ## 是否作为菜单栏显示,1是 2否
+                'created_at'=>date('Y-m-d H:i:s'),
+                'updated_at'=>date('Y-m-d H:i:s'),
+            ];
 
-    getRankHour
+            DB::table('permissions')->insert($addItem);
+            DB::table('permissions')->insert($editItem);
+            DB::table('permissions')->insert($deleteItem);
+
+            DB::commit();
+        }catch(\Exception $e){
+
+            echo $e->getMessage();
+            DB::rollBack();
+
+        }
+    }
+}
