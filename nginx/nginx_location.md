@@ -173,6 +173,8 @@ QUERY_STRING 常量是 fastcgi_parm 指令设置的常量， 将会被 php 程�
 当以 .php 结尾的 $uri,将会被 ```location ~ \.php$``` 捕获，  
 ~~为何 http://mujia-laravel.test/index.php?page=1&limit=10&platform_ids=&game_id=&nickname=&date=&last_logout_time=&last_logon_date= 也会被捕获？~~
 
+解答：首先需要分清 URL 和 URI，URI 不包括 ? 号后面的部分，location 的操作是针对 URI，故能匹配
+
 
 ### 知识点分析之 fastcgi_index 指令
 当请求转给 fastcgi 之后，fastcgi_index 指令设置默认的文件为 index.php, 从而 $fastcgi_script_name 是 /index.php。
