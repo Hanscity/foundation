@@ -142,10 +142,7 @@ location / {
 
 此时用户访问 http://mujia-laravel.test/admin/datamonitor/playerlist?page=1&limit=10&platform_ids=&game_id=&nickname=&date=&last_logout_time=&last_logon_date=
 
-此时 $query_string 为 "page=1&limit=10&platform_ids=&game_id=&nickname=&date=&last_logout_time=&last_logon_date="
-
-"QUERY_STRING":"page=1&limit=10&platform_ids=&game_id=&nickname=&date=&last_logout_time=&last_logon_date=",
-
+此时 Php 的 $_SERVER['QUERY_STRING'] 为 "page=1&limit=10&platform_ids=&game_id=&nickname=&date=&last_logout_time=&last_logon_date="
 
 当设置为：
 
@@ -157,15 +154,15 @@ location / {
 
 此时用户访问 http://mujia-laravel.test/admin/datamonitor/playerlist?page=1&limit=10&platform_ids=&game_id=&nickname=&date=&last_logout_time=&last_logon_date=
 
-此时 $query_string 为 ""  
-
-"QUERY_STRING":"",
+此时 此时 Php 的 $_SERVER['QUERY_STRING'] 为 ""  
 
 此时搜索查询就会失效
 
 QUERY_STRING 常量是 fastcgi_parm 指令设置的常量， 将会被 php 程序接受，保存在 $_SERVER 中，具体下面的 fastcgi_parm 指令会有详细说明
 
-~~至于，$query_string 是内置变量，应该不需要加上呀？难道是在 try_files 指令中被设置，或者是在其它地方被设置，这一点，暂不明白~~
+~~至于，$query_string 是内置变量，应该不需要加上呀？这一点，暂不明白~~
+目前表面上的解释为 QUERY_STRING 在内部跳转时需要传递
+
 
 
 
