@@ -78,3 +78,36 @@ drop：我要丢弃该commit（缩写:d）
 
 
 
+## git config
+
+### set
+- git config --global user.name "aaa"
+- git config --global user.email "bbb"
+
+- git config --global push.default simple (设置之后，就可以直接使用 git push ,从而推送当前的分支)
+
+### check
+- git config --global user.name
+- git config --global user.email
+
+
+
+## git link remote
+
+- git remote add origin git@github.com:Hanscity/Laravel-L01-weibo.git
+
+
+## git change branch name
+
+- git branch -M branch_name
+
+
+
+## plaste all changes
+
+- git clean -df
+
+Sometimes you dont need to use git reset command, if you known this command
+
+当你将文件放入了暂存区（也就是所使用了 git add），那么这个命令就不行了
+

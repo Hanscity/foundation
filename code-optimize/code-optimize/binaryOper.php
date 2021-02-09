@@ -1,7 +1,8 @@
 <?php
 
 
-class Binary{
+class Binary
+{
 
 
     public static $flag_shumei = 1; // 0001
@@ -24,8 +25,8 @@ class Binary{
      * @return mixed
      *
      */
-    public function setBitflag($flag,$val,$bool){
-
+    public function setBitflag($flag,$val,$bool)
+    {
         if($bool){
             $val |= $flag;
         }else{
@@ -36,18 +37,21 @@ class Binary{
         return $val;
     }
 
+  
     //初始化二进制的值
-    public function initValueBinary(){
+    public function initValueBinary()
+    {
         return 0;
     }
-
 
 }
 
 
 
 
-class Activity{
+
+class Activity
+{
 
     /**
      * Notes: 设置二进制位
@@ -57,7 +61,8 @@ class Activity{
      * @param $data
      * bool,如果设置为开启，则为true ；如果设置为关闭，则为 false;
      */
-    public function userBinaryCharacter($data){
+    public function userBinaryCharacter($data)
+    {
 
         $uid = $data['uid'];
         $type = $data['type'];
@@ -100,7 +105,8 @@ class Activity{
 
     }
 
-    public function judgeUserBinaryCharacter($data){
+    public function judgeUserBinaryCharacter($data)
+    {
 
         $uid = $data['uid'];
         $type = $data['type'];
@@ -111,6 +117,9 @@ class Activity{
         }
         return $bool;
     }
+  
+  
+  
 }
 
 

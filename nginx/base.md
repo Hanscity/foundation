@@ -20,5 +20,6 @@ Server A,Server A 将数据返回给用户，对于用户而言，只知道 Serv
 真正处理用户请求的是 Server B，Server A 只是负责转发，Server A 就是 反向代理服务器。
 
 
-
+Documents Of Official Site
+> http://nginx.org/en/docs/
 

@@ -1,4 +1,34 @@
 
+- mysql -uroot -p    ## 登陆
+
+- show databases;    ## 展示所有的数据库
+
+## change the password about mysql user
+
+- such as test
+
+```
+ALTER USER 'test'@'%' IDENTIFIED WITH mysql_native_password BY 'testaaaaaa';
+
+```
+
+
+
+### 创建一个数据库
+
+- utf8mb4_unicode_ci is more suitable then utf8mb4_general_ci
+
+```
+
+create schema fishadmin_2d default character set utf8mb4 collate utf8mb4_unicode_ci;
+
+```
+
+
+
+- use database;    ## 选择一个数据库
+
+
 - desc saas_author;                                                                          ## 查看数据表的字段及索引情况
 
 
@@ -90,6 +120,9 @@
 
 
 
+
+
+create schema fishadmin_2d default character set utf8mb4 collate utf8mb4_general_ci;
 
 
 
