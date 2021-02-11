@@ -10,9 +10,31 @@
 
 /*
     后代元素选择器
+    选择的是后代元素，所以重点是后代元素
     语法：祖先元素 后代元素 {}
 */
-div span {
-    color:red;
+
+/*
+    方式一
+*/
+/* div span {
+    color:green;
     font-size:20px;
+} */
+
+/*
+    方式二
+*/
+#d1 span {
+    color:red;
+    font-size:40px;
+}
+
+/*
+    子元素选择器
+    语法：父元素 子元素 {}
+*/
+div > span {
+    background-color:blue;
+    font-size:30px;
 }
