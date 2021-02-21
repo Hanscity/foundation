@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8">
+    <head>
+        <title>34-选择器的优先级</title>
+        <style>
+            
+            
+            /*
+                交集选择器，优先级是相加的
+                
+            */
+            div.d1 {
+                background-color: burlywood;
+            }
+
+            .d1 {
+                background-color: blueviolet;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div class="d1">桃李春风一杯酒，江湖夜雨十年灯。
+            <span>桃李春风一杯酒，江湖夜雨十年灯。</span>
+        </div>
+        <span>桃李春风一杯酒，江湖夜雨十年灯。</span>
+        <br>
+        <hr>
+        <h2>资料</h2>
+        优先级：<img src="../img/QQ截图20210220104948.png">
+        <br>
+        important: <img src="../img/QQ截图20210220105248.png">                      
+    </body>
+</html>
