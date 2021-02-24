@@ -1,19 +1,4 @@
-寒窑赋
-
-walking in the sun --degauss
-
-free loop
-
-dancing with your ghost 
-
-
-花开如火，也如寂寞
-
-长安日下影，又落江湖中
-
-《文苑英华》
-
-至诚之道，可以前知
+# 时间才是永恒的主题
 
 谁校对时间，谁就会突然老去 --顾城
 
