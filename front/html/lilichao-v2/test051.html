@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box1 , .box2 {
+            width: 200px;
+            height: 200px;
+            font-size: 100px;
+        }
+
+        /*
+        *   垂直外边距的重叠：
+            兄弟元素，取用最大值，而不是相加
+        */
+        .box1 {
+            background-color: #bfa;
+            margin-bottom: 100px;
+        }
+
+        .box2 {
+            background-color: orange;
+            margin-top: 200px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="box1">1</div>
+    <div class="box2">2</div>
+</body>
+</html>

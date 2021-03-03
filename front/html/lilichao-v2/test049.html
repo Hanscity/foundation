@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .outer {
+            width: 800px;
+            height: 200px;
+            border: 10px black solid;
+        }
+
+        /*
+            1. outer.width == margin-left + border-left + padding-left 
+                + margin-right + border-right + padding-right
+
+            2. width 的值默认是 auto
+
+            3. 只有三个值可以设置为 auto,
+                分别是 margin-left, width, margin-right
+                
+        */
+        .inner {
+            margin-left: auto;
+            /* border-left: 0px; */
+            /* padding-left: 0px; */
+            width: 200px;
+            padding-right: 0px;
+            border-right: 0px;
+            margin-right: auto;
+
+            height: 100%;
+            background-color: blue;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="outer">
+                   
+        <div class="inner">
+            aaa
+        </div>
+
+        <!-- <div>
+            bbb
+        </div>    -->
+        
+    </div>
+</body>
+</html>
