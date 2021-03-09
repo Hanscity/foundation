@@ -135,3 +135,31 @@ accomplish 实现
 Eg: Unlikely mysql and mysqli, both of which are low level bare Apis
 
 
+
+## blur radius
+
+blur
+
+```
+英 [blɜː(r)]   美 [blɜːr]  
+n.
+(移动的)模糊形状;模糊的记忆
+v.
+(使)变得模糊不清;(使)视线模糊;(使)看不清;(使)难以区分
+
+```
+
+
+```
+radius
+英 [ˈreɪdiəs]   美 [ˈreɪdiəs]  
+n.
+半径(长度);半径范围;周围;桡骨
+```
+
+css 中 box-shadow 的属性有 offset-x, offset-y, blur-radius, spread-radius, color
+
+
+
+
+
