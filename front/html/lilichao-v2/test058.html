@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*
+            盒子可见框的大小由 内容区 + border + padding
+
+            box-sizing
+                content-box: 是 box-sizing 的默认值，width 和 height 表示盒子内容区的大小
+                border-box: 当选择这个值得时候，width 和 height 表示盒子总体的大小
+
+         */
+        .d1 {
+            width: 100px;
+            height: 100px;
+            padding: 10px;
+            border: 10px solid red;
+            background-color: #bfa;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="d1">
+
+    </div>
+</body>
+</html>
