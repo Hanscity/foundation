@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            font-size: 30px;
+        }
+        .d1 {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 2;
+        }
+
+        .d2 {
+            width: 200px;
+            height: 200px;
+            background-color: rgba(0,0,0,0.3);
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            z-index: 2;
+        }
+
+        .d3 {
+            width: 200px;
+            height: 200px;
+            background-color: yellow;
+            position: absolute;
+            top: 80px;
+            left: 80px;
+            z-index: 2;
+        }
+
+        .d4 {
+            width: 100px;
+            height: 100px;
+            background-color: green;
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            z-index: 1;
+
+        }
+
+        .course {
+            margin-top: 300px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="d1">
+        1
+    </div>
+
+    <div class="d2">
+        2
+    </div>
+
+    <div class="d3">
+        3
+        <div class="d4">
+            4
+        </div>
+    </div>
+
+
+    <div class="course">
+        <hr>
+        <h2>Course Material</h2>
+        <div>
+            <img src="../../img/QQ截图20210317223414.png" alt="">
+        </div>
+    </div>
+    
+</body>
+</html>
