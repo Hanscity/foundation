@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        var func1 = new Function("console.log('1111')");
+        func1();
+        console.log(func1);
+        func1.funcName = "func 001";
+        console.log(func1.funcName);
+
+        function func2()
+        {
+            console.log("2222");
+        }
+
+        func2();
+        func2.name = "func 002";
+        console.log(func2.name);
+
+        var func3 = function()
+        {
+            console.log("3333");
+        }
+        func3();
+        func3.name = "func 003";
+        console.log(func3.name);
+
+
+    </script>
+</head>
+<body>
+    
+    <div>
+        <hr>
+        <h2>函数的创建</h2>
+        <ul>
+            <li>构造函数</li>
+            <li>函数声明</li>
+            <li>匿名函数</li>
+        </ul>
+    </div>
+
+</body>
+</html>
