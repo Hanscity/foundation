@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="../../css/reset.css"> -->
+    <style>
+        .d1 {
+            width: 300px;
+            height: 200px;
+            border: 1px solid red;
+        }·
+
+        .d1 span {
+            display: inline-block;
+            text-align: center;
+        }
+
+        .d2 {
+            border: 1px solid red;
+        }
+        /*
+            text-align 不能操作图片，因为它是改动字体间的距离来调整的
+
+            vertical-align 会消除掉图片和 p 标签之间的一点缝隙~
+        */
+        .d2 img {
+            vertical-align: top;
+            /* text-align: right; */
+        }
+
+
+    </style>
+</head>
+<body>
+    
+    <div class="d1">
+        <span>渭城朝雨浥轻尘，客舍青青柳色新。劝君更尽一杯酒，西出阳关无故人。</span>
+    </div>
+    <br>
+
+    <p class="d2">
+        <!-- 你好 -->
+        <img src="../../img/微信图片_20210208205241.jpg" alt="">
+    </p>
+</body>
+</html>
