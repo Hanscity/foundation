@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        var person1 = {
+            name: "Jordan",
+            age: "23",
+            sports: "basketball"
+        }
+
+        // console.log(person1.name); // Jordan
+        // var n = "name";
+        // console.log(person1.n); // Undefined
+                                // 在这里，n 当做字符串来理解，而不是当做变量来理解
+
+        for(n in person1) {
+            console.log(person1[n]);
+            // console.log(person1.n) 这样子是不行的哦
+            // console.log(person1["n"]) 这样子也是不行的哦，等同于上面
+        }
+
+
+    </script>
+</head>
+<body>
+    
+    <div>
+        <hr>
+        <h2>Course Material</h2>
+        <div>
+            <img src="../../img/QQ截图20210318122017.png" alt="">
+        </div>
+    </div>
+
+
+</body>
+</html>
