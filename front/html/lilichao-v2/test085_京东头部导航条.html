@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="./font-awesome/css/all.css">
+
+    <style>
+
+        .top-bar-wraper {
+            height: 30px;
+            background-color: #e3e4e5;
+            border: 1px solid #ddd;
+            font: 12px "Microsoft YaHei", "Heiti SC", tahoma, arial, "Hiragino Sans GB", 宋体, sans-serif;
+            line-height: 30px;
+            color: rgb(153, 153, 153);
+        }
+
+        .top-bar-wraper a {
+            text-decoration: none;
+            color: rgb(153, 153, 153);
+        }
+
+        .top-bar-wraper a:hover,
+        .top-bar-wraper a.hot-link {
+            color: #f10215;
+        }
+
+        .top-bar {
+            width: 990px;
+            margin: 0 auto;
+        }
+
+        /*
+            左边列表部分--位置
+        */
+        .location {
+            width: 58px;
+            float: left;
+            position: relative;
+        }
+
+        .location .fas {
+            color: #f10215;
+        }
+
+        /* 很奇怪，这里写成 padding: auto 10px; 结果则天差地别~ */
+        .location .current-city {
+            padding: 0 6px;
+            position: relative;
+        }
+
+
+        .location .city-list {
+            display: none;
+            width: 200px;
+            height: 200px;
+            background-color: white;
+            border: 1px solid rgb(204, 204, 204);
+            position: absolute;
+            top: 31px;
+            box-shadow: 1px 1px rgb(204, 204, 204, .8);
+        }
+
+        .location:hover .city-list {
+            display: block;
+        }
+
+        /* 用 current-city 这一部分，盖住下面列表的 border */
+        .location:hover .current-city{
+            border: 1px solid rgb(204, 204, 204);
+            border-bottom: none;
+            background-color: white;
+            height: 31px;
+            z-index: 999;
+        }
+
+        
+        
+        /*
+            右边列表部分
+        */
+        .shortcut {
+            width: 693px;
+            float: right;
+        }
+
+        .shortcut li {
+            float: left;
+        }
+
+        .shortcut .line {
+            width: 1px;
+            height: 10px;
+            background-color:  rgb(153, 153, 153);;
+            margin: 10px 10px;
+        }
+
+        
+
+    </style>
+</head>
+<body>
+    
+
+    <div class="top-bar-wraper">
+        <div class="top-bar">
+
+            <!-- 左侧的菜单 -->
+            <div class="location">
+                <div class="current-city">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <a href="javascript:;">北京</a>
+                </div>
+
+                <div class="city-list">
+
+                </div>
+            </div>
+
+            <!-- 右侧的菜单 -->
+
+            <ul class="shortcut">
+                <li>
+                    <a href="javascript">你好，请登录</a>
+                    <a href="javascript" class="hot-link">免费注册</a>
+                </li>
+
+                <li class="line"></li>
+
+                <li><a href="javascript">我的订单</a></li>
+
+                <li class="line"></li>
+
+                <li>
+                    <a href="javascript">我的京东</a>
+                    <i class="fas fa-angle-down"></i>
+                </li>
+
+                <li class="line"></li>
+
+                <li><a href="javascript">京东会员</a></li>
+
+                <li class="line"></li>
+
+                <li>
+                    <a href="javascript" class="hot-link">企业采购</a>
+                    <i class="fas fa-angle-down"></i>
+                </li>
+
+                <li class="line"></li>
+
+                <li>
+                    <span>客户服务</span>
+                    <i class="fas fa-angle-down"></i>
+                </li>
+
+                <li class="line"></li>
+
+                <li>
+                    <span>网站导航</span>
+                    <i class="fas fa-angle-down"></i>
+                </li>
+
+                <li class="line"></li>
+
+                <li><a href="javascript">手机京东</a></li>
+
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
