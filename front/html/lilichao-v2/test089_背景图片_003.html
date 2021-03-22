@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        /*
+            background 没有顺序要求，也没有哪个属性必须要写，比较自由
+
+            但是有两个注意点：
+              1. background-position/background-size
+              2. background-origin background-clip  (origin 需要在 clip 的前面)
+        */
+        .d1 {
+            width: 600px;
+            height: 1000px;
+            background: #00FF00 url(../../img/微信图片_20210208205128.jpg) 
+                        no-repeat fixed 20px 20px/200px auto 
+                        border-box border-box;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="d1">
+
+    </div>
+</body>
+</html>
