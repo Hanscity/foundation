@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        /*
+        *   这一章非常重要~
+
+            1. 什么是高度塌陷，如何解决高度塌陷
+                一般不指定外面 div 的高度，因为内部的 div 可能内容很少，
+                造成大量的空白。内部多个 div 可能是横向排列，会用浮动来
+                实现。内部的 div 浮动之后，就会脱离文档流，造成外面 div 
+                的高度塌陷。后面的 div 就会上移，造成页面混乱，所以需要
+                解决高度塌陷的问题。用 BFC 来解决。 
+
+            2. 什么是 BFC（block formatting context）,如何解决 BFC
+                BFC 是指块级格式化环境。有多种方式可以打开 BFC，比如
+                浮动，块状行内元素，overflow 等。是的，设置这些属性的
+                时候，附带的开启了 BFC，BFC 并不是什么单独的属性。
+
+                
+        */
+        .outer {
+            border: 10px solid red;
+            overflow: auto;
+        }
+
+        .inner {
+            width: 200px;
+            height: 200px;
+            background-color: orange;
+            float: left;
+        }
+
+        .d2 {
+            width: 200px;
+            height: 200px;
+            background-color: #bfa;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="outer">
+        <div class="inner">
+            
+        </div>
+    </div>
+
+    <div class="d2">
+
+    </div>
+
+    <hr>
+    <h2>Course Material</h2>
+    <div class="pic">
+        <img src="../../img/20210316172903_bfc.png" alt="">
+        <br>
+        <img src="../../img/20210316173010_bfc.png" alt="">
+    </div>
+</body>
+</html>

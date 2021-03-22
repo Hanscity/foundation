@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        /*
+            > https://codepen.io/LandonSchropp/pen/KpzzGo
+        */
+        
+        
+        /*
+            border-box
+            表示为元素指定的任何内边距和边框都将在已设定的宽度和高度内进行绘制。
+            通过从已设定的宽度和高度分别减去边框和内边距才能得到内容的宽度和高度。
+        */
+        * {
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        [class$="face"] {
+            margin: 16px;
+            padding: 4px;
+            
+            background-color: #e7e7e7;
+            width: 104px;
+            height: 104px;
+            object-fit: contain;
+            
+            box-shadow:
+                inset 0 5px white,
+                inset 0 -5px #bbb,
+                inset 5px 0 #d7d7d7,
+                inset -5px 0 #d7d7d7;
+            
+            border-radius: 10%;
+        }
+
+        .first-face {
+            display: flex;
+            justify-content: center;
+            align-items: center;         
+        }
+
+        .second-face {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /*
+            :nth-of-type(n)选择器匹配同类型中的第n个同级兄弟元素。
+            :nth-child() 选择器。该选择器匹配父元素中的第n个子元素。
+
+        */
+        .second-face .pip:nth-of-type(2) {
+            align-self: flex-end;
+        }
+
+        .third-face {
+            display: flex;
+        }
+
+        .third-face .pip:nth-of-type(2) {
+            align-self: center;
+        }
+
+        .third-face .pip:nth-of-type(3) {
+            align-self: flex-end;
+        }
+
+        .fourth-face, .sixth-face {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .fourth-face .column, .sixth-face .column{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .fifth-face {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .fifth-face .column {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .fifth-face .column:nth-of-type(2) {
+            justify-content: center;
+        }
+
+
+        
+        .pip {
+            display: block;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            margin: 4px;
+
+            background-color: #333;
+            box-shadow: inset 0 3px #111, inset 0 -3px #555;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="first-face">
+        <span class="pip"></span>
+    </div>
+
+    <div class="second-face">
+        <span class="pip"></span>
+        <span class="pip"></span>
+    </div>
+
+
+    <div class="third-face">
+        <span class="pip"></span>
+        <span class="pip"></span>
+        <span class="pip"></span>
+    </div>
+
+    <div class="fourth-face">
+
+        <div class="column">
+            <span class="pip"></span>
+            <span class="pip"></span>
+        </div>
+        <div class="column">
+            <span class="pip"></span>
+            <span class="pip"></span>
+        </div>
+
+    </div>
+
+    <div class="fifth-face">
+        <div class="column">
+            <span class="pip"></span>
+            <span class="pip"></span>
+        </div>
+        <div class="column">
+            <span class="pip"></span>
+        </div>
+        <div class="column">
+            <span class="pip"></span>
+            <span class="pip"></span>
+        </div>
+    </div>
+
+    <div class="sixth-face">
+        <div class="column">
+            <span class="pip"></span>
+            <span class="pip"></span>
+        </div>
+        <div class="column">
+            <span class="pip"></span>
+            <span class="pip"></span>
+        </div>
+        <div class="column">
+            <span class="pip"></span>
+            <span class="pip"></span>
+        </div>
+    </div>
+
+
+    
+
+
+</body>
+</html>

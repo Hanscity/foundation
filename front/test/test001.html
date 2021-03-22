@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <title>开始使用layui</title>
+  <link rel="stylesheet" href="../layui/src/css/layui.css">
+</head>
+<body>
+ 
+<!-- 你的HTML代码 -->
+ hi,ch
+<script src="../layui/dist/layui.js"></script>
+<script>
+//一般直接写在一个js文件中
+// layui.use(['layer', 'form'], function(){
+//   var layer = layui.layer
+//   ,form = layui.form;
+  
+//   layer.msg('Hello World');
+// });
+
+layui.config({
+  base: 'res/js/modules/' //你存放新模块的目录，注意，不是layui的模块目录
+}).use('index'); //加载入口
+
+
+</script> 
+</body>
+</html>

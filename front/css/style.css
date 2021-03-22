@@ -1,0 +1,15 @@
+/*
+    1. 选择器
+    2. 申明块
+    
+*/
+p {
+    color:blue;
+    font-size:40px;
+}
+
+div {
+
+    color:red;
+    font-size:30px;
+}

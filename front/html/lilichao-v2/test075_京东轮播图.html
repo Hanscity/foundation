@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/reset.css">
+
+    <style>
+        
+
+        .img-list {
+            width: 400px;
+            /* 这里需要制定高度，不然，后面的绝对定位就找不到 bottom*/
+            height: 300px;
+            margin: 50px auto;
+            position: relative;
+        }
+
+        .img-list li {
+            position: absolute;
+        }
+
+        .img-list li img {
+            width: 400px;
+            height: 300px;
+        }
+
+        .img-list li:nth-child(5) {
+            z-index: 3;
+        }
+
+        .img-list .pointer {
+            position: absolute;
+            bottom: 20px;
+            left: 30px;
+            z-index: 9999;
+        }
+
+        .img-list .pointer a {
+
+            float: left;
+            width: 10px;
+            height: 10px;
+            background-color: rgba(255,255,255,0.3);
+            /* 这个属性，背景颜色就不包括边框*/
+            background-clip: content-box;
+            margin: 0 2px;
+            border-radius: 50%;
+            border: 2px solid transparent;
+        }
+
+        .img-list .pointer a.active,
+        .img-list .pointer a:hover {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            background-color: #fff;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <ul class="img-list">
+        
+
+        <li>
+            <a href="javascript:;">
+                <img src="../../img/jingdong-turn/1129e9000bd79e45.jpg.webp" alt="">
+            </a>
+        </li>
+
+        <li>
+            <a href="javascript:;">
+                <img src="../../img/jingdong-turn/1645f4ce4e9e1c8e.jpg.webp" alt="">
+            </a>
+        </li>
+
+        <li>
+            <a href="javascript:;">
+                <img src="../../img/jingdong-turn/5689d335e6a19f1f.jpg.webp" alt="">
+            </a>
+        </li>
+
+        <li>
+            <a href="javascript:;">
+                <img src="../../img/jingdong-turn/6cc2480f31e8ce1c.jpg.webp" alt="">
+            </a>
+        </li>
+
+        <li>
+            <a href="javascript:;">
+                <img src="../../img/jingdong-turn/85aaac6574a6d0b8.jpg.webp" alt="">
+            </a>
+        </li>
+
+        <li>
+            <a href="javascript:;">
+                <img src="../../img/jingdong-turn/b3a0512d121bbfc5.jpg (1).webp" alt="">
+            </a>
+        </li>
+
+    
+        <div class="pointer">
+            <a class="active" href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+        </div>
+    </ul>
+
+</body>
+</html>

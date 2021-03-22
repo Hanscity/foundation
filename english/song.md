@@ -256,3 +256,11 @@ Perhaps that's my reality
 illusion : wrong idea or the idea is not reality
 
 ```
+
+
+walking in the sun --degauss
+
+free loop
+
+dancing with your ghost 
+

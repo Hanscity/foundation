@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        /*
+            浏览器加载图片，会单独发送一个请求。
+            
+            在前端效果上，会有一个闪烁的状态。
+
+            为了解决这个情况，会加载一张图片，然后偏移来解决。这张图片就称为雪碧图
+
+            雪碧图的应用非常常见，但一般用作背景图。
+               
+        */
+        div a:link {
+            display: block;
+            width: 100px;
+            height: 30px;
+            background-image: url("../../img/91_game_total.jpg");
+        }
+
+        div a:hover {
+
+            background-image: url("../../img/91_game_total.jpg");
+            background-position-x: -100px;
+        }
+
+        div a:active {
+
+            background-image: url("../../img/91_game_total.jpg");
+            background-position-x: -250px;
+            width: 70px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div>
+        <a href="javascript:;"></a>
+    </div>
+</body>
+</html>

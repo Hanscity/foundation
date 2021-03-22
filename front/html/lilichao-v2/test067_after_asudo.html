@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .d1 {
+            border: 10px solid red;
+        }
+
+        .d2 {
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+            float: left;
+        }
+
+        /*
+            记得是 d1 的后面哦~
+    
+        */
+        .d1::after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        /*
+            如果用 d3 来控制样式，这样不好。因为表现和文档应该是要分离的
+            使用 after 来操作吧~ 
+        */
+        /* .d3 {
+            clear: both;
+        } */
+    </style>
+</head>
+
+<body>
+
+    <div class="d1">
+        <div class="d2">
+
+        </div>
+
+        <!-- <div class="d3">
+            aaa
+        </div> -->
+        
+    </div>
+
+    
+</body>
+
+</html>

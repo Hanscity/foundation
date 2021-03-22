@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            width: 50%;
+            margin: 100px auto;
+            border: 1px solid black;
+            /* border-spacing: 指定边框之间的距离*/
+            /* border-spacing: 0px; */
+            /* border-collapse: 设置边框的合并; */
+            border-collapse: collapse;
+        }
+
+        /*
+            even: 2n
+            odd: 2n + 1
+        */
+        table tr:nth-child(2n+1) {
+            background-color: orange;
+        }
+
+        /*
+            text-align: 水平方向设置
+            vertical-align: 垂直方向设置
+
+            display: table-cell; 将元素设置为 table-cell 的时候，
+            就可以利用这两个属性
+        */
+        table td {
+            height: 50px;
+            border: 1px solid black;
+            text-align: center;
+            vertical-align: top;
+        }
+
+
+        /*
+            另类的设置居中方式--将元素设置为 table-cell
+
+        */
+        .d1 {
+            width: 400px;
+            height: 400px;
+            background-color: red;
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .d2 {
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    
+    <table>
+        <tr>
+            <td>学号</td>
+            <td>姓名</td>
+            <td>性别</td>
+            <td>年龄</td>
+            <td>地址</td>
+        </tr>
+
+        <tr>
+            <td>1</td>
+            <td>唐僧</td>
+            <td>男</td>
+            <td>16</td>
+            <td>大唐</td>
+        </tr>
+
+        <tr>
+            <td>2</td>
+            <td>孙悟空</td>
+            <td>男</td>
+            <td>16</td>
+            <td>花果山</td>
+        </tr>
+
+        <tr>
+            <td>3</td>
+            <td>猪八戒</td>
+            <td>男</td>
+            <td>16</td>
+            <td>高老庄</td>
+        </tr>
+
+        <tr>
+            <td>4</td>
+            <td>沙僧</td>
+            <td>男</td>
+            <td>16</td>
+            <td>流沙河</td>
+        </tr>
+    </table>
+
+    <div class="d1">
+        <div class="d2">
+
+        </div>
+    </div>
+</body>
+</html>

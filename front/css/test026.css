@@ -1,0 +1,26 @@
+a:link {color: #FF0000}
+a:visited {color: #00FF00}
+a:hover {color: #FF00FF}
+a:active {color: #0000FF}
+
+/*
+    hover active, 这两个伪元素，也适用于其它普通元素
+*/
+div:link {color: #FF0000}
+div:visited {color: #00FF00}
+div:hover {color: #FF00FF}
+div:active {color: #ff9100}
+
+/*
+    设置选中的文字
+    Chrome 浏览器默认选中的文字是 蓝色
+*/
+*::selection {
+    background-color: chartreuse;                                   
+}
+
+
+input:focus {
+    background-color: cadetblue;
+}
+

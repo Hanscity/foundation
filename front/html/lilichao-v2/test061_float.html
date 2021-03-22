@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /**
+            脱离文档流：
+                块元素：不再独占一行，宽高被内容撑开
+                行内元素：可以设置宽高
+
+            其实就是一句话，脱离文档流之后，特点很像 inline-block
+
+            脱离文档流的操作有很多，浮动(float) 只是其中一种操作
+            
+        */
+        .d1 {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            float: left;
+        }
+
+        .d3 {
+            background-color: orange;
+            float: left;
+        }
+
+        .d4 {
+            background-color: yellow;
+        }
+
+        .s1 {
+            width: 200px;
+            height: 200px;
+            background-color: green;
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <div class="d1"></div>
+    <div>
+        一九九五年 我们在机场的车站
+
+你借我 而我不想归还
+
+那个背包载满纪念品和患难
+
+还有摩擦留下的图案
+
+你的背包 背到现在还没烂
+
+却成为我身体的另一半
+
+千金不换 它已熟悉我的汗
+
+它是我肩膀上的指环
+
+背了六年半 我每一天陪它上班
+
+你借我 我就为你保管
+
+我的朋友都说它旧得很好看
+
+遗憾是它已与你无关
+你的背包 让我走得好缓慢
+
+终有一天陪着我腐烂
+
+你的背包 对我沉重的审判
+
+借了东西为什么不还
+
+你的背包 背到现在还没烂
+
+却成为我身体的另一半
+
+千金不换 它已熟悉我的汗
+
+它是我肩膀上的指环
+
+你的背包让我走得好缓慢
+
+终有一天陪着我腐烂
+
+你的背包对我沉重的审判
+
+借了东西借了东西为什么不还
+借了东西为什么为什么 不还
+    </div>
+
+    <div class="d3">hello</div>
+    <div class="d4">hello</div>
+    <span class="s1">hello</span>
+</body>
+</html>

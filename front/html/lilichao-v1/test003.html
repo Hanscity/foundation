@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>practice 003</title>
+        <!-- 
+            css: Cascading Style Sheets,层叠样式表，一语道尽
+            1. 内联样式
+            2. 内部样式表
+            3. 外部样式表
+            外部样式表，更值得推荐。首先可以多个页面复用。
+            其次因为浏览器的缓存，当第二个页面也用到的时候，直接取用缓存，有利于加载。
+
+            <style>
+            p {
+                color:blue;
+                font-size:40px;
+            }
+            </style>
+
+            <link rel="stylesheet" type="text/css" href="style.css">
+        -->
+        <!-- <link rel="stylesheet" type="text/css" href="../css/test003.css"> -->
+
+        <style>
+
+            /*
+                标签选择器
+            */
+            p {
+                color:blue;
+            }
+
+            /*
+                id 选择器
+                id 元素是唯一的，那么 id 选择器也是唯一的
+            */
+            #third_id {
+                color:purple;
+            }
+
+            /*
+                类选择器
+                一般情况下，类选择器的使用比 id 选择器要多，因为它可以同时作用于多个
+                而如果想只作用于一个，那么就设置唯一的 class 即可
+            */
+            .second {
+                color:red;
+            }
+
+            /*
+                通用选择器
+                任何标签都会被选中
+            */
+            * {
+                color:beige;
+            }
+
+            /*
+                并集选择器
+                就是说，只要满足任意一个标签，就会产生效果
+                语法格式：中间逗号隔开
+            */
+
+            div,span {
+                color:yellow;
+            }
+
+            span {
+                color: greenyellow;
+            }
+
+
+            /*
+                交集选择器（复合选择器）：同时满足条件的才可以产生作用
+                语法格式：中间不能有空格或者其它符号,比如下面的 span.six，不能写成 .sixspan
+            */
+            span.six {
+                color:green;
+            }
+            
+        </style>
+
+
+    </head>
+
+    <body>
+        <p>渭城朝雨浥轻尘，客舍青青柳色新</p>
+        <p class="second">渭城朝雨浥轻尘，客舍青青柳色新</p>
+        <p id="third_id">渭城朝雨浥轻尘，客舍青青柳色新</p>
+        <div>渭城朝雨浥轻尘，客舍青青柳色新</div>
+        <div><span>渭城朝雨浥轻尘，客舍青青柳色新</span></div>
+
+        <span class="six">渭城朝雨浥轻尘，客舍青青柳色新</span>
+        <hr>
+        <a href="#">渭城朝雨浥轻尘，客舍青青柳色新</a>
+
+    </body>
+</html>

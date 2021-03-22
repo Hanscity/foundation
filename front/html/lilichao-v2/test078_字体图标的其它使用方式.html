@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="./font-awesome/css/all.css">
+    <style>
+        .css_load ul {
+            list-style: none;
+        }
+
+        .css_load ul li::before {
+            content: "\f0c8";
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+        }
+
+        .load_entity ul {
+            list-style: none;
+        }
+
+
+    </style>
+
+</head>
+<body>
+    <!-- 
+
+        fab 等设置特定的字体
+        用特定的字体： font-family: 'Font Awesome 5 Free';
+        引入特定的文件： url("../webfonts/fa-regular-400.eot?#iefix") 等等
+        使用规定好的类： 则展示之
+
+        引入多个 URL 是为了兼容性
+
+        字体图标则引入特定的内容
+        .fa-bell:before {
+            content: "\f0f3"; }
+
+
+        .fab {
+            font-family: 'Font Awesome 5 Brands'; }
+        @font-face {
+            font-family: 'Font Awesome 5 Free';
+            font-style: normal;
+            font-weight: 400;
+            font-display: auto;
+            src: url("../webfonts/fa-regular-400.eot");
+            src: url("../webfonts/fa-regular-400.eot?#iefix") format("embedded-opentype"), 
+                url("../webfonts/fa-regular-400.woff2") format("woff2"), 
+                url("../webfonts/fa-regular-400.woff") format("woff"),
+                url("../webfonts/fa-regular-400.ttf") format("truetype"),
+                url("../webfonts/fa-regular-400.svg#fontawesome") format("svg"); 
+        }
+
+        上面一段粗浅的分析非常重要
+        以前用的 layui, 马上将要重点学习的微信小程序中的 UI，基本原理应该都是如此
+
+
+    -->
+        
+    <div>
+        <!-- 
+            方式一： 直接使用类
+
+        -->
+        <div>
+            <i class="fa fa-bell"></i>
+            <i class="fas fa-bell"></i>
+        </div>
+
+        <div>
+            <i class="fa fa-bell-slash"></i>
+            <i class="fas fa-bell-slash"></i>
+        </div>
+
+        <div>
+            <i class="fab fa-accessible-icon"></i>
+        </div>
+
+        <div>
+            <i class="fa fa-otter"></i>
+            <i class="fas fa-otter"></i>
+
+        </div>
+    </div>
+
+    <div>
+        <ul class="fa-ul">
+            <li class="fa fa-square">
+                李白
+            </li>
+            <li class="fa fa-square">
+                杜甫
+            </li>
+            <li class="fa fa-square">
+                白居易
+            </li>
+            <li class="fa fa-square">
+                李贺
+            </li>
+        </ul>
+    </div>
+
+    <div>
+        <ul class="fa-ul">
+            <li><i class="fa-li fa fa-square"></i>
+                李白
+            </li>
+            <li><i class="fa-li fa fa-square"></i>
+                杜甫
+            </li>
+            <li><i class="fa-li fa fa-square"></i>
+                白居易
+            </li>
+            <li><i class="fa-li fa fa-square"></i>
+                李贺
+            </li>
+        </ul>
+    </div>
+
+    <!-- 
+
+        方式二：css 来加载
+    -->
+    <div class="css_load">
+        <ul>
+            <li>
+                李白
+            </li>
+            <li>
+                杜甫
+            </li>
+            <li>
+                白居易
+            </li>
+            <li>
+                李贺
+            </li>
+        </ul>
+    </div>
+
+    <!-- 
+        方式三：HTML 实体
+
+        HTML 的 Unicode 编码是 &#实体编码
+        这里面是 &#x实体编码,目前不知道为何
+    -->
+    <div class="load_entity">
+        <ul>
+            <li><span class="fa">&#xf0c8</span>
+                李白
+            </li>
+            <li><span class="fa">&#xf0c8</span>
+                杜甫
+            </li>
+            <li><span class="fa">&#xf0c8</span>
+                白居易
+            </li>
+            <li><span class="fa">&#xf0c8</span>
+                李贺
+            </li>
+        </ul>
+    </div>
+
+</body>
+</html>

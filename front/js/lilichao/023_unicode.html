@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        span {
+            font-size: 60px;
+        }
+    </style>
+    <script>
+        // \u 表示采用 Unicode 编码，默认用的是 16 进制
+        console.log("\u2620");
+    </script>
+</head>
+<body>
+    <span>
+        <!-- 
+            &# 用来表示 Unicode 编码表示的符号
+            9760 是 16 进制数 2620 的十进制表示
+            
+            > https://blog.csdn.net/weixin_40848638/article/details/83269598
+            特殊符号 命名实体 十进制编码
+            心       &hearts;  &#9829;
+            空格     &nbsp;    &#160;
+            
+            经测试，命名实体一定要加上分号；
+            十进制编码，可以不加上分号；
+        -->
+
+        &#9760;
+    </span>
+    <br>
+    <span>
+        &hearts;&#9829;
+    </span>
+
+</body>
+</html>

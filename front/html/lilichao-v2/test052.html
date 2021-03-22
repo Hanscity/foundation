@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*
+            行内元素
+            设置宽高，无效
+            padding,
+            margin,
+            border 
+            等效果不明~
+
+        */
+        .s1 {
+            background-color: orange;
+            /* padding: 100px; */
+            margin: 100px;
+            /* border: 100px solid red; */
+        }
+
+        .d1 {
+            /* display: inline; */
+            width: 200px;
+            height: 200px;
+            background-color: #bfa;
+        }
+
+        /*
+            display 的属性值
+            inline
+            block
+            inline-block
+            table
+            none : 页面不展示，也不占据位置
+
+            visibility 的属性值
+            visible
+            hidden： 页面不展示，占据位置
+
+
+        */
+        a {
+            display: none;
+            /* visibility: hidden; */
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <a href="javascript:;">我是超链接</a>
+    <span class="s1">im span</span>
+    <!-- <br> -->
+    <span class="s2">im span two</span>
+
+    <div class="d1"></div>
+</body>
+</html>

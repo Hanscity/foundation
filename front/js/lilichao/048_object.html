@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        var obj = new Object();
+
+        obj["123"] = 456;
+        // obj["name"] = 'ch';
+        // obj.age = 23;
+        // console.log(obj);
+
+        // var n = "123";
+        // console.log(obj[n]);
+        // console.log(obj.n); // undefined
+
+        // console.log(obj["name"]); // ch
+        // console.log(obj.name); // ch
+
+        // console.log(obj.age); // 23
+        // console.log(obj["age"]); // 23
+
+        // 有上面的结果可知，obj[] 和 obj.varible 的方式可以互换
+        // 但是 obj.varible 的方式，需要符合变量的命名要求
+
+        var obj2 = new Object();
+        obj2.name = "Macgrady";
+
+        obj.extend = obj2;
+        console.log(obj.extend.name);
+
+        console.log("extend" in obj); // in 用来判断是否存在于对象的属性中
+
+
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

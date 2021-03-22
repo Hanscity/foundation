@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        /* * {
+            margin: 0;
+        } */
+
+
+        /*
+            > http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html
+
+            看这篇文章，首先需要看懂前面的部分：哪个是容器，哪个是项目
+            
+            flex
+            英 [fleks]   美 [fleks]  
+            v.
+            屈伸，活动(四肢或肌肉，尤指为准备体力活动)
+            n.
+            花线;皮线
+
+            align
+            英 [əˈlaɪn]   美 [əˈlaɪn]  
+            v.
+            排整齐;校准;(尤指)使成一条直线;使一致
+
+
+            shrink
+            英 [ʃrɪŋk]   美 [ʃrɪŋk]  
+            v.
+            (使)缩水，收缩，缩小，皱缩;(使)缩小，减少;退缩;畏缩
+            n.
+            精神病学家;心理学家
+
+
+            justify
+            英 [ˈdʒʌstɪfaɪ]   美 [ˈdʒʌstɪfaɪ]  
+            v.
+            证明…正确(或正当、有理);对…作出解释;为…辩解(或辩护);
+            调整使全行排满;使每行排齐;使齐行
+
+        总结起来，情况简单：
+            容器中的排列方向（direction），是否换行如何换行
+            横向纵向的分布方式
+
+            项目的 order，grow，shrink，flex 
+            
+
+        */
+
+
+        /* body {
+            width: 600px;
+        } */
+
+        .d1-outer {
+            width: 600px;
+            height: 600px;
+            background-color: red;
+
+            display: flex;
+            /* 
+            flex-direction:
+                row（默认值）：主轴为水平方向，起点在左端。
+                row-reverse：主轴为水平方向，起点在右端。
+                column：主轴为垂直方向，起点在上沿。
+                column-reverse：主轴为垂直方向，起点在下沿。 
+            */
+            /* flex-direction: row; */
+
+            /*
+                flex-wrap: nowrap | wrap | wrap-reverse;
+            */
+            /* flex-wrap: wrap; */
+
+            /*
+                flex-flow属性是flex-direction属性和flex-wrap属性的简写形式，
+                默认值为row nowrap
+            */
+            /* flex-flow: row wrap; */
+            
+            
+            /*
+                .box {
+                    justify-content: flex-start | flex-end | center |
+                    space-between | space-around;
+                }
+
+                flex-start（默认值）：左对齐
+                flex-end：右对齐
+                center： 居中
+                space-between：两端对齐，项目之间的间隔都相等。
+                space-around：每个项目两侧的间隔相等。所以，项目之间的间隔比项目与边框的间隔大一倍。
+            */
+
+            /* justify-content: space-between; */
+                
+            /*
+                align-items属性定义项目在交叉轴上如何对齐。
+                align-items: flex-start | flex-end | center | baseline | stretch;
+                flex-start：交叉轴的起点对齐。
+                flex-end：交叉轴的终点对齐。
+                center：交叉轴的中点对齐。
+                baseline: 项目的第一行文字的基线对齐。
+                stretch（默认值）：如果项目未设置高度或设为auto，将占满整个容器的高度。
+            */
+
+            /* align-items: stretch; */
+            
+            /*
+                align-content属性定义了多根轴线的对齐方式。
+                如果项目只有一根轴线，该属性不起作用。
+
+                align-content: flex-start | flex-end | center 
+                | space-between | space-around | stretch;
+
+
+                flex-start：与交叉轴的起点对齐。
+                flex-end：与交叉轴的终点对齐。
+                center：与交叉轴的中点对齐。
+                space-between：与交叉轴两端对齐，轴线之间的间隔平均分布。
+                space-around：每根轴线两侧的间隔都相等。所以，轴线之间的间隔比轴线与边框的间隔大一倍。
+                stretch（默认值）：轴线占满整个交叉轴。
+
+
+            */
+
+
+        
+
+        }
+
+        [class$="inner"] {
+            width: 400px;
+            height: 160px;
+        }
+
+        /*
+            项目的属性
+
+            order属性定义项目的排列顺序。数值越小，排列越靠前，默认为0。
+            order: <integer>;
+
+            
+            flex-grow属性定义项目的放大比例，默认为0，即如果存在剩余空间，也不放大。
+            flex-grow: <number>;
+
+            flex-shrink属性定义了项目的缩小比例，默认为1，即如果空间不足，该项目将缩小。
+            flex-shrink: <number>;
+
+            
+        */
+        
+        .d2-inner {
+            
+            background-color: orange;
+            flex-shrink: 0;
+        }
+
+        .d3-inner {
+            
+            background-color: yellow;
+        }
+
+        .d4-inner {
+            background-color: green;
+        }
+
+        .d5-inner {
+            
+            background-color: cyan;
+        }
+
+        .d6-inner {
+            
+            background-color: blue;
+        }
+
+        .d7-inner {
+            
+            background-color: purple;
+        }
+
+    </style>
+</head>
+
+<body>
+    
+    <div class="d1-outer">
+        <div class="d2-inner"></div>
+        <div class="d3-inner"></div>
+        <div class="d4-inner"></div>
+        <div class="d5-inner"></div>
+        <div class="d6-inner"></div>
+        <div class="d7-inner"></div>
+    </div>
+
+</body>
+</html>

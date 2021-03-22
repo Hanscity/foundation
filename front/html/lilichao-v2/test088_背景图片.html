@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .d1 {
+            width: 400px;
+            height: 400px;
+            padding: 10px;
+            background-color: red;
+            background-image: url(../../img/little-pic-004.jpg);
+            background-repeat: no-repeat;
+            /*  
+                left top; left center; left bottom;
+                center top; center center; center bottom;
+                right top; right center; right bottom;
+
+                可以看出，以上是一个九宫格
+
+            */
+            /* background-position: right bottom;  */
+
+            background-position: 20px 20px;
+
+            border: 10px double orange;
+
+            
+
+            /*
+            background-origin:
+                padding-box	背景图像相对于内边距框来定位。
+                border-box	背景图像相对于边框盒来定位。
+                content-box	背景图像相对于内容框来定位。
+            */
+            background-origin: content-box;
+
+            /*
+                该属性接受三个不同的值：
+                    padding-box - 背景绘制到内边距的外边缘
+                    border-box - 背景绘制到边框的外部边缘（默认）
+                    content-box - 在内容框中绘制背景
+
+            */
+
+            background-clip: content-box;
+
+        }
+
+
+
+    </style>
+</head>
+<body>
+    <div>
+        <img src="../../img/little-pic-004.jpg" alt="">
+    </div>
+
+    <div class="d1">
+
+    </div>
+
+
+    <div>
+        <hr>
+        <h2>Course Material</h2>
+        <img src="../../img/QQ截图20210321163836.png" alt="">
+    </div>
+</body>
+</html>

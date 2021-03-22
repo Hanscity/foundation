@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*
+            vh就是当前屏幕可见高度的1%，也就是说
+
+            height:100vh == height:100%;
+
+            但是当元素没有内容时候，设置height:100%，该元素不会被撑开，此时高度为0，
+
+            但是设置height:100vh，该元素会被撑开屏幕高度一致。
+
+
+        */
+        .HolyGrail {
+            display: flex;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        header,
+        footer {
+            flex: 1;
+        }
+
+        .HolyGrail-body {
+            display: flex;
+            flex: 1;
+        }
+
+        .HolyGrail-nav,
+        .HolyGrail-ads {
+            /* 两个边栏的宽度设为12em */
+            flex: 0 0 12em;
+        }
+
+        .HolyGrail-nav {
+            /* 导航放到最左边 */
+            order: -1;
+        }
+
+        .HolyGrail-content {
+            flex: 1 1 0%;
+        }
+
+        header {
+            background-color: grey;
+        }
+
+        footer {
+            background-color: indigo;
+
+        }
+        .HolyGrail-content {
+            background-color: teal;
+        }
+
+        .HolyGrail-nav {
+            background-color: orange;
+        }
+
+        .HolyGrail-ads {
+            background-color: blue;
+        }
+
+        
+    </style>
+</head>
+
+
+<body class="HolyGrail">
+    <header>header</header>
+    <div class="HolyGrail-body">
+        <nav class="HolyGrail-nav">nav</nav>
+        <main class="HolyGrail-content">contents</main>
+        <aside class="HolyGrail-ads">ads</aside>
+    </div>
+    <footer>footer</footer>
+</body>
+
+
+</html>
