@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        form select {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- 
+
+        表单中：
+            name 是提交给服务器数据的名称
+            value 是提交给服务器响应名称数据的值
+
+            radio 不过不设定 value，则默认值是 on
+
+        属性值：
+            autocomplete,表单提示功能，如果写在 input 中，影响此项。
+            如果写在 form 中，则影响此 form
+
+            readonly: 只读，数据会提交
+            disabled: 禁用，数据不会提交
+
+            autofocus: 自动获取焦点
+            
+        
+    -->
+    <form action="test099_target.html">
+        username: <input type="text" name="username"><br>
+        man: <input type="radio" name="gender"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        female: <input type="radio" name="gender"><br>
+        password: <input type="password" name="password"><br>
+        football: <input type="checkbox" name="sports" value="football">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        basketball: <input type="checkbox" name="sports" value="basketball">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        boxing: <input type="checkbox" name="sports" value="boxing"><br>
+
+
+        cars: <select name="cars" id="">
+            <option value="audi">Audi</option>
+            <option value="benz" selected>Benz</option>
+            <option value="bmw">BMW</option>
+        </select><br>
+        <!-- color 用的很少，因为 IE 浏览器不支持-->
+        <!-- <input type="color" name="test-color"> -->
+
+        <!-- email 在正式环境中，也是用的很少，因为不同的浏览器中提示语不一样
+            所以，一般都是自己用 JS 来判断
+        -->
+        <!-- email: <input type="email" name="email"> -->
+
+
+        <br>
+        <br>
+        <!-- 
+            按钮 可以有下面两种方式，结果上来说是一样的
+
+            一般第二种方式，稍多一些
+            因为 button 更容易编写一些样式和结构
+            
+        -->
+        <input type="submit" value="提交">
+        <input type="reset" value="重置">
+        <input type="button" value="按钮">
+        <br>
+
+        <button type="submit">提交</button>
+        <button type="reset">重置</button>
+        <button type="button">按钮</button>
+
+
+    </form>
+</body>
+</html>
