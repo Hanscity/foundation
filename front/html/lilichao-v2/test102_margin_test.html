@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .d1 {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+
+        .d2 {
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+            float: left;
+            border: 1px solid black;
+        }
+
+        .d3 {
+            width: 98px;
+            height: 100px;
+            background-color: yellow;
+            float: left;
+            /* 
+                这里不能再加 padding 了，它是七个参数相加，中间包括了 padding-left 和 padding-right 
+                padding 会影响盒子的宽度
+
+            */
+            /* padding-left: 2px; */
+        }
+
+        /*
+            将 padding 放到下面来，是可以的
+        */
+        .d3 span {
+            display: block;
+            padding-left: 10px;
+        }
+        
+    </style>
+</head>
+<body>
+    
+
+    <div class="d1">
+        <div class="d2">
+
+        </div>
+
+        <div class="d3">
+            <span class="s1">aaa</span>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,167 @@
+body {
+    font: 14px/1.5 Helvetica Neue,Helvetica,Arial,Microsoft Yahei,Hiragino Sans GB,Heiti SC,WenQuanYi Micro Hei,sans-serif;
+    color: #333;
+    background-color: #fff;
+    /*
+        min-width: 当浏览器的窗口不断缩小，body 的宽度也会随之缩小。当窗口的宽度小于 1226px 的时候，body 的宽度就不会缩小
+    */
+    min-width: 1226px;
+}
+
+/*
+    这一段是小米官网做活动的时候，放在最上边的，暂时不做
+*/
+/* .app .topbar-banner-Wrapper .link-block {
+    position: absolute;
+    background-image: url(../../img/mi/mi_03.jpg);
+    width: 100%;
+    height: 240px;
+} */
+
+
+
+.site-topbar {
+    height: 40px;
+    font-size: 12px;
+    color: #b0b0b0;
+    background-color: #333;
+
+}
+
+
+.site-topbar .topbar-nav {
+    height: 40px;
+    line-height: 40px;
+    float: left;
+}
+
+
+.site-topbar a {
+
+    color: #b0b0b0;
+    line-height: 40px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.site-topbar a:hover {
+    color: #fff;
+}
+
+.site-topbar .sep {
+    color: #424242;
+    display: inline-block;
+    margin: 0 0.3em;
+}
+
+
+
+.site-topbar .topbar-cart {
+    float: right;
+    width: 120px;
+    line-height: 40px;
+    font-size: 13px;
+}
+
+.site-topbar .topbar-info {
+    float: right;
+    width: 143px;
+    margin-right: 20px;
+}
+
+
+
+.site-header {
+    height: 100px;
+}
+
+
+.header-logo {
+    width: 62px;
+    height: 100%;
+    float: left;
+}
+
+.header-logo a:link {
+
+    display: block;
+    background-image: url("../../img/mi/mi-logo.png");
+    width: 55px;
+    height: 55px;
+    margin: 25px 0;
+}
+
+.header-nav {
+    float: left;
+    width: 850px;
+    height: 100%;
+    font-size: 17px;
+    color: #333;
+}
+
+.header-nav ul {
+
+    float: left;
+    margin-left: 188px;
+}
+
+
+.header-nav li {
+    float: left;
+    line-height: 100px;
+    margin: 0 7px; 
+    
+}
+
+.header-nav li:hover {
+    color: #ff6700;
+}
+
+.header-nav li a {
+    text-decoration: none;
+    color: #333;
+}
+
+.header-nav li a:hover {
+    color: #ff6700;
+}
+
+
+
+.header-search {
+    float: right;
+    width: 296px;
+    height: 100px;
+}
+
+
+.header-search .search-form {
+    width: 243px;
+    height: 45px;
+    border: 1px solid #e0e0e0;
+    margin: 25px 0;
+    float: left;
+    color: grey;
+}
+
+.header-search .search-icon {
+    width: 50px;
+    height: 45px;
+    border: 1px solid #e0e0e0;
+    border-left: none;
+    float: left;
+    margin-top: 25px;
+    
+}
+
+.header-search .search-icon span {
+    display: block;
+    line-height: 45px;
+    font-size: 20px;
+    color: grey;
+    width: 20px;
+    margin: 0 auto;
+}
+
+
+
