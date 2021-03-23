@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="font-awesome/css/all.css">
+
+    <style>
+        .outer {
+            width: 240px;
+            height: 376px;
+            margin: 100px auto;
+            font-size: 14px;
+            color: grey;
+
+            /* 有立体效果，所以不用 border ，而是用 box-shadow */
+            /* border: 1px solid grey;  */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* .img-wrapper {
+            border: 1px solid red;
+        } */
+        
+        .img-wrapper img {
+            /* 书写为 100% 更好，如果父元素改变了大小，这里就不需要随着改变 */
+            width: 100%;
+
+            /* 
+                vertical-align 属性设置元素的垂直对齐方式。
+
+                top middle bottom
+
+                靠下面对齐，是为了去掉区域内图片显示的与下边框的一丝间隙，在设置了 border 的时候就非常明显了
+
+            */
+            vertical-align: bottom;
+        }
+
+
+        .info {
+            padding: 0 16px;
+            height: 156px;
+            color: #acaaaa;
+            font-size: 16px;
+        }
+
+
+        .info h2 {
+            line-height: 42px;
+            font-size: 18px;
+            color: #717171;
+        }
+
+
+        .info .animation-address {
+            line-height: 32px;
+        }
+
+        .info .main-text {
+            margin-top: 20px;
+        }
+
+
+        /*
+            最下面的部分：
+
+        */
+        .star-wrapper {
+            margin-top: 10px;
+            border-top: 1px solid #e9e9e9;
+            font-size: 16px;
+            padding-left: 14px;
+            padding-top: 16px;
+        }
+
+        .star-wrapper .star {
+            float: left;
+        }
+
+        .star-wrapper .star span:nth-child(1) {
+            color: green;
+        }
+
+        .star-wrapper .star span:nth-child(2) {
+            color: green;
+        }
+
+        .star-wrapper .fab {
+            float: right;
+            margin: 0px 20px 0px 0px;
+        }
+        
+    </style>
+</head>
+<body>
+    
+    <div class="outer">
+
+        <div class="img-wrapper">
+            <img src="../../img/95_movie_card.png" alt="">
+        </div>
+
+
+        <div class="info">
+            <h2>Animation Films</h2>
+
+            <div class="animation-address">
+                <span class="fas fa-map-marker"></span>
+                <span>Animations</span>
+                
+            </div>
+
+            <div class="main-text">
+                Lorem Ipsum is simply dummy text of the printing & 
+                typesetting industry.
+            </div>
+        </div>
+
+
+        <!-- 
+            最下面的部分：
+        -->
+
+        <div class="star-wrapper">
+            <div class="star">
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+                <span class="fas fa-star"></span>
+            </div>
+
+            <div>
+                <span class="fab fa-facebook-square"></span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
