@@ -230,7 +230,7 @@ body {
     因为直接属于 ul, 有所浮动，所以初始化设置 top and left
 
 */
-.header-nav li:hover ~ .header-nav-select,
+.header-nav .nav-goods:hover ~ .header-nav-select,
 .header-nav-select:hover {
 
     width: 100%;
@@ -252,38 +252,70 @@ body {
 }
 
 
-.header-search .search-form {
-    width: 243px;
+.header-search form {
+    width: 100%;
     height: 45px;
     margin: 25px 0;
-    float: left;
 }
 
-.header-search .search-form input {
+/*
+    行内块元素：
+        input, button 等都是行内块元素，很多属性很像行内元素，
+        比如元素之间默认留有一个空格，浮动之后就没有了 （还有一个不太聪明的做法就是代码中写在一起，不留空格~）
+
+*/
+.header-search form input {
     width: 238px;
-    height: 43px;
+    height: 45px;
     border: 1px solid #e0e0e0;
+    float: left;
+    box-sizing: border-box;
 }
 
 
-.header-search .search-icon {
+/*
+    box-sizing:
+        button 的此属性，应该默认就是 border-box 
+        （我们已将 box-sizing 属性设置为 border-box。这样可以确保元素的总宽度和高度中包括内边距（填充）和最终的边框。）
+
+*/
+.header-search form button {
     width: 50px;
     height: 45px;
     border: 1px solid #e0e0e0;
     border-left: none;
     float: left;
-    margin-top: 25px;
-    
+    background-color: #fff;
 }
 
-.header-search .search-icon span {
-    display: block;
-    line-height: 45px;
+.header-search form .fas {
     font-size: 20px;
-    color: grey;
-    width: 20px;
-    margin: 0 auto;
 }
+
+
+/*
+    
+    input 这个元素设置 border: 1px solid #ff6700; 无效
+            设置 outline 可以
+
+    但是呢，去掉 border  可以
+
+    如果不去掉，在放大的情况下，可以看出，outline 在 border 的外面一点
+    
+*/
+.header-search input:focus,
+.header-search input:focus ~ button {
+    outline: 1px solid #ff6700;
+    border: none;
+}
+
+.header-search form button:hover {
+
+    background-color: #ff6700;
+    border: none;
+}
+
+
 
 
 .home-hero-container {
