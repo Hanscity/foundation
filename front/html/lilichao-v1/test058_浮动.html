@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        /*
+            浮动：
+                - 浮动元素会脱离文档流，如果下面有元素，将会填充上去
+                - 浮动元素的浮动边界是父元素的边框或者是相邻与上一个浮动元素
+                - 浮动元素将会展示在文档流的上方
+                - 浮动元素不会超过前面的块元素，不会超过同样浮动的兄弟元素
+
+        */
+        .d1 {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            float: left;
+        }
+
+        .d2 {
+            width: 300px;
+            height: 300px;
+            background-color: orange;
+
+        }
+
+        .d3 {
+            width: 200px;
+            height: 200px;
+            background-color: yellow;
+
+        }
+
+
+    </style>
+</head>
+<body>
+    
+    <div class="d1">
+
+    </div>
+
+    <div class="d2">
+
+    </div>
+
+    <div class="d3">
+
+    </div>
+
+</body>
+</html>

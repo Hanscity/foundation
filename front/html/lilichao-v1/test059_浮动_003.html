@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        /*
+            在文档流中：
+                块元素的宽度默认继承父元素的宽度，如果不进行设置
+                行内元素设置宽高不起作用
+
+            
+            脱离文档流后：
+                块元素的宽度默认不会继承父元素的宽度，默认被内容撑开
+                行内元素将会变成块元素，设置的宽高将会发生作用(经测试，浮动和定位的脱离文档流都是如此)
+
+
+        */
+        .d1 {
+            height: 200px;
+            background-color: red;
+        }
+
+        .d2 {
+            height: 200px;
+            background-color: orange;
+            float: left;
+        }
+
+        .s1 {
+            width: 200px;
+            height: 200px;
+            background-color: yellow;
+            position: absolute;
+            /* float: left; */
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="d1">
+
+    </div>
+
+    <div class="d2">
+        hello,world d2
+    </div>
+
+    
+    <span class="s1">
+        hello, world. s1
+    </span>
+
+
+</body>
+</html>
