@@ -157,7 +157,6 @@ body {
     height: 100px;
     width: 100%;
     position: relative;
-    /* background-color: orange; */
 }
 
 
@@ -226,14 +225,23 @@ body {
     display: none;
 }
 
-/* 兄弟元素选择器 */
-/* .header-nav li:hover ~ .header-nav-select{
+/* 
+    兄弟元素选择器 
+    因为直接属于 ul, 有所浮动，所以初始化设置 top and left
+
+*/
+.header-nav li:hover ~ .header-nav-select,
+.header-nav-select:hover {
+
     width: 100%;
-    height: 300px;
-    background-color: yellow;
+    height: 250px;
+    background-color: grey;
     display: block;
     position: absolute;
-} */
+    top: 100px;
+    left: 0;
+    z-index: 999;
+}
 
 
 
