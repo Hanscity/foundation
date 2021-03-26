@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .outer {
+            width: 200px;
+            height: 600px;
+            background-color: red;
+            display: flex;
+        }
+
+        /*
+        
+            flex-basis: 设置元素在主轴上的宽度,默认值为 auto
+            flex-grow: 默认值为 0， > 0 表示可以放大（0 表示既不放大也不缩小）
+            flex-shrink: 默认值为 1， > 0 表示可以放大（0 表示既不放大也不缩小）
+
+            flex属性是flex-grow, flex-shrink 和 flex-basis的简写
+            initial: 默认值，表示 0 1 auto
+            auto: 表示 1 1 auto
+            none: 表示 0 0 auto
+
+        */
+        
+        .d1 {
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+            flex: 0 1 auto;
+        }
+
+        .d2 {
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            flex: 0 1 auto;
+        }
+
+        .d3 {
+            width: 100px;
+            height: 100px;
+            background-color: green;
+            flex: 0 1 auto;
+        }
+
+
+    </style>
+</head>
+<body>
+    
+    <div class="outer">
+
+        <div class="d1">
+
+        </div>
+
+        <div class="d2">
+            
+        </div>
+
+        <div class="d3">
+            
+        </div>
+
+
+    </div>
+</body>
+</html>
