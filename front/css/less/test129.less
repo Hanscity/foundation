@@ -1,0 +1,28 @@
+
+// 函数的两种用法，可以传递参数，也可以用默认值
+.baseStyle() {
+    width: 100%;
+    height: 100%;
+    background-color: red;
+}
+
+.baseStyleTwo(@width: 100%, @height: 100%, @bcColor: orange) {
+    width: @width;
+    height: @height;
+    background-color: @bcColor;
+}
+
+
+html {
+
+    .baseStyle;
+}
+
+
+body {
+    .baseStyleTwo(400px, 400px, green);
+
+    &:hover {
+        background-color: yellow;
+    }
+}
