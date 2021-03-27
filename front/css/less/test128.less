@@ -1,0 +1,31 @@
+
+// 扩展的用法
+.d1 {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+}
+
+.d2:extend(.d1) {
+    border: 1px solid black;
+}
+
+
+// 函数的用法，这个 .d100 不会编译在 CSS 文件中
+.d100() {
+    width: 100px;
+    height: 100px;
+    background-color: orange;
+}
+
+
+.d3 {
+    .d100;
+}
+
+// mixins 的用法，仔细看编译后的文件，也会发现扩展和编译，稍有不同
+
+.d4 {
+    .d3();
+    border: 1px solid green;
+}
