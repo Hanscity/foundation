@@ -93,3 +93,83 @@ a {
 
 
 }
+
+.course-list:extend(.w) {
+
+    height: 392rem;
+    margin: 30rem auto;
+
+
+    .title {
+        width: 100%;
+        display: flex;
+
+        justify-content: space-between;
+        align-items: center;
+        // align-content: center // 这个不生效
+
+        h3 {
+            font-size: 33rem;
+            color: #24253d;
+            border-left: 2px solid #3a84ff;
+            padding-left: 4px;
+        }
+        
+        a {
+            color: #656565;
+            font-size: 28rem;
+        }
+    }
+
+    .item-list {
+
+        
+        display: flex;
+        justify-content: space-between;
+        overflow: scroll;
+
+        .item {
+            margin: 10rem 14rem;
+            width: 320rem;
+            height: 324rem;
+            box-sizing: border-box;
+            padding: 0 8rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            
+            border: solid 1px transparent;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .3);
+            border-radius: 2%;
+
+            .cover img {
+                width: 300rem;
+                height: 200rem;
+            }
+
+            h4 {
+                font-size: 16px;
+                color: #24253d;
+            }
+
+            .user-info {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                img {
+                    width: 42rem;
+                    height: 42rem;
+                }
+
+                .nickname {
+                    font-size: 24rem;
+                    color: #969393;
+                }
+            }
+
+            
+            
+        }
+    }
+}
