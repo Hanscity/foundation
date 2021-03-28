@@ -1,0 +1,95 @@
+
+
+@total-width: 750;
+
+.w {
+    width: 693rem;
+    margin: 0 auto;
+}
+
+html {
+
+    font-size: (100vw/@total-width);
+    background-color: #eff0f4;
+
+
+}
+
+a {
+    text-decoration: none;
+}
+
+// 设置头部banner 
+
+.top-bar:extend(.w) {
+
+    display: flex;
+    height: 300rem;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    a {
+        color: #24243d;
+        font-size: 36px;
+
+        i {
+            color: #999;
+            font-size: 16px;
+        }
+    }
+
+}
+
+
+// 设置 banner
+.banner:extend(.w) {
+    img {
+        width: 100%;
+    }
+}
+
+.menu:extend(.w) {
+
+    height: 329rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: space-around;
+
+
+    a {
+        flex: none;
+        width: 327rem;
+        height: 104rem;
+        box-sizing: border-box;
+        color: white;
+        font-size: 16px;
+        border-radius: 5%;
+        line-height: 104rem;
+        padding: 0 40rem;
+
+        i {
+            margin: 10rem;
+        }
+    }
+
+    .course {
+        background-color: #f97053;
+    }
+
+    .teacher {
+        background-color: #cd63fe;
+    }
+
+    .sub {
+        background-color: orange;
+    }
+
+    .download {
+        background-color: #1bc4fb;
+    }
+
+
+}

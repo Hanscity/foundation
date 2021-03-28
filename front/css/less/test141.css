@@ -1,0 +1,65 @@
+.w,
+.top-bar,
+.banner,
+.menu {
+  width: 693rem;
+  margin: 0 auto;
+}
+html {
+  font-size: 0.13333333vw;
+  background-color: #eff0f4;
+}
+a {
+  text-decoration: none;
+}
+.top-bar {
+  display: flex;
+  height: 300rem;
+  justify-content: space-between;
+  align-items: center;
+}
+.top-bar a {
+  color: #24243d;
+  font-size: 36px;
+}
+.top-bar a i {
+  color: #999;
+  font-size: 16px;
+}
+.banner img {
+  width: 100%;
+}
+.menu {
+  height: 329rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-content: space-around;
+}
+.menu a {
+  flex: none;
+  width: 327rem;
+  height: 104rem;
+  box-sizing: border-box;
+  color: white;
+  font-size: 16px;
+  border-radius: 5%;
+  line-height: 104rem;
+  padding: 0 40rem;
+}
+.menu a i {
+  margin: 10rem;
+}
+.menu .course {
+  background-color: #f97053;
+}
+.menu .teacher {
+  background-color: #cd63fe;
+}
+.menu .sub {
+  background-color: orange;
+}
+.menu .download {
+  background-color: #1bc4fb;
+}
+/*# sourceMappingURL=./test141.css.map */
