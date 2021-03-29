@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+
+        /*
+            ",", "and", "not", "only" 关键字
+
+            "," 表示并集，或
+
+            "and" 表示交集，且
+
+            "not" 如下例子所示，不仅仅是对 screen 取反，是对所有的取反 
+
+            "only" 兼容旧的浏览器，旧的浏览器不认识 only 这个关键字，会忽略后面的所有样式。
+                    新的浏览器认识这个关键字，会继续读取后面的样式
+
+
+        */
+        @media only screen and (min-width: 400px) and (max-width: 800px) {
+            body {
+                background-color: red;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+
+    <div>
+        <hr>
+        <h2>Course Material</h2>
+
+        <img src="../../img/lilichao-142.png" alt="">
+    </div>
+</body>
+</html>
