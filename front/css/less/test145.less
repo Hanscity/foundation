@@ -1,0 +1,31 @@
+
+.top-bar {
+    height: 48px;
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #000;
+    color: #fff;
+
+}
+
+
+@media only screen and (min-width: 768px) {
+
+    .top-bar {
+
+        background-color: red;
+
+        .left-menu {
+            order: 1; // 默认为 0， 数值越小，越是靠前
+        }
+
+        .user-info {
+            order: 2;
+        }
+    }
+
+    
+    
+}
