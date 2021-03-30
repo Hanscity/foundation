@@ -14,7 +14,12 @@
             this.play = play;
         }
 
-        // 提取到外面来，非常的节省内存
+        
+        /*
+            优点： 提取到外面来，非常的节省内存
+            缺点： 污染了全局的变量，
+                  容易被覆盖
+        */
         function play()
         {
             console.log("paly funny..");
