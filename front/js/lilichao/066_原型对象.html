@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        function Person(name, age)
+        {
+            this.name = name;
+            this.age = age;
+        }
+
+        /*
+            放在原型链中，
+                节省内存
+                不会污染全局作用域，不会被轻易覆盖
+
+        */
+        Person.prototype.play = function() {
+            console.log("paly funny..");
+        }
+        
+        var ch = new Person('ch', 30);
+        ch.play();
+
+        var cl = new Person('cl', 28);
+        console.log(ch.play === cl.play); // true;
+
+        console.log(ch.__proto__ === cl.__proto__);// true
+
+    </script>
+
+</head>
+<body>
+    
+    <div>
+        <hr>
+
+        <h2>
+            Course Material
+        </h2>
+
+        <div>
+            <ul>
+                <li>
+                    我们创建每一个函数，解析器都会向函数中添加属性 prototype, 
+                    这个属性对应着一个对象，这个对象就是原型对象
+                </li>
+
+                <li>
+                    如果函数作为普通函数调用， prototype 没有任何作用
+                </li>
+
+                <li>
+                    但函数以构造函数的形式调用时，它所创建的对象中都会有一个隐含的属性，
+                    指向该改造函数的原型对象，我们可以通过 __proto__ 来访问该属性
+
+                </li>
+            </ul>
+        </div>
+        <img src="../../img/lilichao-js/066.png" alt="">
+
+    </div>
+</body>
+</html>
