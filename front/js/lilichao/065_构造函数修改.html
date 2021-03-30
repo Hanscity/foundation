@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        function Person(name, age)
+        {
+            this.name = name;
+            this.age = age;
+            this.play = play;
+        }
+
+        // 提取到外面来，非常的节省内存
+        function play()
+        {
+            console.log("paly funny..");
+        }
+
+        var ch = new Person('ch', 30);
+        ch.play();
+
+        var cl = new Person('cl', 28);
+        console.log(ch.play === cl.play); // true;
+
+
+    </script>
+</head>
+<body>
+    
+
+</body>
+</html>
