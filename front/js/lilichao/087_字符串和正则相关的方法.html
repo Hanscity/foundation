@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+
+        /*
+            根据任意的字母来拆分字符串
+
+            split 默认就是全局搜索，设置懒惰搜索不起作用
+
+        */
+        var str = "1a2b3c4d5e6f7g8H9I10J";
+
+        var res = str.split(/[A-z]/g);
+
+        console.log(res);
+
+
+
+        /*
+            搜索字符串中是否含有 abz acz aez
+
+            search 默认就是懒惰搜索，设置全局搜索不起作用
+        */
+
+        // var str = "abzckfhoiabzhgkjtklhljlshg";
+        // var res = str.search(/a[bce]z/g);
+
+        // console.log(res);
+
+
+        /*
+        
+            match:
+                默认情况下，只匹配一个，就不往下找寻
+                如果加上全局匹配模式，则会匹配所有
+
+                match 匹配的结果为数组
+
+        */
+
+        // var str = "1a2b3c4d5e6f7g8A9B10C";
+        // var res = str.match(/[A-z]/g);
+
+        // console.log(res);
+        // console.log(Array.isArray(res));
+
+
+
+        /*
+        
+            replace 类似于上面
+
+        */
+
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
