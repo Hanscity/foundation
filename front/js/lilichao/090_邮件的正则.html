@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        /*
+            邮件的正则：
+              196582aa@qq.com.cn
+
+              任意的字母数字下划线（1到30个） （点(.) 任意的字母数字下划线（1到30个））（0到3个） @ 任意的字母数字（1到10个） 
+              点(.) 任意字母（2到10位） (1 或 2 个)
+
+              var reg = /^\w{1,30}(\.\w{1,30}){0,3}@[A-z0-9]{1,10}(\.[\w]{2,10}){1,2}$/;
+
+              
+        */
+
+        var reg = /^\w{1,30}(\.\w{1,30}){0,3}@[A-z0-9]{1,10}(\.[\w]{2,10}){1,2}$/;
+        var res = reg.test("1988888@qq.com");
+
+        console.log(res);
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
