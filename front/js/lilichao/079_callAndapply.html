@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        function play()
+        {
+            console.log(this);
+        }
+
+        var obj = {
+            name: "ch",
+            age: 30
+        }
+
+        play();
+        play.call(obj);
+        play.apply(obj);
+
+
+    </script>
+</head>
+<body>
+    <div>
+        <hr>
+        <h3>Course Summary</h3>
+        <p>
+            当用 call 和 apply 调用时，this 就是指定的那个对象
+        </p>
+    </div>
+</body>
+</html>

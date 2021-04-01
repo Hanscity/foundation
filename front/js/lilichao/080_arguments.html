@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        function fun() {
+            console.log(arguments); // 会保存传递的实参
+            console.log(arguments.callee === fun); // true, 还会保存有很多其它的属性
+            
+        }
+
+        fun(1,2);
+        console.log()
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

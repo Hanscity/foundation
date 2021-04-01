@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+
+    <script>
+
+        
+        var s = 123;
+        s = s.toString();
+        s.hello = "world";
+
+        console.log(s.hello);  // undefined 
+
+
+    </script>
+</head>
+<body>
+    
+    <div class="hr">
+        <hr>
+        <h2>
+            Course Summary
+        </h2>
+
+        <p>
+            包装类，一般不使用，会改变原来数据的性质。但是 JS 的编译器会使用之(临时使用)。
+        </p>
+
+        <p>
+            当我们对一些基本数据类型的值去调用属性和方法时，浏览器会临时使用包装类将其转化为对象，然后再调用对象的属性和方法。
+            调用完以后，再将其转化为基本数据类型。
+        </p>
+
+        <div>
+            <pre>
+                <code>
+var s = 123;
+s = s.toString();
+s.hello = "world"; // 浏览器将字符串 s 转化为包装类对象
+
+console.log(s.hello); // undefined
+                      // 浏览器将字符串 s 转化为新的包装类对象，和上一个包装类对象是不同的对象，所以结果为 undefined
+    
+                </code>
+            </pre>
+            
+        </div>
+        
+    </div>
+</body>
+</html>
