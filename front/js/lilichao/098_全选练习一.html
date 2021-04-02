@@ -26,12 +26,24 @@
         window.onload = function () {
             
             var items = document.getElementsByName("items");
+            var allBox = document.getElementById("checkedAllBox");
+
+            function setBox() {
+                allBox.checked = true;
+                for (var j=0; j<items.length; j++) {
+                    if (! items[j].checked) {
+                        allBox.checked = false;
+                        break;
+                    }
+                }
+            }
 
             var allBtn = document.getElementById("checkAllBtn");
             allBtn.onclick = function () {
                 for (var i=0; i<items.length; i++) {
                     items[i].checked = true;
                 }
+                allBox.checked = true;
             }
 
             var noBtn = document.getElementById("checkNoBtn");
@@ -39,6 +51,7 @@
                 for (var i=0; i<items.length; i++) {
                     items[i].checked = false;
                 }
+                allBox.checked = false;
             }
 
             var revBtn = document.getElementById("checkRevBtn");
@@ -47,6 +60,8 @@
 
                     items[i].checked = !(items[i].checked);
                 }
+
+                setBox();
             }
 
 
@@ -61,14 +76,22 @@
             }
 
 
-            var allBox = document.getElementById("checkedAllBox");
-
+            
             allBox.onclick = function () {
                 for (var i=0; i<items.length; i++) {
                     // items[i].checked = allBox.checked;
                     items[i].checked = this.checked;
                 }
             }
+
+            for (var i=0; i<items.length; i++) {
+
+                items[i].onclick = function () {
+                    setBox();
+                }
+            }
+
+
         }
 
         
