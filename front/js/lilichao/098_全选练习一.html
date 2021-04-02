@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        form {
+            width: 300px;
+            height: 200px;
+            margin: 100px auto;
+            background-color: #232323;
+            color: #fff;
+        }
+
+        .btn {
+            width: 60px;
+        }
+
+    </style>
+
+
+    <script>
+
+        window.onload = function () {
+            
+            var items = document.getElementsByName("items");
+
+            var allBtn = document.getElementById("checkAllBtn");
+            allBtn.onclick = function () {
+                for (var i=0; i<items.length; i++) {
+                    items[i].checked = true;
+                }
+            }
+
+            var noBtn = document.getElementById("checkNoBtn");
+            noBtn.onclick = function () {
+                for (var i=0; i<items.length; i++) {
+                    items[i].checked = false;
+                }
+            }
+
+            var revBtn = document.getElementById("checkRevBtn");
+            revBtn.onclick = function () {
+                for (var i=0; i<items.length; i++) {
+
+                    items[i].checked = !(items[i].checked);
+                }
+            }
+
+
+            var sendBtn = document.getElementById("sendBtn");
+            sendBtn.onclick = function () {
+                
+                for (var i=0; i<items.length; i++) {
+                    if (items[i].checked) {
+                        alert(items[i].value);
+                    }
+                }
+            }
+
+
+            var allBox = document.getElementById("checkedAllBox");
+
+            allBox.onclick = function () {
+                for (var i=0; i<items.length; i++) {
+                    // items[i].checked = allBox.checked;
+                    items[i].checked = this.checked;
+                }
+            }
+        }
+
+        
+
+    </script>
+
+
+</head>
+<body>
+    
+
+
+
+    <form action="" method="post">
+
+        你爱好的运动是： 
+        <input type="checkbox" id="checkedAllBox"> 全选/全不选
+        <br>
+        <hr>
+
+        <input type="checkbox" name="items" value="足球">足球
+        <input type="checkbox" name="items" value="篮球">篮球
+        <input type="checkbox" name="items" value="网球">网球
+        <input type="checkbox" name="items" value="排球">排球
+
+        <br>
+        <hr>
+
+        <input type="button" id="checkAllBtn" value="全 选" class="btn">
+        <input type="button" id="checkNoBtn" value="全不选" class="btn">
+        <input type="button" id="checkRevBtn" value="反 选" class="btn">
+        <input type="button" id="sendBtn" value="弹出框" class="btn">
+
+    </form>
+</body>
+</html>
