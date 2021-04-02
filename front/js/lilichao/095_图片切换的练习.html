@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .outer {
+            width: 400px;
+            height: 340px;
+            margin: 100px auto;
+            background-color: #232323;
+
+            text-align: center;
+            color: #fff;
+        }
+
+        .outer img {
+            width: 400px;
+            height: 260px;
+        }
+
+        
+    </style>
+
+    <script>
+        window.onload = function () {
+
+
+            var imgArr = ["../../img/微信图片_20210208205128.jpg", "../../img/微信图片_20210208205232.jpg", "../../img/微信图片_20210208205249.jpg", 
+                            "../../img/微信图片_20210208205256.jpg", "../../img/微信图片_20210208205302.jpg"];
+
+            var indexImg = 0;
+            var imgObject = document.getElementsByTagName("img")[0];
+            imgObject.src = imgArr[indexImg];
+            
+            document.getElementsByTagName("p")[0].innerHTML = "图片共有 " + imgArr.length + " 张，当前为第 " + (indexImg + 1) + " 张";
+
+            document.getElementById("prev").onclick = function () {
+                if (indexImg == 0) {
+                    indexImg = imgArr.length -1;
+                } else {
+                    indexImg--;
+                }
+
+                
+                imgObject.src = imgArr[indexImg];
+                document.getElementsByTagName("p")[0].innerHTML = "图片共有 " + imgArr.length + " 张，当前为第 " + (indexImg + 1) + " 张";
+            }
+
+            document.getElementById("next").onclick = function () {
+                if (indexImg == imgArr.length -1) {
+                    indexImg = 0;
+                } else {
+                    indexImg++;
+                }
+
+                imgObject.src = imgArr[indexImg];
+                document.getElementsByTagName("p")[0].innerHTML = "图片共有 " + imgArr.length + " 张，当前为第 " + (indexImg + 1) + " 张";
+            }
+
+        }
+    </script>
+</head>
+<body>
+    
+    <div class="outer">
+        <p>
+            图片共有 N 张，当前为第 N 张
+        </p>
+
+        <img src="../../img/微信图片_20210208205232.jpg" alt="">
+        
+        <button id="prev">上一张</button>
+        <button id="next">下一张</button>
+    </div>
+</body>
+</html>
