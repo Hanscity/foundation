@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+    .outer {
+        width: 800px;
+        height: 800px;
+        background-color: #e6e6e6;
+        margin: 100px auto;
+        color: #323232;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .outer table {
+        width: 400px;
+        height: 200px;
+        border-collapse: collapse;
+        
+    }
+
+    table,table tr th, table tr td { 
+        border:1px solid #323232; 
+    }
+
+
+    .outer form {
+        width: 400px;
+        height: 200px;
+        border: 1px solid #323232;
+    }
+
+    .outer form div {
+        margin: 10px 10px;
+    }
+
+    </style>
+
+    <script>
+
+        function delA() {
+            // this 是点击超链接的对象
+            var tr = this.parentNode.parentNode;
+                    
+                    /*
+                        获取 tr 的第一个子元素
+
+                        // 方法一
+                        var name = tr.children[0].innerText;
+
+                        // 方法二
+                        // 可以看出， tr 也是可以 getElement...
+                        var name = tr.getElementsByTagName("td")[0].innerText;
+
+                    */
+                    var name = tr.getElementsByTagName("td")[0].innerText;
+
+                    var flag = confirm("确认删除 "+name+" 吗？");
+                    if (flag) {
+                        tr.parentNode.removeChild(tr);
+                    }
+                    
+                    // 否定了 a 标签的默认行为(跳转)
+                    // 方式二： javascript:;
+                    // 方式三： #
+                    return false;
+
+        }
+        window.onload = function () {
+
+            var aObj = document.getElementsByTagName("a");
+            for (var i=0; i<aObj.length; i++) {
+
+                aObj[i].onclick = delA;
+            }
+
+
+            var table = document.getElementsByTagName("table")[0];
+            var tbody = table.firstElementChild;
+
+            
+            var btn = document.getElementById("btn");
+
+            btn.onclick = function () {
+
+                var tr = document.createElement("tr");
+                var tdName = document.createElement("td");
+                var tdEmail = document.createElement("td");
+                var tdSalary = document.createElement("td");
+                var tdA = document.createElement("td");
+                var aEle = document.createElement("a");
+
+                var name = document.getElementById("name").value;
+                var email = document.getElementById("email").value;
+                var salary = document.getElementById("salary").value;
+
+                var nameText = document.createTextNode(name);
+                var emailText = document.createTextNode(email);
+                var salaryText = document.createTextNode(salary);
+                var aText = document.createTextNode("Delete");
+
+                tdName.appendChild(nameText);
+                tdEmail.appendChild(emailText);
+                tdSalary.appendChild(salaryText);
+                aEle.appendChild(aText);
+                aEle.href = "javascript:;";
+                aEle.class = "delete";
+                aEle.onclick = delA;
+                tdA.appendChild(aEle);
+
+                tr.appendChild(tdName);
+                tr.appendChild(tdEmail);
+                tr.appendChild(tdSalary);
+                tr.appendChild(tdA);
+
+                tbody.appendChild(tr);
+
+            }
+
+
+
+        }
+
+
+
+    </script>
+</head>
+<body>
+    
+    <div class="outer">
+        <div class="table">
+            <table>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+
+                    <th>
+                        Email
+                    </th>
+
+                    <th>
+                        Salary
+                    </th>
+
+                    <th>
+                        Operate
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        Tom
+                    </td>
+
+                    <td>
+                        tom@tom.com
+                    </td>
+
+                    <td>
+                        5000
+                    </td>
+
+                    <td>
+                        <a href="record.php?id=1" class="delete">Delete</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Jerry
+                    </td>
+
+                    <td>
+                        jerry@sohu.com
+                    </td>
+
+                    <td>
+                        8000
+                    </td>
+
+                    <td>
+                        <a href="record.php?id=2" class="delete">Delete</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Bob
+                    </td>
+
+                    <td>
+                        Bob@sohu.com
+                    </td>
+
+                    <td>
+                        10000
+                    </td>
+
+                    <td>
+                        <a href="record.php?id=3" class="delete">Delete</a>
+                    </td>
+                </tr>
+
+
+            </table>
+        </div>
+
+
+        <div class="form">
+            <form action="#">
+
+                <h3>添加新员工</h3>
+
+                <div>
+                    name: <input type="text" id="name">
+                </div>
+
+                <div>
+                    email: <input type="text" id="email">
+                </div>
+
+                <div>
+                    salary: <input type="text" id="salary">
+                </div>
+            
+                <div>
+                    <button type="submit" id="btn">Submit</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</body>
+</html>
