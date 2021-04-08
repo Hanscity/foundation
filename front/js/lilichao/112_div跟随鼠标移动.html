@@ -34,6 +34,10 @@
 
                     所以这里需要改为 pageX, 这样就都一致了
 
+                    备注： IE 8 不兼容 pageX 这个属性，只支持 clientX 属性
+                          为了兼容 IE8，可以都用 clientX，然后加上滑动的距离即可
+                          这里就不做练习了
+
                 */
                 d1.style.left = event.pageX + "px";
                 d1.style.top = event.pageY + "px";
