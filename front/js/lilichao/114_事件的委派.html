@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        ul {
+            background-color: #e6e6e6;
+        }
+    </style>
+    
+    <script>
+        window.onload = function () {
+            var btn01 = document.getElementById("btn01");
+            var ul = document.getElementById("d1");
+
+            btn01.onclick = function () {
+                var li = document.createElement("li");
+                li.innerHTML = '<a href="javascript:;" class="link">超链接 added</a>';
+                ul.appendChild(li);
+            }
+
+
+            /*
+                事件的委派
+                    给父元素绑定事件，这样子的好处就是新增元素之后，就不需要再为新增的元素一个一个的绑定某些事件了
+                    
+            */
+
+            ul.onclick = function (event) {
+
+                if (event.target.className == "link") {
+                    console.log("特定元素的事件委派成功~");
+                }
+
+            }
+           
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <button id="btn01">Add Link</button>
+    </div>
+
+    <hr>
+
+    <ul id="d1">
+        <li><a href="javascript:;" class="link">超链接1</a></li>
+        <li><a href="javascript:;" class="link">超链接2</a></li>
+        <li><a href="javascript:;" class="link">超链接3</a></li>
+    </ul>
+</body>
+</html>
