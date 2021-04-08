@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .practice {
+            width: 400px;
+            height: 400px;
+            margin: 100px auto;
+            background-color: #e6e6e6;
+        }
+
+        #areaDiv {
+            width: 100%;
+            height: 200px;
+            border: 1px solid red;
+        }
+
+        #showMsg {
+            width: 100%;
+            height: 100px;
+            border: 1px solid orange;
+            margin: 10px 0;
+        }
+    </style>
+
+    <script>
+        window.onload = function () {
+            var areaDiv = document.getElementById("areaDiv");
+            var showMsg = document.getElementById("showMsg");
+
+            /*
+                当事件触发时，浏览器会将事件对象作为实参传入
+            */
+            areaDiv.onmousemove = function (event) {
+
+                /*
+                    IE 8 中，此时 event 是 undefined，它会将 event 封装进 window 的对象中
+                */
+                // if (! event) {
+                //     event = window.event;
+                // }
+                /*
+                    更为常见的写法：
+                */
+                event = event || window.event;
+
+                var x = event.clientX;
+                var y = event.clientY;
+
+                showMsg.innerText = "x = " + x + "; y = " + y;
+            }
+        }
+    </script>
+</head>
+<body>
+    
+
+    <div class="practice">
+
+        <div id="areaDiv">
+
+        </div>
+
+        <div id="showMsg">
+
+        </div>
+
+
+    </div>
+</body>
+</html>
