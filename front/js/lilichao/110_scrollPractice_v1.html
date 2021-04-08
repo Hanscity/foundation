@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .outer {
+            margin: 100px auto;
+            width: 500px;
+            height: 700px;
+        }
+
+        .title {
+            text-align: center;
+        }
+        .content {
+            width: 100%;
+            height: 600px;
+            overflow: auto;
+            background-color: #e6e6e6;
+        }
+
+        .register button {
+            float: right;
+            width: 100px;
+            font-size: 16px;
+            margin: 10px;
+        }
+    </style>
+
+    <script>
+        window.onload = function () {
+
+            var btnRegister = document.getElementById("btnRegister");
+            var content = document.getElementsByClassName("content")[0];
+
+            btnRegister.onclick = function () {
+                console.log(content.clientHeight);  
+                console.log(content.scrollTop);
+                console.log(content.scrollHeight);
+
+                if ((content.scrollHeight - content.scrollTop) == content.clientHeight) {
+                    alert("可以注册");
+                }else {
+                    alert("请看完协议");
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    
+    <div class="outer">
+
+        <div class="title">
+            <h3>请仔细阅读协议</h3>
+        </div>
+        
+        <div class="content">
+            简介编辑
+Terrorblade和Magina原是孪生兄弟。虽然同样流着暗夜精灵的血，Terrorblade却受到不死族力量的诱惑而陷入不归的深渊。背上巨大的恶魔之翼代表了他和暗夜世界的彻底决裂。他熟练的掌握了镜像的制造以及对灵魂的操纵。他可以变身为可怕而强大的恶魔，通过投掷能量打击对手。挥舞着巨大月刃的他无疑是战场上的一个噩梦。
+初始系数编辑
+初始射程 (Base Range): 128
+初始攻击间隔 (Base Attack Time): 1.5
+初始移动速度 (Base Move Speed): 310
+初始防御 (Base Armor): 7.2
+基本属性 (Primary Attribute): 敏捷 / Agility
+初始攻击力 (Base Damage): 48 - 54
+初始力量值 (Base Strength): 15
+初始敏捷值 (Base Agility): 22
+初始智力值 (Base Intelligence): 15
+力量增长系数 (Strength Growth): 1.40
+敏捷增长系数 (Agility Growth): 3.20
+智力增长系数 (Intelligence Growth): 1.75
+英雄技能编辑
+倒影 (C)
+倒影：
+　　============
+　　灵魂守卫映出敌人的黑暗倒影反制敌人，被照映的敌方单位会受到自身倒影的攻击。黑暗倒影降低本体60%的攻 击/移动速度，拥有攻击力并且不受伤害，持续5秒。
+　　施法距离：250
+　　魔法消耗：50
+　　冷却时间：22/18/14/10
+　　幻想伤害：40/50/60/70%
+　　移动/攻击速度降低：60%
+　　持续时间：5 seconds
+祈灵术： (E)
+祈灵术：
+　　===============
+　　制造一个具有恐怖利刃60%攻击力的幻象。幻象承受300%的伤害。持续25秒。
+　　幻想伤害：30/40/50/60%
+　　幻象承受伤害：300%
+　　持续时间：25
+　　魔法消耗：80
+　　Cooldown: 16
+变身 (T)
+恐怖利刃变身成为强力的恶魔，具备远程攻击能力。
+　　攻击力加成：20/40/60/80
+　　攻击距离：500
+　　持续时间：40
+　　冷却时间：150
+　　魔法消耗：50
+灵魂隔断 (R)
+隔断并重新连接灵魂守卫和目标英雄的灵魂，两者现有生命值的百分比会随之互换。目标英雄仍将保留一定百分比的生命。 施法距离：250
+等级1 - 交换双方生命值的百分比，目标英雄至少保留25%的生命。
+　　等级2 - 交换双方生命值的百分比，目标英雄至少保留20%的生命。
+　　等级3 - 交换双方生命值的百分比，目标英雄至少保留15%的生命。
+等级1: 魔法消耗200点，施法间隔160秒。
+　　等级2: 魔法消耗100点，施法间隔110秒。
+　　等级3: 魔法消耗0点，施法间隔60秒。
+        </div>
+
+        <div class="register">
+            <div class="btnRegister">
+                <button id="btnRegister">注册</button>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>
