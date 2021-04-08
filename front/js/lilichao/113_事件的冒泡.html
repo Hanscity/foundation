@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #d1 {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+
+        #s1 {
+            background-color: orange;
+        }
+
+    </style>
+
+    <script>
+        window.onload = function () {
+
+            /*
+                关于冒泡的理解：
+                    body->d1->s1, 当你点击 s1 的时候，s1 也属于 d1 的范畴，当然 d1 也会有点击事件。body 同理~
+                    形象理解为，一个事件在向外传播
+            */
+            var d1 = document.getElementById("d1");
+            d1.onclick = function () {
+                console.log("im d1");
+            }
+
+            var s1 = document.getElementById("s1");
+            s1.onclick = function (event) {
+                console.log("im s1");
+                // 在这里取消事件的冒泡
+                event.cancelBubble = true;
+            }
+
+            var body = document.getElementsByTagName("body")[0];
+            body.onclick = function () {
+                console.log("I'm Body");
+            }
+
+            
+        }
+    </script>
+    
+</head>
+<body>
+    
+    <div id="d1">
+        im div == d1
+        <span id="s1">
+            im span == s1
+        </span>
+    </div>
+</body>
+</html>
