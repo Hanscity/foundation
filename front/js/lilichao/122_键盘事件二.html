@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        window.onload = function () {
+            var input = document.getElementsByTagName("input")[0];
+
+            input.onkeydown = function (event) {
+
+                /*
+                    小练习： 输入框内，不能输入数字
+                */
+
+                if (event.keyCode >= 48 && event.keyCode <= 57) {
+                    // 如果否定了默认事件，则键盘输入无法显示在输入框
+                    return false;
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    
+    <div>
+        Test: <input type="text">
+    </div>
+</body>
+</html>
