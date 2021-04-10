@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <style>
+        #img {
+            width: 600px;
+            height: 400px;
+        }
+
+        
+        .divButton button {
+            width: 60px;
+            height: 30px;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+
+            var img = document.getElementById("img");
+            var start = document.getElementById("start");
+            var end = document.getElementById("end");
+
+            var imgArr = ["../../img/微信图片_20210208205128.jpg", "../../img/微信图片_20210208205232.jpg", 
+                            "../../img/微信图片_20210208205241.jpg","../../img/微信图片_20210208205249.jpg", 
+                            "../../img/微信图片_20210208205256.jpg"];
+            var index = 0;
+            var timer;
+
+            start.onclick = function () {
+
+                /*
+                    如果，不清除定时器，那么用户可以一直点击按钮，那么会一直在不断的开启新的定时器
+
+                    timer 是 undefined，对于函数 clearInterval ，无碍~
+
+                */
+                clearInterval(timer);
+
+                /*
+                    timer 这个变量的作用域，我有点混淆
+
+                    这个匿名函数的里面，不能用 var, 否则外面找不到
+
+                    如果不用 var, 则相当于是外面的全局变量
+                */
+                timer = setInterval(function () {
+                    var indexSrc = index % imgArr.length;
+                    img.src = imgArr[indexSrc];
+                    index ++;
+                }, 1000);
+            }
+
+            end.onclick = function () {
+                clearInterval(timer);
+            }
+            
+
+        }
+    </script>
+</head>
+<body>
+    
+    
+
+    <div class="divImg">
+        <img src="../../img/微信图片_20210208205128.jpg" alt="" id="img">
+    </div>
+
+    <br>
+
+    <div class="divButton">
+        <h3>自动切换图片</h3>
+        <button id="start">开始</button>
+        
+        <button id="end">停止</button>
+
+    </div>
+</body>
+</html>
