@@ -50,18 +50,18 @@
                 speed 永远传入正值，向左移动还是向右移动，交给程序来判断~
 
             */
-            if (d1.offsetLeft > target) {
+            if (obj.offsetLeft > target) {
                 speed = -speed;
             }
 
             timer = setInterval(function () {
 
-                d1.style.left = d1.offsetLeft + speed + "px";
+                obj.style.left = obj.offsetLeft + speed + "px";
 
-                if ((speed < 0 && parseInt(d1.offsetLeft) <= target) 
-                    || (speed >= 0 && parseInt(d1.offsetLeft) >= target) ) {
+                if ((speed < 0 && parseInt(obj.offsetLeft) <= target) 
+                    || (speed >= 0 && parseInt(obj.offsetLeft) >= target) ) {
 
-                    d1.style.left = target + "px";
+                    obj.style.left = target + "px";
                     clearInterval(timer);
                 }
             }, 30);
