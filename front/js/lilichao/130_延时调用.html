@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        window.onload = function () {
+
+            var num = 1000;
+
+            /*
+                延时调用：
+                    只调用一次
+
+                定时调用和延时调用可以互换，定时调用只调用一次，就是延时调用；延时调用多次，就是定时调用。
+
+            */
+            var timer = setTimeout(function () {
+                console.log(num++);
+            }, 3000);
+
+            /*
+                如果开启了延时调用，还未到执行时间就关闭了，那么延时调用里的函数就不会执行了，也就关闭了~
+
+            */
+            clearTimeout(timer);
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
