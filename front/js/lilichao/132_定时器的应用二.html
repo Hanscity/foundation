@@ -53,6 +53,8 @@
             if (obj.offsetLeft > target) {
                 speed = -speed;
             }
+            console.log(speed);
+            console.log(target);
 
             timer = setInterval(function () {
 
@@ -61,6 +63,7 @@
                 if ((speed < 0 && parseInt(obj.offsetLeft) <= target) 
                     || (speed >= 0 && parseInt(obj.offsetLeft) >= target) ) {
 
+                    console.log(obj.offsetLeft);
                     obj.style.left = target + "px";
                     clearInterval(timer);
                 }

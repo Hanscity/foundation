@@ -44,29 +44,40 @@
 
     <script>
 
-        function move(obj, speed, target) {
+        function getStyle(obj, name) {
+            // 这里一定要加上 window, 因为对象的属性没有会报错为 undefined, 而变量没有会直接报错~
+            if (window.getComputedStyle) {
+                return getComputedStyle(obj)[name];
+            } else {
+                // IE 8 的用法
+                return obj.currentStyle[name];
+            }
+        }
+
+
+        function move(obj, attr, speed, target) {
 
             clearInterval(obj.timer);
-            /*
-                speed 永远传入正值，向左移动还是向右移动，交给程序来判断~
-
-            */
-            if (obj.offsetLeft > target) {
+            
+            if (parseInt(getStyle(obj, attr)) > target) {
                 speed = -speed;
             }
 
             obj.timer = setInterval(function () {
 
-                obj.style.left = obj.offsetLeft + speed + "px";
+                var attrValue = parseInt(getStyle(obj, attr));
+                obj.style[attr] = attrValue + speed + "px";
 
-                if ((speed < 0 && parseInt(obj.offsetLeft) <= target) 
-                    || (speed >= 0 && parseInt(obj.offsetLeft) >= target) ) {
+                if ((speed < 0 && parseInt(attrValue) <= target) || 
+                    (speed >= 0 && parseInt(attrValue) >= target) ) {
 
-                    obj.style.left = target + "px";
+                    obj.style[attr] = target + "px";
                     clearInterval(obj.timer);
                 }
             }, 30);
         }   
+
+
 
 
 
@@ -79,23 +90,24 @@
             var btnLeftTortoise = document.getElementById("leftTortoise");
             var btnRightTortoise = document.getElementById("rightTortoise");
 
-            btnRightMove.onclick = function () {
-                move(d1, 19, 800);
-            };
-
             btnLeftMove.onclick = function () {
-                move(d1, 19, 0);
+                move(d1, "width", 19, 0);
             };
 
-
-            btnRightTortoise.onclick = function () {
-                move(tortoise, 9, 800);
-            }
-
+            btnRightMove.onclick = function () {
+                move(d1, "width", 19, 800);
+            };
 
             btnLeftTortoise.onclick = function () {
-                move(tortoise, 9, 0);
+                move(tortoise, "left", 9, 0);
             }
+
+            btnRightTortoise.onclick = function () {
+                move(tortoise, "left", 9, 800);
+            }
+
+
+            
 
 
         }
