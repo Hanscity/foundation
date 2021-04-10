@@ -41,65 +41,46 @@
     </style>
 
     <script>
+
+        var timer;
+        function move(obj, speed, target) {
+
+            clearInterval(timer);
+            /*
+                speed 永远传入正值，向左移动还是向右移动，交给程序来判断~
+
+            */
+            if (d1.offsetLeft > target) {
+                speed = -speed;
+            }
+
+            timer = setInterval(function () {
+
+                d1.style.left = d1.offsetLeft + speed + "px";
+
+                if ((speed < 0 && parseInt(d1.offsetLeft) <= target) 
+                    || (speed >= 0 && parseInt(d1.offsetLeft) >= target) ) {
+
+                    d1.style.left = target + "px";
+                    clearInterval(timer);
+                }
+            }, 30);
+        }
+
+
+
         window.onload = function () {
             var d1 = document.getElementById("d1");
             var btnRightMove = document.getElementById("rightMove");
             var btnLeftMove = document.getElementById("leftMove");
 
-            var timerRight;
-            var timerLeft;
-
             btnRightMove.onclick = function () {
-                
-                clearInterval(timerRight);
-                clearInterval(timerLeft);
-
-                timerRight = setInterval(function () {
-
-                    // offsetLeft 挺好用，暂且不用 getComputedStyle 方法
-                    d1.style.left = d1.offsetLeft + 19 + "px";
-                    
-                    if (parseInt(d1.offsetLeft) >= 800) {
-                        d1.style.left = 800 + "px";
-                        clearInterval(timerRight);
-                    }
-        
-                }, 30);
-
-            }
-
+                move(d1, 19, 800);
+            };
 
             btnLeftMove.onclick = function () {
-                
-                clearInterval(timerLeft);
-                clearInterval(timerRight);
-
-                timerLeft = setInterval(function () {
-
-                    d1.style.left = d1.offsetLeft - 19 + "px";
-                    
-                    if (parseInt(d1.offsetLeft) <= 0) {
-                        d1.style.left = 0 + "px";
-                        clearInterval(timerLeft);
-                    }
-        
-                }, 30);
-
-            }
-
-
-
-
-            function getStyle(obj, name) {
-                // 这里一定要加上 window, 因为对象的属性没有会报错为 undefined, 而变量没有会直接报错~
-                if (window.getComputedStyle) {
-                    return getComputedStyle(obj)[name];
-                } else {
-                    // IE 8 的用法
-                    return obj.currentStyle[name];
-                }
-            }
-
+                move(d1, 19, 0);
+            };
         }
     </script>
 </head>
