@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        window.onload = function () {
+            var btn01 = document.getElementById("btn01");
+
+            btn01.onclick = function () {
+
+                /*
+                    console.log 和 alert 的打印稍有不同
+                */
+                // console.log(location);
+                // alert(location);
+
+                /*
+                    赋值 location 会前往这个 URL，相对路径也会生效
+
+                    location.assign("https://www.baidu.com") 等同于 location = "https://www.baidu.com"
+
+
+                */
+                // location.assign("https://www.baidu.com");
+
+
+                /*
+                    location.reload();          等同于刷新按钮
+                    location.reload(true);      等同于清空缓存再刷新， Ctrl + F5
+
+                    chrome: 内容留不下来了，默认都是清空缓存了
+                    firefox: 有效
+                */
+                // location.reload(true);
+
+                /*
+                
+                    location.replace();
+                    类似于 location.assign(), 区别是不会生成历史记录,也就是说在新的页面点击回退按钮会回退到初始的空白页
+
+                */
+
+                location.replace("https://www.baidu.com");
+                
+
+            }
+        }
+    </script>
+</head>
+<body>
+    
+    <div class="d1">
+
+        <button id="btn01">Click</button>
+        <br>
+
+        nickname: <input type="text">
+    </div>
+</body>
+</html>
