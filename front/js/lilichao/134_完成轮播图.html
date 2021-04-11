@@ -59,6 +59,13 @@
     <script>
         window.onload = function () {
 
+            var timer;
+            /*
+                默认显示的 a 标签
+                showIndex: 公用这一个参数的好处是，当手动点击之后，自动切换会在手动点击的此图片基础上走下一张图片
+            */
+            var showIndex = 0;
+
             /*
                 动态计算出 ul 的总宽度，因为图片可能增加或者减少
             */
@@ -74,10 +81,6 @@
             var link = document.getElementsByClassName("link")[0];
             link.style.left = (parseInt(getComputedStyle(outer).width) - 20 * aElement.length)/2 + "px";
 
-            /*
-                默认显示的 a 标签
-            */
-            var showIndex = 0;
             aElement[showIndex].style.backgroundColor = "black";
 
             /*
@@ -87,14 +90,20 @@
                 aElement[i].num = i;
                 aElement[i].onclick = function () {
                     
-                    // ul.style.left = this.num * -620 + "px";
                     /*
-                        引用 move 函数
-                            speed: 62, target -620 能除尽比较好，不然会闪现以下空白再回退~
+                        手动点击图片，关闭定时器，是不希望定时器的切换对手动切换造成干扰
+
                     */
-                    move(ul, "left", 62, this.num * -620);
+                    clearInterval(timer);
+
+                    /*
+                        手动点击图片，不要动画效果比较好
+                    */
+                    ul.style.left = this.num * -620 + "px";
+                    // move(ul, "left", 62, this.num * -620);
                     showIndex = this.num;
                     setAcolor(this.num);
+                    changeColor();
                 }
             }
 
@@ -113,14 +122,26 @@
 
             changeColor();
 
+
             /*
                 自动切换图片
             */
            function changeColor() {
 
-                setInterval(function () {
-                    showIndex = (++ showIndex) % aElement.length;
-                    console.log(showIndex);
+                timer = setInterval(function () {
+                    ++ showIndex
+                    /*
+                        将判断写在这个位置更好，如果写在 setAcolor() 函数里面，还多走了一个动画效果
+                    */
+                    if (showIndex == (liAll.length - 1)) {
+                        showIndex = 0;
+                        ul.style.left = 0;
+                    }
+                    showIndex %= liAll.length;
+                    /*
+                        自动切换，引用 move 函数 效果比较好
+                            speed: 62, target -620 能除尽比较好，不然会闪现以下空白再回退~
+                    */
                     move(ul, "left", 62, showIndex * -620, function () {
                         setAcolor(showIndex);
                     });
@@ -147,6 +168,8 @@
             <li><img src="../../img/微信图片_20210208205249.jpg" alt=""></li>
 
             <li><img src="../../img/微信图片_20210208205256.jpg" alt=""></li>
+
+            <li><img src="../../img/微信图片_20210208205128.jpg" alt=""></li>
 
         </ul>
 

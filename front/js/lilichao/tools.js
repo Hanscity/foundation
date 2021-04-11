@@ -9,6 +9,15 @@ function getStyle(obj, name) {
 }
 
 
+/**
+ * @comment: 动画效果改变属性
+ * 
+ * @param {*} obj 
+ * @param {*} attr 
+ * @param {*} speed 
+ * @param {*} target 
+ * @param {*} callback 
+ */
 function move(obj, attr, speed, target, callback) {
 
     clearInterval(obj.timer);
