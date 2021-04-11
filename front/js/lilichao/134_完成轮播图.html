@@ -55,6 +55,7 @@
 
     </style>
 
+    <script src="./tools.js"></script>
     <script>
         window.onload = function () {
 
@@ -76,8 +77,34 @@
             /*
                 默认显示的 a 标签
             */
-            var aShowIndex = 0;
-            aElement[aShowIndex].style.backgroundColor = "black";
+            aElement[0].style.backgroundColor = "black";
+
+            /*
+                点击选中图片
+            */
+
+            for (var i=0; i<aElement.length; i++) {
+                aElement[i].num = i;
+
+                aElement[i].onclick = function () {
+                    
+                    // ul.style.left = this.num * -620 + "px";
+                    // 引用 move 函数
+                    move(ul, "left", 100, this.num * -620);
+                    setAcolor(this.num);
+                }
+            }
+
+            function setAcolor(num) {
+
+                for (var i=0; i<aElement.length; i++) {
+
+                    // 这里设置的内联样式，优先级较高；如果直接设置为 black，hover 就会失效；设置为空，则不会覆盖默认的样式
+                    aElement[i].style.backgroundColor = "";
+                }
+                aElement[num].style.backgroundColor = "black";
+            }
+
 
         }
     </script>
@@ -106,6 +133,7 @@
             <a href="javascript:;"></a>
             <a href="javascript:;"></a>
         </div>
+
     </div>
 </body>
 </html>
