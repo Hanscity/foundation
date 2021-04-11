@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../../css/reset.css">
+
+    <style>
+
+        .outer {
+            width: 620px;
+            height: 420px;
+            background-color: #e6e6e6;
+            margin: 100px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        ul {
+
+            height: 420px;
+            position: absolute;
+            left: 0px;
+        }
+
+        ul li {
+            float: left;
+            margin: 10px;
+        }
+
+        img {
+            width: 600px;
+            height: 400px;
+        }
+
+        .link {
+            position: absolute;
+            bottom: 15px;
+        }
+
+        .link a {
+            float: left;
+            width: 15px;
+            height: 15px;
+            margin: 5px;
+            background-color: red;
+            opacity: 0.5;
+        }
+
+        .link a:hover {
+            background-color: black;
+        }
+
+    </style>
+
+    <script>
+        window.onload = function () {
+
+            /*
+                动态计算出 ul 的总宽度，因为图片可能增加或者减少
+            */
+            var liAll = document.getElementsByTagName("li");
+            var ul = document.getElementById("imgList");
+            ul.style.width = liAll.length * 620 + "px";
+
+            /*
+                动态计算出超链接的居中位置，因为图片可能增加或者减少
+            */
+            var aElement = document.getElementsByTagName("a");
+            var outer = document.getElementsByClassName("outer")[0];
+            var link = document.getElementsByClassName("link")[0];
+            link.style.left = (parseInt(getComputedStyle(outer).width) - 20 * aElement.length)/2 + "px";
+
+            /*
+                默认显示的 a 标签
+            */
+            var aShowIndex = 0;
+            aElement[aShowIndex].style.backgroundColor = "black";
+
+        }
+    </script>
+</head>
+
+<body>
+    
+    <div class="outer">
+        <ul id="imgList">
+
+            <li><img src="../../img/微信图片_20210208205128.jpg" alt=""></li>
+
+            <li><img src="../../img/微信图片_20210208205232.jpg" alt=""></li>
+
+            <li><img src="../../img/微信图片_20210208205241.jpg" alt=""></li>
+
+            <li><img src="../../img/微信图片_20210208205249.jpg" alt=""></li>
+
+            <li><img src="../../img/微信图片_20210208205256.jpg" alt=""></li>
+        </ul>
+
+        <div class="link">
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+        </div>
+    </div>
+</body>
+</html>
