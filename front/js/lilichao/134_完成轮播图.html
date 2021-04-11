@@ -77,15 +77,14 @@
             /*
                 默认显示的 a 标签
             */
-            aElement[0].style.backgroundColor = "black";
+            var showIndex = 0;
+            aElement[showIndex].style.backgroundColor = "black";
 
             /*
                 点击选中图片
             */
-
             for (var i=0; i<aElement.length; i++) {
                 aElement[i].num = i;
-
                 aElement[i].onclick = function () {
                     
                     // ul.style.left = this.num * -620 + "px";
@@ -94,10 +93,14 @@
                             speed: 62, target -620 能除尽比较好，不然会闪现以下空白再回退~
                     */
                     move(ul, "left", 62, this.num * -620);
+                    showIndex = this.num;
                     setAcolor(this.num);
                 }
             }
 
+            /*
+                设置颜色
+            */
             function setAcolor(num) {
 
                 for (var i=0; i<aElement.length; i++) {
@@ -107,6 +110,23 @@
                 }
                 aElement[num].style.backgroundColor = "black";
             }
+
+            changeColor();
+
+            /*
+                自动切换图片
+            */
+           function changeColor() {
+
+                setInterval(function () {
+                    showIndex = (++ showIndex) % aElement.length;
+                    console.log(showIndex);
+                    move(ul, "left", 62, showIndex * -620, function () {
+                        setAcolor(showIndex);
+                    });
+                }, 3000);
+           }
+
 
 
         }
@@ -127,6 +147,7 @@
             <li><img src="../../img/微信图片_20210208205249.jpg" alt=""></li>
 
             <li><img src="../../img/微信图片_20210208205256.jpg" alt=""></li>
+
         </ul>
 
         <div class="link">
