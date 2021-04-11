@@ -22,6 +22,9 @@
             height: 100px;
             background-color: red;
             position: absolute;
+            font-size: 40px;
+            text-align: center;
+            line-height: 100px;
         }
 
         #d2 {
@@ -37,65 +40,44 @@
             height: 100px;
             background-color: orange;
             position: absolute;
-            top: 400px;
-
+            top: 300px;
+            font-size:26px;
+            text-align: center;
+            line-height: 100px;
         }
+
+        #machine {
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            position: absolute;
+            top: 500px;
+            font-size:26px;
+            text-align: center;
+            line-height: 100px;
+        }
+
     </style>
-
+    <script src="./tools.js"></script>
     <script>
-
-        function getStyle(obj, name) {
-            // 这里一定要加上 window, 因为对象的属性没有会报错为 undefined, 而变量没有会直接报错~
-            if (window.getComputedStyle) {
-                return getComputedStyle(obj)[name];
-            } else {
-                // IE 8 的用法
-                return obj.currentStyle[name];
-            }
-        }
-
-
-        function move(obj, attr, speed, target) {
-
-            clearInterval(obj.timer);
-            
-            if (parseInt(getStyle(obj, attr)) > target) {
-                speed = -speed;
-            }
-
-            obj.timer = setInterval(function () {
-
-                var attrValue = parseInt(getStyle(obj, attr));
-                obj.style[attr] = attrValue + speed + "px";
-
-                if ((speed < 0 && parseInt(attrValue) <= target) || 
-                    (speed >= 0 && parseInt(attrValue) >= target) ) {
-
-                    obj.style[attr] = target + "px";
-                    clearInterval(obj.timer);
-                }
-            }, 30);
-        }   
-
-
-
-
 
         window.onload = function () {
             var d1 = document.getElementById("d1");
             var tortoise = document.getElementById("tortoise");
+            var machine = document.getElementById("machine");
 
             var btnRightMove = document.getElementById("rightMove");
             var btnLeftMove = document.getElementById("leftMove");
             var btnLeftTortoise = document.getElementById("leftTortoise");
             var btnRightTortoise = document.getElementById("rightTortoise");
+            var btnMachine = document.getElementById("changeMachine");
 
             btnLeftMove.onclick = function () {
-                move(d1, "width", 19, 0);
+                move(d1, "left", 19, 0);
             };
 
             btnRightMove.onclick = function () {
-                move(d1, "width", 19, 800);
+                move(d1, "left", 19, 800);
             };
 
             btnLeftTortoise.onclick = function () {
@@ -106,27 +88,38 @@
                 move(tortoise, "left", 9, 800);
             }
 
-
-            
-
-
+            btnMachine.onclick = function () {
+                move(machine, "width", 19, 800, function () {
+                    move(machine, "height", 19, 400, function () {
+                        move(machine, "top", 19, 700, function () {
+                            move(machine, "top", 6, 500, function () {
+                                move(machine, "width", 19, 100, function () {
+                                    move(machine, "height", 19, 100);
+                                });
+                            });
+                        });
+                    });
+                });
+            };
         }
     </script>
 </head>
 <body>
     <div>
-        <button id="leftMove">Left Move</button>
+        <button id="leftMove">Left d1</button>
 
-        <button id="rightMove">Right Move</button>
+        <button id="rightMove">Right d1</button>
 
         <button id="leftTortoise">Left Tortoise</button>
 
         <button id="rightTortoise">Right Tortoise</button>
+
+        <button id="changeMachine">Machine</button>
     </div>
 
 
     <div id="d1">
-
+        d1
     </div>
 
     <div id="d2">
@@ -134,7 +127,11 @@
     </div>
 
     <div id="tortoise">
+        tortoise
+    </div>
 
+    <div id="machine">
+        machine
     </div>
 </body>
 </html>
