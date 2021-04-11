@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .d1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+
+        .d2 {
+            height: 200px;
+            background-color: yellow;
+        }
+
+
+    </style>
+
+    <script>
+        window.onload = function () {
+
+            var d1 = document.getElementsByClassName("d1")[0];
+
+            var btn01 = document.getElementById("btn01");
+
+            /*
+            
+                如果单独操作对象的属性，主要有两个缺点：
+                    1. 没修改一次，浏览器需要重新加载一次，影响性能
+                    2. JS 和 CSS 代码没有分离
+                
+                故，优先操作对象
+                
+            */
+            btn01.onclick = function () {
+                toggleClassName(d1, "d2");
+            }
+
+
+            function addClassName(obj, className) {
+                if (! hasClassName(obj, className)) {
+                    obj.className += " " + className;
+                }
+            }
+
+            function hasClassName(obj, className) {
+                var reg = new RegExp("\\b" + className + "\\b");
+                var bool =  reg.test(obj.className)
+                return bool;
+            }
+
+            function removeClassName(obj, className) {
+                var reg = new RegExp("\\b" + className + "\\b");
+                obj.className = obj.className.replace(reg, "");
+            }
+
+
+            /*
+                如果有，则添加此类
+                如果没有，则删除此类
+
+            */
+            function toggleClassName(obj, className) {
+                if (hasClassName(obj, className)) {
+                    removeClassName(obj, className);
+                } else {
+                    addClassName(obj, className);
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+    
+    <button id="btn01">点击按钮操作 d1 的样式</button>
+    <hr>
+
+    <div class="d1">
+
+    </div>
+</body>
+</html>

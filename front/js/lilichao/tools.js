@@ -40,3 +40,40 @@ function move(obj, attr, speed, target, callback) {
         }
     }, 30);
 }
+
+
+/**
+ * 
+ *  类的操作
+ */
+
+function addClassName(obj, className) {
+    if (! hasClassName(obj, className)) {
+        obj.className += " " + className;
+    }
+}
+
+function hasClassName(obj, className) {
+    var reg = new RegExp("\\b" + className + "\\b");
+    var bool =  reg.test(obj.className)
+    return bool;
+}
+
+function removeClassName(obj, className) {
+    var reg = new RegExp("\\b" + className + "\\b");
+    obj.className = obj.className.replace(reg, "");
+}
+
+
+/**
+ * 如果有，则添加此类; 如果没有，则删除此类;
+ * @param {*} obj 
+ * @param {*} className 
+ */
+function toggleClassName(obj, className) {
+    if (hasClassName(obj, className)) {
+        removeClassName(obj, className);
+    } else {
+        addClassName(obj, className);
+    }
+}
