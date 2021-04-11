@@ -89,8 +89,11 @@
                 aElement[i].onclick = function () {
                     
                     // ul.style.left = this.num * -620 + "px";
-                    // 引用 move 函数
-                    move(ul, "left", 100, this.num * -620);
+                    /*
+                        引用 move 函数
+                            speed: 62, target -620 能除尽比较好，不然会闪现以下空白再回退~
+                    */
+                    move(ul, "left", 62, this.num * -620);
                     setAcolor(this.num);
                 }
             }
