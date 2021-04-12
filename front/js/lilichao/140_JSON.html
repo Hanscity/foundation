@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        /*
+        
+            JSON:
+                JavaScript Object Notation(JS 对象表示法)
+
+                JSON 是一种特定格式的字符串，可以被大部分语言识别（转换为对象），在开发中主要用来数据交互
+
+                JSON 和 JS 对象格式一样，区别是 JSON 字符串中的属性名必须加上双引号
+
+            JSON 分类：
+                1. 对象 '{}'
+                2. 数组 '[]'
+
+            JSON 值的类型：
+                1. 字符串
+                2. 数值
+                3. boolean
+                4. null
+                5. 普通对象
+                6. 数组
+
+            JSON 转对象
+                JSON.parse()
+
+
+            对象转 JSON
+                JSON.stringify()
+
+            
+        */
+
+        var chObj =  {name:"ch", age:18, gender:"male"};
+        var objJson = '{"name":"ch", "age":18, "gender":"male"}';
+        var arrJson = '[1, 2, 3, 4, {"name":"ch", "age":18, "gender":"male"}]';
+
+        console.log(objJson);
+        console.log(arrJson);
+
+        console.log(JSON.parse(objJson));
+        console.log(JSON.parse(arrJson));
+
+        console.log(JSON.stringify(chObj));
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
