@@ -33,7 +33,8 @@ function move(obj, attr, speed, target, callback) {
         /**
          * 视频的讲解中，还有一个 bug, 如果 attrValue + speed < 0
          * 
-         * obj.style[attr] = attrValue + speed + "px"; 这一句不会执行成功，因为结果是负数就不会赋值
+         * obj.style[attr] = attrValue + speed + "px"; 这一句不会执行成功，
+         * 因为结果是负数,有些情况下赋值不能成功；有些情况下，可以赋值成功。
          * 就不会走入 if 循环，就不会关掉定时器，定时器就一直在运行~
          * 
          */
