@@ -29,7 +29,19 @@ function move(obj, attr, speed, target, callback) {
     obj.timer = setInterval(function () {
 
         var attrValue = parseInt(getStyle(obj, attr));
-        obj.style[attr] = attrValue + speed + "px";
+
+        /**
+         * 视频的讲解中，还有一个 bug, 如果 attrValue + speed < 0
+         * 
+         * obj.style[attr] = attrValue + speed + "px"; 这一句不会执行成功，因为结果是负数就不会赋值
+         * 就不会走入 if 循环，就不会关掉定时器，定时器就一直在运行~
+         * 
+         */
+        if (attrValue + speed < 0) {
+            obj.style[attr] = target + "px";
+        } else {
+            obj.style[attr] = attrValue + speed + "px";
+        }
 
         if ((speed < 0 && parseInt(attrValue) <= target) || 
             (speed >= 0 && parseInt(attrValue) >= target) ) {
