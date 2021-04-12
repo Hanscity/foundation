@@ -175,4 +175,15 @@ n.
 
 
 
+应用： JSON (JavaScript Object Notation)(JSON 对象表示法)
+
+```
+
+notation
+英 [nəʊˈteɪʃn]   美 [noʊˈteɪʃn]  
+n.
+(数学、科学和音乐中的)符号，记号，谱号
+
+
+```
 
