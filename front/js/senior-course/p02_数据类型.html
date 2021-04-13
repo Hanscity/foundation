@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        window.onload = function () {
+
+            /*
+                undefined 和 "undefined" 是不同的
+
+            */
+            
+            var c1 = {
+                c2: [1, 2, console.log],
+                c3: function () {
+
+                }
+            };
+
+            console.log(typeof c1.c2);
+            console.log(c1.c2 instanceof Object);
+
+        }
+    </script>
+</head>
+<body>
+
+    <div>
+        <h2>JS 的数据类型</h2>
+        <h3>基本值类型</h3>
+        <ul>
+            <li>
+                string(判断类型: typeof a === "string")
+            </li>
+
+            <li>
+                number(判断类型: typeof a === "number")
+            </li>
+
+            <li>
+                boolean(判断类型: typeof a === "boolean")
+            </li>
+
+            <li>
+                null(判断类型: a === null)(因为 typeof null === "object" )
+                
+            </li>
+
+            <li>
+                undefined (判断类型: a === undefined 或者 typeof a === 'undefined')
+            </li>
+
+        </ul>
+
+        <h3>引用类型</h3>
+        <ul>
+
+            <li>
+                普通对象(判断类型: a instanceof Object 或者 typeof c1 === "object"(一般不这么判断，因为区分不了普通的 Object 和 array))
+            </li> 
+
+            <li>
+                方法（一种特别的对象，可以执行之）（判断类型: a instanceof Function 或者 typeof a === 'function'）
+            </li>
+
+            <li>
+                数组（一种特别的对象，数组下标）（判断类型: a instanceof Array）
+            </li>
+
+        </ul>
+        
+    </div>
+
+    <div>
+        <h2>判断数据类型</h2>
+
+        <ul>
+            <li>typeof（返回数据类型的字符串表达，不能区分 null, array, 一般也不用来区分普通 object，其实是可以的）</li>
+            <li>instanceof（判断对象的具体类型）</li>
+            <li>===（不会进行类型的转换）</li>
+        </ul>
+    </div>
+    
+</body>
+</html>

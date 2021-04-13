@@ -187,3 +187,15 @@ n.
 
 ```
 
+
+应用： IIFE (Immediately-Invoked Function Expression)
+```
+
+invoke
+英 [ɪnˈvəʊk]   美 [ɪnˈvoʊk]  
+v.
+援引，援用(法律、规则等作为行动理由);提及，援引(某人、某理论、实例等作为支持);提出(某人的名字，以激发某种感觉或行动)
+
+
+
+```

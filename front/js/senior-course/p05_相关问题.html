@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+
+        var a = {name:"ch", age:"24"};
+        /*
+        
+            赋值操作：
+                var b = a;
+                将 a 变量的值赋值给 b 变量
+                如果 a 变量是引用值类型等于 0x123，那么 b 变量也是引用值类型 0x123, 赋值的特点从未改变~
+
+        */
+        var b = a;
+        b.age = 25;
+        console.log(a.age); // 25
+    </script>
+</head>
+<body>
+    
+    <div>
+        <img src="../../img/senior-course/p04_001.png" alt="">
+
+        <p>
+            这张图可以说明一个非常重要的问题
+        </p>
+
+        <pre>
+            <code>
+var a = {name:"ch", age:"24"};
+/*
+
+赋值操作：
+    var b = a;
+    将 a 变量的值赋值给 b 变量
+    如果 a 变量是引用值类型等于 0x123，那么 b 变量也是引用值类型 0x123, 赋值的特点从未改变~
+
+*/
+var b = a;
+b.age = 25;
+console.log(a.age); // 25
+            </code>
+        </pre>
+    </div>
+    
+</body>
+</html>
