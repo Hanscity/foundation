@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        
+        /*
+            闭包可能导致内存泄漏
+        */
+        function fn1() {
+            var arr = new Array[100000];
+
+            function fn2() {
+                console.log(arr.length);
+            }
+
+            return fn2;
+        }
+
+        var f = fn1();
+        f();
+
+        /*
+            让内部函数成为垃圾对象（回收闭包）
+        */
+        f = null;
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

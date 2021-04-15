@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        /*
+
+            第一次执行，结果为 empty string
+            因为 window.onload = function () {} 是一个匿名函数，匿名函数的变量不属于 window 对象
+            ？？？？ 但是还有一个疑问，为啥 window.age 是 undefined，而 window.name 不是 undefined 呢，应该是 undefined 才对呀 ？
+
+            当后面注释的代码有执行之后，可能有结果，因为缓存
+        */
+        window.onload = function () {
+
+            var name = "The Window";
+            var object = {
+                name: "My Object",
+                getNameFunc: function () {
+                    return function () {
+                        return this.name;
+                    };
+                }
+            }
+
+            console.log(object.getNameFunc()()); // empty string
+
+
+        }
+
+        
+        /*
+            不是闭包
+        */
+        // var name = "The Window";
+
+        // var object = {
+        //     name: "My Object",
+        //     getNameFunc: function () {
+        //         return function () {
+        //             return this.name;
+        //         };
+        //     }
+        // }
+
+        // console.log(object.getNameFunc()()); // The Window; this 是 window 调用
+
+
+        /*
+            是闭包，闭包的变量是 that
+
+        */
+        // var name = "The Window";
+
+        // var object = {
+        //     name: "My Object",
+        //     getNameFunc: function () {
+        //         var that = this;
+        //         return function () {
+        //             return that.name;
+        //         };
+        //     }
+        // }
+
+        // console.log(object.getNameFunc()()); // My Object;
+
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
