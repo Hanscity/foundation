@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        window.onload = function () {
+            var btn = document.getElementsByTagName("button");
+            // for (var i=0,btnLength=btn.length; i<btnLength; i++) {
+            //     btn[i].index = i;
+            //     btn[i].onclick = function () {
+            //         console.log("这是第 " + this.index + " 个 button");
+            //     }
+            // }
+
+            /*
+                闭包的写法
+            */
+            for (var i=0,btnLength=btn.length; i<btnLength; i++) {
+                (function (i) {
+                    btn[i].onclick = function () {
+                        console.log("这是第 " + i + " 个 button");
+                    }
+                })(i);
+            }
+
+        }
+    </script>
+</head>
+<body>
+    
+    <div>
+        <button>Click One</button>
+        <button>Click Two</button>
+        <button>Click Three</button>
+    </div>
+</body>
+</html>

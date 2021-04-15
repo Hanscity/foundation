@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        /*
+        
+            闭包：
+                产生： 函数定义是产生（不是调用）
+                死亡： 在嵌套的内部函数成为垃圾对象时
+
+            闭包的作用：
+                可以调用函数内的变量
+        
+        */
+        function fn1() {
+            // 在这一行，闭包就已经产生了（函数提升，内部函数对象已经创建了）
+            var a = 2;
+            var fn2 = function () {
+                a ++;
+                console.log(a);
+            }
+            return fn2;
+        }
+
+        var f = fn1();
+        f();
+        f();
+        f = null // 闭包消失
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
