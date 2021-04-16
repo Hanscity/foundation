@@ -7,24 +7,23 @@
 
     <script>
 
-        function Person () {
+        function Person (name, age) {
 
-            this.setName = function (name) {
-                this.name = name;
-            }
+            this.name = name;
+            this.age = age;
 
-            this.setAge = function (age) {
-                this.age = age;
-            }
         }
 
         Person.prototype.eat = function () {
             console.log("i like eat");
         }
 
+        /*
+            这里用 apply 来使用 Person 的构造(适用于属性)
+            和下面一起组合成 组合继承（下面的适用于方法）
+        */
         function Student (name, age) {
-            this.name = name;
-            this.age = age;
+            Person.apply(this, [name, age]);
         }
 
         //  将子对象实例的 prototype 属性指向父对象的实例
@@ -43,30 +42,27 @@
 <body>
     <div>
         <hr>
-        <p>
-            原型链继承： 将子对象实例的 prototype 属性指向父对象的实例，从而完成继承
-        </p>
+        <h2>组合继承的实例</h2>
 
     <pre>
         <code>
-function Person () {
+function Person (name, age) {
 
-    this.setName = function (name) {
-        this.name = name;
-    }
+    this.name = name;
+    this.age = age;
 
-    this.setAge = function (age) {
-        this.age = age;
-    }
 }
 
 Person.prototype.eat = function () {
     console.log("i like eat");
 }
 
+/*
+    这里用 apply 来使用 Person 的构造(适用于属性)
+    和下面一起组合成 组合继承（下面的适用于方法）
+*/
 function Student (name, age) {
-    this.name = name;
-    this.age = age;
+    Person.apply(this, [name, age]);
 }
 
 //  将子对象实例的 prototype 属性指向父对象的实例
