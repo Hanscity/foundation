@@ -29,9 +29,12 @@
 
         //  将子对象实例的 prototype 属性指向父对象的实例
         Student.prototype = new Person();
+        //  将 constructor 属性指向本来的对象
+        Student.prototype.constructor = Student;
 
         var stu1 = new Student("ch", 20);
         console.log(stu1.eat);
+        console.log(stu1);
 
 
 
