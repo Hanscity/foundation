@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jQuery3.6/jquery-3.6.0.js"></script>
+    <style>
+        .d1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+
+    </style>
+
+    <script>
+        /*
+            原生的隐藏的写法
+        */
+        // window.onload = function () {
+        //     var d1 = document.getElementsByClassName("d1")[0];
+        //     d1.style.display = "none";
+        // }
+    </script>
+
+    <script>
+
+        /*
+            jQuery 隐藏的写法
+
+        */
+        $(function() {
+            $(".d1").hide();
+        })
+    </script>
+</head>
+<body>
+    
+
+    <div class="d1">
+
+    </div>
+    <div class="course">
+        <hr>
+        <img src="../../../img/jQuery/p04_001.png" alt="">
+    </div>
+
+    
+</body>
+</html>
