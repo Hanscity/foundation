@@ -73,11 +73,21 @@
 
     <script>
         $(function () {
-            
+
             $('.setting div:first').css('color', 'red');
+
             $('.setting div:eq(2)').css('color', 'orange');
 
             $('ul li:odd').css('color', 'green');
+
+            /*
+                下一小节的删选方法比删选选择器更为优雅
+
+                等同于 $('.setting div:eq(3)').css('color', 'blue');
+            */
+            $('.setting div').eq(3).css('color', 'blue');
+
+
         })
 
     </script>
