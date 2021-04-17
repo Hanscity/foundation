@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        window.onload = function () {
+
+            var btn01 = document.getElementById("btn01");
+
+            btn01.onclick = function () {
+                var start = Date.now();
+                setTimeout(function () {
+                    var ing = Date.now();
+                    console.log(ing-start);
+                }, 300);
+
+            }
+
+            /*
+                做一个时间很长的程序
+
+                在 Ubuntu 中，chrome 或者是 Firefox，此例并没有出现视频中讲解的定时将会超时的情况
+                视频是 2018年，如今是 2021 年，可见浏览器底层已经发生了很大变化~剩下的几集都是进程线程等偏底层的东西，
+                讲解的并不算好。当前视频暂不继续~
+                
+            */
+            for (var i=0; i<10000000000; i++) {
+
+            }
+
+        }
+        
+
+
+    </script>
+</head>
+<body>
+    <button id="btn01">启动定时器的测试</button>
+
+</body>
+</html>
