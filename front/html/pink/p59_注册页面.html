@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .register {
+            width: 600px;
+            height: 1000px;
+            margin: 100px auto;
+            background-color: #e6e6e6;
+        }
+
+        .title h3 {
+            text-align: center;
+        }
+
+        .one_line {
+            line-height: 30px;
+            width: 100%;
+            float: left;
+        }
+
+        .one_line .left {
+            float: left;
+            width: 100px;
+        }
+
+        .one_line .left span {
+            display: block;
+            float: right;
+        }
+
+        .one_line .right {
+            float: left;
+            width: 300px;
+            margin: 0 0 0 20px;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="register">
+
+        <div class="title">
+            <h3>
+                青春不常在，抓紧谈恋爱
+            </h3>
+        </div>
+
+        <div class="form">
+    
+            <form action="http://yaf.test/index/user/html" method="post">
+
+                <div class="one_line">
+                    <div class="left">
+                        <span>性别</span>
+                    </div>
+    
+                    <div class="right">
+                        <input type="radio" name="gender" id="male" value="male"><label for="male">男</label>
+                        <input type="radio" name="gender" id="female" value="female"><label for="female">女</label>
+                    </div>
+                </div>
+    
+    
+                <div class="one_line">
+                    <div class="left">
+                        <span>生日</span>
+                    </div>
+    
+                    <div class="right">
+                        <select name="year" id="">
+                            <option value="">--请选择年份</option>
+                            <option value="1990">1990</option>
+                            <option value="1991">1991</option>
+                            <option value="1992">1992</option>
+                            <option value="1993">1993</option>
+                            <option value="1994">1994</option>
+                        </select>
+
+                        <select name="month" id="">
+                            <option value="">--请选择月份</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+
+                        <select name="day" id="">
+                            <option value="">--请选择天</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                </div>
+                
+
+                <div class="one_line">
+                    <div class="left">
+                        <span>
+                            <label for="area">所在地区</label>
+                        </span>
+                    </div>
+    
+                    <div class="right">
+                        <input type="text" name="area" id="area" placeholder="请填写所在地区">
+                    </div>
+                </div>
+
+
+                <div class="one_line">
+                    <div class="left">
+                        <span>婚姻状况</span>
+                    </div>
+    
+                    <div class="right">
+                        <input type="radio" name="marry" id="had" value="had"><label for="had">已婚</label>
+                        <input type="radio" name="marry" id="never" value="never"><label for="never">未婚</label>
+                    </div>
+                </div>
+
+
+                <div class="one_line">
+                    <div class="left">
+                        <span>
+                            <label for="education">学历</label>
+                        </span>
+                    </div>
+    
+                    <div class="right">
+                        <input type="text" name="education" id="education" placeholder="请填写最高学历">
+                    </div>
+                </div>
+
+                <div class="one_line">
+                    <div class="left">
+                        <span>喜欢的类型</span>
+                    </div>
+    
+                    <div class="right">
+                        <!--
+                            如果需要提交多个值，需要加上 []
+                        -->
+                        <input type="checkbox" name="favorite[]" id="sex" value="sex"><label for="sex">性感</label>
+                        <input type="checkbox" name="favorite[]" id="nerous" value="nerous"><label for="nerous">御姐</label>
+                        <input type="checkbox" name="favorite[]" id="soft" value="soft"><label for="soft">温柔</label>
+                        <input type="checkbox" name="favorite[]" id="new" value="new"><label for="new">清新</label>
+                    </div>
+                </div>
+
+
+                <div class="one_line">
+                    <div class="left">
+                        <span>自我介绍</span>
+                    </div>
+    
+                    <div class="right">
+                        <textarea name="introduce" id="" placeholder="快来展示自己吧"></textarea>
+                    </div>
+                </div>
+
+
+                
+
+                <div class="one_line">
+                    <div class="left">
+                        <span>&nbsp</span>
+                    </div>
+    
+                    <div class="right">
+                        <input type="checkbox" name="agree" id="agree" checked="checked" value="agree">
+                        <label for="agree">我同意注册条款和会员加入标准</label>
+                    </div>
+                </div>
+
+                <div class="one_line">
+                    <div class="left">
+                        <span>&nbsp</span>
+                    </div>
+    
+                    <div class="right">
+                        <input type="submit" value="免费注册">
+                    </div>
+                </div>
+
+
+                <div class="one_line">
+                    <div class="left">
+                        <span>&nbsp</span>
+                    </div>
+    
+                    <div class="right">
+                        <a href="#">我是会员，立即登录</a>
+                    </div>
+                </div>
+
+
+
+
+
+            </form>
+        </div>
+
+
+    </div>
+    
+</body>
+</html>
