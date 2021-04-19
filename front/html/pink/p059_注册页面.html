@@ -6,6 +6,14 @@
     <title>Document</title>
 
     <style>
+
+        .clearfix::before,
+        .clearfix::after {
+            content: '';
+            display: table;
+            clear: both;
+        }
+
         .register {
             width: 600px;
             height: 1000px;
@@ -18,13 +26,14 @@
         }
 
         /*
-            此时，margin 又是可以的~
+            这里遇到了浮动之后，高度塌陷的问题
+            最好不要将父元素用浮动，这样子后面的兄弟元素，也要开启浮动
+
         */
         .one_line {
-            /* line-height: 30px; */
+            line-height: 40px;
             width: 100%;
-            float: left;
-            margin: 10px 0;
+            /* float: left; */
         }
 
         .one_line .left {
@@ -59,7 +68,7 @@
     
             <form action="http://yaf.test/index/user/html" method="post">
 
-                <div class="one_line">
+                <div class="one_line clearfix">
                     <div class="left">
                         <span>性别</span>
                     </div>
@@ -71,7 +80,7 @@
                 </div>
     
     
-                <div class="one_line">
+                <div class="one_line clearfix">
                     <div class="left">
                         <span>生日</span>
                     </div>
@@ -107,7 +116,7 @@
                 </div>
                 
 
-                <div class="one_line">
+                <div class="one_line clearfix">
                     <div class="left">
                         <span>
                             <label for="area">所在地区</label>
@@ -120,7 +129,7 @@
                 </div>
 
 
-                <div class="one_line">
+                <div class="one_line clearfix">
                     <div class="left">
                         <span>婚姻状况</span>
                     </div>
@@ -132,7 +141,7 @@
                 </div>
 
 
-                <div class="one_line">
+                <div class="one_line clearfix">
                     <div class="left">
                         <span>
                             <label for="education">学历</label>
@@ -144,7 +153,7 @@
                     </div>
                 </div>
 
-                <div class="one_line">
+                <div class="one_line clearfix">
                     <div class="left">
                         <span>喜欢的类型</span>
                     </div>
@@ -161,7 +170,7 @@
                 </div>
 
 
-                <div class="one_line">
+                <div class="one_line clearfix">
                     <div class="left">
                         <span>自我介绍</span>
                     </div>
@@ -174,7 +183,7 @@
 
                 
 
-                <div class="one_line">
+                <div class="one_line clearfix">
                     <div class="left">
                         <span>&nbsp</span>
                     </div>
@@ -185,7 +194,7 @@
                     </div>
                 </div>
 
-                <div class="one_line">
+                <div class="one_line clearfix">
                     <div class="left">
                         <span>&nbsp</span>
                     </div>
@@ -196,7 +205,7 @@
                 </div>
 
 
-                <div class="one_line">
+                <div class="one_line clearfix">
                     <div class="left">
                         <span>&nbsp</span>
                     </div>
