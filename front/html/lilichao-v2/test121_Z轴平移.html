@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        html {
+            /*
+                一般，基础的透视设置为 800px~1200px, 设置给 HTML 元素
+            */
+            perspective: 800px;
+        }
+
+        .outer {
+            width: 800px;
+            height: 800px;
+            background-color: #e6e6e6;
+            margin: 100px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+
+        .outer .d2 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            
+        }
+
+        .outer:hover .d2 {
+            /*
+                从物理的角度上讲并没有变大，只是视觉角度上的变大
+            */
+            transform: translateZ(200px);
+        }
+
+
+    </style>
+</head>
+<body>
+    
+
+    <div class="outer">
+
+        <div class="d2">
+
+        </div>
+    </div>
+</body>
+</html>
