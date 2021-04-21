@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        /*
+            overflow: hidden 
+            可以使放大的元素仍然在父元素的范围内
+        */
+
+        .prac {
+            width: 300px;
+            height: 200px;
+            background-color: #e6e6e6;
+            border: 1px solid #e6e6e6;
+            overflow: hidden;
+        }
+
+        .prac img {
+            width: 300px;
+            height: 200px;
+
+        }
+
+        .prac:hover img {
+            transform: scale(1.2);
+
+            /*
+                缩放的远点，默认值是 center
+            */
+            transform-origin: 0 0;
+        }
+
+        .d1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="prac">
+        <img src="../../img/meiguowangshi_noodles.png" alt="">
+    </div>
+
+    <div class="d1">
+
+    </div>
+</body>
+</html>
