@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jQuery3.6/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(function () {
+            var colorArr = ["red", "orange", "green"];
+
+            /*
+                each 函数默认传递两个参数（与变量名无关），
+                    index: 索引
+                    domPri: 原生的 DOM 对象，所以用了 $() 来转化
+
+            */
+            $(".prac div").each(function (index, domPri) {
+                // $(domPri).css("color", colorArr[index]);
+            })
+
+
+            /*
+            
+                这种方式的遍历和上面方式的遍历比较：
+                    大体差不错，而这一种的优点是可以传递数组，更适合用来操作数据
+
+            */
+            $.each($(".prac div"), function (index, domPri) {
+                $(domPri).css("color", colorArr[index]);
+            })
+        })
+    </script>
+</head>
+<body>
+    
+    <div class="prac">
+
+        <div class="d1">
+            1
+        </div>
+
+        <div class="d2">
+            2
+        </div>
+
+        <div class="d3">
+            3
+        </div>
+
+    </div>
+</body>
+</html>

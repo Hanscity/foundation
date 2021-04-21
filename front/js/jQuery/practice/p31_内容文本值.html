@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jQuery3.6/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(function () {
+
+            /*
+            
+                html() 获取文本加标签，设置同理
+
+                text() 获取纯文本，设置同理
+
+                value() 表单
+            */
+
+            console.log($(".d1 span").html());
+            console.log($(".d1").text());
+            $(".d1 span").text(2222);
+
+            $("input").eq(0).val(1111);
+            $("input").eq(1).val(2222);
+
+            
+        })
+    </script>
+</head>
+<body>
+    
+    <div class="d1">
+        <span class="s1">
+            Hello,World.
+        </span>
+    </div>
+
+    <div class="input">
+        username: <input type="text">
+        <br>
+        nickname: <input type="text">
+    </div>
+
+
+</body>
+</html>
