@@ -4,11 +4,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .prac {
+            width: 200px;
+            height: 400px;
+            background-color: red;
+        }
+
+    </style>
+
+    <script src="../jQuery3.6/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function () {
+
+            $('button').eq(0).click(function () {
+                $('.prac').show(1000);
+            })
+
+            $('button').eq(1).click(function () {
+                $('.prac').hide(1000);
+            })
+
+            $('button').eq(2).click(function () {
+                $('.prac').toggle(1000);
+            })
+
+        })
+    </script>
 </head>
 <body>
+
+    <div class="button">
+        <button>Show</button>
+        <button>Hide</button>
+        <button>Turn</button>
+    </div>
+
+    <br>
+
+    <div class="prac">
+
+    </div>
+
+
     <div class="course">
         <hr>
         <img src="../../../img/jQuery/p21_001.png" alt="">
+        <br>
+        <img src="../../../img/jQuery/p21_002.png" alt="">
+
     </div>
+
+
+
+
 </body>
 </html>
