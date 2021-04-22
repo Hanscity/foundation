@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="../jQuery3.6/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function () {
+
+            /*
+                事件委托
+            */
+            $("ul").on("click", "li", function () {
+                console.log("Im li");
+            })
+
+            /*
+                解绑事件委托
+
+            */
+            $("ul").off("click", "li");
+
+        })
+    </script>
+</head>
+<body>
+    <div class="course">
+        <hr>
+        <h3>事件解绑</h3>
+        <img src="../../../img/jQuery/p46_001.png" alt="">
+    </div>
+
+
+    <ul>
+        <li>
+            Hello,world.
+        </li>
+
+        <li>
+            Hello,world.
+        </li>
+
+        <li>
+            Hello,world.
+        </li>
+    </ul>
+</body>
+</html>
