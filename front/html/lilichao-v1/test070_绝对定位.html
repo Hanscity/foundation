@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/reset.css">
+
+
+    <style>
+
+        /*
+            绝对定位：
+                1. 脱离文档流（下面的内容会填充上去），位置默认不变
+                2. 定位位置是相对于最近一个开启了定位的祖先元素而言，如果祖先元素没有开启定位，
+                    那么会追踪到 body 元素进行定位（一般来说开启了绝对定位的元素的父元素会开启相对定位）
+                3. 开启了绝对定位后，层级比文档流要高
+                4. 开启了绝对定位后，不会继承父元素的宽高等属性
+                5. 开启了绝对定位后，一定是块元素
+
+                
+                                   
+        */
+        .d1 {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+
+        .d2 {
+            width: 400px;
+            height: 400px;
+            background-color: green;
+            position: relative;
+        }
+
+        .d3 {
+            width: 200px;
+            height: 200px;
+            background-color: orange;
+            position: absolute;
+            top: 100px;
+            left: 100px;
+        }
+
+
+        .d4 {
+            width: 300px;
+            height: 300px;
+            background-color: yellow;
+        }
+
+        .d5 {
+            width: 200px;
+            height: 200px;
+            background-color: cyan;
+        }
+
+        .s1 {
+            width: 200px;
+            height: 200px;
+            background-color: blue;
+            position: absolute;
+        }
+    </style>
+    
+</head>
+<body>
+    <div class="d1">
+
+    </div>
+
+    <div class="d2">
+
+        <div class="d5">
+
+        </div>
+
+        <div class="d3">
+
+        </div>
+
+    </div>
+    
+    
+
+    <div class="d4">
+
+    </div>
+
+    <span class="s1">
+
+    </span>
+</body>
+</html>

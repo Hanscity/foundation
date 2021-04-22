@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .d1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+
+        .current {
+            background-color: green;
+        }
+    </style>
+
+    <script src="../jQuery3.6/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function () {
+
+            /*
+                方式一
+            */
+            // $(".d1").click(function () {
+            //     $(this).css("backgroundColor", "orange");
+            // })
+
+            // $(".d1").mouseover(function () {
+            //     $(this).css("backgroundColor", "yellow");
+            // })
+
+            /*
+                方式二
+            */
+
+            $(".d1").on({
+                click: function () {
+                    $(this).css("backgroundColor", "orange");
+                },
+                mouseover: function () {
+                    $(this).css("backgroundColor", "yellow");
+                }
+            });
+
+
+            /*
+                方式三
+                这种方式其实和方式二相同，只是增加了合并的写法
+            */
+            
+            // $(".d1").on({
+            //     click: function () {
+            //         $(this).css("backgroundColor", "orange");
+            //     },
+            //     "mouseover mouseleave": function () {
+            //         $(this).css("backgroundColor", "green");
+            //     }
+            // });
+
+        })
+    </script>
+</head>
+
+<body>
+
+    <div class="d1">
+
+    </div>
+</body>
+
+</html>

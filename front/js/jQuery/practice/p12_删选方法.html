@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jQuery3.6/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    
+    <div class="setting">
+        <div>
+            Are you all right ?
+        </div>
+    
+        <div class="second">
+            Are you all right ?
+        </div>
+    
+        <div>
+            Are you all right ?
+        </div>
+    
+        <div>
+            Are you all right ?
+        </div>
+
+        <div>
+            Are you all right ?
+        </div>
+    
+        <div>
+            Are you all right ?
+        </div>
+    
+        <div>
+            Are you all right ?
+        </div>
+
+    </div>
+    
+    <div class="order">
+        <div class="oper">
+            <p>
+                The same operation
+            </p>
+
+            <div class="nav">
+                <p>
+                    1
+                </p>
+
+                <p>
+                    2
+                </p>
+            </div>
+
+        </div>
+
+        
+        
+
+
+    </div>
+    
+
+    
+    <div class="course">
+        <hr>
+        <h2>Course Summary</h2>
+        <img src="../../../img/jQuery/p12_001.png" alt="">
+    </div>
+
+    <script>
+
+        $(function () {
+            
+            // 查找父级选择器
+            $('.second').parent().css('background', 'red')
+
+            
+            
+            // 查找后代选择器
+            $('.oper').find('p').css('color', 'green');
+
+            // 查找子代选择器
+            $('.oper').children('p').css('color', 'orange')
+
+            
+        })
+
+    </script>
+
+
+</body>
+</html>

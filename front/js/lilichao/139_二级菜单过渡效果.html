@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../../css/reset.css">
+
+    <style>
+        .sdmenu {
+            width: 150px;
+            height: 800px;
+            background-color: #e6e6e6;
+            margin: 10px auto;
+            /* position: relative; */
+        }
+
+        /* .sub {
+            position: absolute;
+        } */
+
+        .collapsed {
+            height: 30px;
+            overflow: hidden;
+        }
+
+        .menuSpan {
+            display: block;
+            line-height: 30px;
+            text-align: center;
+            background-color: #232323;
+            color: #fff;
+        }
+
+        a {
+            display: block;
+            margin: 6px;
+            text-decoration: none;
+
+        }
+    </style>
+
+    <script src="tools.js"></script>
+    <script>
+        window.onload = function () {
+            var menuSpan = document.getElementsByClassName("menuSpan");
+
+            var indexOpen = 0;
+            var parentDiv;
+            
+            for (var i=0; i<menuSpan.length; i++) {
+                // 记录手动打开的
+                menuSpan[i].openNum = i;
+
+                menuSpan[i].onclick = function () {
+                    
+                    parentDiv = this.parentNode;
+                    var originHeight = parentDiv.offsetHeight;
+                    toggleClassName(parentDiv, "collapsed");
+                    var targetHeight = parentDiv.offsetHeight;
+
+                    /*
+                        增加动画效果
+                            首先将高度回复到初始值，然后开启动画
+                        
+                        ???? 我写的动画还有一个问题，a 标签铺的特别快，div 走的特别慢，
+                        当你将 speed 参数调小的时候，就会特别明显
+
+                    */
+                    parentDiv.style.height = originHeight + "px";
+                    move(parentDiv, "height", 50, targetHeight, function () {
+                        /*
+                            动画执行完毕，需要将内联样式去掉,内联样式的优先级太高，会干扰到下一次
+                        */
+                        parentDiv.style.height = "";
+                    });
+
+                    indexOpen = this.openNum;
+                    addCollapse();
+                }
+            }
+
+            function addCollapse() {
+                for (var i=0; i<menuSpan.length; i++) {
+                    if (i != indexOpen) {
+                        /*
+                            这一部分，也需要开启动画，因为上一个部分的动画有点问题，这里也就不折腾了
+                            其实，二级菜单开启动画并不合适~
+                        */
+                        addClassName(menuSpan[i].parentNode, "collapsed");
+                    }
+                }
+            }
+
+
+        }
+    </script>
+</head>
+<body>
+
+
+    <div id="my_menu" class="sdmenu">
+
+        <div class="sub">
+            <span class="menuSpan">在线工具</span>
+            <a href="#">图像优化</a>
+            <a href="#">收藏夹图标生成器</a>
+            <a href="#">邮件</a>
+            <a href="#">htaccess密码</a>
+            <a href="#">梯度图像</a>
+            <a href="#">按钮生成器</a>
+            <a href="#">图像优化</a>
+            <a href="#">收藏夹图标生成器</a>
+            <a href="#">邮件</a>
+            <a href="#">htaccess密码</a>
+            <a href="#">梯度图像</a>
+            <a href="#">按钮生成器</a>
+        </div>
+
+        <div class="collapsed sub">
+            <span class="menuSpan">支持我们</span>
+            <a href="#">推荐我们</a>
+            <a href="#">链接我们</a>
+            <a href="#">网络资源</a>
+            <a href="#">推荐我们</a>
+            <a href="#">链接我们</a>
+            <a href="#">网络资源</a>
+            <a href="#">推荐我们</a>
+            <a href="#">链接我们</a>
+            <a href="#">网络资源</a>
+        </div>
+
+        <div class="collapsed sub">
+            <span class="menuSpan">合作伙伴</span>
+            <a href="#">Javascript工具包</a>
+            <a href="#">CSS驱动</a>
+            <a href="#">CodingForums</a>
+            <a href="#">CSS例子</a>
+        </div>
+
+        <div class="collapsed sub">
+            <span class="menuSpan">制作单位</span>
+            <a href="#">木架</a>
+            <a href="#">Microsoft</a>
+            <a href="#">Tencent</a>
+            <a href="#">Wangyi</a>
+        </div>
+
+
+    </div>
+</body>
+</html>

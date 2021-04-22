@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .tab {
+            width: 800px;
+            height: 300px;
+            background-color: #e6e6e6;
+            margin: 100px auto;
+        }
+
+        .tab_list {
+            width: 100%;
+            height: 60px;
+        }
+
+        .tab_list ul {
+            display: flex;
+            justify-content: space-between;
+        }
+
+
+        .tab_list ul li {
+            width: 150px;
+            line-height: 60px;
+            text-align: center;
+        }
+
+        .setting_tab_li {
+            background-color: red;
+        }
+        
+
+        .tab .tab_com {
+            background-color: #d0d0d0;
+            height: 240px;
+        }
+
+        .tab .tab_com .item {
+            display: none;
+        }
+
+        .tab .tab_com .current_content {
+            display: block;
+        }
+
+
+    </style>
+
+    <script src="../jQuery3.6/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    
+    <div class="tab">
+        <div class="tab_list">
+            <ul>
+                <li class="current">商品介绍</li>
+                <li>规格与包装</li>
+                <li>售后保障</li>
+                <li>商品评价（50000）</li>
+                <li>手机社区</li>
+
+            </ul>
+        </div>
+
+        <div class="tab_com">
+            <div class="item current_content">
+                商品介绍模块内容
+            </div>
+
+            <div class="item">
+                规格与包装模块内容
+            </div>
+
+            <div class="item">
+                售后保障模块内容
+            </div>
+
+            <div class="item">
+                商品评价（50000）模块内容
+            </div>
+
+            <div class="item">
+                手机社区模块内容
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            $('.tab .tab_list ul li').click(function () {
+
+                
+                /*
+                    1. 链式操作，设置点击的按钮和它的兄弟按钮
+                */
+                $(this).addClass('setting_tab_li').siblings().removeClass('setting_tab_li');
+
+                /*
+                    2. 获取按钮的 index
+                */
+                var clickIndex = $(this).index();
+
+                /*
+                    1. 链式操作，相应的 index 内容展示，其余的兄弟元素内容隐藏
+                */
+                $('.tab_com .item').eq(clickIndex).addClass('current_content').siblings().removeClass('current_content');
+
+            })
+        })
+    </script>
+</body>
+</html>

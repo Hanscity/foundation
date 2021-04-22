@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        .cityDiv {
+            width: 200px;
+            height: 160px;
+            background-color: red;
+        }
+
+        .cityDiv button {
+            margin-left: 20px;
+            width: 60px;
+            height: 30px;
+        }
+
+    </style>
+
+    <script>
+        window.onload = function () {
+            var strUl = document.getElementsByTagName("ul")[0];
+
+            document.getElementById("city").onclick = function () {
+
+                /*
+                获取当前元素的子节点：
+                chrome, firefox 等浏览器，如下面例子所示，有九个，因为空白部分也算。
+                IE 浏览器只有四个，因为没有计算空白部分
+                */
+                console.log(strUl.childNodes);
+                console.log(strUl.firstChild); // 获取第一个节点，等同于 strUl.childNodes[0]
+
+                /*
+                    获取当前元素的子元素：
+
+                    如下面例子所示，有四个，各大浏览器都很统一，没有兼容性的问题，所以一般推荐使用这个
+
+                */
+                console.log(strUl.children);
+
+                console.log(strUl.firstElementChild); // 获取第一个子元素，等同于 strUl.children[0]
+                                                      // IE 8 及以前，不兼容
+
+                                                      
+
+            }
+
+
+
+
+        }
+    </script>
+</head>
+<body>
+    
+    <div class="cityDiv">
+        <ul>
+            <li>
+                北京
+            </li>
+
+            <li>
+                广州
+            </li>
+
+            <li>
+                深圳
+            </li>
+
+            <li>
+                武汉
+            </li>
+        </ul>
+
+        <button id="city">
+            city
+        </button>
+    </div>
+
+
+    <div>
+        <hr>
+        <h3>Course Summary</h3>
+
+        <img src="../../img/lilichao-js/096_001.png" alt="">
+    </div>
+
+    
+</body>
+</html>

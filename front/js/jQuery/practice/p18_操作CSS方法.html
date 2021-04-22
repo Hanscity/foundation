@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+
+        .d1 {
+            width: 200px;
+        }
+
+        
+
+    </style>
+
+    <script src="../jQuery3.6/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="d1">
+
+    </div>
+
+    <script>
+        $(function () {
+            $('div').click(function () {
+
+                /*
+                    添加类
+                */
+                // $('div').addClass('d1');
+
+                /*
+                    删除类
+                */
+                // $('div').removeClass('d1');
+
+                /*
+                    切换类
+
+                */
+                $(this).toggleClass('d1');
+
+                /*
+                    判断类
+                */
+                console.log($(this).hasClass('d1'));
+
+            })
+        })
+    </script>
+</body>
+</html>

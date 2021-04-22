@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #d1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+
+        }
+
+        #d2 {
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+            position: absolute;
+            left: 200px;
+            top: 200px;
+        }
+
+        #noodles {
+            position: absolute;
+            top: 330px;
+        }
+
+        .course {
+            position: absolute;
+            margin: 800px 0;
+        }
+    </style>
+
+    <script>
+
+        window.onload = function () {
+
+            /*
+                拖拽：
+                    1. 鼠标按下 onmousedown
+                    2. 鼠标拖动 onmousemove
+                    3. 鼠标释放 onmouseup
+            */
+
+            var d1 = document.getElementById("d1");
+            var d2 = document.getElementById("d2");
+            // 移动图片，也没问题
+            var d3 = document.getElementById("noodles");
+
+            drag(d1);
+
+            drag(d2);
+
+            drag(d3);
+            
+            /*
+                封装成函数，则可以绑定多个元素的拖拽
+            */
+            function drag(obj) 
+            {
+                
+                obj.onmousedown = function (event) {
+
+                // console.log(event.clientX);
+                // console.log(event.offsetX);
+                // console.log(d1.offsetLeft);
+
+                // console.log(event.clientY);
+                // console.log(event.offsetY);
+                // console.log(d1.offsetTop);
+
+                /*
+                    event.clientX（鼠标针对定位在 X 轴的距离） = event.offsetX（鼠标在 d1 上的 X 轴距离） + d1.offsetLeft（d1 针对定位在 X 轴的距离）
+                    event.clientY = event.offsetY + d1.offsetTop
+
+                    在这里，直接使用 event.offsetX，event.offsetY 即可
+                */
+                var offsetX = event.offsetX;
+                var offsetY = event.offsetY;
+
+                document.onmousemove = function (event) {
+
+                    // 两个 event 不一样，所以需要在上一步定位出来这个距离
+                    var xMove = event.clientX - offsetX + "px";
+                    var yMove = event.clientY - offsetY + "px";
+
+                    obj.style.left = xMove;
+                    obj.style.top = yMove;
+
+                }
+
+
+                /*
+                    给 document 绑定鼠标的释放比较好，当页面复杂的时候
+                    在当前的页面中，如果 d1 给拖拽到 d2 的范围时，如果给 d1 绑定鼠标释放事件，就会不生效
+                */
+                document.onmouseup = function () {
+                    document.onmousemove = null;
+
+                    /*
+                        这个事件一旦执行，document 就绑定了这个事件
+                        当鼠标离开 d1 进入其它部分，鼠标的释放还是会触发鼠标的释放事件
+                        所以，这里也取消自己的，让它变成一个一次性的事件
+                    */
+                    document.onmouseup = null;
+                }
+
+                /*
+                    全选（ctrl + A）之后, 就不能正常拖拽 d1
+                    这个时候， return false， 就可以正常拖拽
+
+                    有点玄，不作过分理解~
+
+                    return false, 在 IE8 中不支持，需要用到其它函数，暂不学习~
+
+                */
+                return false;
+                }
+            }
+            
+
+            
+
+
+        }
+    </script>
+</head>
+<body>
+    
+    我是一段文字
+    <div id="d1">
+
+    </div>
+
+    <div id="d2">
+
+    </div>
+
+    <div id="noodles">
+        <img src="../../img/meiguowangshi_noodles.png" alt="">
+    </div>
+
+
+    <div class="course">
+        <hr>
+        <h2>Course Summary</h2>
+
+        <img src="../../img/lilichao-js/119_01.png" alt="">
+    </div>
+</body>
+</html>

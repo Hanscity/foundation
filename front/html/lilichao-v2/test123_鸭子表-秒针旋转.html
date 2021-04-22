@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        html {
+            /*
+                一般，基础的透视设置为 800px~1200px, 设置给 HTML 元素
+            */
+            perspective: 800px;
+        }
+
+        .outer {
+            width: 200px;
+            height: 200px;
+            margin: 100px auto;
+            border-radius: 50%;
+            border: 1px solid black;
+
+            /*
+                旋转的其实是盒子容器，秒针更随着。
+                需要将秒针的起点设置在中心位置
+                
+            */
+            animation: run 60s infinite;
+        }
+
+        .outer .d2 {
+            width: 4px;
+            height: 100px;
+            background-color: red;
+            margin-left: 100px;
+        }
+
+        @keyframes run {
+            from {
+                transform: rotateZ(0deg);
+            }
+
+            to {
+                transform: rotateZ(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    
+
+    <div class="outer">
+
+        <div class="d2">
+
+        </div>
+    </div>
+</body>
+</html>

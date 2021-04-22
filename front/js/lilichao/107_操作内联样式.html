@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .d1 {
+            width: 200px;
+            height: 200px;
+            background-color: red;
+        }
+    </style>
+
+    <script>
+
+        window.onload = function () {
+            var btn01 = document.getElementById("btn01");
+            var d1 = document.getElementsByClassName("d1")[0];
+
+            /*
+
+                JS 修改元素样式的固定格式：
+                    element.style.属性 = 属性值;
+                
+                凡是有 - 号的，这个等同于减号，一律改为驼峰
+                    background-color:
+                        element.style.backgroundColor = 颜色值;
+                
+                JS 修改元素样式修改的是内联样式，拥有最高的级别
+                !important 除外（一般情况下，不要为 CSS 增加此符号，会导致 JS 的修改失效）
+
+            */
+            btn01.onclick = function () {
+                d1.style.width = "300px";
+                d1.style.height = "300px";
+                d1.style.backgroundColor = "orange";
+            }
+
+
+            /*
+            
+                JS 读取元素样式，也是只能读取内联样式
+
+            */
+            btn02.onclick = function () {
+                console.log(d1.style);
+                console.log(d1.style.width);
+                console.log(d1.style.height);
+                console.log(d1.style.backgroundColor);
+            }
+        }
+    </script>
+</head>
+<body>
+    
+    <button id="btn01">设置样式</button>
+    <br>
+    <br>
+    <button id="btn02">读取样式</button>
+    <hr>
+
+    <div class="d1" style="width: 400px">
+        
+    </div>
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../css/reset.css">
+
+    <style>
+
+        .outer {
+            width: 1000px;
+            height: 600px;
+            background-color: grey;
+            display: flex;
+            color: #fff;
+            justify-content: space-around;
+            align-items: center;
+            margin: 100px auto;
+        }
+
+        .outer .content {
+            width: 400px;
+            height: 300px;
+            background-color: #323232;
+        }
+
+        .outer .content p {
+            width: 100%;
+            line-height: 90px;
+        }
+
+        .outer .content ul {
+            width: 400px;
+            height: 200px;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .outer .content ul li {
+            width: 60px;
+            height: 40px;
+            background-color: red;
+            text-align: center;
+            line-height: 40px;
+            /* flex-basis: none; */
+        }
+
+        .outer #btnList button {
+            background-color: orange;
+            margin: 10px auto;
+        }
+    </style>
+
+    <script>
+        window.onload = function () {
+
+            /*
+                节点的操作中， 一般都是父节点操作
+
+            */
+
+            /*
+                创建
+            */
+            myClick('btn01', function () {
+                // 创建 li 元素节点
+                var liEle = document.createElement("li");
+
+                // 创建 广州 文本节点
+                var gzText = document.createTextNode("广州");
+
+                // 创建完整的 li 的元素
+                liEle.appendChild(gzText);
+
+                // 获取父节点元素
+                var cityUl = document.getElementById('city');
+
+                // 新增子元素
+                cityUl.appendChild(liEle);
+            });
+
+            /*
+                在特定元素前创建
+            */
+            myClick('btn02', function () {
+                // 创建 li 元素节点
+                var liEle = document.createElement("li");
+
+                // 创建 广州 文本节点
+                var gzText = document.createTextNode("广州");
+
+                // 创建完整的 li 的元素
+                liEle.appendChild(gzText);
+
+                // 获取北京的节点
+                var bj = document.getElementById("bj");
+
+                // 获取父节点元素
+                var cityUl = document.getElementById('city');
+
+                // 新节点， 旧节点
+                cityUl.insertBefore(liEle, bj);
+
+
+            })
+
+            /*
+                替换某元素
+            */
+            myClick('btn03', function () {
+                // 创建 li 元素节点
+                var liEle = document.createElement("li");
+
+                // 创建 广州 文本节点
+                var gzText = document.createTextNode("广州");
+
+                // 创建完整的 li 的元素
+                liEle.appendChild(gzText);
+
+                // 获取北京的节点
+                var bj = document.getElementById("bj");
+
+                // 获取父节点元素
+                var cityUl = document.getElementById('city');
+
+                // 新节点， 旧节点
+                cityUl.replaceChild(liEle, bj);
+
+
+            })
+
+            /*
+                删除子节点
+            */
+            myClick('btn04', function () {
+                
+                // 获取北京的节点
+                var bj = document.getElementById("bj");
+
+                // 获取父节点元素
+                var cityUl = document.getElementById('city');
+
+                // 特定节点
+                // cityUl.removeChild(bj);
+
+                // 更为常用的用法
+                bj.parentNode.removeChild(bj);
+
+
+            })
+
+
+            /*
+                读取 #city 内的 HTML 代码
+            */
+            myClick('btn05', function () {
+                
+                
+                // 获取元素
+                var cityUl = document.getElementById('city');
+
+                console.log(cityUl.innerHTML);
+            })
+
+
+            /*
+                设置 #bj 内的 HTML 代码
+            */
+            myClick('btn06', function () {
+                
+                
+                // 获取元素
+                var bj = document.getElementById('bj');
+                bj.innerHTML = "BEIJING";
+
+            })
+
+
+            /*
+                创建 方式二
+
+            */
+            myClick('btn07', function () {
+                // // 创建 li 元素节点
+                // var liEle = document.createElement("li");
+
+                // // 创建 广州 文本节点
+                // var gzText = document.createTextNode("广州");
+
+                // // 创建完整的 li 的元素
+                // liEle.appendChild(gzText);
+
+                // // 获取父节点元素
+                // var cityUl = document.getElementById('city');
+
+                // // 新增子元素
+                // cityUl.appendChild(liEle);
+
+                /*
+                    这种方式的创建，是销毁原先的元素，然后重建所有的元素
+                    通过 F12 可以看出
+                    在谷歌浏览器中，创建的元素会有闪烁
+                */
+                // var cityUl = document.getElementById('city');
+                // cityUl.innerHTML += "<li>广州</li>"
+
+
+                /*
+                    第一种方式太琐碎
+                    第二种方式非常简便，但是变化太大，当元素上绑定有很多事件的时候，影响很大
+                    这是第三种方式，折中处理，灵活应用
+
+                */
+                var liEle = document.createElement("li");
+                liEle.innerHTML = "广州";
+                var cityUl = document.getElementById('city');
+                cityUl.appendChild(liEle);
+
+            });
+
+
+
+
+        }
+
+
+        function myClick(idStr, fun) {
+            var btn = document.getElementById(idStr);
+            btn.onclick = fun;   // 不用写执行，onclick 自带有执行的动作
+        }
+    </script>
+</head>
+<body>
+    
+    <div class="outer">
+
+        <div class="content">
+            <p>
+                你喜欢哪个城市？
+            </p>
+            <hr>
+    
+            <ul id="city">
+                <li id="bj">
+                    北京
+                </li>
+                <li>
+                    上海
+                </li>
+                <li>
+                    东京
+                </li>
+                <li>
+                    首尔
+                </li>
+    
+            </ul>
+        </div>
+    
+        <div id="btnList">
+            <div>
+                <button id="btn01">
+                    创建一个“广州节点”，添加到 city 下
+                </button>
+            </div>
+    
+            <div>
+                <button id="btn02">
+                    将“广州节点”插入到 #bj 前面
+                </button>
+            </div>
+    
+            <div>
+                <button id="btn03">
+                    使用“广州节点”替换 #bj 节点
+                </button>
+            </div>
+    
+            <div>
+                <button id="btn04">
+                   删除 #bj 节点
+                </button>
+            </div>
+    
+            <div>
+                <button id="btn05">
+                    读取 #city 内的 HTML 代码
+                </button>
+            </div>
+    
+            <div>
+                <button id="btn06">
+                    设置 #bj 内的 HTML 代码
+                </button>
+            </div>
+    
+            <div>
+                <button id="btn07">
+                    创建一个“广州节点”，添加到 city 下(方式二)
+                </button>
+            </div>
+        </div>
+
+    </div>
+    
+</body>
+</html>

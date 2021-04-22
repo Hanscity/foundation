@@ -1,0 +1,26 @@
+/*
+
+    变量的使用：
+        变量的申明和初始化大同小异
+
+        变量的使用在不同的情况下则稍有不同
+
+
+
+*/
+
+// 这种注释也会编译进去吗？
+// 经测试，这种单行的注释不会编译进入 CSS 文件中，这非常合理~
+
+@widthOuter: 600px;
+@heightOuter: 600px;
+@divOuter: outer;
+
+.@{divOuter} {
+    width: @widthOuter;
+    height: @heightOuter; 
+    background-color: red;
+    color: #efefef;
+    background-color: $color;
+}
+

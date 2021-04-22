@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .d1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+
+    </style>
+
+    <script>
+        window.onload = function () {
+
+            /*
+                简单的封装示例：
+            */
+            var any = function (str) {
+                return document.querySelector(str);
+            }
+
+            console.log(any(".d1"));
+
+        }
+    </script>
+</head>
+<body>
+    
+    <div class="d1">
+
+    </div>
+
+
+    <div class="course">
+        <hr>
+        <h3>多库共存</h3>
+        <img src="../../../img/jQuery/p51_001.png" alt="">
+
+        <div>
+            简单的封装示例：
+            <pre>
+                <code>
+window.onload = function () {
+
+    var any = function (str) {
+        return document.querySelector(str);
+    }
+
+    console.log(any(".d1"));
+    
+}
+                </code>
+            </pre>
+        </div>
+
+    </div>
+</body>
+</html>

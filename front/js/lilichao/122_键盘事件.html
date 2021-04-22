@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        /*
+            键盘事件一般是绑定给可以获取焦点的元素或者是document
+
+            键盘按下： onkeydown
+                如果按键按下，一直不放开，那么此事件会一直触发
+                还有一个细节，第一次的触发稍慢，后面的触发比较快。这是浏览器的一个细节，防止误操作~
+
+
+            键盘松开： onkeyup
+
+
+        */
+
+        window.onload = function () {
+
+            document.onkeydown = function (event) {
+
+                /*
+                    keyCode 可以获取键盘的编码
+
+
+                    ctrlKey （单独的 ctrl 键是 17）
+                    shiftKey
+                    altKey
+                    以上三种，经常组合使用，所以单独提出来
+                */
+
+                /*
+                    判断 a 和 ctrl 是否同时被按下
+                */
+
+                console.log(event.keyCode);
+                console.log(event.ctrlKey);
+
+                if (event.keyCode == 65 && event.ctrlKey) {
+                    console.log("a 和 ctrl 已经同时被按下");
+                }
+
+                
+            }
+
+            document.onkeyup = function () {
+                // console.log(2222);
+            }
+
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,66 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+
+        <style>
+
+            .d1 {
+                width: 100px;
+                height: 100px;
+                background-color: red;
+                margin: 100px auto 0;
+                transform: translate(200px);
+            }
+
+            .d2 {
+                
+                background-color: orange;
+                position: absolute;
+
+                /*
+                    如果设置了 width 和 height， 这种方式设置居中才可能生效~
+
+                */
+                /* width: 100px;
+                height: 100px;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto; */
+
+                /*
+                    这样子设置的 50%， 并没有算上本身的高度和宽度
+                        left: 50%;
+                        top: 50%;
+
+                    transform: translateX(-50%) translateY(-50%);
+                        在上面的基础上，平移本身的宽度和高度
+                    
+
+                */
+                left: 50%;
+                top: 50%;
+
+                transform: translateX(-50%) translateY(-50%);
+
+            }
+
+        </style>
+    </head>
+    <body>
+        
+
+        <div class="d1">
+
+        </div>
+
+
+        <div class="d2">
+            aaaaaaaaaaa
+        </div>
+    </body>
+    </html>

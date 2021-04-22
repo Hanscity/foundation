@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jQuery3.6/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(function () {
+
+            /*
+                当鼠标焦点进入 input 框时，则会触发
+            */
+            $("input").focus(function () {
+                console.log("I have get the focus");
+            })
+
+            /*
+                自动触发
+
+                方式一: $("input").focus();
+                方式二: $("input").trigger("focus");
+                方式三: $("input").triggerHandler("focus"); (第三种方式，不会自动获取鼠标焦点)
+
+                方式三比较特殊，就是不会触发元素的默认行为
+                
+            */
+            // $("input").focus();
+            // $("input").trigger("focus");
+            $("input").triggerHandler("focus");
+
+        })
+    </script>
+</head>
+<body>
+    
+    <div class="prac">
+        username: <input type="text">
+    </div>
+</body>
+</html>

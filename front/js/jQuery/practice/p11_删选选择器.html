@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jQuery3.6/jquery-3.6.0.min.js"></script>
+</head>
+
+<body>
+    
+    <div class="setting">
+        <div>
+            Are you all right ?
+        </div>
+    
+        <div>
+            Are you all right ?
+        </div>
+    
+        <div>
+            Are you all right ?
+        </div>
+    
+        <div>
+            Are you all right ?
+        </div>
+
+        <div>
+            Are you all right ?
+        </div>
+    
+        <div>
+            Are you all right ?
+        </div>
+    
+        <div>
+            Are you all right ?
+        </div>
+
+    </div>
+    
+
+    <ul>
+        <li>
+            The same operation
+        </li>
+
+        <li>
+            The same operation
+        </li>
+
+        <li>
+            The same operation
+        </li>
+
+        <li>
+            The same operation
+        </li>
+
+        <li>
+            The same operation
+        </li>
+
+    </ul>
+
+    
+    <div class="course">
+        <hr>
+        <h2>Course Summary</h2>
+        <img src="../../../img/jQuery/p11_001.png" alt="">
+    </div>
+
+    <script>
+        $(function () {
+
+            $('.setting div:first').css('color', 'red');
+
+            $('.setting div:eq(2)').css('color', 'orange');
+
+            $('ul li:odd').css('color', 'green');
+
+            /*
+                下一小节的删选方法比删选选择器更为优雅
+
+                等同于 $('.setting div:eq(3)').css('color', 'blue');
+            */
+            $('.setting div').eq(3).css('color', 'blue');
+
+
+        })
+
+    </script>
+
+
+</body>
+</html>

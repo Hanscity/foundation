@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        function Person(name, age)
+        {
+            this.name = name;
+            this.age = age;
+        }
+
+        
+        var ch = new Person('ch', 30);
+        console.log(ch); // 这里的结果和老师视频中的讲解很不一样，我可以直接打出对象的结果，而没有调用 toString() 方法
+        
+        console.log(ch.__proto__.__proto__.hasOwnProperty('toString')); // true;
+
+        
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,17 @@
+/*
+
+    变量的使用：
+        变量的申明和初始化大同小异
+
+        变量的使用在不同的情况下则稍有不同
+
+
+
+*/
+.outer {
+  width: 600px;
+  height: 600px;
+  background-color: red;
+  color: #efefef;
+  background-color: #efefef;
+}

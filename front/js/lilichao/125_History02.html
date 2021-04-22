@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        
+        window.onload = function () {
+            console.log(history.length);
+
+            var btn01 = document.getElementById("btn01");
+            var btn02 = document.getElementById("btn02");
+            var btn03 = document.getElementById("btn03");
+
+            btn01.onclick = function () {
+                console.log(history.length);
+                history.back();
+            }
+
+            btn02.onclick = function () {
+                console.log(history.length);
+                history.forward();
+            }
+
+            btn03.onclick = function () {
+                console.log(history.length);
+                history.go(-2);
+            }
+        }
+
+
+    </script>
+</head>
+<body>
+    <button id="btn01">Back Button</button>
+    <button id="btn02">Forward Button</button>
+    <button id="btn03">go -2</button>
+
+    <h2>History 02</h2>
+    <a href="125_History03.html">Link 03</a>
+</body>
+</html>

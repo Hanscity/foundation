@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <hr>
+
+        <h2>
+            对象创建的几种模式
+        </h2>
+
+        <ul>
+            <li>
+                new Object() （适用于对象不确定，缺点是语句太多）
+            </li>
+
+            <li>
+                对象字面量 （适合单独使用，无法复用）
+            </li>
+
+            <li>
+                工厂模式 （基本不会使用，相对于构造函数，无法区分具体对象类型）
+            </li>
+
+            <li>
+                构造函数 （如果被频繁使用，浪费内存）
+            </li>
+
+            <li>
+                构造函数 + prototype （适用于大量使用，JS 的模块或者库等）
+            </li>
+
+        </ul>
+    </div>
+</body>
+</html>

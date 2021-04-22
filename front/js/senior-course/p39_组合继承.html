@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        function Person (name, age) {
+
+            this.name = name;
+            this.age = age;
+
+        }
+
+        Person.prototype.eat = function () {
+            console.log("i like eat");
+        }
+
+        /*
+            这里用 apply 来使用 Person 的构造(适用于属性)
+            和下面一起组合成 组合继承（下面的适用于方法）
+        */
+        function Student (name, age) {
+            Person.apply(this, [name, age]);
+        }
+
+        //  将子对象实例的 prototype 属性指向父对象的实例
+        Student.prototype = new Person();
+        //  将 constructor 属性指向本来的对象
+        Student.prototype.constructor = Student;
+
+        var stu1 = new Student("ch", 20);
+        console.log(stu1.eat);
+        console.log(stu1);
+
+
+
+    </script>
+</head>
+<body>
+    <div>
+        <hr>
+        <h2>组合继承的实例</h2>
+
+    <pre>
+        <code>
+function Person (name, age) {
+
+    this.name = name;
+    this.age = age;
+
+}
+
+Person.prototype.eat = function () {
+    console.log("i like eat");
+}
+
+/*
+    这里用 apply 来使用 Person 的构造(适用于属性)
+    和下面一起组合成 组合继承（下面的适用于方法）
+*/
+function Student (name, age) {
+    Person.apply(this, [name, age]);
+}
+
+//  将子对象实例的 prototype 属性指向父对象的实例
+Student.prototype = new Person();
+//  将 constructor 属性指向本来的对象
+Student.prototype.constructor = Student;
+
+var stu1 = new Student("ch", 20);
+console.log(stu1.eat);
+console.log(stu1);
+
+        </code>
+    </pre>
+    </div>
+</body>
+</html>

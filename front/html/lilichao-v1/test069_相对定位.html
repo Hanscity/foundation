@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        /*
+            相对定位：
+                1. 不会脱离文档流
+                2. 不设置 top bottom left right 等,不会有变化（一般设置两个就够了，一个水平方向，一个垂直方向）
+                3. 位置是相对于原位置而言~
+                4. 层级高于文档流中的元素（只有开启了定位，z-index 的设置才有效）
+                5. 相对定位不会改变元素的性质（块元素开启相对定位后还是块元素，行内元素开启相对定位后还是行内元素）
+        */
+        .d1 {
+            /* width: 200px; */
+            height: 200px;
+            background-color: red;
+            position: relative;
+        }
+
+        .d2 {
+            width: 200px;
+            height: 200px;
+            background-color: orange;
+            position: relative;
+            left: 100px;
+            top: 200px;
+            z-index: 2;
+        }
+
+        .d3 {
+            width: 200px;
+            height: 200px;
+            background-color: yellow;
+            position: relative;
+            z-index: 3;
+        }
+
+        .s1 {
+            width: 200px;
+            height: 200px;
+            background-color: green;
+            position: relative;
+        }
+
+    </style>
+</head>
+<body>
+    
+    <div class="d1">
+
+    </div>
+
+    <div class="d2">
+
+    </div>
+
+    <div class="d3">
+
+    </div>
+
+    <span class="s1">
+        hello world
+    </span>
+</body>
+</html>

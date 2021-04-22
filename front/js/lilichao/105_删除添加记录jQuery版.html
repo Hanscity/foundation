@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+    .outer {
+        width: 800px;
+        height: 800px;
+        background-color: #e6e6e6;
+        margin: 100px auto;
+        color: #323232;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .outer table {
+        width: 400px;
+        height: 200px;
+        border-collapse: collapse;
+        
+    }
+
+    table,table tr th, table tr td { 
+        border:1px solid #323232; 
+    }
+
+
+    .outer form {
+        width: 400px;
+        height: 200px;
+        border: 1px solid #323232;
+    }
+
+    .outer form div {
+        margin: 10px 10px;
+    }
+
+    </style>
+
+    <script src="../jQuery/jQuery3.6/jquery-3.6.0.min.js"></script>
+
+    <script>
+
+        $(function () {
+            $("#btn").click(function () {
+                var name = $("#name").val();
+                var email = $("#email").val();
+                var salary = $("#salary").val();
+
+                var res = $(".table tbody").append("<tr><td>" + name + "</td>" + 
+                                "<td>" + email + "</td>" + 
+                                "<td>" + salary + "</td>"+ 
+                                "<td><a href='javascript:;'>Delete</a></td></tr>");
+            })
+
+            /*
+                jQuery 的事件委托
+            */
+            $(".table tbody").on("click", "a", function (event) {
+                var flag = confirm("确认删除 "+name+" 吗？");
+                if (flag) {
+                    $(this).parents("tr").remove();
+                }
+            })
+            
+        })
+
+    </script>
+
+</head>
+<body>
+    
+    <div class="outer">
+        <div class="table">
+            <table>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+
+                    <th>
+                        Email
+                    </th>
+
+                    <th>
+                        Salary
+                    </th>
+
+                    <th>
+                        Operate
+                    </th>
+                </tr>
+                <tr>
+                    <td>
+                        Tom
+                    </td>
+
+                    <td>
+                        tom@tom.com
+                    </td>
+
+                    <td>
+                        5000
+                    </td>
+
+                    <td>
+                        <a href="#" class="delete">Delete</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Jerry
+                    </td>
+
+                    <td>
+                        jerry@sohu.com
+                    </td>
+
+                    <td>
+                        8000
+                    </td>
+
+                    <td>
+                        <a href="#" class="delete">Delete</a>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        Bob
+                    </td>
+
+                    <td>
+                        Bob@sohu.com
+                    </td>
+
+                    <td>
+                        10000
+                    </td>
+
+                    <td>
+                        <a href="#" class="delete">Delete</a>
+                    </td>
+                </tr>
+
+
+            </table>
+        </div>
+
+
+        <div class="form">
+            <form action="#">
+
+                <h3>添加新员工</h3>
+
+                <div>
+                    name: <input type="text" id="name">
+                </div>
+
+                <div>
+                    email: <input type="text" id="email">
+                </div>
+
+                <div>
+                    salary: <input type="text" id="salary">
+                </div>
+            
+                <div>
+                    <button type="submit" id="btn">Submit</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</body>
+</html>

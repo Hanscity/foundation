@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        /*
+            字面量创建正则表达式： /正则表达式/匹配模式
+        */
+
+        // var reg = /a/i;
+        // var result = reg.test('abc');
+        // console.log(typeof reg);
+        // console.log(result);
+
+
+        /*
+             | 表示 或：
+            reg = /a|b|c|d|e|f|g/
+
+            [abcdefg] 
+            [a-g]
+            
+            以上三种都是表示或者 abcdefg
+
+
+            /[a-z]/: 任意的小写字母
+            /[A-Z]/: 任意的大写字母
+            /[A-z]/: 任意的字母
+            /[a-z]/i: 任意的字母
+            /[A-Z]/i: 任意的字母
+            /[a-Z]/ : Uncaught SyntaxError: Invalid regular expression: /[a-Z]/: Range out of order in character class
+        */
+
+        // var reg = /[A-Z]/i;
+        // var res = reg.test("c");
+
+        // console.log(res); 
+
+
+        /*
+            检查一个字符串是否含有 abc 或者 adc 或者 aec
+
+            1. /abc|adc|aec/
+            2. /a[bce]c/
+
+        */
+
+        // var reg = /a[bce]c/;
+        // var res = reg.test("acec");
+
+        // console.log(res); 
+
+
+        /*
+
+            /[^ab]/: 除了 ab 以外的
+        */
+
+        // var reg = /[^ab]/;
+        // var res1 = reg.test("a"); //false
+        // var res2 = reg.test("b"); //false
+        // var res3 = reg.test("ab"); //false
+        // var res4 = reg.test("c"); //true
+        // var res5 = reg.test("abc"); //true
+
+        // console.log(res1);
+        // console.log(res2);
+        // console.log(res3);
+        // console.log(res4);
+        // console.log(res5);
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

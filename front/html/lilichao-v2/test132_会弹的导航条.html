@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        *   {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        ul {
+            width: 1000px;
+            height: 40px;
+            line-height: 40px;
+            background-color: #E8E7E3;
+            margin: 100px auto;
+            display: flex;
+        }
+
+        li {
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        li:hover {
+            background-color: #232323;
+        }
+
+        li:hover a {
+            color: #fff;
+        }
+
+        a {
+            text-decoration: none;
+            color: #636363;
+        }
+
+
+        /*
+            项目： 容器的子元素才是项目,不是子元素的后代元素不满足 flex 的情况
+        */
+        /* a {
+            flex-grow: 1;
+        } */
+
+        
+
+    </style>
+     
+</head>
+<body>
+    
+    <ul>
+        <li><a href="#">HTML/CSS</a></li>
+        <li><a href="#">Browser Side</a></li>
+        <li><a href="#">Server Side</a></li>
+        <li><a href="#">Programming</a></li>
+        <li><a href="#">XML</a></li>
+        <li><a href="#">Web Building</a></li>
+        <li><a href="#">Reference</a></li>
+    </ul>
+</body>
+</html>

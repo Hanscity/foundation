@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象拷贝</title>
+
+    <script src="../jQuery3.6/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(function () {
+            var targetObj = {
+                name: "ch",
+                gender: "male",
+                msg: {
+                    graduation: "Argriculture University",
+                    time: "2008"
+                }
+            }
+
+            var obj = {
+                name: "cl",
+                gender: "male",
+                msg: {
+                    time: "2012"
+                }
+            }
+
+            $.extend(true, targetObj, obj);
+            targetObj.msg.time = "2009";
+
+            console.log(targetObj);
+            console.log(obj);
+
+
+        })
+    </script>
+</head>
+<body>
+    
+
+    <div class="course">
+        <hr>
+        <h3>对象拷贝</h3>
+        <img src="../../../img/jQuery/p50_001.png" alt="">
+        <br>
+        <img src="../../../img/jQuery/p50_002.png" alt="">
+    </div>
+</body>
+</html>

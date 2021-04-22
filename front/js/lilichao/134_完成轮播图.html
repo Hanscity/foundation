@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../../css/reset.css">
+
+    <style>
+
+        .outer {
+            width: 620px;
+            height: 420px;
+            background-color: #e6e6e6;
+            margin: 100px auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        ul {
+
+            height: 420px;
+            position: absolute;
+            left: 0px;
+        }
+
+        ul li {
+            float: left;
+            margin: 10px;
+        }
+
+        img {
+            width: 600px;
+            height: 400px;
+        }
+
+        .link {
+            position: absolute;
+            bottom: 15px;
+        }
+
+        .link a {
+            float: left;
+            width: 15px;
+            height: 15px;
+            margin: 5px;
+            background-color: red;
+            opacity: 0.5;
+        }
+
+        .link a:hover {
+            background-color: black;
+        }
+
+    </style>
+
+    <script src="./tools.js"></script>
+    <script>
+        window.onload = function () {
+
+            var timer;
+            /*
+                默认显示的 a 标签
+                showIndex: 公用这一个参数的好处是，当手动点击之后，自动切换会在手动点击的此图片基础上走下一张图片
+            */
+            var showIndex = 0;
+
+            /*
+                动态计算出 ul 的总宽度，因为图片可能增加或者减少
+            */
+            var liAll = document.getElementsByTagName("li");
+            var ul = document.getElementById("imgList");
+            ul.style.width = liAll.length * 620 + "px";
+
+            /*
+                动态计算出超链接的居中位置，因为图片可能增加或者减少
+            */
+            var aElement = document.getElementsByTagName("a");
+            var outer = document.getElementsByClassName("outer")[0];
+            var link = document.getElementsByClassName("link")[0];
+            link.style.left = (parseInt(getComputedStyle(outer).width) - 20 * aElement.length)/2 + "px";
+
+            aElement[showIndex].style.backgroundColor = "black";
+
+            /*
+                点击选中图片
+            */
+            for (var i=0; i<aElement.length; i++) {
+                aElement[i].num = i;
+                aElement[i].onclick = function () {
+                    
+                    /*
+                        手动点击图片，关闭定时器，是不希望定时器的切换对手动切换造成干扰
+
+                    */
+                    clearInterval(timer);
+
+                    /*
+                        手动点击图片，不要动画效果比较好
+                    */
+                    ul.style.left = this.num * -620 + "px";
+                    // move(ul, "left", 62, this.num * -620);
+                    showIndex = this.num;
+                    setAcolor(this.num);
+                    changeColor();
+                }
+            }
+
+            /*
+                设置颜色
+            */
+            function setAcolor(num) {
+
+                for (var i=0; i<aElement.length; i++) {
+
+                    // 这里设置的内联样式，优先级较高；如果直接设置为 black，hover 就会失效；设置为空，则不会覆盖默认的样式
+                    aElement[i].style.backgroundColor = "";
+                }
+                aElement[num].style.backgroundColor = "black";
+            }
+
+            changeColor();
+
+
+            /*
+                自动切换图片
+            */
+           function changeColor() {
+
+                timer = setInterval(function () {
+                    ++ showIndex
+                    /*
+                        将判断写在这个位置更好，如果写在 setAcolor() 函数里面，还多走了一个动画效果
+                    */
+                    if (showIndex == (liAll.length - 1)) {
+                        showIndex = 0;
+                        ul.style.left = 0;
+                    }
+                    showIndex %= liAll.length;
+                    /*
+                        自动切换，引用 move 函数 效果比较好
+                            speed: 62, target -620 能除尽比较好，不然会闪现以下空白再回退~
+                    */
+                    move(ul, "left", 62, showIndex * -620, function () {
+                        setAcolor(showIndex);
+                    });
+                }, 3000);
+           }
+
+
+
+        }
+    </script>
+</head>
+
+<body>
+    
+    <div class="outer">
+        <ul id="imgList">
+
+            <li><img src="../../img/微信图片_20210208205128.jpg" alt=""></li>
+
+            <li><img src="../../img/微信图片_20210208205232.jpg" alt=""></li>
+
+            <li><img src="../../img/微信图片_20210208205241.jpg" alt=""></li>
+
+            <li><img src="../../img/微信图片_20210208205249.jpg" alt=""></li>
+
+            <li><img src="../../img/微信图片_20210208205256.jpg" alt=""></li>
+
+            <li><img src="../../img/微信图片_20210208205128.jpg" alt=""></li>
+
+        </ul>
+
+        <div class="link">
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+            <a href="javascript:;"></a>
+        </div>
+
+    </div>
+</body>
+</html>

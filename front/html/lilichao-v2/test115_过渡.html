@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../../css/reset.css">
+
+    <style>
+        .clearfix::before,
+        .clearfix::after {
+            content: '';
+            display: table;
+            clear: both;
+        }
+
+        .d1 {
+            width: 800px;
+            height: 800px;
+            background-color: #e6e6e6;
+        }
+
+        .d1 .d2 {
+            width: 100px;
+            height: 100px;
+            background-color: #232323;
+            margin-bottom: 100px;
+
+            /* transition-property: all;
+            transition-duration: 2s; */
+
+            /*
+                速度曲线
+                    ease: 默认值
+                    
+                    也可以使用 bezier 曲线来表示：
+                    https://cubic-bezier.com
+
+            */
+            /* transition-timing-function: linear;
+            transition-delay: 2s; */
+
+            /*
+                可以合在一起写,只有一个要求，transition-duration 需要写在 transition-delay 的前面
+
+                2s: 动画执行 2s
+                cubic-bezier(.5,.51,1,1): 动画执行的速度曲线
+                all: 针对所有的属性
+                2s: 延迟 2s 执行;
+            */
+
+            transition: 2s cubic-bezier(.5,.51,1,1) all 2s;
+
+        }
+
+        .d1 .d3 {
+            width: 100px;
+            height: 100px;
+            background-color: #232323;
+            margin-bottom: 100px;
+            /* transition: all 2s; */
+
+            transition-property: all;
+            transition-duration: 2s;
+
+            transition-timing-function: linear;
+
+        }
+
+        .d1:hover .d2 {
+            /* width: 200px;
+            height: 200px; */
+            margin-left: 700px;
+        }
+
+
+        .d1:hover .d3 {
+            /* width: 200px;
+            height: 200px; */
+            margin-left: 700px;
+        }
+
+        
+    </style>
+
+</head>
+<body>
+    
+    <div class="d1 clearfix">
+        <div class="d2">
+
+        </div>
+
+        <div class="d3">
+
+        </div>
+    </div>
+
+   
+    <div class="course">
+        <hr>
+        <h3>Course Summary</h3>
+        <img src="../../img/lilichao-v2/115_001.png" alt="">
+    </div>
+
+</body>
+</html>

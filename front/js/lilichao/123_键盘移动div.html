@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #d1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+        }
+    </style>
+
+    <script>
+
+        window.onload = function () {
+
+            var d1 = document.getElementById("d1");
+            document.onkeydown = function (event) {
+
+                var speed = 20;
+                // 当按住 Ctrl 时，有加速效果
+                if (event.ctrlKey) {
+                    speed = 100;
+                }
+                console.log(speed);
+
+                switch (event.keyCode) {
+
+                    // 37,left
+                    case 37:
+                        d1.style.left = d1.offsetLeft - speed + "px";
+                        break;
+                    // 38, top
+                    case 38:
+                        d1.style.top = d1.offsetTop - speed + "px";
+                        break;
+                    // 39, right
+                    case 39:
+                        d1.style.left = d1.offsetLeft + speed + "px";
+                        break;
+                    // 40, bottom
+                    case 40:
+                        d1.style.top = d1.offsetTop + speed + "px";
+                        break;
+                    default:
+                        break;
+
+                }
+                    
+
+            }
+        }
+    </script>
+</head>
+<body>
+    
+    <div id="d1">
+
+    </div>
+</body>
+</html>

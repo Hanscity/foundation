@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        #d1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+        }
+    </style>
+
+    <script>
+
+        window.onload = function () {
+
+            var d1 = document.getElementById("d1");
+            var direction;
+            var speed = 20;
+
+            /*
+                将位移的计算交给定时器是为了解决第一次键盘按下时候的卡顿
+
+                    视频讲解中，说明是将速度和方向分开来计算，从而使速度变快
+                    我判断，应该不是的。
+                    这点计算，不会影响速度。
+                    让第一次不在卡顿，应该是当前的定时器函数改变了浏览器第一次按键按下默认的定时时间或者说是启动时间，从而变快的
+            */
+            setInterval(function () {
+                switch (direction) {
+                    // 37,left
+                    case 37:
+                        d1.style.left = d1.offsetLeft - speed + "px";
+                        break;
+                    // 38, top
+                    case 38:
+                        d1.style.top = d1.offsetTop - speed + "px";
+                        break;
+                    // 39, right
+                    case 39:
+                        d1.style.left = d1.offsetLeft + speed + "px";
+                        break;
+                    // 40, bottom
+                    case 40:
+                        d1.style.top = d1.offsetTop + speed + "px";
+                        break;
+                    default:
+                        break;
+                }
+            }, 30);
+
+            document.onkeydown = function (event) {
+
+                // 当按住 Ctrl 时，有加速效果
+                if (event.ctrlKey) {
+                    speed = 100;
+                }
+                direction = event.keyCode;
+            }
+
+            document.onkeyup = function (event) {
+
+                // 当释放 Ctrl 时，速度还原
+                if (event.ctrlKey == false) {
+                    speed = 20;
+                }
+                direction = 0;
+            }
+        }
+    </script>
+</head>
+<body>
+    
+    <div id="d1">
+
+    </div>
+</body>
+</html>

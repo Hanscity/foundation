@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0;
+        }
+
+        #rightMove {
+            width: 100px;
+            height: 30px;
+            margin: 20px;
+        }
+
+        #d1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+        }
+
+        #d2 {
+            width: 0px;
+            height: 1200px;
+            border: 1px solid black;
+            position: absolute;
+            margin: 0 800px;
+        }
+
+    </style>
+
+    <script>
+        window.onload = function () {
+            var d1 = document.getElementById("d1");
+            var btnRightMove = document.getElementById("rightMove");
+
+            var timer;
+
+            btnRightMove.onclick = function () {
+                
+                clearInterval(timer);
+
+                timer = setInterval(function () {
+
+                    // offsetLeft 挺好用，暂且不用 getComputedStyle 方法
+                    d1.style.left = d1.offsetLeft + 19 + "px";
+                    
+                    if (parseInt(d1.offsetLeft) >= 800) {
+                        d1.style.left = 800 + "px";
+                        clearInterval(timer);
+                    }
+        
+                }, 30);
+
+            }
+
+
+            function getStyle(obj, name) {
+                // 这里一定要加上 window, 因为对象的属性没有会报错为 undefined, 而变量没有会直接报错~
+                if (window.getComputedStyle) {
+                    return getComputedStyle(obj)[name];
+                } else {
+                    // IE 8 的用法
+                    return obj.currentStyle[name];
+                }
+            }
+
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <button id="rightMove">Right Move</button>
+    </div>
+
+
+    <div id="d1">
+
+    </div>
+
+    <div id="d2">
+
+    </div>
+</body>
+</html>

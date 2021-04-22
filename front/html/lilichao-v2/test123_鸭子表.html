@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        html {
+            /*
+                一般，基础的透视设置为 800px~1200px, 设置给 HTML 元素
+            */
+            perspective: 800px;
+        }
+
+        .outer {
+            width: 300px;
+            height: 300px;
+            margin: 100px auto;
+            border-radius: 50%;
+            /* border: 1px solid black; */
+            position: relative;
+            /*
+                旋转的其实是盒子容器，秒针更随着。
+                需要将秒针的起点设置在中心位置
+                
+            */
+            background-image: url("../../img/lilichao-v2/123_rolex.png");
+            background-size: cover;
+
+        }
+
+        .outer > div {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+        .outer .hour_box {
+
+            width: 60%;
+            height: 60%;
+            animation: run 36000s infinite linear;
+        }
+
+        .outer .min_box {
+
+            width: 80%;
+            height: 80%;
+            animation: run 600s infinite steps(60);
+        }
+
+        .outer .second_box {
+            width: 90%;
+            height: 90%;
+            animation: run 10s infinite steps(60);
+
+        }
+
+        .outer .hour_box .hour {
+        
+            width: 6px;
+            height: 50%;
+            background-color: orange;
+            margin: 0 auto;
+
+        }
+
+        .outer .min_box .min {
+        
+            width: 4px;
+            height: 50%;
+            background-color: green;
+            margin: 0 auto;
+        }
+
+        .outer .second_box .second {
+        
+            width: 2px;
+            height: 50%;
+            background-color: #232323;
+            margin: 0 auto;
+        }
+
+
+        @keyframes run {
+            from {
+                transform: rotateZ(0deg);
+            }
+
+            to {
+                transform: rotateZ(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    
+
+    <div class="outer">
+
+        <div class="hour_box">
+            <div class="hour">
+
+            </div>
+        </div>
+
+        <div class="min_box">
+            <div class="min">
+
+            </div>
+        </div>
+
+
+        <div class="second_box">
+            <div class="second">
+
+            </div>
+        </div>
+
+
+    </div>
+</body>
+</html>

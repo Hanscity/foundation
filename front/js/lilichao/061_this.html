@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        var name = "Global name";
+
+        function fun() {
+            console.log(this.name);
+        }
+
+        
+        fun();
+
+        var objZhubajie = {
+            name: "zhubajie",
+            func: fun // 这里不能加引号， 因为 fun 是一个变量，保存的是堆的地址
+        };
+        
+        objZhubajie.func();
+
+
+    </script>
+</head>
+<body>
+    
+
+</body>
+</html>

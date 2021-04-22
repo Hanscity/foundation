@@ -1,0 +1,13 @@
+.clearfix:before,
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+
+/* 中间容器的宽度都是固定的 */
+.base-width {
+    width: 1226px;
+    margin: 0 auto;
+}

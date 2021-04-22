@@ -23,3 +23,26 @@ Server A,Server A 将数据返回给用户，对于用户而言，只知道 Serv
 Documents Of Official Site
 > http://nginx.org/en/docs/
 
+
+查看状态
+
+systemctl status nginx
+
+查看状态
+
+service nginx status
+
+配置检查
+
+nginx -t
+
+
+重启
+
+nginx -s reload
+
+
+查看端口
+
+sudo lsof :80
+

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+
+        .cityDiv {
+            width: 200px;
+            height: 160px;
+            background-color: red;
+        }
+
+        .cityDiv button {
+            margin-left: 20px;
+            width: 60px;
+            height: 30px;
+        }
+
+    </style>
+
+    <script>
+
+        
+        // function myClick(paramId, func) {
+
+        //     document.getElementById(paramId).onclick = func;
+        // }
+
+        window.onload = function () {
+
+
+            function myClick(paramId, func) {
+
+                document.getElementById(paramId).onclick = func;
+            }
+
+            
+            
+            myClick("cityBtn", function () {
+                var bj = document.getElementById("guangzhou");
+                
+                // console.log(bj.parentNode.innerHTML);
+                /*
+                    innerText 和 innerHTML取出的内容类似，不同的是它会自动将 HTML 去除
+    
+                */
+                // console.log(bj.parentNode.innerText);
+
+                // 获取前一个兄弟节点
+                // console.log(bj.previousSibling);
+
+                // 获取前一个兄弟元素
+                // console.log(bj.previousElementSibling);
+
+
+                /*
+                    此时：
+                    innerHTML: <span>广州</span>
+                    innerText: 广州
+                    firstChild: #text
+                    
+                */
+                console.log(bj);
+                console.log(bj.innerHTML);
+                console.log(bj.innerText);
+                console.log(bj.firstChild);
+            })
+
+        }
+    </script>
+</head>
+<body>
+    
+    <div class="cityDiv">
+        <ul>
+            <li id="beijing">
+                北京
+            </li>
+
+            <li id="guangzhou">
+                <span>广州</span>
+            </li>
+
+            <li id="shenzhen">
+                深圳
+            </li>
+
+            <li id="wuhan">
+                武汉
+            </li>
+        </ul>
+
+        <button id="cityBtn">
+            city
+        </button>
+    </div>
+
+
+    <div>
+        <hr>
+        <h3>Course Summary</h3>
+
+        <img src="../../img/lilichao-js/097_001.png" alt="">
+    </div>
+
+    
+</body>
+</html>

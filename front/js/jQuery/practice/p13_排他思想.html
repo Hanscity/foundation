@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jQuery3.6/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div>
+        <button>Click</button>
+
+        <button>Click</button>
+
+        <button>Click</button>
+
+        <button>Click</button>
+
+        <button>Click</button>
+
+        <button>Click</button>
+
+        <button>Click</button>
+
+        <button>Click</button>
+    </div>
+    
+
+    <script>
+        $(function () {
+            console.log($('button'));
+            /*
+                隐式迭代，所有的元素都会有绑定
+            */
+            $('button').click(function () {
+                $(this).css('background', 'red');
+
+                /*
+                    隐式迭代，除此元素外的所有的兄弟元素 button 都会设置
+
+                    也可以这样写，siblings 里面加上元素--$(this).siblings('button').css('background', '');
+                */
+                $(this).siblings().css('background', '');
+            })
+        })
+    </script>
+</body>
+</html>

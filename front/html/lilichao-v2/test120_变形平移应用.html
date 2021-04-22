@@ -1,0 +1,59 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+
+        <style>
+
+            .d1 {
+                width: 800px;
+                height: 800px;
+                background-color: #ffffee;
+                margin: 100px auto;
+                display: flex;
+            }
+
+            .d1 div {
+                
+                width: 220px;
+                height: 300px;
+                background-color: #e6e6e6;
+                margin: 20px;
+            }
+
+            .d1 div:hover {
+                /*
+                    动画执行 0.3s , 针对所有的属性
+                */
+                transition: 0.3s all;
+
+                /*
+                    向上移动 3px
+                */
+                transform: translateY(-3px);
+                box-shadow: 0 0 6px  rgba(0, 0, 0, .3);
+            }
+
+
+        </style>
+    </head>
+    <body>
+        
+
+        <div class="d1">
+            <div class="d2">
+
+            </div>
+
+            <div class="d3">
+
+            </div>
+
+
+        </div>
+
+
+    </body>
+    </html>

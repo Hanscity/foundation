@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        function Person()
+        {
+
+        }
+
+
+        var ch = new Person();
+        
+        Person.prototype.name = 'The name of prototype';
+        ch.age = 18;
+
+        /*
+            使用 in 检查对象中是否含有某个属性时，如果对象中有，或者对象的原型链中有，也会返回 true
+        */
+        console.log("name" in ch); // true
+        console.log("age" in ch); // true
+
+        /*
+            使用 hasOwnProperty 检查对象中是否含有某个属性时，如果对象中有，返回 true；如果对象的原型链中有，返回 false
+        */
+        console.log(ch.hasOwnProperty("name")); // false
+        console.log(ch.hasOwnProperty("age")); // true
+
+
+        /*
+            对象查找属性：
+              首先在自身对象的属性中找
+              如果没有，会去原型对象 prototype 中寻找
+              如果没有，会去原型对象 prototype 的原型对象 prototype 中寻找，直到 Object 对象的原型
+
+              Object 对象没有原型对象，如果没有找到，则返回 undefined
+
+        */
+        console.log(ch.hasOwnProperty("hasOwnProperty")); // false
+        console.log(ch.__proto__.hasOwnProperty("hasOwnProperty")); // false
+        console.log(ch.__proto__.__proto__.hasOwnProperty("hasOwnProperty")); // true
+
+        console.log(ch.__proto__.__proto__.__proto__); // null; Object 的 __proto__ == null
+
+        console.log(ch.__proto__.__proto__); // Object
+
+    </script>
+</head>
+<body>
+    
+    <div>
+        <hr>
+        <h2>Course Summary</h2>
+
+        <div>
+            <h3>
+                in 检查对象属性
+            </h3>
+            使用 in 检查对象中是否含有某个属性时，如果对象中有，或者对象的原型链中有，也会返回 true
+
+        </div>
+
+        <div>
+            <h3>
+                hasOwnProperty 检查对象属性
+            </h3>
+
+            使用 hasOwnProperty 检查对象中是否含有某个属性时，如果对象中有，返回 true；如果对象的原型链中有，返回 false
+
+        </div>
+
+
+        <div>
+
+            <h3>
+                对象查找属性
+            </h3>
+
+            <ul>
+                <li>
+                    首先在自身对象的属性中找
+                </li>
+
+                <li>
+                    如果没有，会去原型对象 prototype 中寻找
+                </li>
+
+                <li>
+                    如果没有，会去原型对象 prototype 的原型对象 prototype 中寻找，直到 Object 对象的原型
+                </li>
+
+                <li>
+                    Object 对象没有原型对象(Object 的 __proto__ == null)，如果没有找到，则返回 undefined
+                </li>
+            </ul>
+            
+              
+              
+              
+        </div>
+    </div>
+</body>
+</html>

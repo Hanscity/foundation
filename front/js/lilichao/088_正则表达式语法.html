@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        /*
+            量词：
+                /a{3}/: a 出现三次
+                /(ab){3}/: ab 出现三次
+                /(ab){m,n}/: ab 出现 m~n 次都可以
+                /(ab){m,}/: ab 出现 m 次及以上 都可以
+
+                /a+/: a 出现至少一次，相当于 /a{1,}/
+                a*: a 出现0次或多次，相当于 /a{0,}/
+                /a?/: a 出现0次或一次，相当于 /a{0,1}/
+
+
+        */
+
+        // var reg = /ab?c/;
+        // var res = reg.test("abbcdefg");
+        // console.log(res);
+
+
+        // var reg = /a?/;
+        // var res = reg.test("aaacdefg");
+        // console.log(res); // true 这个程序，有点疑问~
+
+        
+        /*
+            检查一个字符串中是否以 a 开头：
+            /^a/: 以 a 开头的字符串
+            /a$/: 以 a 结尾的字符串
+            /^a$/: 表示一个字母 a,有且只有 a
+
+        */
+
+        // var reg = /^a$/;
+        // var res = reg.test("aaaaaa"); // false
+        // console.log(res);
+
+
+        /*
+            判断手机号： 
+                1. 以 1 开头
+                2. 第二位 [3-9]
+                3. 一起 11 位
+                
+            结果： /^1[3-9][0-9]{9}$/; 前面的开头符号和后面的结束符号，必须得有，表示有且只有。
+
+        */
+        // var reg = /^1[3-9][0-9]{9}$/;
+        // var res = reg.test(13048825228);
+        // console.log(res);
+
+        var reg = /1[3-9][0-9]{9}/;
+        var res = reg.test("abjgbejbge13048825228hgekhgtkt");
+        console.log(res);  // true;
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

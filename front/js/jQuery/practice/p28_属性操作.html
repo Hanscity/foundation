@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="../jQuery3.6/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(function () {
+            
+            /*
+                原生的属性，prop 和 attr 都是可以的（可以获取可以设置）
+            */
+            console.log($("input").eq(0).prop("type"));
+            console.log($("input").eq(0).attr("type"));
+
+            /*
+                自定义的属性，prop() 获取不到， attr() 可以获取
+            */
+            console.log($("input").eq(1).prop("ch")); // undefined
+            console.log($("input").eq(1).attr("ch")); // chenhang
+
+
+        })
+    </script>
+
+
+</head>
+<body>
+    <div class="form">
+        <form action="">
+
+            username: <input type="text">
+            <br>
+            <br>
+            password: <input type="password"  ch="chenhang">
+
+        </form>
+    </div>
+</body>
+</html>

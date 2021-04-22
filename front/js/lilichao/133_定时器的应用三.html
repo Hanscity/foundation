@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            margin: 0px;
+            padding: 0;
+        }
+
+        button {
+            width: 100px;
+            height: 30px;
+            margin: 20px;
+        }
+
+        #d1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            font-size: 40px;
+            text-align: center;
+            line-height: 100px;
+        }
+
+        #d2 {
+            width: 0px;
+            height: 1200px;
+            border: 1px solid black;
+            position: absolute;
+            margin: 0 800px;
+        }
+
+        #tortoise {
+            width: 100px;
+            height: 100px;
+            background-color: orange;
+            position: absolute;
+            top: 300px;
+            font-size:26px;
+            text-align: center;
+            line-height: 100px;
+        }
+
+        #machine {
+            width: 100px;
+            height: 100px;
+            background-color: yellow;
+            position: absolute;
+            top: 500px;
+            font-size:26px;
+            text-align: center;
+            line-height: 100px;
+        }
+
+    </style>
+    <script src="./tools.js"></script>
+    <script>
+
+        window.onload = function () {
+            var d1 = document.getElementById("d1");
+            var tortoise = document.getElementById("tortoise");
+            var machine = document.getElementById("machine");
+
+            var btnRightMove = document.getElementById("rightMove");
+            var btnLeftMove = document.getElementById("leftMove");
+            var btnLeftTortoise = document.getElementById("leftTortoise");
+            var btnRightTortoise = document.getElementById("rightTortoise");
+            var btnMachine = document.getElementById("changeMachine");
+
+            btnLeftMove.onclick = function () {
+                move(d1, "left", 19, 0);
+            };
+
+            btnRightMove.onclick = function () {
+                move(d1, "left", 19, 800);
+            };
+
+            btnLeftTortoise.onclick = function () {
+                move(tortoise, "left", 9, 0);
+            }
+
+            btnRightTortoise.onclick = function () {
+                move(tortoise, "left", 9, 800);
+            }
+
+            btnMachine.onclick = function () {
+                move(machine, "width", 19, 800, function () {
+                    move(machine, "height", 19, 400, function () {
+                        move(machine, "top", 19, 700, function () {
+                            move(machine, "top", 6, 500, function () {
+                                move(machine, "width", 19, 100, function () {
+                                    move(machine, "height", 19, 100);
+                                });
+                            });
+                        });
+                    });
+                });
+            };
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <button id="leftMove">Left d1</button>
+
+        <button id="rightMove">Right d1</button>
+
+        <button id="leftTortoise">Left Tortoise</button>
+
+        <button id="rightTortoise">Right Tortoise</button>
+
+        <button id="changeMachine">Machine</button>
+    </div>
+
+
+    <div id="d1">
+        d1
+    </div>
+
+    <div id="d2">
+
+    </div>
+
+    <div id="tortoise">
+        tortoise
+    </div>
+
+    <div id="machine">
+        machine
+    </div>
+</body>
+</html>

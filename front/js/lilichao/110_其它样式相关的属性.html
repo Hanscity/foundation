@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .d1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            padding: 10px;
+            border: 10px solid orange;
+        }
+
+        .d3 {
+            width: 200px;
+            height: 200px;
+            background-color: orange;
+            overflow: auto;
+        }
+
+        .d4 {
+            width: 600px;
+            height: 600px;
+            background-color: yellow;
+        }
+
+
+    </style>
+
+    <script>
+        window.onload = function () {
+
+            var d1 = document.getElementsByClassName("d1")[0];
+            var d3 = document.getElementsByClassName("d3")[0];
+
+            var btn01 = document.getElementById("btn01");
+
+            btn01.onclick = function () {
+
+                /*
+                    获取样式：
+
+                */
+                // var styleD1 = getComputedStyle(d1);
+                // console.log(styleD1);
+                // console.log(styleD1.width);
+                
+                /*
+
+                    clientWidth: 
+                    clientHeight:
+
+                    计算方法是： 内边距 + padding
+
+                    只读，不可修改
+
+
+                */
+                // console.log(d1.clientWidth);
+
+                /*
+                    offsetWidth:
+                    offsetHeight:
+
+                    计算方法是： 内边距 + padding + border
+
+                    只读，不可修改
+                */
+
+                // console.log(d1.offsetWidth);
+
+
+                /*
+                    offsetParent:
+                        返回开启了定位的祖先元素，如果都没有开启，则返回 body
+
+                    offsetLeft:
+
+                    offsetRight:
+
+
+                */
+                // console.log(d1.offsetParent);
+                // console.log(d1.offsetLeft);
+
+
+                /*
+                    获取元素滚动区域的宽度，高度： 
+                        scrollWidth:
+                        scrollHeight: 
+                    
+                    获取元素已经滚动地距离
+                        scrollLeft
+                        scrollTop
+
+                    scrollWidth - scrollLeft = clientWidth 的时候，说明滚动条到了最右端
+                    scrollHeight - scrollTop = clientHeight 的时候，说明滚动条到了最下端（在注册协议的时候，可以应用到）
+
+                */
+                console.log(d3.scrollLeft);
+                console.log(d3.scrollTop);
+
+                console.log(d3.clientHeight); // 185 而不是 200， 是因为现在有了滚动条的大小
+                console.log(d3.scrollHeight - d3.scrollTop);
+
+                
+
+            }
+
+
+            /*
+                @comment: 这个方法是为了兼容正常的浏览器和 IE8
+
+                obj: 对象元素
+                name: 对象元素的属性
+
+            */
+            function getStyle(obj, name) {
+
+                // 这里一定要加上 window, 因为对象的属性没有会报错为 undefined, 而变量没有会直接报错~
+                if (window.getComputedStyle) {
+                    return getComputedStyle(obj)[name];
+                } else {
+                    // IE 8 的用法
+                    return obj.currentStyle[name];
+                }
+            }
+        }
+
+    </script>
+</head>
+<body>
+    
+    <button id="btn01">Click</button>
+
+    <hr>
+
+    <div class="d2">
+        <div class="d1">
+
+        </div>
+    </div>
+
+    <div class="d3">
+        <div class="d4"></div>
+    </div>
+    
+</body>
+</html>

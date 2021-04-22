@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../../css/reset.css">
+
+    <style>
+
+        
+
+        /*
+
+            justify-content属性定义了项目在主轴上的对齐方式。
+            justify-content: flex-start | flex-end | center | space-between | space-around;
+
+            align-items属性定义项目在交叉轴上如何对齐。
+            align-items: flex-start | flex-end | center | baseline | stretch;
+
+
+            align-content属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。
+            align-content:   flex-start | flex-end | center | space-between | space-around | stretch;
+
+            经测试， justify-content 和 align-content 是对应的
+        */
+
+        .outer {
+            width: 700px;
+            height: 800px;
+            background-color: red;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            /* align-items: center; */
+            align-content: space-around;
+        }
+
+        .outer div {
+            flex-shrink: 0;
+        }
+
+
+        .d1 {
+            width: 200px;
+            height: 100px;
+            background-color: orange;
+        }
+
+        .d2 {
+            width: 200px;
+            height: 200px;
+            background-color: yellow;
+        }
+
+        
+        .d3 {
+            width: 200px;
+            height: 300px;
+            background-color: green;
+        }
+
+        .d4 {
+            width: 200px;
+            height: 100px;
+            background-color: cyan;
+        }
+
+        .d5 {
+            width: 200px;
+            height: 300px;
+            background-color: blue;
+        }
+
+        .d6 {
+            width: 200px;
+            height: 200px;
+            background-color: purple;
+        }
+
+        
+
+    </style>
+
+    
+</head>
+<body>
+    
+    <div class="outer">
+
+        <div class="d1">
+
+        </div>
+
+        <div class="d2">
+            
+        </div>
+
+        <div class="d3">
+            
+        </div>
+
+        <div class="d4">
+            
+        </div>
+
+        <div class="d5">
+            
+        </div>
+
+        <div class="d6">
+            
+        </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jQuery3.6/jquery-3.6.0.js"></script>
+    <style>
+        .d1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+
+    </style>
+
+    
+
+</head>
+<body>
+    
+
+    <div class="d1">
+
+    </div>
+    
+    <script>
+
+        /*
+            DOM 对象： 用原生的 JS 获取的对象
+        */
+        console.dir(document.querySelector('.d1'));
+
+        /*
+            jQuery 对象： 用 jQuery 获取的对象
+
+            jQuery 对象只能用 jQuery 的属性和方法， DOM 对象只能用原生 JS 的属性和方法
+
+            没有深入学习之前，总是误认为， jQuery 和原生的 JS 不能混用
+
+        */
+        console.dir($('.d1'));
+
+    </script>
+</body>
+</html>

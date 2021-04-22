@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        /*
+            this 为执行该函数的对象
+            
+        */
+        function test() {
+            console.log(this);
+        }
+
+        test();
+        
+    </script>
+</head>
+<body>
+    
+    <div>
+        <h2>this 是什么</h2>
+        <p>
+            任何函数本质上都是通过某对象来调用的，如果没有直接指定就是 window
+        </p>
+
+        <h2>
+            如何确定 this 的值
+        </h2>
+
+        <ul>
+            <li>
+                当以函数的形式调用时，this 就是 window
+            </li>
+
+            <li>
+                当以方法的形式调用时，this 就是该对象
+            </li>
+
+            <li>
+                当以创建方法的形式调用时，this 就是新创建的那个对象
+            </li>
+
+            <li>
+                当用 call 和 apply 调用时，this 就是指定的那个对象
+            </li>
+            
+        </ul>
+
+        <p>
+            总结： this 为执行该函数的对象
+        </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../jQuery3.6/jquery-3.6.0.min.js"></script>
+
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+
+        }
+
+    </style>
+</head>
+<body>
+    <div>
+
+    </div>
+
+    <script>
+
+        $(function () {
+            
+            /*
+            
+                如果不加上属性值，则是查询
+
+            */
+            // console.log($('div').css('width'));
+
+            /*
+                可以加上 px
+            */
+            // $('div').css('width', '300px');
+
+            /*
+                也可以用数字
+            */
+            // $('div').css('width', 200);
+
+
+            /*
+
+                这两种写法都可以
+                $('div').css('background', 'blue');
+                $('div').css('backgroundColor', 'blue');
+
+            */
+            // $('div').css('backgroundColor', 'blue');
+
+            /*
+                也可以用对象来设置多个属性
+            */
+            $('div').css({
+                width: 200,
+                height: 200,
+                background: 'orange'
+            })
+
+
+
+
+        })
+    </script>
+</body>
+</html>

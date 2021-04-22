@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        window.onload = function () {
+
+            var btn01 = document.getElementById("btn01");
+
+            /*
+                addEventListener 可以为函数添加多个同一类型的事件
+
+                参数说明：
+                    1. 第一个参数不要加 on
+                    2. 第二个参数是回调函数，当事件触发时会被调用
+                    3. 是否在捕获阶段触发函数，需要一个布尔值，一般都是 false
+
+
+                备注： IE8 及以下不支持 addEventListener，如果为了兼容性，需要重新写一个函数来作兼容，这里不作赘叙~
+                 
+            */
+
+            btn01.addEventListener("click", function () {
+                console.log(1111);
+            }, false);
+
+            btn01.addEventListener("click", function () {
+                console.log(2222);
+            }, false);
+
+        }
+
+    </script>
+</head>
+<body>
+    
+    <div>
+        <button id="btn01">Click Me</button>
+    </div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        function Fn() {
+
+        }
+
+        var fn = new Fn();
+
+        console.log(fn.__proto__ === Fn.prototype); //true
+        console.log(fn.__proto__ === fn.prototype); // false;
+
+
+    </script>
+</head>
+
+<body>
+    
+    <div class="course">
+        <hr>
+        <h2>Course Summary</h2>
+        <p>
+            对象实例的隐式原型链等于构造函数的显式原型链
+        </p>
+        <img src="../../img/senior-course/p16_002.png" alt="">
+        <img src="../../img/senior-course/p16_001.png" alt="">
+    </div>
+    
+</body>
+</html>

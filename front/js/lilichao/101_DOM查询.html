@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        window.onload = function () {
+
+            /*
+            
+                document.body 等同于 document.getElementsByTagName("body")[0]
+            */
+
+            var body = document.getElementsByTagName("body")[0];
+            var body2 = document.body;
+
+            /*
+                document.div 这个方法不支持~
+
+            */
+            var div = document.getElementsByTagName("div");
+            var div2 = document.div;
+
+            // console.log(div);
+            // console.log(div2);
+
+            /*
+                获取的是 html 根标签的所有内容
+
+            */
+            var html = document.documentElement;
+
+
+            /*
+            
+                document.all 等同于 document.getElementsByTagName("*")
+            */
+            var all = document.all;
+            
+            var all2 = document.getElementsByTagName("*");
+            
+
+            /*
+                根据 class 属性查询一组元素节点
+                IE8 及以下，不支持
+            */
+            var div = document.getElementsByClassName("d1");
+            // console.log(div[0].innerText);
+
+
+            /*
+                根据 CSS 选择器来查询一个元素节点
+                此方法有一个特点： 如果有多组数据，只返回第一组数据
+
+            */
+            var css = document.querySelector(".d1 div");
+            // console.log(css.innerHTML);
+
+            var cssD1 = document.querySelector(".d1");
+            // console.log(cssD1);
+
+            /*
+                根据 CSS 选择器来查询一类元素节点
+                此方法，可以返回多组数据
+                如果只有一条数据，返回的也将是数组形式
+            */
+            var cssAll = document.querySelectorAll(".d1");
+            // console.log(cssAll);
+        }
+
+
+    </script>
+</head>
+<body>
+    
+    <div class="d1">
+        <div>
+            <span>hello, d1</span>
+        </div>
+    </div>
+
+
+    <div class="d1">
+        <span>hello, d1</span>
+    </div>
+
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+
+        window.onload = function () {
+
+            /*
+            
+                JS 的函数调用，是值传递，还是引用传递
+                1. 是值传递
+                2. 有的是值传递，有的是引用传递
+
+                这两种理解都可以，相对来说第一种理解更为合适。
+                第二种理解中，当是引用传递的时候，其实传递的也是值，只是这个值是内存的地址，也就是引用传递
+
+                如下例子所示：
+            */
+            // var a = {name:"ch", age:"12"};
+
+            // function fn(obj) {
+            //     obj.age = 20;
+            // }
+
+            // fn(a);
+            // console.log(a.age); // 20;
+
+            
+            // var a = 3;
+            // var obj = {};
+
+
+        }
+
+        /*
+            释放内存：
+                局部变量： 函数执行完自动释放
+                全局变量： 称为垃圾对象，垃圾回收器回收
+        */
+        // var a = 3;
+        // var obj = {};
+        // var obj = null;
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

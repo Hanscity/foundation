@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .gender {
+            list-style: none;
+            display: flex;
+            padding: 0 20px;
+        }
+
+        .username {
+            width: 500px;
+            background-color: red;
+        }
+
+    </style>
+</head>
+<body>
+    <form action="">
+
+        <!--
+
+            将 width 扩大，主要是测试，label 的作用范围是多大
+            
+        -->
+        <div class="username">
+            <label for="username">username: </label><input type="text" id="username">
+        </div>
+
+        <dl class="gender">
+            <dt>性别</dt>
+
+            <dd>
+                <input type="radio" name="gender" id="male">
+
+                <label for="male">男</label>
+            </dd>
+
+            <dd>
+                <input type="radio" name="gender" id="female">
+
+                <label for="female">女</label>
+            </dd>
+        </dl>
+    </form>
+
+
+    <div class="course">
+        <hr>
+        <img src="../../img/pink/p53_001.png" alt="">
+    </div>
+</body>
+</html>

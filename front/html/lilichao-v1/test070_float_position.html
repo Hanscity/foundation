@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="../../css/reset.css">
+
+    <style>
+        .nav ul {
+            width: 1000px;
+            height: 50px;
+            margin: 100px auto;
+            background-color: #323232;
+        }
+
+        .nav ul li {
+            float: left;
+            background-color: grey;
+            width: 100px;
+            line-height: 50px;
+            margin: 0 33px;
+            position: relative;
+        }
+
+        .nav li:hover .intro {
+            width: 200px;
+            height: 100px;
+            background-color: #666666;
+            position: absolute;
+            left: -50px;
+            top: 50px;
+
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="nav">
+        <ul>
+            <li>
+                php
+            </li>
+
+            <li>
+                java
+            </li>
+
+            <li>
+                python
+            </li>
+
+            <li>
+                go
+
+                <div class="intro">
+
+                </div>
+            </li>
+
+            <li>
+                c++
+            </li>
+
+            <li>
+                c
+            </li>
+
+        </ul>
+    </div>
+</body>
+</html>

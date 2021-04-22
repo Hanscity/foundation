@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+
+        /*
+            . 表示任意字符
+            \. 表示 .
+
+
+            \w: 任意字母，数字，下划线_, 等同于 /[A-z0-9_]/
+            \W: 除开 任意字母，数字，下划线_, 等同于 /[^A-z0-9_]/
+
+            \d: 表示任意的数字, 等同于 /[0-9]/
+            \D: 表示除开任意的数字, 等同于 /[^0-9]/
+
+            \s: 表示空格
+            \S: 表示除了空格的任意的字符
+
+            \b: 表示单词的边界
+            \B: 表示除了单词的边界
+
+
+        */
+
+        // var reg = /\bchild\b/;
+
+        // var res = reg.test("have fun child");
+        // console.log(res); //true
+
+        // var res = reg.test("have fun children");
+        // console.log(res); // false;
+
+
+
+        /*
+            去掉字符串中的前后的空格
+
+                 rain step    
+
+        */
+
+        var str = "    rain step    ";
+        var reg = /^\s+|\s+$/g; // 这里去除后面的空格，需要使用 g 不太好理解
+        // var reg = /\s+$/; // 因为这个表达式，是可以去除后面所有的空格的
+        var str = str.replace(reg, "");
+        console.log("aaa" + str + "aaa");
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
