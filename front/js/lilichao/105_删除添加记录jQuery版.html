@@ -43,68 +43,36 @@
 
     </style>
 
+    <script src="../jQuery/jQuery3.6/jquery-3.6.0.min.js"></script>
+
     <script>
 
-        function delA() {
-            // this 是点击超链接的对象
-            var tr = this.parentNode.parentNode;
-                    
-            /*
-                获取 tr 的第一个子元素
+        $(function () {
+            $("#btn").click(function () {
+                var name = $("#name").val();
+                var email = $("#email").val();
+                var salary = $("#salary").val();
 
-                // 方法一
-                var name = tr.children[0].innerText;
-
-                // 方法二
-                // 可以看出， tr 也是可以 getElement...
-                var name = tr.getElementsByTagName("td")[0].innerText;
-
-            */
-            var name = tr.getElementsByTagName("td")[0].innerText;
-
-            var flag = confirm("确认删除 "+name+" 吗？");
-            if (flag) {
-                tr.parentNode.removeChild(tr);
-            }
-            
-            // 否定了 a 标签的默认行为(跳转)
-            // 方式二： javascript:;
-            // 方式三： #
-            return false;
-
-        }
-        window.onload = function () {
-
-            var aObj = document.getElementsByTagName("a");
-            for (var i=0; i<aObj.length; i++) {
-                aObj[i].onclick = delA;
-            }
-
-            var table = document.getElementsByTagName("table")[0];
-            var tbody = table.firstElementChild;
-            var btn = document.getElementById("btn");
-
-            btn.onclick = function () {
-
-                var name = document.getElementById("name").value;
-                var email = document.getElementById("email").value;
-                var salary = document.getElementById("salary").value;
-                var tr = document.createElement("tr");
-
-                tr.innerHTML = "<td>" + name + "</td>" + 
+                var res = $(".table tbody").append("<tr><td>" + name + "</td>" + 
                                 "<td>" + email + "</td>" + 
                                 "<td>" + salary + "</td>"+ 
-                                "<td><a href='javascript:;'>Delete</a></td>";
-                
-                tr.getElementsByTagName("a")[0].onclick = delA;
-                tbody.appendChild(tr);
-            }
+                                "<td><a href='javascript:;'>Delete</a></td></tr>");
+            })
 
-        }
-
-
+            /*
+                jQuery 的事件委托
+            */
+            $(".table tbody").on("click", "a", function (event) {
+                var flag = confirm("确认删除 "+name+" 吗？");
+                if (flag) {
+                    $(this).parents("tr").remove();
+                }
+            })
+            
+        })
 
     </script>
+
 </head>
 <body>
     
@@ -142,7 +110,7 @@
                     </td>
 
                     <td>
-                        <a href="record.php?id=1" class="delete">Delete</a>
+                        <a href="#" class="delete">Delete</a>
                     </td>
                 </tr>
 
@@ -160,7 +128,7 @@
                     </td>
 
                     <td>
-                        <a href="record.php?id=2" class="delete">Delete</a>
+                        <a href="#" class="delete">Delete</a>
                     </td>
                 </tr>
 
@@ -178,7 +146,7 @@
                     </td>
 
                     <td>
-                        <a href="record.php?id=3" class="delete">Delete</a>
+                        <a href="#" class="delete">Delete</a>
                     </td>
                 </tr>
 
