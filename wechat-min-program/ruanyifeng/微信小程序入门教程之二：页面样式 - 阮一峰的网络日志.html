@@ -1,0 +1,1343 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0080)http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" id="sixapart-standard"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+<meta name="generator" content="Movable Type  5.2.2">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--link rel="stylesheet" href="http://www.ruanyifeng.com/blog/styles.css" type="text/css" /-->
+<link rel="start" href="http://www.ruanyifeng.com/blog/" title="Home">
+<link rel="alternate" type="application/atom+xml" title="Recent Entries" href="http://feeds.feedburner.com/ruanyifeng">
+<script src="./微信小程序入门教程之二：页面样式 - 阮一峰的网络日志_files/hm.js.下载"></script><script async="" src="./微信小程序入门教程之二：页面样式 - 阮一峰的网络日志_files/analytics.js.下载"></script><script type="text/javascript" src="./微信小程序入门教程之二：页面样式 - 阮一峰的网络日志_files/mt.js.下载"></script>
+<!--
+<rdf:RDF xmlns="http://web.resource.org/cc/"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<Work rdf:about="http://www.ruanyifeng.com/blog/2018/02/docker-tutorial.html">
+<dc:title>Docker 入门教程</dc:title>
+<dc:description>2013年发布至今， Docker 一直广受瞩目，被认为可能会改变软件行业。...</dc:description>
+<dc:creator>阮一峰</dc:creator>
+<dc:date>2018-02-09T05:53:27+08:00</dc:date>
+<license rdf:resource="http://creativecommons.org/licenses/by-nc-nd/3.0/" />
+</Work>
+<License rdf:about="http://creativecommons.org/licenses/by-nc-nd/3.0/">
+</License>
+</rdf:RDF>
+-->
+
+<style>
+body {
+  background-color: #f5f5d5;
+}
+
+#container::before {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: rgba(0,0,0,0.1);
+  text-align: center;
+  content: "本站显示不正常，可能因为您使用了广告拦截器。";
+}
+
+</style>
+<script>
+function loadjscssfile(filename, filetype){
+    if (filetype=="js"){ //if filename is a external JavaScript file
+        var fileref=document.createElement('script')
+        fileref.setAttribute("type","text/javascript")
+        fileref.setAttribute("src", filename)
+    }
+    else if (filetype=="css"){ //if filename is an external CSS file
+        var fileref=document.createElement("link")
+        fileref.setAttribute("rel", "stylesheet")
+        fileref.setAttribute("type", "text/css")
+        fileref.setAttribute("href", filename)
+    }
+    if (typeof fileref!="undefined")
+        document.getElementsByTagName("head")[0].appendChild(fileref)
+}
+//loadjscssfile("http://www.ruanyifeng.com/blog/styles.css", "css");
+loadjscssfile('/static/themes/theme_scrapbook/theme_scrapbook.min.css', "css");
+
+
+function checker() {
+// var img = document.querySelector('img[src^="http://www.ruanyifeng.com/blog/images"]');
+var img = document.querySelector('a > img[src*="wangbase.com/blogimg/asset/"]');
+  if (img && window.getComputedStyle(img).display === 'none'){
+    var sponsor = document.querySelector('.entry-sponsor');
+    var prompt = document.createElement('div');
+    prompt.style = 'border: 1px solid #c6c6c6;border-radius: 4px;background-color: #f5f2f0;padding: 15px; font-size: 14px;';
+  prompt.innerHTML = '<p>您使用了广告拦截器，导致本站内容无法显示。</p><p>请将 www.ruanyifeng.com 加入白名单，解除广告屏蔽后，刷新页面。谢谢。</p>';
+    sponsor.parentNode.replaceChild(prompt, sponsor);
+    document.querySelector('#main-content').innerHTML = '';
+  }
+}
+
+setTimeout(checker, 1000);
+</script><link rel="stylesheet" type="text/css" href="./微信小程序入门教程之二：页面样式 - 阮一峰的网络日志_files/theme_scrapbook.min.css">
+
+    
+    <link rel="prev" href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-one.html" title="微信小程序入门教程之一：初次上手">
+    <link rel="next" href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-three.html" title="微信小程序入门教程之三：脚本编程">
+    
+    <title>微信小程序入门教程之二：页面样式 - 阮一峰的网络日志</title>
+<style type="text/css">
+button.btn[data-v-a4d9f4e4]{display:inline-block;font-weight:300;line-height:1.25;text-align:center;white-space:nowrap;vertical-align:middle;user-select:none;border:1px solid transparent;cursor:pointer;letter-spacing:1px;transition:all .15s ease
+}
+button.btn.btn-sm[data-v-a4d9f4e4]{padding:.4rem .8rem;font-size:.8rem;border-radius:.2rem
+}
+button.btn.btn-primary[data-v-a4d9f4e4]{color:#fff;background-color:#45C8F1;border-color:#45C8F1
+}
+button.btn.btn-outline-primary[data-v-a4d9f4e4]{color:#45C8F1;background-color:transparent;border-color:#45C8F1
+}
+button.btn.btn-danger[data-v-a4d9f4e4]{color:#fff;background-color:#FF4949;border-color:#FF4949
+}
+.text-muted[data-v-a4d9f4e4]{color:#8492A6
+}
+.text-center[data-v-a4d9f4e4]{text-align:center
+}
+.drop-down-enter[data-v-a4d9f4e4],.drop-down-leave-to[data-v-a4d9f4e4]{transform:translateX(0) translateY(-20px);transition-timing-function:cubic-bezier(0.74, 0.04, 0.26, 1.05);opacity:0
+}
+.drop-down-enter-active[data-v-a4d9f4e4],.drop-down-leave-active[data-v-a4d9f4e4]{transition:all .15s
+}
+.move-left-enter[data-v-a4d9f4e4],.move-left-leave-to[data-v-a4d9f4e4]{transform:translateY(0) translateX(-80px);transition-timing-function:cubic-bezier(0.74, 0.04, 0.26, 1.05);opacity:0
+}
+.move-left-enter-active[data-v-a4d9f4e4],.move-left-leave-active[data-v-a4d9f4e4]{transition:all .15s
+}
+.overlay[data-v-a4d9f4e4]{position:fixed;background:rgba(220,220,220,0.8);display:flex;align-items:center;justify-content:center;top:0;left:0;right:0;bottom:0;transition:all 0.2s ease;opacity:0;visibility:hidden
+}
+.overlay .modal[data-v-a4d9f4e4]{transition:all 0.2s ease;opacity:0;transform:scale(0.6);overflow:hidden
+}
+.overlay.show[data-v-a4d9f4e4]{opacity:1;visibility:visible
+}
+.overlay.show .modal[data-v-a4d9f4e4]{opacity:1;transform:scale(1)
+}
+.shake[data-v-a4d9f4e4]{animation:shake-data-v-a4d9f4e4 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;transform:translate3d(0, 0, 0)
+}
+@keyframes shake-data-v-a4d9f4e4{
+10%,90%{transform:translate3d(-1px, 0, 0)
+}
+20%,80%{transform:translate3d(2px, 0, 0)
+}
+30%,50%,70%{transform:translate3d(-4px, 0, 0)
+}
+40%,60%{transform:translate3d(4px, 0, 0)
+}
+}
+.pulse[data-v-a4d9f4e4]{animation:pulse-data-v-a4d9f4e4 2s ease infinite
+}
+@keyframes pulse-data-v-a4d9f4e4{
+0%{opacity:.7
+}
+50%{opacity:.4
+}
+100%{opacity:.7
+}
+}
+.flash-once[data-v-a4d9f4e4]{animation:flash-once 3.5s ease 1
+}
+@keyframes fade-up-data-v-a4d9f4e4{
+0%{transform:translate3d(0, 10px, 0);opacity:0
+}
+100%{transform:translate3d(0, 0, 0);opacity:1
+}
+}
+.fade-in[data-v-a4d9f4e4]{animation:fade-in-data-v-a4d9f4e4 .3s ease-in-out
+}
+@keyframes fade-in-data-v-a4d9f4e4{
+0%{opacity:0
+}
+100%{opacity:1
+}
+}
+.spin[data-v-a4d9f4e4]{animation-name:spin-data-v-a4d9f4e4;animation-duration:2000ms;animation-iteration-count:infinite;animation-timing-function:linear
+}
+@keyframes spin-data-v-a4d9f4e4{
+from{transform:rotate(0deg)
+}
+to{transform:rotate(360deg)
+}
+}
+.bounceIn[data-v-a4d9f4e4]{animation-name:bounceIn-data-v-a4d9f4e4;transform-origin:center bottom;animation-duration:1s;animation-fill-mode:both;animation-iteration-count:1
+}
+@keyframes bounceIn-data-v-a4d9f4e4{
+0%,20%,40%,60%,80%,100%{-webkit-transition-timing-function:cubic-bezier(0.215, 0.61, 0.355, 1);transition-timing-function:cubic-bezier(0.215, 0.61, 0.355, 1)
+}
+0%{opacity:1;-webkit-transform:scale3d(0.8, 0.8, 0.8);transform:scale3d(0.8, 0.8, 0.8)
+}
+20%{-webkit-transform:scale3d(1.1, 1.1, 1.1);transform:scale3d(1.1, 1.1, 1.1)
+}
+40%{-webkit-transform:scale3d(0.9, 0.9, 0.9);transform:scale3d(0.9, 0.9, 0.9)
+}
+60%{opacity:1;-webkit-transform:scale3d(1.03, 1.03, 1.03);transform:scale3d(1.03, 1.03, 1.03)
+}
+80%{-webkit-transform:scale3d(0.97, 0.97, 0.97);transform:scale3d(0.97, 0.97, 0.97)
+}
+100%{opacity:1;-webkit-transform:scale3d(1, 1, 1);transform:scale3d(1, 1, 1)
+}
+}
+@keyframes dots-data-v-a4d9f4e4{
+0%,20%{color:rgba(0,0,0,0);text-shadow:0.25em 0 0 rgba(0,0,0,0),0.5em 0 0 rgba(0,0,0,0)
+}
+40%{color:#8492A6;text-shadow:0.25em 0 0 rgba(0,0,0,0),0.5em 0 0 rgba(0,0,0,0)
+}
+60%{text-shadow:0.25em 0 0 #8492A6,0.5em 0 0 rgba(0,0,0,0)
+}
+80%,100%{text-shadow:.25em 0 0 #8492A6, .5em 0 0 #8492A6
+}
+}
+@keyframes recording-data-v-a4d9f4e4{
+0%{box-shadow:0px 0px 5px 0px rgba(173,0,0,0.3)
+}
+65%{box-shadow:0px 0px 5px 5px rgba(173,0,0,0.3)
+}
+90%{box-shadow:0px 0px 5px 5px rgba(173,0,0,0)
+}
+}
+html[data-v-a4d9f4e4]{max-height:500px
+}
+body[data-v-a4d9f4e4]{margin:0;font-size:100%;color:#3C4858;width:350px;max-height:500px
+}
+a[data-v-a4d9f4e4]{text-decoration:none;color:#45C8F1
+}
+h1[data-v-a4d9f4e4],h2[data-v-a4d9f4e4],h3[data-v-a4d9f4e4],h4[data-v-a4d9f4e4]{margin-top:0
+}
+.container_selected_area[data-v-a4d9f4e4]{display:none;visibility:hidden;padding:0;position:fixed;top:0;left:0;right:0;bottom:0;z-index:2147483647
+}
+.container_selected_area.active[data-v-a4d9f4e4]{visibility:visible;display:block
+}
+.container_selected_area .label[data-v-a4d9f4e4]{font-family:"Didact Gothic Regular",sans-serif;font-size:22px;text-align:center;padding-top:15px
+}
+.container_selected_area .area[data-v-a4d9f4e4]{display:none;position:fixed;z-index:2147483647;border:1px solid #1e83ff;background:rgba(30,131,255,0.1);box-sizing:border-box
+}
+.container_selected_area .area.active[data-v-a4d9f4e4]{display:block;top:0;left:0
+}
+.hide[data-v-a4d9f4e4]{display:none
+}
+</style></head>
+<body id="scrapbook" class="mt-entry-archive one-column">
+<script>
+if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent)) document.body.classList.add('mobile');
+
+/*
+window.addEventListener('load', function(event) {
+  setTimeout(function () {
+    hab('#sup-post-2');
+    hab('#cre-inner');
+  }, 1000);
+});
+*/
+</script>
+    <div id="container">
+        <div id="container-inner">
+
+            <div id="header">
+    <div id="header-inner">
+        <div id="header-content">
+
+
+            <div id="header-name">阮一峰的网络日志 <span id="site_location"> » <a href="http://www.ruanyifeng.com/blog/" accesskey="1">首页</a></span><span id="site_archive"> » <a href="http://www.ruanyifeng.com/blog/archives.html">档案</a></span>
+</div>
+
+<div id="google_search">
+<!-- SiteSearch Google -->
+<form action="https://www.baidu.com/s" target="_blank" method="get" id="cse-search-box">
+  <div>
+  <input type="text" size="20" name="origin" class="searchbox" id="sbi" value="">
+  <input type="hidden" name="wd" value="">
+  <!--input type="image" src="/static/themes/theme_scrapbook/images/top_search_submit.gif" class="searchbox_submit" value="" alt="搜索" name="sa" onclick="this.form.wd.value = this.form.origin.value + ' inurl:www.ruanyifeng.com/blog'" /-->
+  <input type="image" src="./微信小程序入门教程之二：页面样式 - 阮一峰的网络日志_files/top_search_submit.gif" class="searchbox_submit" value="" alt="搜索" name="sa" onclick="this.form.wd.value = this.form.origin.value + &#39; 阮一峰&#39;">
+</div>
+</form>
+
+<!-- SiteSearch Google -->
+</div>
+<div id="feed_icon">
+<a href="http://www.ruanyifeng.com/feed.html" title="订阅Feed">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAUzSURBVHjavFdbbFRVFF3nPjoz7dTWTittaW0jUDRAUqaNojyqREnEQKgfUj9MqqAmhqRt/OCD4CuY+Kckoh+aiGKC+gMJbdHoRysJ8dkhhmJLNdDKtJU+6GMK87j3Hs85d2Z6HzNtMYWb3Dn3NWftvfba+5xNYDl+e6Fkj6yqb/oDRbWq14vlPBLRKCITkxf0ROLt+hNjp1PPSRK4kA3vF1dXNRcWlyA2OQU9eos9opAkAiKxD+XkKO6t15aRWO7J/MgmAZU8MEgexgZHMX518Dh72sYMmVKShnxWuWHdHtxKIDIYTgMuDzgfmSOIQkYMpdUF8OY92Hytt4/jvkg47czzU16iQovM3QFwmNck+Yyduu7D6NA0Z6JR4THntFs9V4tWQg6Ui3s6MwKDncsFTnXKLJhDSeUK3AgPtyhccDzmVs999buRt/1Vm4i0od+hX7+MRG87jPGB/w1u8FPj9xEw7McVrnYuOCvtpjTth3J/nTg99c8LRhKhr6D3dTB5R24bXFwbMXBsyZzeoXaycEpJ95TB09AGX/NpqLVNtw8urnVzLvHjFNxiFqRy2OOHuqUVnue+ACkoWzo4O6lGzTmuHq6nPvY2m9rVqjrIK2rMEKxqyG5NPAKt+wjo0LklgfNxJkZMA3KJvqRUk3z5UFY3QH14P0h+WUY79HPvgv7VuSg4ZRGY1YgZgqXmORccF17sy2ehnf9AeO085K2HQFbtXBScj0LcpgF2cN+WV+DZ/LJQu6gD4R7oV7pBJwbSgtMvfiPoVp56DySwxm7EtkMs1WdAB7qzggsDJKQYsHucSkOudrkiCPWR/fA2nYCn8SNIK4NptSMyAu3sAdDRkIsJdfth0LzSrODUoPNZ4KI9SxJI5UHk7D4GdQfz2us31c7CoHMjRkKuDPHseCMrONVhNcDJwMJpKFVvg9L4OaTiNWm1x789KCqkrXhVBiEz0WYCT2nAzQAD1/vaETv1GrRfP4Vx5cfMNcDPwvP0h0DhanPym7OIf/+O67vcJ1/PCJ4KgdzaUP6Wz+dU+5yIL6fV+PsHGAOdwlPpvvUOyeeAVGyCdqkDNB6DPjsBSrnndfOGevOh3RhGItxvA+fX1CtbGFhgYUFkFMZPR6F1HnClHq8HyubWtJexX06CRmdt33hrd7nA7SFY4qoGpnYuOKcRykPPgDCBcsHx9Iv+fNL2PueBehCWUfYQIIMGLOCcOmXDXsh1+yCt35tUPfvzGFuSvzvoinXOxqa02qOhM6733nVP2MAdaej2XN11DPKjLZCD+yBvahGCo7JfTKAN9UD7s8Oe9zUNIhz8fWI8DG2k38WCFdxugANcXrvTVd1IEbuv3Jour7Hzn7jLMBNfKs7R3i67gRVrbeCOEDhinmWhAatsqdquM2XzHZINhK2cqTjHr/XZdVJUbgN3MWAVXKbSyg9jesRW2xP9di+lwrL5ojM3m2H/kG9hwcIA37c71W6wJdW2J2S5nrjYbq/t1AHAhJsKQeyfPvf6IMJgghPJhFZ4x0KlfLFvt22du45Au/A1SOlGc0P672XXwhLtOcM0kTTEMMd0qkVmMNXxMd/tsedUjInr4SQDgOfeXMSiN0FCL5WHah4L1qqYXPJOJlttd+a5M+YpcG5poLYKQ5f+6JJ4r8bbJYP47hq4r7QAs9PjYNhHJd4o8l5taiwuOpa7AS4XKqI/5NjJbTnaWK92nLdLuhQAJayRNMiygXPBeQN+Qbvu0zDc3y+aUzhbkGR73sI7ljvUnndx2q3t+X8CDAD66FtrIL864AAAAABJRU5ErkJggg==" alt="" style="border: 0pt none;">
+</a></div>
+
+        </div>
+    </div>
+</div>
+
+
+
+            <div id="content">
+                <div id="content-inner">
+
+
+                    <div id="alpha">
+                        <div id="alpha-inner">
+
+
+                            <div id="entry-2214" class="entry-asset asset hentry">
+                                <div class="asset-header">
+<div class="asset-nav entry-nav">
+
+<div class="entry-location">
+<ul>
+<li>上一篇：<a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-one.html" title="微信小程序入门教程之一：初次上手">微信小程序入门教程之一</a></li>
+<li>下一篇：<a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-three.html" title="微信小程序入门教程之三：脚本编程">微信小程序入门教程之三</a></li>
+</ul>
+</div>
+
+
+    
+                                    <div class="entry-categories">
+                                        <p>分类<span class="delimiter">：</span></p>
+                                        <ul>
+                                            <li><a href="http://www.ruanyifeng.com/blog/developer/" rel="tag">开发者手册</a></li>
+                                        </ul>
+                                    </div>
+    
+
+
+                                            
+<div class="entry-location-mobile" style="float: right;">
+<ul>
+<li><a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-one.html" title="微信小程序入门教程之一：初次上手">⇐&nbsp;</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-three.html" title="微信小程序入门教程之三：脚本编程">&nbsp;⇒</a></li>
+</ul>
+</div>
+
+</div>
+</div>
+
+                          
+<article class="hentry">
+                                    <h1 id="page-title" class="asset-name entry-title">微信小程序入门教程之二：页面样式</h1>
+
+
+
+<div class="asset-meta">
+                                        
+
+                                            <p class="vcard author">作者： <a class="fn url" href="http://www.ruanyifeng.com/">阮一峰</a></p>
+                                    <p>日期： <a href="http://www.ruanyifeng.com/blog/2020/10/"><abbr class="published" title="2020-10-27T11:48:43+08:00">2020年10月27日</abbr></a></p>
+
+
+</div>
+
+
+
+
+
+
+
+
+                                
+                                <div class="asset-content entry-content" id="main-content">
+
+                                    <!-- div class="asset-body" -->
+                                        <p>这个系列的<a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-one.html" target="_blank">上一篇教程</a>，教大家写了一个最简单的 Hello world 微信小程序。</p>
+
+                                    <!-- /div -->
+
+
+                                    <!-- div id="more" class="asset-more" -->
+                                        <p>但是，那只是一个裸页面，并不好看。今天接着往下讲，如何为这个页面添加样式，使它看上去更美观，教大家写出实际可以使用的页面。</p>
+
+<p>所有示例的完整代码，都可以从 GitHub 的<a href="https://github.com/ruanyf/wechat-miniprogram-demos" target="_blank">代码仓库</a>下载。</p>
+
+<p><img src="./微信小程序入门教程之二：页面样式 - 阮一峰的网络日志_files/bg2020100911.jpg" alt="" title=""></p>
+
+<h2>一、总体样式</h2>
+
+<p>微信小程序允许在顶层放置一个<code>app.wxss</code>文件，里面采用 CSS 语法设置页面样式。这个文件的设置，对所有页面都有效。</p>
+
+<p>注意，小程序虽然使用 CSS 样式，但是样式文件的后缀名一律要写成<code>.wxss</code>。</p>
+
+<p>打开上一篇教程的示例，在项目顶层新建一个<code>app.wxss</code>文件，内容如下。</p>
+
+<blockquote><pre class=" language-css"><code class=" language-css">
+<span class="token selector">page </span><span class="token punctuation">{</span>
+  <span class="token property">background-color</span><span class="token punctuation">:</span> pink<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">text </span><span class="token punctuation">{</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> 24pt<span class="token punctuation">;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></blockquote>
+
+<p>上面代码将整个页面的背景色设为粉红，然后将<code>&lt;text&gt;</code>标签的字体大小设为 24 磅，字体颜色设为蓝色。</p>
+
+<p>开发者工具导入代码之后，得到了下面的渲染结果。</p>
+
+<p><img src="./微信小程序入门教程之二：页面样式 - 阮一峰的网络日志_files/bg2020100303.jpg" alt="" title=""></p>
+
+<p>可以看到，页面的背景色变成粉红，文本字体变大了，字体颜色变成了蓝色。</p>
+
+<p>实际开发中，直接对<code>&lt;text&gt;</code>标签设置样式，会影响到所有的文本。一般不这样用，而是通过<code>class</code>属性区分不同类型的文本，然后再对每种<code>class</code>设置样式。</p>
+
+<p>打开<code>pages/home/home.wxml</code>文件，把页面代码改成下面这样。</p>
+
+<blockquote><pre class=" language-markup"><code class=" language-markup">
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>view</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>text</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>title<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>hello world<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>text</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>view</span><span class="token punctuation">&gt;</span></span>
+</code></pre></blockquote>
+
+<p>上面代码中，我们为<code>&lt;text&gt;</code>标签加上了一个<code>class</code>属性，值为<code>title</code>。</p>
+
+<p>然后，将顶层的<code>app.wxss</code>文件改掉，不再直接对<code>&lt;text&gt;</code>设置样式，改成对<code>class</code>设置样式。</p>
+
+<blockquote><pre class=" language-css"><code class=" language-css">
+<span class="token selector">page </span><span class="token punctuation">{</span>
+  <span class="token property">background-color</span><span class="token punctuation">:</span> pink<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token selector">.title </span><span class="token punctuation">{</span>
+  <span class="token property">font-size</span><span class="token punctuation">:</span> 24pt<span class="token punctuation">;</span>
+  <span class="token property">color</span><span class="token punctuation">:</span> blue<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></blockquote>
+
+<p>上面代码中，样式设置在 class 上面（<code>.title</code>），这样就可以让不同的<code>class</code>呈现不同的样式。修改之后，页面的渲染结果并不会有变化。</p>
+
+<p>这个示例的完整代码，可以到<a href="https://github.com/ruanyf/wechat-miniprogram-demos/tree/master/demos/03.css" target="_blank">代码仓库</a>查看。</p>
+
+<h2>二、Flex 布局</h2>
+
+<p>各种页面元素的位置关系，称为布局（layout），小程序官方推荐使用 Flex 布局。不熟悉这种布局的同学，可以看看我写的<a href="http://www.ruanyifeng.com/blog/2015/07/flex-grammar.html" target="_blank">《Flex 布局教程》</a>。</p>
+
+<p>下面演示如何通过 Flex 布局，将上面示例的文本放置到页面中央。</p>
+
+<p>首先，在<code>pages/home</code>目录里面，新建一个<code>home.wxss</code>文件，这个文件设置的样式，只对 home 页面生效。这是因为每个页面通常有不一样的布局，所以页面布局一般不写在全局的<code>app.wxss</code>里面。</p>
+
+<p>然后，<code>home.wxss</code>文件写入下面的内容。</p>
+
+<blockquote><pre class=" language-css"><code class=" language-css">
+<span class="token selector">page </span><span class="token punctuation">{</span>
+  <span class="token property">height</span><span class="token punctuation">:</span> 100%<span class="token punctuation">;</span>
+  <span class="token property">width</span><span class="token punctuation">:</span> 750rpx<span class="token punctuation">;</span>
+  <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+  <span class="token property">justify-content</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+  <span class="token property">align-items</span><span class="token punctuation">:</span> center<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></blockquote>
+
+<p>开发者工具导入项目代码，页面渲染结果如下。</p>
+
+<p><img src="./微信小程序入门教程之二：页面样式 - 阮一峰的网络日志_files/bg2020100304.jpg" alt="" title=""></p>
+
+<p>下面解释一下上面这段 WXSS 代码，还是很简单的。</p>
+
+<p>（1）<code>height: 100%;</code>：页面高度为整个屏幕高度。</p>
+
+<p>（2）<code>width: 750rpx;</code>：页面宽度为整个屏幕宽度。</p>
+
+<p>注意，这里单位是<code>rpx</code>，而不是<code>px</code>。<code>rpx</code>是小程序为适应不同宽度的手机屏幕，而发明的一种长度单位。不管什么手机屏幕，宽度一律为<code>750rpx</code>。它的好处是换算简单，如果一个元素的宽度是页面的一半，只要写成<code>width: 375rpx;</code>即可。</p>
+
+<p>（3）<code>display: flex;</code>：整个页面（page）采用 Flex 布局。</p>
+
+<p>（4）<code>justify-content: center;</code>：页面的一级子元素（这个示例是<code>&lt;view&gt;</code>）水平居中。</p>
+
+<p>（5）<code>align-items: center;</code>：页面的一级子元素（这个示例是<code>&lt;view&gt;</code>）垂直居中。一个元素同时水平居中和垂直中央，就相当于处在页面的中央了。</p>
+
+<p>这个示例的完整代码，可以到<a href="https://github.com/ruanyf/wechat-miniprogram-demos/tree/master/demos/04.flex" target="_blank">代码仓库</a>查看。</p>
+
+<h2>三、WeUI</h2>
+
+<p>如果页面的所有样式都自己写，还是挺麻烦的，也没有这个必要。腾讯封装了一套 UI 框架 <a href="https://github.com/Tencent/weui" target="_blank">WeUI</a>，可以拿来用。</p>
+
+<p>手机访问 <a href="https://weui.io/" target="_blank">weui.io</a>，可以看到这套 UI 框架的效果。</p>
+
+<p><img src="./微信小程序入门教程之二：页面样式 - 阮一峰的网络日志_files/bg2020100305.jpg" alt="" title=""></p>
+
+<p>这一节就来看看，怎么使用这个框架的小程序版本 <a href="https://github.com/Tencent/weui-wxss/" target="_blank">WeUI-WXSS</a>，为我们的页面加上官方的样式。</p>
+
+<p>首先，进入它的 <a href="https://github.com/Tencent/weui-wxss/" target="_blank">GitHub 仓库</a>，在<code>dist/style</code>目录下面，找到<a href="https://github.com/Tencent/weui-wxss/blob/master/dist/style/weui.wxss" target="_blank"><code>weui.wxss</code></a>这个文件，将<a href="https://raw.githubusercontent.com/Tencent/weui-wxss/master/dist/style/weui.wxss" target="_blank">源码</a>全部复制到你的<code>app.wxss</code>文件的头部。</p>
+
+<p>然后，将<code>page/home/home.wxml</code>文件改成下面这样。</p>
+
+<blockquote><pre class=" language-markup"><code class=" language-markup">
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>view</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>weui-btn weui-btn_primary<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    主操作
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>weui-btn weui-btn_primary weui-btn_loading<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>i</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>weui-loading<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>i</span><span class="token punctuation">&gt;</span></span>正在加载
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>weui-btn weui-btn_primary weui-btn_disabled<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    禁止点击
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>view</span><span class="token punctuation">&gt;</span></span>
+</code></pre></blockquote>
+
+<p>开发者工具导入项目代码，页面渲染结果如下。</p>
+
+<p><img src="./微信小程序入门教程之二：页面样式 - 阮一峰的网络日志_files/bg2020100306.jpg" alt="" title=""></p>
+
+<p>可以看到，加入 WeUI 框架以后，只要为按钮添加不同的 class，就能自动出现框架提供的样式。你可以根据需要，为页面选择不同的按钮。</p>
+
+<p>这个示例中，<code>&lt;button&gt;</code>元素使用了下面的<code>class</code>。</p>
+
+<blockquote>
+  <ul>
+<li><code>weui-btn</code>：按钮样式的基类</li>
+<li><code>weui-btn_primary</code>：主按钮的样式。如果是次要按钮，就使用<code>weui-btn_default</code>。</li>
+<li><code>weui-btn_loading</code>：按钮点击后，操作正在进行中的样式。该类内部需要用<code>&lt;i&gt;</code>元素，加上表示正在加载的图标。</li>
+<li><code>weui-btn_disabled</code>：按钮禁止点击的样式。</li>
+</ul>
+</blockquote>
+
+<p>WeUI 提供了大量的元素样式，完整的清单可以查看<a href="https://github.com/Tencent/weui-wxss" target="_blank">这里</a>。 </p>
+
+<p>这个示例的完整代码，可以到<a href="https://github.com/ruanyf/wechat-miniprogram-demos/tree/master/demos/05.weui" target="_blank">代码仓库</a>查看。</p>
+
+<h2>四、加入图片</h2>
+
+<p>美观的页面不能光有文字，还必须有图片。小程序的<code>&lt;image&gt;</code>组件就用来加载图片。</p>
+
+<p>打开<code>home.wxml</code>文件，将其改为如下代码。</p>
+
+<blockquote><pre class=" language-markup"><code class=" language-markup">
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>view</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>image</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><a class="token url-link" href="https://picsum.photos/200">https://picsum.photos/200</a><span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>image</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>view</span><span class="token punctuation">&gt;</span></span>
+</code></pre></blockquote>
+
+<p>开发者工具加载项目代码，页面的渲染结果如下，可以显示图片了。</p>
+
+<p><img src="./微信小程序入门教程之二：页面样式 - 阮一峰的网络日志_files/bg2020100309.jpg" alt="" title=""></p>
+
+<p><code>&lt;image&gt;</code>组件有<a href="https://developers.weixin.qq.com/miniprogram/dev/component/image.html" target="_blank">很多属性</a>，比如可以通过<code>style</code>属性指定样式。</p>
+
+<blockquote><pre class=" language-markup"><code class=" language-markup">
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>view</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>image</span>
+    <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><a class="token url-link" href="https://picsum.photos/200">https://picsum.photos/200</a><span class="token punctuation">"</span></span>
+    <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>height: 375rpx; width: 375rpx;<span class="token punctuation">"</span></span>
+  <span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>image</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>view</span><span class="token punctuation">&gt;</span></span>
+</code></pre></blockquote>
+
+<p>默认情况下，图片会占满整个容器的宽度（这个例子是<code>&lt;view&gt;</code>的宽度），上面代码通过<code>style</code>属性指定图片的高度和宽度（占据页面宽度的一半），渲染结果如下。</p>
+
+<p><img src="./微信小程序入门教程之二：页面样式 - 阮一峰的网络日志_files/bg2020100310.jpg" alt="" title=""></p>
+
+<p>当然，图片样式不一定写在<code>&lt;image&gt;</code>组件里面，也可以写在 WXSS 样式文件里面。</p>
+
+<p>这个示例的完整代码，可以到<a href="https://github.com/ruanyf/wechat-miniprogram-demos/tree/master/demos/06.image" target="_blank">代码仓库</a>查看。</p>
+
+<h2>五、图片轮播</h2>
+
+<p>小程序原生的<a href="https://developers.weixin.qq.com/miniprogram/dev/component/swiper.html" target="_blank"><code>&lt;swiper&gt;</code>组件</a>可以提供图片轮播效果。</p>
+
+<p><img src="./微信小程序入门教程之二：页面样式 - 阮一峰的网络日志_files/bg2020100311.jpg" alt="" title=""></p>
+
+<p>上面页面的图片上面，有三个提示点，表示一共有三张图片，可以切换显示。</p>
+
+<p>它的代码很简单，只需要改一下<code>home.wxml</code>文件即可。</p>
+
+<blockquote><pre class=" language-markup"><code class=" language-markup">
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>view</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>swiper</span>
+    <span class="token attr-name">indicator-dots</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{{true}}<span class="token punctuation">"</span></span>  
+    <span class="token attr-name">autoplay</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{{true}}<span class="token punctuation">"</span></span>
+    <span class="token attr-name">style</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>width: 750rpx;<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>swiper-item</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>image</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><a class="token url-link" href="https://picsum.photos/200">https://picsum.photos/200</a><span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>image</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>swiper-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>swiper-item</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>image</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><a class="token url-link" href="https://picsum.photos/250">https://picsum.photos/250</a><span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>image</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>swiper-item</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>swiper-item</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>image</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span><a class="token url-link" href="https://picsum.photos/300">https://picsum.photos/300</a><span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>image</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>swiper-item</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>swiper</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>view</span><span class="token punctuation">&gt;</span></span>
+</code></pre></blockquote>
+
+<p>上面代码中，<code>&lt;swiper&gt;</code>组件就是轮播组件，里面放置了三个<a href="https://developers.weixin.qq.com/miniprogram/dev/component/swiper-item.html" target="_blank"><code>&lt;swiper-item&gt;</code>组件</a>，表示有三个轮播项目，每个项目就是一个<code>&lt;image&gt;</code>组件。</p>
+
+<p><code>&lt;swiper&gt;</code>组件的<code>indicator-dots</code>属性设置是否显示轮播点，<code>autoplay</code>属性设置是否自动播放轮播。它们的属性值都是一个布尔值，这里要写成<code>{{true}}</code>。这种<code>{{...}}</code>的语法，表示里面放置的是 JavaScript 代码，这个放在下一次讲解。</p>
+
+<p>这个示例的完整代码，可以到<a href="https://github.com/ruanyf/wechat-miniprogram-demos/tree/master/demos/07.swiper" target="_blank">代码仓库</a>查看。</p>
+
+<p>页面样式就讲到这里，<a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-three.html" target="_blank">下一篇教程</a>讲解怎么在微信小程序里面加入 JavaScript 脚本，跟用户互动。</p>
+
+<p>（完）</p>
+
+                                    <!-- /div -->
+
+                                </div>
+    <script type="text/javascript" src="./微信小程序入门教程之二：页面样式 - 阮一峰的网络日志_files/newwindow.js.下载"></script>
+                                <div class="asset-footer">
+
+<h3>文档信息</h3>
+<ul>
+<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
+<li>发表日期： <abbr class="published" title="2020-10-27T11:48:43+08:00">2020年10月27日</abbr></li>
+
+</ul>
+                                </div>
+</article>
+                            </div>
+
+
+
+  <div style="display: inline-block ! important;width: 100%;">
+  
+  </div>
+
+
+
+<div id="related_entries">
+<h2>相关文章</h2>
+<ul>
+
+<li><strong>2020.12.13: <a href="http://www.ruanyifeng.com/blog/2020/12/ssh-tutorial.html">《SSH 入门教程》发布了</a></strong>
+
+                           <div class="entry-body">
+                              SSH 是登录 Linux 服务器的必备工具，只要你在做互联网开发，多多少少都会用到它。
+
+                           </div>
+
+</li>
+
+ 
+<li><strong>2020.11.02: <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html">微信小程序入门教程之四：API 使用</a></strong>
+
+                           <div class="entry-body">
+                              今天是这个系列教程的最后一篇。
+
+                           </div>
+
+</li>
+
+ 
+<li><strong>2020.10.29: <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-three.html">微信小程序入门教程之三：脚本编程</a></strong>
+
+                           <div class="entry-body">
+                              这个系列教程的前两篇，介绍了小程序的项目结构和页面样式。
+
+                           </div>
+
+</li>
+
+ 
+<li><strong>2020.10.26: <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-one.html">微信小程序入门教程之一：初次上手</a></strong>
+
+                           <div class="entry-body">
+                              微信是中国使用量最大的手机 App 之一，日活跃用户超过3亿，月活跃用户超过11亿（2019年底统计），市场极大。
+
+                           </div>
+
+</li>
+
+ 
+</ul>
+</div>
+
+
+
+                    
+
+                    <div id="comments" class="comments">
+
+
+    
+    
+        
+    <h2 class="comments-header">留言（15条）</h2>
+
+    <div id="comments-content" class="comments-content" style="clear: left;">
+        
+        <div id="comment-423472" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">诗文</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423472">
+            <p>要不跟着做吧。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 27, 2020  2:16 PM">2020年10月27日 14:16</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-423472">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-text" title="引用诗文的这条留言" onclick="return CommentQuote(&#39;comment-quote-423472&#39;,&#39;诗文&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-423474" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">Sunshine</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423474">
+            <p>{<br>
+  "useExtendedLib": {<br>
+    "kbone": true,<br>
+    "weui": true<br>
+  }<br>
+}<br>
+这种引入weui，更轻量级，更简单</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 27, 2020  4:28 PM">2020年10月27日 16:28</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-423474">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-text" title="引用Sunshine的这条留言" onclick="return CommentQuote(&#39;comment-quote-423474&#39;,&#39;Sunshine&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-423476" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://www.bytedig.com" href="https://www.bytedig.com/" target="_blank" rel="nofollow">Dig</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423476">
+            <p>微信小程序做起来后，头条，支付宝纷纷跟进，甚至代码接口完全一样。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 27, 2020  6:37 PM">2020年10月27日 18:37</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-423476">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-text" title="引用Dig的这条留言" onclick="return CommentQuote(&#39;comment-quote-423476&#39;,&#39;Dig&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-423477" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://www.yunyouni.com" href="https://www.yunyouni.com/" target="_blank" rel="nofollow">云有你</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423477">
+            <p>感谢阮老师，我已经会小程序了。<br>
+要是看别人的教程，估计得花几天也看不明白。。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 27, 2020  8:18 PM">2020年10月27日 20:18</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-423477">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-text" title="引用云有你的这条留言" onclick="return CommentQuote(&#39;comment-quote-423477&#39;,&#39;云有你&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-423480" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://xinyufeng.net" href="https://xinyufeng.net/" target="_blank" rel="nofollow">Peak Xin</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423480">
+            <p>还是阮老师请的比较细致、易懂，感谢！</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 27, 2020 11:08 PM">2020年10月27日 23:08</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-423480">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-text" title="引用Peak Xin的这条留言" onclick="return CommentQuote(&#39;comment-quote-423480&#39;,&#39;Peak Xin&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-423482" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">Kevin</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423482">
+            <p>谢谢阮老师的透彻讲解，比自己看文档要更快，阮老师能讲到重点上。我这边用的是vant weapp这个ui组件，更适合开发微商店。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="October 28, 2020  9:37 AM">2020年10月28日 09:37</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-423482">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-text" title="引用Kevin的这条留言" onclick="return CommentQuote(&#39;comment-quote-423482&#39;,&#39;Kevin&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-423611" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">节点</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423611">
+            <blockquote>
+<pre>引用Sunshine的发言：</pre>
+
+<p>{<br>
+"useExtendedLib": {<br>
+"kbone": true,<br>
+"weui": true<br>
+}<br>
+}<br>
+这种引入weui，更轻量级，更简单</p>
+
+</blockquote>
+
+<p>通过 app.json 里追加 useExtendedLib 配置后 按钮的示例貌似没了点击弹起的效果了</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="November  2, 2020  4:36 PM">2020年11月 2日 16:36</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-423611">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-text" title="引用节点的这条留言" onclick="return CommentQuote(&#39;comment-quote-423611&#39;,&#39;节点&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-423714" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">悟空</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423714">
+            <p>我这里为什么{{...}}这种语法不起作用，改成{...}才起作用？</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="November  9, 2020  5:00 PM">2020年11月 9日 17:00</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-423714">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-text" title="引用悟空的这条留言" onclick="return CommentQuote(&#39;comment-quote-423714&#39;,&#39;悟空&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-423806" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">芝麻</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423806">
+            <p><br>
+  
+    src="https://picsum.photos/200"<br>
+    style="height: 375rpx; width: 375rpx;"<br>
+  &gt;<br>
+<br>
+请问如果是添加本地图片 ，图片应该放在哪个目录底下，路径采用绝对还是相对路径</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="November 14, 2020  3:32 PM">2020年11月14日 15:32</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-423806">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-text" title="引用芝麻的这条留言" onclick="return CommentQuote(&#39;comment-quote-423806&#39;,&#39;芝麻&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-423823" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://www.vitian.vip" href="http://www.vitian.vip/" target="_blank" rel="nofollow">小王子</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423823">
+            <p>一峰老师，你有空可以出几篇uniapp相关的文章吗</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="November 16, 2020  4:55 PM">2020年11月16日 16:55</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-423823">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-text" title="引用小王子的这条留言" onclick="return CommentQuote(&#39;comment-quote-423823&#39;,&#39;小王子&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-424057" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">sparks42</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-424057">
+            <p>轮播里的，得加  style="width: 100%"，不然图片右边有空白</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="December  1, 2020 10:26 PM">2020年12月 1日 22:26</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-424057">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-text" title="引用sparks42的这条留言" onclick="return CommentQuote(&#39;comment-quote-424057&#39;,&#39;sparks42&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-424396" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">夏虫</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-424396">
+            <p>进了weui的github主页，但还是找不到文档在哪~</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="December 19, 2020  5:25 PM">2020年12月19日 17:25</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-424396">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-text" title="引用夏虫的这条留言" onclick="return CommentQuote(&#39;comment-quote-424396&#39;,&#39;夏虫&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-424781" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">菜鸟</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-424781">
+            <p>找到weui.wxss这个文件，将源码全部复制到你的app.wxss文件的头部。<br>
+--这句没看到对应源码，能否详细说一下？感谢。<br>
+开发者工具下载太可怕了一堆游戏。。。大家都哪里下载？</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="January  2, 2021  9:47 PM">2021年1月 2日 21:47</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-424781">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-text" title="引用菜鸟的这条留言" onclick="return CommentQuote(&#39;comment-quote-424781&#39;,&#39;菜鸟&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-425030" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">张大发</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-425030">
+            <blockquote>
+<pre>引用节点的发言：</pre>
+
+<p>通过 app.json 里追加 useExtendedLib 配置后 按钮的示例貌似没了点击弹起的效果了</p>
+
+</blockquote>
+
+<p> 这是个bug</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="January 15, 2021  5:39 PM">2021年1月15日 17:39</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-425030">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-text" title="引用张大发的这条留言" onclick="return CommentQuote(&#39;comment-quote-425030&#39;,&#39;张大发&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-425459" class="comment">
+    <div id="comment-last" class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">sky_47</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-425459">
+            <blockquote>
+<pre>引用菜鸟的发言：</pre>
+
+<p>找到weui.wxss这个文件，将源码全部复制到你的app.wxss文件的头部。<br>
+--这句没看到对应源码，能否详细说一下？感谢。<br>
+开发者工具下载太可怕了一堆游戏。。。大家都哪里下载？</p>
+
+</blockquote>
+
+<p><br>
+是指weui的github里面的dist/style/weui.wxss,Github链接阮老师已经给出了，是https://github.com/Tencent/weui-wxss。开发者工具老师在课程一也给出了下载链接。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="February  7, 2021  3:21 PM">2021年2月 7日 15:21</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-425459">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html#comment-text" title="引用sky_47的这条留言" onclick="return CommentQuote(&#39;comment-quote-425459&#39;,&#39;sky_47&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    </div>
+        
+    
+
+
+    
+    
+    <div class="comments-open" id="comments-open">
+        <h2 class="comments-open-header">我要发表看法</h2>
+        <div class="comments-open-content">
+
+        
+            <div id="comment-greeting"></div>
+
+            <form method="post" action="http://www.ruanyifeng.com/cgi-bin/mtos/mt-comments.cgi" name="comments_form" id="comments-form" onsubmit="return pleaseWait();">
+                <input type="hidden" name="static" value="1">
+                <input type="hidden" name="entry_id" value="2214">
+                <input type="hidden" name="__lang" value="en">
+                <input type="hidden" name="parent_id" value="" id="comment-parent-id">
+                <input type="hidden" name="armor" value="1">
+                <input type="hidden" name="preview" value="">
+                <input type="hidden" name="sid" value="">
+                <div id="comments-open-data">
+            <div id="comments-open-text">
+                    <p><label for="comment-text">您的留言
+                    （HTML标签部分可用）</label></p>
+                    <p><textarea id="comment-text" name="text" rows="10" cols="50"></textarea></p>
+                </div>
+                    <div id="comment-form-name">
+                        <p><label for="comment-author">您的大名：</label></p>
+                        <p><input id="comment-author" name="author" size="30" value="">  <span class="hint"> «-必填</span></p>
+                    </div>
+                    <div id="comment-form-email">
+                        <p><label for="comment-email">电子邮件：</label></p>
+                        <p><input id="comment-email" name="email" size="30" value="">  <span class="hint"> «-必填，不公开</span></p>
+                    </div>
+                    <div id="comment-form-url">
+                        <p><label for="comment-url">个人网址：</label></p>
+                        <p><input id="comment-url" name="url" size="30" value="">  <span class="hint"> «-我信任你，不会填写广告链接</span></p>
+                    </div>
+                    <div id="comment-form-remember-me">
+                        <p>
+                        <label for="comment-bake-cookie">记住个人信息？</label><input type="checkbox" id="comment-bake-cookie" name="bakecookie" onclick="!this.checked?forgetMe(document.comments_form):rememberMe(document.comments_form)" value="1" accesskey="r"></p>
+                    </div>
+                </div>
+                    <div id="comment-form-reply" style="display:none">
+                    <input type="checkbox" id="comment-reply" name="comment_reply" value="" onclick="mtSetCommentParentID()">
+                    <label for="comment-reply" id="comment-reply-label"></label>
+                </div>
+                <div id="comments-open-captcha"></div>
+                <div id="comments-open-footer">
+<div id="wait" style="display:none;">
+<p><strong>正在发表您的评论，请稍候</strong></p>
+<p>
+<input type="text" name="percent" size="3" style="font-family:Arial; color:black;text-align:center; border-width:medium; border-style:none;">           
+<input type="text" name="chart" size="46" style="font-family:Arial;font-weight:bolder; color:black; padding:0px; border-style:none;">
+</p>
+</div>
+
+                    <p><input type="submit" accesskey="s" name="post" id="comment-submit" value="发表">  <span class="hint"> «- 点击按钮</span></p>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+
+    
+
+
+</div>
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        <script type="text/javascript" src="./微信小程序入门教程之二：页面样式 - 阮一峰的网络日志_files/prism.js.下载"></script>
+        <script type="text/javascript" src="./微信小程序入门教程之二：页面样式 - 阮一峰的网络日志_files/checker.js.下载"></script> 
+            <div id="footer">
+<div id="footer-inner">
+  <div id="footer-content">
+
+      
+<!--
+      <section> 
+     </section>
+  <p><a title="Instagram" target="_blank" href="http://instagram.com/ruanyf">Instagram</a></p>
+       <p><a title="订阅" href="https://app.feedblitz.com/f/f.fbz?Sub=348868" target="_blank">邮件订阅</a></p>
+  
+       <h2>Feed</h2>
+       <p><a title="FeedBurner" href="http://feeds.feedburner.com/ruanyifeng" target="_blank">FeedBurner</a></p>
+       <p><a title="atom.xml" href="http://www.ruanyifeng.com/blog/atom.xml" target="_blank">atom.xml</a></p>
+     
+      <p>支付宝：<a title="支付宝" href="alipays://platformapi/startapp?appId=20000067&url=http%3A%2F%2Fwww.ruanyifeng.com%2Fblog" target="_blank">yifeng.ruan@gmail.com</a></p>
+-->
+
+     <section>
+<!--
+       <h2>授权方式</h2>
+       <p><a title="许可证" href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" target="_blank">自由转载-非商用-非衍生-保持署名</a></p>
+       <h2>微信公号</h2>
+       <h2>社交帐号</h2>
+       <h2>联系方式</h2>
+     -->
+       <p><img src="./微信小程序入门教程之二：页面样式 - 阮一峰的网络日志_files/bg2020013101.jpg" alt="微信扫描"></p>
+       <p>
+         <a title="微博" href="http://weibo.com/ruanyf" target="_blank">Weibo</a> | 
+         <a title="Twitter" target="_blank" href="https://twitter.com/ruanyf">Twitter</a> |
+         <a title="GitHub" target="_blank" href="https://github.com/ruanyf">GitHub</a>
+       </p>
+     
+     <p>Email: <a title="电子邮件" href="mailto:yifeng.ruan@gmail.com" target="_blank">yifeng.ruan@gmail.com</a></p>
+     </section>
+  
+  
+
+
+  </div>
+</div>
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-46829782-1', 'ruanyifeng.com');
+  ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript" src="./微信小程序入门教程之二：页面样式 - 阮一峰的网络日志_files/stats.js.下载"></script>
+<script>
+var supportImg = document.querySelector('#support-img');
+
+if (supportImg && _hmt) {
+  _hmt.push(['_trackEvent', 'banner', 'load']);
+  supportImg.addEventListener('click', function () {
+    _hmt.push(['_trackEvent', 'banner', 'click']);
+  }, false);
+}
+
+var homepageImg = document.querySelector('#homepage_sponsor');
+if (homepageImg && _hmt) {
+  _hmt.push(['_trackEvent', 'homepage-banner', 'load']);
+  homepageImg.addEventListener('click', function () {
+    _hmt.push(['_trackEvent', 'homepage-banner', 'click']);
+  }, false);
+}
+</script>
+
+
+<script>
+document.getElementById("share_button").innerHTML=document.getElementById("share_button_proto").innerHTML;
+</script>
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+
+<input type="file" id="" name="file" style="display: none;"><div data-v-a4d9f4e4="" class="container_selected_area" style="cursor: url(&quot;chrome-extension://ijejnggjjphlenbhmjhhgcdpehhacaal/assets/images/cursor-imagen.svg&quot;) 9 9, crosshair;"><div data-v-a4d9f4e4="" class="area"></div></div></body></html>
