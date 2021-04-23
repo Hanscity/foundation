@@ -1,0 +1,2207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0081)http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html -->
+<html xmlns="http://www.w3.org/1999/xhtml" id="sixapart-standard"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+<meta name="generator" content="Movable Type  5.2.2">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--link rel="stylesheet" href="http://www.ruanyifeng.com/blog/styles.css" type="text/css" /-->
+<link rel="start" href="http://www.ruanyifeng.com/blog/" title="Home">
+<link rel="alternate" type="application/atom+xml" title="Recent Entries" href="http://feeds.feedburner.com/ruanyifeng">
+<script src="./微信小程序入门教程之四：API 使用 - 阮一峰的网络日志_files/hm.js.下载"></script><script async="" src="./微信小程序入门教程之四：API 使用 - 阮一峰的网络日志_files/analytics.js.下载"></script><script type="text/javascript" src="./微信小程序入门教程之四：API 使用 - 阮一峰的网络日志_files/mt.js.下载"></script>
+<!--
+<rdf:RDF xmlns="http://web.resource.org/cc/"
+         xmlns:dc="http://purl.org/dc/elements/1.1/"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+<Work rdf:about="http://www.ruanyifeng.com/blog/2021/04/weekly-issue-152.html">
+<dc:title>科技爱好者周刊（第 152 期）：从北大到技校</dc:title>
+<dc:description>这里记录每周值得分享的科技内容，周五发布。...</dc:description>
+<dc:creator>阮一峰</dc:creator>
+<dc:date>2021-04-02T08:31:26+08:00</dc:date>
+<license rdf:resource="http://creativecommons.org/licenses/by-nc-nd/3.0/" />
+</Work>
+<License rdf:about="http://creativecommons.org/licenses/by-nc-nd/3.0/">
+</License>
+</rdf:RDF>
+-->
+
+<style>
+body {
+  background-color: #f5f5d5;
+}
+
+#container::before {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  background: rgba(0,0,0,0.1);
+  text-align: center;
+  content: "本站显示不正常，可能因为您使用了广告拦截器。";
+}
+
+</style>
+<script>
+function loadjscssfile(filename, filetype){
+    if (filetype=="js"){ //if filename is a external JavaScript file
+        var fileref=document.createElement('script')
+        fileref.setAttribute("type","text/javascript")
+        fileref.setAttribute("src", filename)
+    }
+    else if (filetype=="css"){ //if filename is an external CSS file
+        var fileref=document.createElement("link")
+        fileref.setAttribute("rel", "stylesheet")
+        fileref.setAttribute("type", "text/css")
+        fileref.setAttribute("href", filename)
+    }
+    if (typeof fileref!="undefined")
+        document.getElementsByTagName("head")[0].appendChild(fileref)
+}
+//loadjscssfile("http://www.ruanyifeng.com/blog/styles.css", "css");
+loadjscssfile('/static/themes/theme_scrapbook/theme_scrapbook.min.css', "css");
+
+
+function checker() {
+// var img = document.querySelector('img[src^="http://www.ruanyifeng.com/blog/images"]');
+var img = document.querySelector('a > img[src*="wangbase.com/blogimg/asset/"]');
+  if (img && window.getComputedStyle(img).display === 'none'){
+    var sponsor = document.querySelector('.entry-sponsor');
+    var prompt = document.createElement('div');
+    prompt.style = 'border: 1px solid #c6c6c6;border-radius: 4px;background-color: #f5f2f0;padding: 15px; font-size: 14px;';
+  prompt.innerHTML = '<p>您使用了广告拦截器，导致本站内容无法显示。</p><p>请将 www.ruanyifeng.com 加入白名单，解除广告屏蔽后，刷新页面。谢谢。</p>';
+    sponsor.parentNode.replaceChild(prompt, sponsor);
+    document.querySelector('#main-content').innerHTML = '';
+  }
+}
+
+setTimeout(checker, 1000);
+</script><link rel="stylesheet" type="text/css" href="./微信小程序入门教程之四：API 使用 - 阮一峰的网络日志_files/theme_scrapbook.min.css">
+
+    
+    <link rel="prev" href="http://www.ruanyifeng.com/blog/2020/10/weekly-issue-131.html" title="科技爱好者周刊（第 131 期）：你的头脑是二值逻辑，还是三值逻辑？">
+    <link rel="next" href="http://www.ruanyifeng.com/blog/2020/11/weekly-issue-132.html" title="科技爱好者周刊（第 132 期）：快能力和慢能力">
+    
+    <title>微信小程序入门教程之四：API 使用 - 阮一峰的网络日志</title>
+<style type="text/css">
+button.btn[data-v-a4d9f4e4]{display:inline-block;font-weight:300;line-height:1.25;text-align:center;white-space:nowrap;vertical-align:middle;user-select:none;border:1px solid transparent;cursor:pointer;letter-spacing:1px;transition:all .15s ease
+}
+button.btn.btn-sm[data-v-a4d9f4e4]{padding:.4rem .8rem;font-size:.8rem;border-radius:.2rem
+}
+button.btn.btn-primary[data-v-a4d9f4e4]{color:#fff;background-color:#45C8F1;border-color:#45C8F1
+}
+button.btn.btn-outline-primary[data-v-a4d9f4e4]{color:#45C8F1;background-color:transparent;border-color:#45C8F1
+}
+button.btn.btn-danger[data-v-a4d9f4e4]{color:#fff;background-color:#FF4949;border-color:#FF4949
+}
+.text-muted[data-v-a4d9f4e4]{color:#8492A6
+}
+.text-center[data-v-a4d9f4e4]{text-align:center
+}
+.drop-down-enter[data-v-a4d9f4e4],.drop-down-leave-to[data-v-a4d9f4e4]{transform:translateX(0) translateY(-20px);transition-timing-function:cubic-bezier(0.74, 0.04, 0.26, 1.05);opacity:0
+}
+.drop-down-enter-active[data-v-a4d9f4e4],.drop-down-leave-active[data-v-a4d9f4e4]{transition:all .15s
+}
+.move-left-enter[data-v-a4d9f4e4],.move-left-leave-to[data-v-a4d9f4e4]{transform:translateY(0) translateX(-80px);transition-timing-function:cubic-bezier(0.74, 0.04, 0.26, 1.05);opacity:0
+}
+.move-left-enter-active[data-v-a4d9f4e4],.move-left-leave-active[data-v-a4d9f4e4]{transition:all .15s
+}
+.overlay[data-v-a4d9f4e4]{position:fixed;background:rgba(220,220,220,0.8);display:flex;align-items:center;justify-content:center;top:0;left:0;right:0;bottom:0;transition:all 0.2s ease;opacity:0;visibility:hidden
+}
+.overlay .modal[data-v-a4d9f4e4]{transition:all 0.2s ease;opacity:0;transform:scale(0.6);overflow:hidden
+}
+.overlay.show[data-v-a4d9f4e4]{opacity:1;visibility:visible
+}
+.overlay.show .modal[data-v-a4d9f4e4]{opacity:1;transform:scale(1)
+}
+.shake[data-v-a4d9f4e4]{animation:shake-data-v-a4d9f4e4 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;transform:translate3d(0, 0, 0)
+}
+@keyframes shake-data-v-a4d9f4e4{
+10%,90%{transform:translate3d(-1px, 0, 0)
+}
+20%,80%{transform:translate3d(2px, 0, 0)
+}
+30%,50%,70%{transform:translate3d(-4px, 0, 0)
+}
+40%,60%{transform:translate3d(4px, 0, 0)
+}
+}
+.pulse[data-v-a4d9f4e4]{animation:pulse-data-v-a4d9f4e4 2s ease infinite
+}
+@keyframes pulse-data-v-a4d9f4e4{
+0%{opacity:.7
+}
+50%{opacity:.4
+}
+100%{opacity:.7
+}
+}
+.flash-once[data-v-a4d9f4e4]{animation:flash-once 3.5s ease 1
+}
+@keyframes fade-up-data-v-a4d9f4e4{
+0%{transform:translate3d(0, 10px, 0);opacity:0
+}
+100%{transform:translate3d(0, 0, 0);opacity:1
+}
+}
+.fade-in[data-v-a4d9f4e4]{animation:fade-in-data-v-a4d9f4e4 .3s ease-in-out
+}
+@keyframes fade-in-data-v-a4d9f4e4{
+0%{opacity:0
+}
+100%{opacity:1
+}
+}
+.spin[data-v-a4d9f4e4]{animation-name:spin-data-v-a4d9f4e4;animation-duration:2000ms;animation-iteration-count:infinite;animation-timing-function:linear
+}
+@keyframes spin-data-v-a4d9f4e4{
+from{transform:rotate(0deg)
+}
+to{transform:rotate(360deg)
+}
+}
+.bounceIn[data-v-a4d9f4e4]{animation-name:bounceIn-data-v-a4d9f4e4;transform-origin:center bottom;animation-duration:1s;animation-fill-mode:both;animation-iteration-count:1
+}
+@keyframes bounceIn-data-v-a4d9f4e4{
+0%,20%,40%,60%,80%,100%{-webkit-transition-timing-function:cubic-bezier(0.215, 0.61, 0.355, 1);transition-timing-function:cubic-bezier(0.215, 0.61, 0.355, 1)
+}
+0%{opacity:1;-webkit-transform:scale3d(0.8, 0.8, 0.8);transform:scale3d(0.8, 0.8, 0.8)
+}
+20%{-webkit-transform:scale3d(1.1, 1.1, 1.1);transform:scale3d(1.1, 1.1, 1.1)
+}
+40%{-webkit-transform:scale3d(0.9, 0.9, 0.9);transform:scale3d(0.9, 0.9, 0.9)
+}
+60%{opacity:1;-webkit-transform:scale3d(1.03, 1.03, 1.03);transform:scale3d(1.03, 1.03, 1.03)
+}
+80%{-webkit-transform:scale3d(0.97, 0.97, 0.97);transform:scale3d(0.97, 0.97, 0.97)
+}
+100%{opacity:1;-webkit-transform:scale3d(1, 1, 1);transform:scale3d(1, 1, 1)
+}
+}
+@keyframes dots-data-v-a4d9f4e4{
+0%,20%{color:rgba(0,0,0,0);text-shadow:0.25em 0 0 rgba(0,0,0,0),0.5em 0 0 rgba(0,0,0,0)
+}
+40%{color:#8492A6;text-shadow:0.25em 0 0 rgba(0,0,0,0),0.5em 0 0 rgba(0,0,0,0)
+}
+60%{text-shadow:0.25em 0 0 #8492A6,0.5em 0 0 rgba(0,0,0,0)
+}
+80%,100%{text-shadow:.25em 0 0 #8492A6, .5em 0 0 #8492A6
+}
+}
+@keyframes recording-data-v-a4d9f4e4{
+0%{box-shadow:0px 0px 5px 0px rgba(173,0,0,0.3)
+}
+65%{box-shadow:0px 0px 5px 5px rgba(173,0,0,0.3)
+}
+90%{box-shadow:0px 0px 5px 5px rgba(173,0,0,0)
+}
+}
+html[data-v-a4d9f4e4]{max-height:500px
+}
+body[data-v-a4d9f4e4]{margin:0;font-size:100%;color:#3C4858;width:350px;max-height:500px
+}
+a[data-v-a4d9f4e4]{text-decoration:none;color:#45C8F1
+}
+h1[data-v-a4d9f4e4],h2[data-v-a4d9f4e4],h3[data-v-a4d9f4e4],h4[data-v-a4d9f4e4]{margin-top:0
+}
+.container_selected_area[data-v-a4d9f4e4]{display:none;visibility:hidden;padding:0;position:fixed;top:0;left:0;right:0;bottom:0;z-index:2147483647
+}
+.container_selected_area.active[data-v-a4d9f4e4]{visibility:visible;display:block
+}
+.container_selected_area .label[data-v-a4d9f4e4]{font-family:"Didact Gothic Regular",sans-serif;font-size:22px;text-align:center;padding-top:15px
+}
+.container_selected_area .area[data-v-a4d9f4e4]{display:none;position:fixed;z-index:2147483647;border:1px solid #1e83ff;background:rgba(30,131,255,0.1);box-sizing:border-box
+}
+.container_selected_area .area.active[data-v-a4d9f4e4]{display:block;top:0;left:0
+}
+.hide[data-v-a4d9f4e4]{display:none
+}
+</style></head>
+<body id="scrapbook" class="mt-entry-archive one-column">
+<script>
+if (/mobile/i.test(navigator.userAgent) || /android/i.test(navigator.userAgent)) document.body.classList.add('mobile');
+
+/*
+window.addEventListener('load', function(event) {
+  setTimeout(function () {
+    hab('#sup-post-2');
+    hab('#cre-inner');
+  }, 1000);
+});
+*/
+</script>
+    <div id="container">
+        <div id="container-inner">
+
+            <div id="header">
+    <div id="header-inner">
+        <div id="header-content">
+
+
+            <div id="header-name">阮一峰的网络日志 <span id="site_location"> » <a href="http://www.ruanyifeng.com/blog/" accesskey="1">首页</a></span><span id="site_archive"> » <a href="http://www.ruanyifeng.com/blog/archives.html">档案</a></span>
+</div>
+
+<div id="google_search">
+<!-- SiteSearch Google -->
+<form action="https://www.baidu.com/s" target="_blank" method="get" id="cse-search-box">
+  <div>
+  <input type="text" size="20" name="origin" class="searchbox" id="sbi" value="">
+  <input type="hidden" name="wd" value="">
+  <!--input type="image" src="/static/themes/theme_scrapbook/images/top_search_submit.gif" class="searchbox_submit" value="" alt="搜索" name="sa" onclick="this.form.wd.value = this.form.origin.value + ' inurl:www.ruanyifeng.com/blog'" /-->
+  <input type="image" src="./微信小程序入门教程之四：API 使用 - 阮一峰的网络日志_files/top_search_submit.gif" class="searchbox_submit" value="" alt="搜索" name="sa" onclick="this.form.wd.value = this.form.origin.value + &#39; 阮一峰&#39;">
+</div>
+</form>
+
+<!-- SiteSearch Google -->
+</div>
+<div id="feed_icon">
+<a href="http://www.ruanyifeng.com/feed.html" title="订阅Feed">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAUzSURBVHjavFdbbFRVFF3nPjoz7dTWTittaW0jUDRAUqaNojyqREnEQKgfUj9MqqAmhqRt/OCD4CuY+Kckoh+aiGKC+gMJbdHoRysJ8dkhhmJLNdDKtJU+6GMK87j3Hs85d2Z6HzNtMYWb3Dn3NWftvfba+5xNYDl+e6Fkj6yqb/oDRbWq14vlPBLRKCITkxf0ROLt+hNjp1PPSRK4kA3vF1dXNRcWlyA2OQU9eos9opAkAiKxD+XkKO6t15aRWO7J/MgmAZU8MEgexgZHMX518Dh72sYMmVKShnxWuWHdHtxKIDIYTgMuDzgfmSOIQkYMpdUF8OY92Hytt4/jvkg47czzU16iQovM3QFwmNck+Yyduu7D6NA0Z6JR4THntFs9V4tWQg6Ui3s6MwKDncsFTnXKLJhDSeUK3AgPtyhccDzmVs999buRt/1Vm4i0od+hX7+MRG87jPGB/w1u8FPj9xEw7McVrnYuOCvtpjTth3J/nTg99c8LRhKhr6D3dTB5R24bXFwbMXBsyZzeoXaycEpJ95TB09AGX/NpqLVNtw8urnVzLvHjFNxiFqRy2OOHuqUVnue+ACkoWzo4O6lGzTmuHq6nPvY2m9rVqjrIK2rMEKxqyG5NPAKt+wjo0LklgfNxJkZMA3KJvqRUk3z5UFY3QH14P0h+WUY79HPvgv7VuSg4ZRGY1YgZgqXmORccF17sy2ehnf9AeO085K2HQFbtXBScj0LcpgF2cN+WV+DZ/LJQu6gD4R7oV7pBJwbSgtMvfiPoVp56DySwxm7EtkMs1WdAB7qzggsDJKQYsHucSkOudrkiCPWR/fA2nYCn8SNIK4NptSMyAu3sAdDRkIsJdfth0LzSrODUoPNZ4KI9SxJI5UHk7D4GdQfz2us31c7CoHMjRkKuDPHseCMrONVhNcDJwMJpKFVvg9L4OaTiNWm1x789KCqkrXhVBiEz0WYCT2nAzQAD1/vaETv1GrRfP4Vx5cfMNcDPwvP0h0DhanPym7OIf/+O67vcJ1/PCJ4KgdzaUP6Wz+dU+5yIL6fV+PsHGAOdwlPpvvUOyeeAVGyCdqkDNB6DPjsBSrnndfOGevOh3RhGItxvA+fX1CtbGFhgYUFkFMZPR6F1HnClHq8HyubWtJexX06CRmdt33hrd7nA7SFY4qoGpnYuOKcRykPPgDCBcsHx9Iv+fNL2PueBehCWUfYQIIMGLOCcOmXDXsh1+yCt35tUPfvzGFuSvzvoinXOxqa02qOhM6733nVP2MAdaej2XN11DPKjLZCD+yBvahGCo7JfTKAN9UD7s8Oe9zUNIhz8fWI8DG2k38WCFdxugANcXrvTVd1IEbuv3Jour7Hzn7jLMBNfKs7R3i67gRVrbeCOEDhinmWhAatsqdquM2XzHZINhK2cqTjHr/XZdVJUbgN3MWAVXKbSyg9jesRW2xP9di+lwrL5ojM3m2H/kG9hwcIA37c71W6wJdW2J2S5nrjYbq/t1AHAhJsKQeyfPvf6IMJgghPJhFZ4x0KlfLFvt22du45Au/A1SOlGc0P672XXwhLtOcM0kTTEMMd0qkVmMNXxMd/tsedUjInr4SQDgOfeXMSiN0FCL5WHah4L1qqYXPJOJlttd+a5M+YpcG5poLYKQ5f+6JJ4r8bbJYP47hq4r7QAs9PjYNhHJd4o8l5taiwuOpa7AS4XKqI/5NjJbTnaWK92nLdLuhQAJayRNMiygXPBeQN+Qbvu0zDc3y+aUzhbkGR73sI7ljvUnndx2q3t+X8CDAD66FtrIL864AAAAABJRU5ErkJggg==" alt="" style="border: 0pt none;">
+</a></div>
+
+        </div>
+    </div>
+</div>
+
+
+
+            <div id="content">
+                <div id="content-inner">
+
+
+                    <div id="alpha">
+                        <div id="alpha-inner">
+
+
+                            <div id="entry-2217" class="entry-asset asset hentry">
+                                <div class="asset-header">
+<div class="asset-nav entry-nav">
+
+<div class="entry-location">
+<ul>
+<li>上一篇：<a href="http://www.ruanyifeng.com/blog/2020/10/weekly-issue-131.html" title="科技爱好者周刊（第 131 期）：你的头脑是二值逻辑，还是三值逻辑？">科技爱好者周刊（第&nbsp;1</a></li>
+<li>下一篇：<a href="http://www.ruanyifeng.com/blog/2020/11/weekly-issue-132.html" title="科技爱好者周刊（第 132 期）：快能力和慢能力">科技爱好者周刊（第&nbsp;1</a></li>
+</ul>
+</div>
+
+
+    
+                                    <div class="entry-categories">
+                                        <p>分类<span class="delimiter">：</span></p>
+                                        <ul>
+                                            <li><a href="http://www.ruanyifeng.com/blog/developer/" rel="tag">开发者手册</a></li>
+                                        </ul>
+                                    </div>
+    
+
+
+                                            
+<div class="entry-location-mobile" style="float: right;">
+<ul>
+<li><a href="http://www.ruanyifeng.com/blog/2020/10/weekly-issue-131.html" title="科技爱好者周刊（第 131 期）：你的头脑是二值逻辑，还是三值逻辑？">⇐&nbsp;</a></li>
+<li><a href="http://www.ruanyifeng.com/blog/2020/11/weekly-issue-132.html" title="科技爱好者周刊（第 132 期）：快能力和慢能力">&nbsp;⇒</a></li>
+</ul>
+</div>
+
+</div>
+</div>
+
+                          
+<article class="hentry">
+                                    <h1 id="page-title" class="asset-name entry-title">微信小程序入门教程之四：API 使用</h1>
+
+
+
+<div class="asset-meta">
+                                        
+
+                                            <p class="vcard author">作者： <a class="fn url" href="http://www.ruanyifeng.com/">阮一峰</a></p>
+                                    <p>日期： <a href="http://www.ruanyifeng.com/blog/2020/11/"><abbr class="published" title="2020-11-02T18:33:01+08:00">2020年11月 2日</abbr></a></p>
+
+
+</div>
+
+
+
+
+
+
+
+
+                                
+                                <div class="asset-content entry-content" id="main-content">
+
+                                    <!-- div class="asset-body" -->
+                                        <p>今天是这个系列教程的最后一篇。</p>
+
+                                    <!-- /div -->
+
+
+                                    <!-- div id="more" class="asset-more" -->
+                                        <p><a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-three.html" target="_blank">上一篇教程</a>介绍了，小程序页面如何使用 JavaScript 脚本。有了脚本以后，就可以调用微信提供的各种能力（即微信 API），从而做出千变万化的页面。本篇就介绍怎么使用 API。</p>
+
+<p>所有示例的完整代码，都可以从 GitHub 的<a href="https://github.com/ruanyf/wechat-miniprogram-demos" target="_blank">代码仓库</a>下载。</p>
+
+<p><img src="./微信小程序入门教程之四：API 使用 - 阮一峰的网络日志_files/bg2020100913.jpg" alt="" title=""></p>
+
+<h2>一、WXML 渲染语法</h2>
+
+<p>前面说过，小程序的页面结构使用 WXML 语言进行描述。</p>
+
+<p>WXML 的全称是微信页面标签语言（Weixin Markup Language），它不仅提供了许多功能标签，还有一套自己的语法，可以设置页面渲染的生效条件，以及进行循环处理。</p>
+
+<p>微信 API 提供的数据，就通过 WXML 的渲染语法展现在页面上。比如，<code>home.js</code>里面的数据源是一个数组。</p>
+
+<blockquote><pre class=" language-javascript"><code class=" language-javascript">
+<span class="token function">Page<span class="token punctuation">(</span></span><span class="token punctuation">{</span>
+  data<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    items<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">'事项 A'</span><span class="token punctuation">,</span> <span class="token string">'事项 B'</span><span class="token punctuation">,</span> <span class="token string">'事项 C'</span><span class="token punctuation">]</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></blockquote>
+
+<p>上面代码中，<code>Page()</code>的参数配置对象的<code>data.items</code>属性是一个数组。通过数据绑定机制，页面可以读取全局变量<code>items</code>，拿到这个数组。</p>
+
+<p>拿到数组以后，怎样将每一个数组成员展现在页面上呢？WXML 的数组循环语法，就是一个很简便的方法。</p>
+
+<p>打开<code>home.wxml</code>，改成下面的代码。</p>
+
+<blockquote><pre class=" language-markup"><code class=" language-markup">
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>view</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>text</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>title<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">wx:</span>for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{{items}}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    {{index}}、 {{item}}
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>text</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>view</span><span class="token punctuation">&gt;</span></span>
+</code></pre></blockquote>
+
+<p>上面代码中，<code>&lt;text&gt;</code>标签的<code>wx:for</code>属性，表示当前标签（<code>&lt;text&gt;</code>）启用数组循环，处理<code>items</code>数组。数组有多少个成员，就会生成多少个<code>&lt;text&gt;</code>。渲染后的页面结构如下。</p>
+
+<blockquote><pre class=" language-markup"><code class=" language-markup">
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>view</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>text</span><span class="token punctuation">&gt;</span></span>...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>text</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>text</span><span class="token punctuation">&gt;</span></span>...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>text</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>text</span><span class="token punctuation">&gt;</span></span>...<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>text</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>view</span><span class="token punctuation">&gt;</span></span>
+</code></pre></blockquote>
+
+<p>在循环体内，当前数组成员的位置序号（从<code>0</code>开始）绑定变量<code>index</code>，成员的值绑定变量<code>item</code>。</p>
+
+<p>开发者工具导入项目代码，页面渲染结果如下。</p>
+
+<p><img src="./微信小程序入门教程之四：API 使用 - 阮一峰的网络日志_files/bg2020100507.jpg" alt="" title=""></p>
+
+<p>这个示例的完整代码，可以参考<a href="https://github.com/ruanyf/wechat-miniprogram-demos/tree/master/demos/13.wxml" target="_blank">代码仓库</a>。</p>
+
+<p>WXML 的其他渲染语法（主要是条件判断和对象处理），请查看<a href="https://developers.weixin.qq.com/miniprogram/dev/reference/wxml/list.html" target="_blank">官方文档</a>。</p>
+
+<h2>二、客户端数据储存</h2>
+
+<p>页面渲染用到的外部数据，如果每次都从服务器或 API 获取，有时可能会比较慢，用户体验不好。</p>
+
+<p>小程序允许将一部分数据保存在客户端（即微信 App）的本地储存里面（其实就是自定义的缓存）。下次需要用到这些数据的时候，就直接从本地读取，这样就大大加快了渲染。本节介绍怎么使用客户端数据储存。</p>
+
+<p>打开<code>home.wxml</code>，改成下面的代码。</p>
+
+<blockquote><pre class=" language-markup"><code class=" language-markup">
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>view</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>text</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>title<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">wx:</span>for</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>{{items}}<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    {{index}}、 {{item}}
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>text</span><span class="token punctuation">&gt;</span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>input</span> <span class="token attr-name">placeholder</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>输入新增事项<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">bind:</span>input</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>inputHandler<span class="token punctuation">"</span></span><span class="token punctuation">/&gt;</span></span>
+   <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name"><span class="token namespace">bind:</span>tap</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>buttonHandler<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>确定<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>view</span><span class="token punctuation">&gt;</span></span>
+</code></pre></blockquote>
+
+<p>上面代码除了展示数组<code>items</code>，还新增了一个输入框和一个按钮，用来接受用户的输入。背后的意图是，用户通过输入框，为<code>items</code>数组加入新成员。</p>
+
+<p>开发者工具导入项目代码，页面渲染结果如下。</p>
+
+<p><img src="./微信小程序入门教程之四：API 使用 - 阮一峰的网络日志_files/bg2020100509.jpg" alt="" title=""></p>
+
+<p>注意，输入框有一个<code>input</code>事件的监听函数<code>inputHandler</code>（输入内容改变时触发），按钮有一个<code>tap</code>事件的监听函数<code>buttonHandler</code>（点击按钮时触发）。这两个监听函数负责处理用户的输入。</p>
+
+<p>然后，打开<code>home.js</code>，代码修改如下。</p>
+
+<blockquote><pre class=" language-javascript"><code class=" language-javascript">
+<span class="token function">Page<span class="token punctuation">(</span></span><span class="token punctuation">{</span>
+  data<span class="token punctuation">:</span> <span class="token punctuation">{</span>
+    items<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+    inputValue<span class="token punctuation">:</span> <span class="token string">''</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">inputHandler<span class="token punctuation">(</span></span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    this<span class="token punctuation">.</span><span class="token function">setData<span class="token punctuation">(</span></span><span class="token punctuation">{</span>
+      inputValue<span class="token punctuation">:</span> event<span class="token punctuation">.</span>detail<span class="token punctuation">.</span>value <span class="token operator">||</span> <span class="token string">''</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">buttonHandler<span class="token punctuation">(</span></span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    const newItem <span class="token operator">=</span> this<span class="token punctuation">.</span>data<span class="token punctuation">.</span>inputValue<span class="token punctuation">.</span><span class="token function">trim<span class="token punctuation">(</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>newItem<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    const itemArr <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>this<span class="token punctuation">.</span>data<span class="token punctuation">.</span>items<span class="token punctuation">,</span> newItem<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    wx<span class="token punctuation">.</span><span class="token function">setStorageSync<span class="token punctuation">(</span></span><span class="token string">'items'</span><span class="token punctuation">,</span> itemArr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    this<span class="token punctuation">.</span><span class="token function">setData<span class="token punctuation">(</span></span><span class="token punctuation">{</span> items<span class="token punctuation">:</span> itemArr <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">onLoad<span class="token punctuation">(</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    const itemArr <span class="token operator">=</span> wx<span class="token punctuation">.</span><span class="token function">getStorageSync<span class="token punctuation">(</span></span><span class="token string">'items'</span><span class="token punctuation">)</span> <span class="token operator">||</span> <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span> 
+    this<span class="token punctuation">.</span><span class="token function">setData<span class="token punctuation">(</span></span><span class="token punctuation">{</span> items<span class="token punctuation">:</span> itemArr <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></blockquote>
+
+<p>上面代码中，输入框监听函数<code>inputHandler()</code>只做了一件事，就是每当用户的输入发生变化时，先从事件对象<code>event</code>的<code>detail.value</code>属性上拿到输入的内容，然后将其写入全局变量<code>inputValue</code>。如果用户删除了输入框里面的内容，<code>inputValue</code>就设为空字符串。</p>
+
+<p>按钮监听函数<code>buttonHandler()</code>是每当用户点击提交按钮，就会执行。它先从<code>inputValue</code>拿到用户输入的内容，确定非空以后，就将其加入<code>items</code>数组。然后，使用微信提供的<code>wx.setStorageSync()</code>方法，将<code>items</code>数组存储在客户端。最后使用<code>this.setData()</code>方法更新一下全局变量<code>items</code>，进而触发页面的重新渲染。</p>
+
+<p><code>wx.setStorageSync()</code>方法属于小程序的客户端数据储存 API，用于将数据写入客户端储存。它接受两个参数，分别是键名和键值。与之配套的，还有一个<code>wx.getStorageSync()</code>方法，用于读取客户端储存的数据。它只有一个参数，就是键名。这两个方法都是同步的，小程序也提供异步版本，请参考<a href="https://developers.weixin.qq.com/miniprogram/dev/api/storage/wx.setStorage.html" target="_blank">官方文档</a>。</p>
+
+<p>最后，上面代码中，<code>Page()</code>的参数配置对象还有一个<code>onLoad()</code>方法。该方法属于页面的生命周期方法，页面加载后会自动执行该方法。它只执行一次，用于页面初始化，这里的意图是每次用户打开页面，都通过<code>wx.getStorageSync()</code>方法，从客户端取出以前存储的数据，显示在页面上。</p>
+
+<p>这个示例的完整代码，可以参考<a href="https://github.com/ruanyf/wechat-miniprogram-demos/tree/master/demos/14.storage" target="_blank">代码仓库</a>。</p>
+
+<p>必须牢记的是，客户端储存是不可靠的，随时可能消失（比如用户清理缓存）。用户换了一台手机，或者本机重装微信，原来的数据就丢失了。所以，它只适合保存一些不重要的临时数据，最常见的用途一般就是作为缓存，加快页面显示。</p>
+
+<h2>三、远程数据请求</h2>
+
+<p>小程序可以从外部服务器读取数据，也可以向服务器发送数据。本节就来看看怎么使用小程序的网络能力。</p>
+
+<p>微信规定，只有后台登记过的服务器域名，才可以进行通信。不过，开发者工具允许开发时放松这个限制。</p>
+
+<p><img src="./微信小程序入门教程之四：API 使用 - 阮一峰的网络日志_files/bg2020100510.jpg" alt="" title=""></p>
+
+<p>按照上图，点击开发者工具右上角的三条横线（"详情"），选中"不校验合法域名、web-view（业务域名）、TLS 版本以及 HTTPS 证书" 。这样的话，小程序在开发时，就可以跟服务器进行通信了。</p>
+
+<p>下面，我们在本地启动一个开发服务器。为了简单起见，我选用了 <a href="https://www.npmjs.com/package/json-server" target="_blank">json-server</a> 作为本地服务器，它的好处是只要有一个 JSON 数据文件，就能自动生成 RESTful 接口。</p>
+
+<p>首先，新建一个数据文件<code>db.json</code>，内容如下。</p>
+
+<blockquote><pre class=" language-javascript"><code class=" language-javascript">
+<span class="token punctuation">{</span>
+  <span class="token string">"items"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token string">"事项 A"</span><span class="token punctuation">,</span> <span class="token string">"事项 B"</span><span class="token punctuation">,</span> <span class="token string">"事项 C"</span><span class="token punctuation">]</span>
+<span class="token punctuation">}</span>
+</code></pre></blockquote>
+
+<p>然后，确认本机安装了 Node.js 以后，进入<code>db.json</code>所在的目录，在命令行执行下面命令，启动服务器。</p>
+
+<blockquote><pre class=" language-bash"><code class=" language-bash">
+npx json<span class="token operator">-</span>server db<span class="token punctuation">.</span>json
+</code></pre></blockquote>
+
+<p>正常情况下，这时你打开浏览器访问<code>localhost:3000/items</code>这个网址，就能看到返回了一个数组<code>["事项 A", "事项 B", "事项 C"]</code>。</p>
+
+<p>接着，打开<code>home.js</code>，代码修改如下。</p>
+
+<blockquote><pre class=" language-javascript"><code class=" language-javascript">
+<span class="token function">Page<span class="token punctuation">(</span></span><span class="token punctuation">{</span>
+  data<span class="token punctuation">:</span> <span class="token punctuation">{</span> items<span class="token punctuation">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">onLoad<span class="token punctuation">(</span></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    const that <span class="token operator">=</span> this<span class="token punctuation">;</span>
+    wx<span class="token punctuation">.</span><span class="token function">request<span class="token punctuation">(</span></span><span class="token punctuation">{</span>
+      url<span class="token punctuation">:</span> <span class="token string">'<a class="token url-link" href="http://localhost/">http://localhost</a>:3000/items'</span><span class="token punctuation">,</span>
+      <span class="token function">success<span class="token punctuation">(</span></span>res<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        that<span class="token punctuation">.</span><span class="token function">setData<span class="token punctuation">(</span></span><span class="token punctuation">{</span> items<span class="token punctuation">:</span> res<span class="token punctuation">.</span>data <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></blockquote>
+
+<p>上面代码中，生命周期方法<code>onLoad()</code>会在页面加载后自动执行，这时就会执行<code>wx.request()</code>方法去请求远程数据。如果请求成功，就会执行回调函数<code>succcess()</code>，更新页面全局变量<code>items</code>，从而让远程数据显示在页面上。</p>
+
+<p><code>wx.request()</code>方法就是小程序的网络请求 API，通过它可以发送 HTTP 请求。它的参数配置对象最少需要指定<code>url</code>属性（请求的网址）和<code>succcess()</code>方法（服务器返回数据的处理函数）。其他参数请参考<a href="https://developers.weixin.qq.com/miniprogram/dev/api/network/request/wx.request.html" target="_blank">官方文档</a>。</p>
+
+<p>开发者工具导入项目代码，页面渲染结果如下。它的初始数据是从服务器拿到的。</p>
+
+<p><img src="./微信小程序入门教程之四：API 使用 - 阮一峰的网络日志_files/bg2020100509.jpg" alt="" title=""></p>
+
+<p>这个示例的完整代码，可以参考<a href="https://github.com/ruanyf/wechat-miniprogram-demos/tree/master/demos/15.web-request" target="_blank">代码仓库</a>。</p>
+
+<p>这个例子只实现了远程数据获取，json-server 实际上还支持数据的新增和删改，大家可以作为练习，自己来实现。</p>
+
+<h2>四、<code>&lt;open-data&gt;</code>组件</h2>
+
+<p>如果要在页面上展示当前用户的身份信息，可以使用小程序提供的<a href="https://developers.weixin.qq.com/miniprogram/dev/component/open-data.html" target="_blank"><code>&lt;open-data&gt;</code>组件</a>。</p>
+
+<p>打开<code>home.wxml</code>文件，代码修改如下。</p>
+
+<blockquote><pre class=" language-markup"><code class=" language-markup">
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>view</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>open-data</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>userAvatarUrl<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>open-data</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>open-data</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>userNickName<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>open-data</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>view</span><span class="token punctuation">&gt;</span></span>
+</code></pre></blockquote>
+
+<p>上面代码中，<code>&lt;open-data&gt;</code>组件的<code>type</code>属性指定所要展示的信息类型，<code>userAvatarUrl</code>表示展示用户头像，<code>userNickName</code>表示用户昵称。</p>
+
+<p>开发者工具导入项目代码，页面渲染结果如下，显示你的头像和用户昵称。</p>
+
+<p><img src="./微信小程序入门教程之四：API 使用 - 阮一峰的网络日志_files/bg2020110205.jpg" alt="" title=""></p>
+
+<p><code>&lt;open-data&gt;</code>支持的用户信息如下。</p>
+
+<blockquote>
+  <ul>
+<li><code>userNickName</code>：用户昵称    </li>
+<li><code>userAvatarUrl</code>：用户头像    </li>
+<li><code>userGender</code>：用户性别    </li>
+<li><code>userCity</code>：用户所在城市</li>
+<li><code>userProvince</code>：用户所在省份</li>
+<li><code>userCountry</code>：用户所在国家</li>
+<li><code>userLanguage</code>：用户的语言</li>
+</ul>
+</blockquote>
+
+<p>这个示例的完整代码，可以参考<a href="https://github.com/ruanyf/wechat-miniprogram-demos/tree/master/demos/16.open-data" target="_blank">代码仓库</a>。</p>
+
+<p><code>&lt;open-data&gt;</code>不需要用户授权，也不需要登录，所以用起来很方便。但也是因为这个原因，小程序不允许用户脚本读取<code>&lt;open-data&gt;</code>返回的信息。</p>
+
+<h2>五、获取用户个人信息</h2>
+
+<p>如果想拿到用户的个人信息，必须得到授权。官方建议，通过按钮方式获取授权。</p>
+
+<p>打开<code>home.wxml</code>文件，代码修改如下。</p>
+
+<blockquote><pre class=" language-markup"><code class=" language-markup">
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>view</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>text</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>title<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>hello {{name}}<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>text</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">open-type</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>getUserInfo<span class="token punctuation">"</span></span> <span class="token attr-name"><span class="token namespace">bind:</span>getuserinfo</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>buttonHandler<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>
+    授权获取用户个人信息
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>view</span><span class="token punctuation">&gt;</span></span>
+</code></pre></blockquote>
+
+<p>上面代码中，<code>&lt;button&gt;</code>标签的<code>open-type</code>属性，指定按钮用于获取用户信息，<code>bind:getuserinfo</code>属性表示点击按钮会触发<code>getuserinfo</code>事件，即跳出对话框，询问用户是否同意授权。</p>
+
+<p><img src="./微信小程序入门教程之四：API 使用 - 阮一峰的网络日志_files/bg2020100603.jpg" alt="" title=""></p>
+
+<p>用户点击"允许"，脚本就可以得到用户信息。</p>
+
+<p><code>home.js</code>文件的脚本代码如下。</p>
+
+<blockquote><pre class=" language-javascript"><code class=" language-javascript">
+<span class="token function">Page<span class="token punctuation">(</span></span><span class="token punctuation">{</span>
+  data<span class="token punctuation">:</span> <span class="token punctuation">{</span> name<span class="token punctuation">:</span> <span class="token string">''</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function">buttonHandler<span class="token punctuation">(</span></span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>event<span class="token punctuation">.</span>detail<span class="token punctuation">.</span>userInfo<span class="token punctuation">)</span> <span class="token keyword">return</span><span class="token punctuation">;</span>
+    this<span class="token punctuation">.</span><span class="token function">setData<span class="token punctuation">(</span></span><span class="token punctuation">{</span>
+      name<span class="token punctuation">:</span> event<span class="token punctuation">.</span>detail<span class="token punctuation">.</span>userInfo<span class="token punctuation">.</span>nickName
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></blockquote>
+
+<p>上面代码中，<code>buttonHandler()</code>是按钮点击的监听函数，不管用户点击"拒绝"或"允许"，都会执行这个函数。我们可以通过事件对象<code>event</code>有没有<code>detail.userInfo</code>属性，来判断用户点击了哪个按钮。如果能拿到<code>event.detail.userInfo</code>属性，就表示用户允许读取个人信息。这个属性是一个对象，里面就是各种用户信息，比如头像、昵称等等。</p>
+
+<p>这个示例的完整代码，可以参考<a href="https://github.com/ruanyf/wechat-miniprogram-demos/tree/master/demos/17.user-info" target="_blank">代码仓库</a>。</p>
+
+<p>实际开发中，可以先用<code>wx.getSetting()</code>方法判断一下，用户是否已经授权过。如果已经授权过，就不用再次请求授权，而是直接用<code>wx.getUserInfo()</code>方法获取用户信息。</p>
+
+<p>注意，这种方法返回的用户信息之中，不包括能够真正识别唯一用户的<code>openid</code>属性。这个属性需要用到保密的小程序密钥去请求，所以不能放在前端获取，而要放在后端。这里就不涉及了。</p>
+
+<h2>六、多页面的跳转</h2>
+
+<p>真正的小程序不会只有一个页面，而是多个页面，所以必须能在页面之间实现跳转。</p>
+
+<p><code>app.json</code>配置文件的<code>pages</code>属性就用来指定小程序有多少个页面。</p>
+
+<blockquote><pre class=" language-javascript"><code class=" language-javascript">
+<span class="token punctuation">{</span>
+  <span class="token string">"pages"</span><span class="token punctuation">:</span> <span class="token punctuation">[</span>
+    <span class="token string">"pages/home/home"</span><span class="token punctuation">,</span>
+    <span class="token string">"pages/second/second"</span>
+  <span class="token punctuation">]</span><span class="token punctuation">,</span>
+  <span class="token string">"window"</span><span class="token punctuation">:</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre></blockquote>
+
+<p>上面代码中，<code>pages</code>数组包含两个页面。以后每新增一个页面，都必须把页面路径写在<code>pages</code>数组里面，否则就是无效页面。排在第一位的页面，就是小程序打开时，默认展示的页面。</p>
+
+<p>新建第二个页面的步骤如下。</p>
+
+<p>第一步，新建<code>pages/second</code>目录。</p>
+
+<p>第二步，在该目录里面，新建文件<code>second.js</code>，代码如下。</p>
+
+<blockquote><pre class=" language-javascript"><code class=" language-javascript">
+<span class="token function">Page<span class="token punctuation">(</span></span><span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></blockquote>
+
+<p>第三步，新建第二页的页面文件<code>second.wxml</code>，代码如下。</p>
+
+<blockquote><pre class=" language-markup"><code class=" language-markup">
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>view</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>text</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>title<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>这是第二页<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>text</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>navigator</span> <span class="token attr-name">url</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>../home/home<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>前往首页<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>navigator</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>view</span><span class="token punctuation">&gt;</span></span>
+</code></pre></blockquote>
+
+<p>上面代码中，<code>&lt;navigator&gt;</code>就是链接标签，相当于网页标签<code>&lt;a&gt;</code>，只要用户点击就可以跳转到<code>url</code>属性指定的页面（这里是第一页的位置）。</p>
+
+<p>第四步，修改第一页的页面文件<code>home.wxml</code>，让用户能够点击进入第二页。</p>
+
+<blockquote><pre class=" language-markup"><code class=" language-markup">
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>view</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>text</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>title<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>这是首页<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>text</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>navigator</span> <span class="token attr-name">url</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>../second/second<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>前往第二页<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>navigator</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>view</span><span class="token punctuation">&gt;</span></span>
+</code></pre></blockquote>
+
+<p>开发者工具导入项目代码，页面渲染结果如下。</p>
+
+<p><img src="./微信小程序入门教程之四：API 使用 - 阮一峰的网络日志_files/bg2020100604.jpg" alt="" title=""></p>
+
+<p>用户点击"前往第二页"，就会看到第二个页面。</p>
+
+<p>这个示例的完整代码，可以参考<a href="https://github.com/ruanyf/wechat-miniprogram-demos/tree/master/demos/18.multi-pages" target="_blank">代码仓库</a>。</p>
+
+<h2>七、wx.navigateTo()</h2>
+
+<p>除了使用<code>&lt;navigator&gt;</code>组件进行页面跳转，小程序也提供了页面跳转的脚本方法<code>wx.navigateTo()</code>。</p>
+
+<p>首先，打开<code>home.wxml</code>文件，代码修改如下。</p>
+
+<blockquote><pre class=" language-markup"><code class=" language-markup">
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>view</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>text</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>title<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>这是首页<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>text</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name"><span class="token namespace">bind:</span>tap</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>buttonHandler<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span>前往第二页<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>view</span><span class="token punctuation">&gt;</span></span>
+</code></pre></blockquote>
+
+<p>开发者工具导入项目代码，页面渲染结果如下。</p>
+
+<p><img src="./微信小程序入门教程之四：API 使用 - 阮一峰的网络日志_files/bg2020100605.jpg" alt="" title=""></p>
+
+<p>然后，打开<code>home.js</code>文件，代码修改如下。</p>
+
+<blockquote><pre class=" language-javascript"><code class=" language-javascript">
+<span class="token function">Page<span class="token punctuation">(</span></span><span class="token punctuation">{</span>
+  <span class="token function">buttonHandler<span class="token punctuation">(</span></span>event<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    wx<span class="token punctuation">.</span><span class="token function">navigateTo<span class="token punctuation">(</span></span><span class="token punctuation">{</span>
+      url<span class="token punctuation">:</span> <span class="token string">'../second/second'</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></blockquote>
+
+<p>上面代码中，<code>buttonHandler()</code>是按钮点击的监听函数，只要用户点击按钮，就会调用<code>wx.navigateTo()</code>方法。该方法的参数是一个配置对象，该对象的<code>url</code>属性指定了跳转目标的位置，自动跳转到那个页面。</p>
+
+<p>这个示例的完整代码，可以参考<a href="https://github.com/ruanyf/wechat-miniprogram-demos/tree/master/demos/19.wx-navigateto" target="_blank">代码仓库</a>。</p>
+
+<p>写到这里，这个小程序入门教程就告一段落了，入门知识基本上都涉及了。下一步，大家可以阅读小程序的<a href="https://developers.weixin.qq.com/ebook?action=get_post_info&amp;docid=0008aeea9a8978ab0086a685851c0a" target="_blank">官方教程</a>和<a href="https://developers.weixin.qq.com/miniprogram/dev/framework/" target="_blank">使用文档</a>，争取对小程序 API 有一个整体的把握，然后再去看看各种实际项目的源码，应该就可以动手开发了。以后，我还会写小程序的进阶教程，包括云开发，介绍如何写小程序的后端，下次再见。</p>
+
+<p>（完）</p>
+
+                                    <!-- /div -->
+
+                                </div>
+    <script type="text/javascript" src="./微信小程序入门教程之四：API 使用 - 阮一峰的网络日志_files/newwindow.js.下载"></script>
+                                <div class="asset-footer">
+
+<h3>文档信息</h3>
+<ul>
+<li>版权声明：自由转载-非商用-非衍生-保持署名（<a href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh">创意共享3.0许可证</a>）</li>
+<li>发表日期： <abbr class="published" title="2020-11-02T18:33:01+08:00">2020年11月 2日</abbr></li>
+
+</ul>
+                                </div>
+</article>
+                            </div>
+
+
+
+  <div style="display: inline-block ! important;width: 100%;">
+  
+  </div>
+
+
+
+<div id="related_entries">
+<h2>相关文章</h2>
+<ul>
+
+<li><strong>2020.12.13: <a href="http://www.ruanyifeng.com/blog/2020/12/ssh-tutorial.html">《SSH 入门教程》发布了</a></strong>
+
+                           <div class="entry-body">
+                              SSH 是登录 Linux 服务器的必备工具，只要你在做互联网开发，多多少少都会用到它。
+
+                           </div>
+
+</li>
+
+ 
+<li><strong>2020.10.29: <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-three.html">微信小程序入门教程之三：脚本编程</a></strong>
+
+                           <div class="entry-body">
+                              这个系列教程的前两篇，介绍了小程序的项目结构和页面样式。
+
+                           </div>
+
+</li>
+
+ 
+<li><strong>2020.10.27: <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-two.html">微信小程序入门教程之二：页面样式</a></strong>
+
+                           <div class="entry-body">
+                              这个系列的上一篇教程，教大家写了一个最简单的 Hello world 微信小程序。
+
+                           </div>
+
+</li>
+
+ 
+<li><strong>2020.10.26: <a href="http://www.ruanyifeng.com/blog/2020/10/wechat-miniprogram-tutorial-part-one.html">微信小程序入门教程之一：初次上手</a></strong>
+
+                           <div class="entry-body">
+                              微信是中国使用量最大的手机 App 之一，日活跃用户超过3亿，月活跃用户超过11亿（2019年底统计），市场极大。
+
+                           </div>
+
+</li>
+
+ 
+</ul>
+</div>
+
+
+
+                    
+
+                    <div id="comments" class="comments">
+
+
+    
+    
+        
+    <h2 class="comments-header">留言（37条）</h2>
+
+    <div id="comments-content" class="comments-content" style="clear: left;">
+        
+        <div id="comment-423618" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">小鱼果</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423618">
+            <p>感谢阮老师分享，最近正想研究研究小程序呢。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="November  2, 2020 10:13 PM">2020年11月 2日 22:13</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-423618">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用小鱼果的这条留言" onclick="return CommentQuote(&#39;comment-quote-423618&#39;,&#39;小鱼果&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-423623" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">节点</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423623">
+            <p>获取用户个人信息示例部分，无论模拟器还是真机，都没有弹窗提示“微信授权”的窗口呢 Orz 而是直接获取了我的微信名称并加载到页面里了。<br>
+感谢软老师的教程带我入门，完结撒花</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="November  3, 2020 11:28 AM">2020年11月 3日 11:28</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-423623">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用节点的这条留言" onclick="return CommentQuote(&#39;comment-quote-423623&#39;,&#39;节点&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-423624" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">rainbow</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423624">
+            <p>哈哈哈，更新及时、谢谢大哥</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="November  3, 2020 11:52 AM">2020年11月 3日 11:52</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-423624">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用rainbow的这条留言" onclick="return CommentQuote(&#39;comment-quote-423624&#39;,&#39;rainbow&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-423625" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">飞扬</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423625">
+            <p>又有想法去学习开发小程序了，之前没有好的教程，做到一半。。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="November  3, 2020 11:58 AM">2020年11月 3日 11:58</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-423625">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用飞扬的这条留言" onclick="return CommentQuote(&#39;comment-quote-423625&#39;,&#39;飞扬&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-423628" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">黄笑</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423628">
+            <p>bind:input 应该没有冒号吧</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="November  3, 2020  6:13 PM">2020年11月 3日 18:13</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-423628">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用黄笑的这条留言" onclick="return CommentQuote(&#39;comment-quote-423628&#39;,&#39;黄笑&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-423629" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">黄笑</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423629">
+            <p>试了高阶的版本是可以的，是我弄错了。。<br>
+</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="November  3, 2020  6:21 PM">2020年11月 3日 18:21</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-423629">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用黄笑的这条留言" onclick="return CommentQuote(&#39;comment-quote-423629&#39;,&#39;黄笑&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-423647" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">codeniu</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423647">
+            <blockquote>
+<pre>引用黄笑的发言：</pre>
+
+<p>试了高阶的版本是可以的，是我弄错了。。</p>
+
+<p><br>
+</p></blockquote>
+
+<p>高阶版本是啥意思。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="November  4, 2020  8:14 PM">2020年11月 4日 20:14</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-423647">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用codeniu的这条留言" onclick="return CommentQuote(&#39;comment-quote-423647&#39;,&#39;codeniu&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-423651" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">a</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423651">
+            <p>@ 节点 你是用的wxml tag 没用js读取吧？</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="November  5, 2020  7:18 AM">2020年11月 5日 07:18</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-423651">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用a的这条留言" onclick="return CommentQuote(&#39;comment-quote-423651&#39;,&#39;a&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-423653" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">PGambler</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423653">
+            <p>感谢，阮老师分享，学习中！</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="November  5, 2020 10:16 AM">2020年11月 5日 10:16</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-423653">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用PGambler的这条留言" onclick="return CommentQuote(&#39;comment-quote-423653&#39;,&#39;PGambler&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-423656" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">丨追灬寻</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423656">
+            <p>阮大来一波k8s教程吧</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="November  5, 2020  2:28 PM">2020年11月 5日 14:28</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-423656">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用丨追灬寻的这条留言" onclick="return CommentQuote(&#39;comment-quote-423656&#39;,&#39;丨追灬寻&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-423724" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">elon</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423724">
+            <p>已学习完,感谢大佬优质分享</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="November 10, 2020  6:21 PM">2020年11月10日 18:21</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-423724">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用elon的这条留言" onclick="return CommentQuote(&#39;comment-quote-423724&#39;,&#39;elon&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-423728" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">shaynelee</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423728">
+            <p>期待进阶高级教程</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="November 10, 2020 10:31 PM">2020年11月10日 22:31</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-423728">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用shaynelee的这条留言" onclick="return CommentQuote(&#39;comment-quote-423728&#39;,&#39;shaynelee&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-423814" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://无" href="http://xn--rgv/" target="_blank" rel="nofollow">creamaa</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423814">
+            <p>大牛就是大牛<br>
+期待进阶版本</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="November 15, 2020  7:46 PM">2020年11月15日 19:46</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-423814">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用creamaa的这条留言" onclick="return CommentQuote(&#39;comment-quote-423814&#39;,&#39;creamaa&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-423857" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">萌新</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423857">
+            <p>受益匪浅</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="November 19, 2020  9:49 AM">2020年11月19日 09:49</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-423857">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用萌新的这条留言" onclick="return CommentQuote(&#39;comment-quote-423857&#39;,&#39;萌新&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-423866" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">netwjx</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423866">
+            <p>homer好评 ^_^</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="November 19, 2020  3:59 PM">2020年11月19日 15:59</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-423866">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用netwjx的这条留言" onclick="return CommentQuote(&#39;comment-quote-423866&#39;,&#39;netwjx&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-423935" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">忆零</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423935">
+            <p>简洁易懂，期待高阶教程！</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="November 23, 2020  9:17 PM">2020年11月23日 21:17</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-423935">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用忆零的这条留言" onclick="return CommentQuote(&#39;comment-quote-423935&#39;,&#39;忆零&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-423938" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">Shing</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-423938">
+            <p>感谢，期待后续的小程序进阶教程。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="November 24, 2020  3:18 PM">2020年11月24日 15:18</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-423938">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用Shing的这条留言" onclick="return CommentQuote(&#39;comment-quote-423938&#39;,&#39;Shing&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-424017" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">xiaoniu</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-424017">
+            <p>期待后续</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="November 27, 2020  8:06 PM">2020年11月27日 20:06</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-424017">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用xiaoniu的这条留言" onclick="return CommentQuote(&#39;comment-quote-424017&#39;,&#39;xiaoniu&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-424044" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://somenzz.cn" href="http://somenzz.cn/" target="_blank" rel="nofollow">somenzz</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-424044">
+            <p>示例代码中inputHandler没有被触发，不知道怎么回事，请教高手回答一下</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="December  1, 2020 10:13 AM">2020年12月 1日 10:13</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-424044">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用somenzz的这条留言" onclick="return CommentQuote(&#39;comment-quote-424044&#39;,&#39;somenzz&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-424054" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://无" href="http://xn--rgv/" target="_blank" rel="nofollow">初学者</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-424054">
+            <p>&lt;navigator url="../playing/playing"&gt;前往首页&lt;/navigator&gt;<br>
+跳转界面 没效果 会是什么原因呢？  没报错  没提示 没作为  就是静默 </p>
+
+<p>通过按钮调用方法跳转也不能实现页面跳转效果， 这里确实有报错，说是：<br>
+VM23 WAService.js:2 (in promise) MiniProgramError<br>
+{"errMsg":"navigateTo:fail can not navigateTo a tabbar page"}<br>
+Object</p>
+
+<p>网上说的解决方案，没看懂 ，也没改善效果</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="December  1, 2020  7:21 PM">2020年12月 1日 19:21</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-424054">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用初学者的这条留言" onclick="return CommentQuote(&#39;comment-quote-424054&#39;,&#39;初学者&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-424066" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">andy</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-424066">
+            <p>const itemArr = [...this.data.items, newItem];</p>
+
+<p>没看懂等号右边的部分。哪位大侠解释下？</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="December  2, 2020  3:48 PM">2020年12月 2日 15:48</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-424066">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用andy的这条留言" onclick="return CommentQuote(&#39;comment-quote-424066&#39;,&#39;andy&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-424081" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">xilin</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-424081">
+            <p>期待以后的文章，这四篇挺简单</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="December  3, 2020  1:31 PM">2020年12月 3日 13:31</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-424081">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用xilin的这条留言" onclick="return CommentQuote(&#39;comment-quote-424081&#39;,&#39;xilin&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-424085" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">BecomeBamboo</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-424085">
+            <p>感谢阮老师浅显易懂的教程，文笔朴实生动通俗易懂，撸一遍代码受益匪浅，感谢！</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="December  3, 2020  4:45 PM">2020年12月 3日 16:45</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-424085">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用BecomeBamboo的这条留言" onclick="return CommentQuote(&#39;comment-quote-424085&#39;,&#39;BecomeBamboo&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-424138" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">飘逸星辰YY</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-424138">
+            <p>@初学者：</p>
+
+<p>这是因为你把playing页面在app.json里设置成了tabBar页面，navigateTo不能跳转到tabBar页面</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="December  4, 2020  5:09 PM">2020年12月 4日 17:09</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-424138">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用飘逸星辰YY的这条留言" onclick="return CommentQuote(&#39;comment-quote-424138&#39;,&#39;飘逸星辰YY&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-424142" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://celwk.com" href="http://celwk.com/" target="_blank" rel="nofollow">Can</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-424142">
+            <p>就是 Vue和React的合体啊, 各取千秋, 加上微信支付和获取用户信息这关键的API</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="December  4, 2020 10:54 PM">2020年12月 4日 22:54</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-424142">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用Can的这条留言" onclick="return CommentQuote(&#39;comment-quote-424142&#39;,&#39;Can&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-424177" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="https://qszy1210.github.io/" href="https://qszy1210.github.io/" target="_blank" rel="nofollow">qszy</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-424177">
+            <p>感谢分享, 看到阮大的分享, 总认为是最合适的.能够让人看懂理解的内容.</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="December  7, 2020  1:32 PM">2020年12月 7日 13:32</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-424177">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用qszy的这条留言" onclick="return CommentQuote(&#39;comment-quote-424177&#39;,&#39;qszy&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-424222" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">Jimmy</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-424222">
+            <p>感谢分享，写的真好，期待阮老师的下一步哈。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="December 10, 2020 11:09 AM">2020年12月10日 11:09</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-424222">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用Jimmy的这条留言" onclick="return CommentQuote(&#39;comment-quote-424222&#39;,&#39;Jimmy&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-424343" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">诗和远方在明天</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-424343">
+            <p>简明扼要、思路清晰！</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="December 17, 2020  4:16 PM">2020年12月17日 16:16</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-424343">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用诗和远方在明天的这条留言" onclick="return CommentQuote(&#39;comment-quote-424343&#39;,&#39;诗和远方在明天&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-424345" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">大高贵</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-424345">
+            <p>期待高阶~关注大佬很久啦~</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="December 17, 2020  5:32 PM">2020年12月17日 17:32</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-424345">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用大高贵的这条留言" onclick="return CommentQuote(&#39;comment-quote-424345&#39;,&#39;大高贵&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-424400" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">姜二</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-424400">
+            <blockquote>
+<pre>引用andy的发言：</pre>
+
+<p>const itemArr = [...this.data.items, newItem];</p>
+
+<p>没看懂等号右边的部分。哪位大侠解释下？</p>
+
+</blockquote>
+
+<p>这是js的语法，等号右边的中括号，表示要重新定义一个数组。中括号内，就放一个个的数组元素。 ...（三个点） 代表展开数组，可以简单理解为把this.data.items中的每个元素，复制到中括号里了，然后再新加了一个 newItem元素，最终的目的是把this.data.items追加一个新元素，再返回给itemArr。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="December 20, 2020  2:23 PM">2020年12月20日 14:23</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-424400">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用姜二的这条留言" onclick="return CommentQuote(&#39;comment-quote-424400&#39;,&#39;姜二&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-424450" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author"><a title="http://我没有" href="http://xn--wnuo4izrf/" target="_blank" rel="nofollow">小赵</a></span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-424450">
+            <p>期待后续更新</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="December 23, 2020  4:14 PM">2020年12月23日 16:14</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-424450">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用小赵的这条留言" onclick="return CommentQuote(&#39;comment-quote-424450&#39;,&#39;小赵&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-424830" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">ljx</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-424830">
+            <blockquote>
+<pre>引用somenzz的发言：</pre>
+
+<p>示例代码中inputHandler没有被触发，不知道怎么回事，请教高手回答一下</p>
+
+</blockquote>
+
+<p>解决一：bindinput  (不要冒号)<br>
+解决二：在右上角【详情】-》【本地设置】中，把【调试基础库】版本选高点。</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="January  6, 2021 10:02 PM">2021年1月 6日 22:02</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-424830">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用ljx的这条留言" onclick="return CommentQuote(&#39;comment-quote-424830&#39;,&#39;ljx&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-424875" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">流光</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-424875">
+            <blockquote>
+<pre>引用初学者的发言：</pre>
+
+<p>&lt;navigator url="../playing/playing"&gt;前往首页&lt;/navigator&gt;<br>
+跳转界面 没效果 会是什么原因呢？没报错没提示 没作为就是静默 </p>
+
+<p>通过按钮调用方法跳转也不能实现页面跳转效果， 这里确实有报错，说是：<br>
+VM23 WAService.js:2 (in promise) MiniProgramError<br>
+{"errMsg":"navigateTo:fail can not navigateTo a tabbar page"}<br>
+Object</p>
+
+<p>网上说的解决方案，没看懂 ，也没改善效果</p>
+
+</blockquote>
+
+<p>tabBar 已定义的页面，通过这2种方式均无法跳转</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="January  8, 2021 11:31 AM">2021年1月 8日 11:31</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-424875">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用流光的这条留言" onclick="return CommentQuote(&#39;comment-quote-424875&#39;,&#39;流光&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-424956" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">topwang</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-424956">
+            <p>期待高级教程以及云开发、小程序后端</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="January 12, 2021  3:57 PM">2021年1月12日 15:57</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-424956">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用topwang的这条留言" onclick="return CommentQuote(&#39;comment-quote-424956&#39;,&#39;topwang&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-425463" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">单车</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-425463">
+            <p><br>
+    授权获取用户个人信息<br>
+</p>
+
+<p>或者是：</p>
+
+<p><br>
+    授权获取用户个人信息<br>
+</p>
+
+<p>或者是调整详情-》本地设置-》调试基础库 的版本</p>
+
+<p>或者是重启微信开发者工具</p>
+
+<p><br>
+都没有弹出框。。有谁知道原因吗？</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="February  7, 2021  8:22 PM">2021年2月 7日 20:22</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-425463">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用单车的这条留言" onclick="return CommentQuote(&#39;comment-quote-425463&#39;,&#39;单车&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-425560" class="comment">
+    <div class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">just</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-425560">
+            <blockquote>
+<pre>引用andy的发言：</pre>
+
+<p>const itemArr = [...this.data.items, newItem];</p>
+
+<p>没看懂等号右边的部分。哪位大侠解释下？</p>
+
+</blockquote>
+
+<p>这是 ES6 数组的拓展语法，...this.data.items 表示将 this.data.items 数组里面的元素展开，后面再加上 newItem 组合成一个新的数组</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="February 21, 2021 10:42 PM">2021年2月21日 22:42</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-425560">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用just的这条留言" onclick="return CommentQuote(&#39;comment-quote-425560&#39;,&#39;just&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    
+        
+        <div id="comment-426263" class="comment">
+    <div id="comment-last" class="inner">
+        <div class="comment-header">
+            <div class="asset-meta">
+<p>
+                <span class="byline">
+                    
+
+                    <span class="vcard author">梦入烟城</span>
+
+ 说：
+                </span>
+</p>
+            </div>
+        </div>
+        <div class="comment-content" id="comment-quote-426263">
+            <p>谢谢 大神教导，我感觉我会一些简单的小程序编写了！！！</p>
+        </div>
+<div class="comment-footer">
+<div class="comment-footer-inner">
+<p>
+                   <abbr class="published" title="April  8, 2021  2:38 PM">2021年4月 8日 14:38</abbr>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-426263">#</a>
+ | <a href="http://www.ruanyifeng.com/blog/2020/11/wechat-miniprogram-tutorial-part-four.html#comment-text" title="引用梦入烟城的这条留言" onclick="return CommentQuote(&#39;comment-quote-426263&#39;,&#39;梦入烟城&#39;);">引用</a>
+</p>
+</div>
+</div>
+    </div>
+</div>
+        
+    </div>
+        
+    
+
+
+    
+    
+    <div class="comments-open" id="comments-open">
+        <h2 class="comments-open-header">我要发表看法</h2>
+        <div class="comments-open-content">
+
+        
+            <div id="comment-greeting"></div>
+
+            <form method="post" action="http://www.ruanyifeng.com/cgi-bin/mtos/mt-comments.cgi" name="comments_form" id="comments-form" onsubmit="return pleaseWait();">
+                <input type="hidden" name="static" value="1">
+                <input type="hidden" name="entry_id" value="2217">
+                <input type="hidden" name="__lang" value="en">
+                <input type="hidden" name="parent_id" value="" id="comment-parent-id">
+                <input type="hidden" name="armor" value="1">
+                <input type="hidden" name="preview" value="">
+                <input type="hidden" name="sid" value="">
+                <div id="comments-open-data">
+            <div id="comments-open-text">
+                    <p><label for="comment-text">您的留言
+                    （HTML标签部分可用）</label></p>
+                    <p><textarea id="comment-text" name="text" rows="10" cols="50"></textarea></p>
+                </div>
+                    <div id="comment-form-name">
+                        <p><label for="comment-author">您的大名：</label></p>
+                        <p><input id="comment-author" name="author" size="30" value="">  <span class="hint"> «-必填</span></p>
+                    </div>
+                    <div id="comment-form-email">
+                        <p><label for="comment-email">电子邮件：</label></p>
+                        <p><input id="comment-email" name="email" size="30" value="">  <span class="hint"> «-必填，不公开</span></p>
+                    </div>
+                    <div id="comment-form-url">
+                        <p><label for="comment-url">个人网址：</label></p>
+                        <p><input id="comment-url" name="url" size="30" value="">  <span class="hint"> «-我信任你，不会填写广告链接</span></p>
+                    </div>
+                    <div id="comment-form-remember-me">
+                        <p>
+                        <label for="comment-bake-cookie">记住个人信息？</label><input type="checkbox" id="comment-bake-cookie" name="bakecookie" onclick="!this.checked?forgetMe(document.comments_form):rememberMe(document.comments_form)" value="1" accesskey="r"></p>
+                    </div>
+                </div>
+                    <div id="comment-form-reply" style="display:none">
+                    <input type="checkbox" id="comment-reply" name="comment_reply" value="" onclick="mtSetCommentParentID()">
+                    <label for="comment-reply" id="comment-reply-label"></label>
+                </div>
+                <div id="comments-open-captcha"></div>
+                <div id="comments-open-footer">
+<div id="wait" style="display:none;">
+<p><strong>正在发表您的评论，请稍候</strong></p>
+<p>
+<input type="text" name="percent" size="3" style="font-family:Arial; color:black;text-align:center; border-width:medium; border-style:none;">           
+<input type="text" name="chart" size="46" style="font-family:Arial;font-weight:bolder; color:black; padding:0px; border-style:none;">
+</p>
+</div>
+
+                    <p><input type="submit" accesskey="s" name="post" id="comment-submit" value="发表">  <span class="hint"> «- 点击按钮</span></p>
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+
+    
+
+
+</div>
+
+
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        <script type="text/javascript" src="./微信小程序入门教程之四：API 使用 - 阮一峰的网络日志_files/prism.js.下载"></script>
+        <script type="text/javascript" src="./微信小程序入门教程之四：API 使用 - 阮一峰的网络日志_files/checker.js.下载"></script> 
+            <div id="footer">
+<div id="footer-inner">
+  <div id="footer-content">
+
+      
+<!--
+      <section> 
+     </section>
+  <p><a title="Instagram" target="_blank" href="http://instagram.com/ruanyf">Instagram</a></p>
+       <p><a title="订阅" href="https://app.feedblitz.com/f/f.fbz?Sub=348868" target="_blank">邮件订阅</a></p>
+  
+       <h2>Feed</h2>
+       <p><a title="FeedBurner" href="http://feeds.feedburner.com/ruanyifeng" target="_blank">FeedBurner</a></p>
+       <p><a title="atom.xml" href="http://www.ruanyifeng.com/blog/atom.xml" target="_blank">atom.xml</a></p>
+     
+      <p>支付宝：<a title="支付宝" href="alipays://platformapi/startapp?appId=20000067&url=http%3A%2F%2Fwww.ruanyifeng.com%2Fblog" target="_blank">yifeng.ruan@gmail.com</a></p>
+-->
+
+     <section>
+<!--
+       <h2>授权方式</h2>
+       <p><a title="许可证" href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.zh" target="_blank">自由转载-非商用-非衍生-保持署名</a></p>
+       <h2>微信公号</h2>
+       <h2>社交帐号</h2>
+       <h2>联系方式</h2>
+     -->
+       <p><img src="./微信小程序入门教程之四：API 使用 - 阮一峰的网络日志_files/bg2020013101.jpg" alt="微信扫描"></p>
+       <p>
+         <a title="微博" href="http://weibo.com/ruanyf" target="_blank">Weibo</a> | 
+         <a title="Twitter" target="_blank" href="https://twitter.com/ruanyf">Twitter</a> |
+         <a title="GitHub" target="_blank" href="https://github.com/ruanyf">GitHub</a>
+       </p>
+     
+     <p>Email: <a title="电子邮件" href="mailto:yifeng.ruan@gmail.com" target="_blank">yifeng.ruan@gmail.com</a></p>
+     </section>
+  
+  
+
+
+  </div>
+</div>
+</div>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-46829782-1', 'ruanyifeng.com');
+  ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript" src="./微信小程序入门教程之四：API 使用 - 阮一峰的网络日志_files/stats.js.下载"></script>
+<script>
+var supportImg = document.querySelector('#support-img');
+
+if (supportImg && _hmt) {
+  _hmt.push(['_trackEvent', 'banner', 'load']);
+  supportImg.addEventListener('click', function () {
+    _hmt.push(['_trackEvent', 'banner', 'click']);
+  }, false);
+}
+
+var homepageImg = document.querySelector('#homepage_sponsor');
+if (homepageImg && _hmt) {
+  _hmt.push(['_trackEvent', 'homepage-banner', 'load']);
+  homepageImg.addEventListener('click', function () {
+    _hmt.push(['_trackEvent', 'homepage-banner', 'click']);
+  }, false);
+}
+</script>
+
+
+<script>
+document.getElementById("share_button").innerHTML=document.getElementById("share_button_proto").innerHTML;
+</script>
+
+
+
+
+
+
+
+
+
+        </div>
+    </div>
+
+<input type="file" id="" name="file" style="display: none;"><div data-v-a4d9f4e4="" class="container_selected_area" style="cursor: url(&quot;chrome-extension://ijejnggjjphlenbhmjhhgcdpehhacaal/assets/images/cursor-imagen.svg&quot;) 9 9, crosshair;"><div data-v-a4d9f4e4="" class="area"></div></div></body></html>
