@@ -18,3 +18,22 @@
 ## weui
 > https://weui.io/
 
+
+## 小程序的跳转
+
+### navigate 标签
+
+```
+<navigator url="/pages/index/register" open-type="navigate">
+    注册
+</navigator>
+
+```
+
+open-type 值选项说明：
+
+- navigate 保留当前页面，跳转到应用内的某个页面
+- redirect 关闭当前页面，跳转到应用内的某个页面
+- reLaunch 关闭所有页面，打开到应用内的某个页面
+- switchTab 跳转到 tabBar 页面，并关闭其他所有非 tabBar 页面
+
