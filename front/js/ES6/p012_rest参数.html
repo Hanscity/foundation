@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+        function allStar() {
+            /*
+                视频中的讲解，arguments 是对象
+                2021-04-25， 此时也是数组，和下面的 ...rest 参数的答应结果是一样的
+                
+            */
+            console.log(arguments);
+        }
+
+        allStar("kobe", "Durant", "Magrady");
+
+
+        function allStar(...argu) {
+            console.log(argu);
+        }
+
+        allStar("kobe", "Durant", "Magrady");
+
+    </script>
+</body>
+</html>
