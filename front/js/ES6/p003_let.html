@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+        /*
+            1. 不能重复申明
+        */
+        let a;
+
+        /*
+            2. 块级作用域
+                - 全局
+                - 函数
+                - eval（在 ES5 中的严格模式下）
+        */
+
+        // {
+        //     var girl = "rich";
+        // }
+        // console.log(girl); // undefined
+
+
+        /*
+            3. 不存在变量提升
+        */
+
+        /*
+            4. 不影响作用域链(会向上级寻找变量)
+        */
+
+        let school = "wuzhong";
+
+        function fn () {
+            console.log(school);
+        }
+        fn();
+
+        /*
+            5. 值可以修改
+        */
+        school = "yucai";
+        console.log(school);
+
+
+
+    </script>
+</body>
+</html>

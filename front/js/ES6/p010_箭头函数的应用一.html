@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #d1 {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    
+    <div id="d1">
+
+    </div>
+
+    <script>
+        var d1 = document.getElementById("d1");
+
+        /*
+            常规的写法
+        */
+        // d1.onclick = function () {
+        //     let that = this;
+        //     setTimeout(function () {
+        //         that.style.backgroundColor = "orange";
+        //     }, 1000);
+        // }
+
+        /*
+            箭头函数的写法：
+
+        */
+        d1.onclick = function () {
+            setTimeout(() => {
+                this.style.backgroundColor = "orange";
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

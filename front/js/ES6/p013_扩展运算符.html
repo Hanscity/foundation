@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="test">1</div>
+    <div class="test">2</div>
+    <div class="test">3</div>
+
+    <script>
+        /*
+        
+            rest 参数： function allStar(...rest) 这是定义函数的时候
+
+            扩展运算符： allStar(...star); 这是调用函数的时候
+
+        */
+
+        // function allStar(...rest) {
+        //     console.log(rest);
+        // }
+
+        // let star = ["kobe", "Durant", "Macgrady"];
+        // allStar(...star);
+
+
+        /*
+            应用： 
+            - 数组的合并
+        */
+        // let westStar = ["Kobe", "MacGrady"];
+        // let eastStar = ["James", "Wade"];
+        // let star = [...westStar, ...eastStar];
+        // console.log(star);
+
+        /*
+            - 数组的copy, 新数组的值不会影响原来数组的值
+        */
+        // let westStarCopy = [...westStar];
+        // console.log(westStarCopy);
+        // westStarCopy[1] = "Durant";
+        // console.log(westStar);
+        // console.log(westStarCopy);
+
+
+        /*
+            - 将伪数组转化为真正的数组
+        */
+        // var divTest = document.getElementsByClassName("test");
+        // console.log(divTest);
+        // console.log(...divTest);
+
+
+    </script>
+    
+</body>
+</html>
