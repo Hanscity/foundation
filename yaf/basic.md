@@ -622,3 +622,84 @@ server {
 
 
 ```
+
+
+
+
+## Yaf 对 HTTP 数据的获取
+
+### POST 请求
+
+#### 当 header 是 "Content-Type:application/json"（前后端分离的项目中，默认是 json） 的时候
+
+```
+curl -X POST -H "Content-Type: application/json" -d '{"account_idx":837,"gid":10021,"count":10}' http://yaf.test/index/user/test
+
+```
+
+php 代码如下：
+
+```
+
+var_export(file_get_contents("php://input"));
+var_export($this->getRequest()->getPost());
+var_export($_POST);
+
+```
+
+
+结果如下：
+
+
+```
+'{"account_idx":837,"gid":10021,"count":10}'
+
+array ()
+
+array ()
+
+```
+
+结论： 当 header 是 "Content-Type:application/json" 的时候，需要使用 php://input
+
+
+
+### 当 header 是 "Content-Type:application/x-www-form-urlencoded" 的时候
+
+```
+curl -X POST -H 'Content-Type : application/x-www-form-urlencoded' -d 'name=ch&gid=10021&count=10' http://yaf.test/index/user/test
+
+```
+
+php 代码如下：
+
+```
+
+var_export(file_get_contents("php://input"));
+var_export($_POST);
+var_export($this->getRequest()->getPost());
+
+```
+
+
+结果如下：
+
+
+```
+'name=ch&gid=10021&count=10'
+
+array (
+  'name' => 'ch',
+  'gid' => '10021',
+  'count' => '10',
+)
+
+array (
+  'name' => 'ch',
+  'gid' => '10021',
+  'count' => '10',
+)
+
+```
+
+结论： 当 header 是 "Content-Type:application/json" 的时候，不要使用 php://input
