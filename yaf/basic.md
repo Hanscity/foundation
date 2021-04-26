@@ -630,7 +630,7 @@ server {
 
 ### POST 请求
 
-#### 当 header 是 "Content-Type:application/json" 的时候
+#### 当 header 是 "Content-Type:application/json"（前后端分离的项目中，默认是 json） 的时候
 
 ```
 curl -X POST -H "Content-Type: application/json" -d '{"account_idx":837,"gid":10021,"count":10}' http://yaf.test/index/user/test
