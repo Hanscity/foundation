@@ -75,3 +75,88 @@ wx.showToast({
 
 ```
 
+
+## 设置页面上方的 title (NavigationBarTitle)
+
+app.json 中设置默认的 NavigationBarTitle
+
+```
+
+"window": {
+    "navigationBarBackgroundColor": "#000000",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "沐家农贸信息"   
+},
+
+```
+
+页面中动态设置
+
+```
+wx.setNavigationBarTitle({
+    title: '登录页面',
+})
+
+```
+
+
+## 本地存储（本地的注册登录）
+
+```
+
+/**
+* 生命周期函数--监听页面加载
+* 获取本地缓存数据并设置
+*/
+onLoad: function (options) {
+  const itemArr = wx.getStorageSync('items') || []; 
+  this.setData({ items: itemArr });
+},
+
+
+/*
+  设置本地缓存并设置
+*/
+const newItem = {
+  username: this.data.username,
+  password: this.data.password,
+  passwordConfirm: this.data.passwordConfirm,
+  phone: this.data.phone,
+  codeVerify: this.data.codeVerify,
+};
+const itemArr = [...this.data.items, newItem];
+wx.setStorageSync('items', itemArr);
+this.setData({ items: itemArr });
+
+
+/*
+  从本地缓存中获取数据并判断
+*/
+let users = wx.getStorageSync('items') || [];
+let userinfo = users.find(item => {
+  return item.username === this.data.usernameInput && 
+  item.password === this.data.passwordInput
+});
+
+if (!userinfo) {
+  wx.showToast({
+    title: '该用户名或者密码不存在',
+    icon: 'fail',
+    duration: 2000
+  })
+  return;
+}
+
+wx.showToast({
+  title: '登录成功',
+  icon: 'success',
+  duration: 2000,
+  success: function () {
+    wx.navigateTo({
+      url: '/pages/index/registerIndi'
+    })
+  }
+})
+
+
+```
