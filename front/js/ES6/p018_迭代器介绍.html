@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        let xiyou = ["tangseng", "sunwukong", "shasheng", "zhubajie"];
+
+        let iterator = xiyou[Symbol.iterator]();
+
+        console.log(xiyou);
+        console.log(iterator);
+
+        console.log(iterator.next());
+        console.log(iterator.next());
+        console.log(iterator.next());
+        console.log(iterator.next());
+        console.log(iterator.next());
+
+
+        /*
+            拥有迭代器接口之后，可以使用 for of;
+                for of： 打印的是值
+                for in： 打印的是索引
+                
+        */
+        // for (let i of xiyou) {
+        //     console.log(i);
+        // }
+
+        // for (let i in xiyou) {
+        //     console.log(i);
+        // }
+
+    </script>
+</body>
+</html>
