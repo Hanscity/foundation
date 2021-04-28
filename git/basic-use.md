@@ -124,3 +124,11 @@ The file will have its original line endings in your working directory
 git config --global core.autocrlf true
 
 ```
+
+
+## 命令行的情况下，中文乱码问题
+
+```
+git config --global core.quotepath false
+
+```
