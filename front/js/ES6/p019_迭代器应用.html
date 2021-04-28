@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+        /*
+        
+            for of 适用的数据类型：
+                Array
+                Arguments
+                Set
+                Map
+                String
+                TypeArray
+                NodeList
+
+        */
+
+        const allStar = {
+            name: "Basketball All Star",
+            list: [
+                "Kobe",
+                "MacGrady",
+                "Wade",
+                "Iverson",
+                "Durant"
+            ],
+            [Symbol.iterator]() {
+                let index = 0;
+                // ... 暂时搞不懂~
+            }
+        };
+
+        console.log(Symbol.iterator);
+
+    </script>
+</body>
+</html>
