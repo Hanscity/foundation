@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <pre>
+        <code>
+// Php 代码
+$a = [1=>'rice', 2=>'wheel', 3=>'corn'];
+var_export(json_encode($b)); // 结果二： '{"1":"rice","2":"wheel","3":"corn"}'
+
+// JS 代码
+let a = '{"1":"rice","2":"wheel","3":"corn"}';
+console.log(JSON.parse(a)); // '{"1":"rice","2":"wheel","3":"corn"}'
+
+
+// Php 代码
+$b = [0=>'rice', 1=>'wheel', 2=>'corn'];
+var_export(json_encode($a)); // 结果一： '["rice","wheel","corn"]'
+
+// JS 代码
+let b = '["rice","wheel","corn"]';
+console.log(JSON.parse(b)); // ["rice", "wheel", "corn"]
+
+
+// 通过对比可以看出，差别很大；转化为 JS 对象后，第一个结果是普通对象， 第二个结果是数组对象
+
+        </code>
+    </pre>
+
+    <script>
+
+        
+    </script>
+</body>
+</html>
