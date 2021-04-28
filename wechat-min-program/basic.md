@@ -160,3 +160,67 @@ wx.showToast({
 
 
 ```
+
+
+
+## 远程数据请求
+
+### POST 请求
+
+#### "content-type": "application/json"
+
+传递的数据 newItem 是对象
+```
+const newItem = {
+  username: this.data.username,
+  password: this.data.password,
+  passwordConfirm: this.data.passwordConfirm,
+  phone: this.data.phone,
+  codeVerify: this.data.codeVerify,
+};
+
+wx.request({
+  url: app.globalData.serverHost + '/index/user/test',
+  method: "POST",
+  header: {
+      "content-type": "application/json"
+  },
+  data: newItem,
+  success(res) {
+    console.log(res);
+  }
+});
+
+```
+
+
+#### "content-type": "application/x-www-form-urlencoded"
+
+传递的数据 newItem 是对象
+
+```
+const newItem = {
+  username: this.data.username,
+  password: this.data.password,
+  passwordConfirm: this.data.passwordConfirm,
+  phone: this.data.phone,
+  codeVerify: this.data.codeVerify,
+};
+
+wx.request({
+  url: app.globalData.serverHost + '/index/user/test',
+  method: "POST",
+  header: {
+      "content-type": "application/x-www-form-urlencoded"
+  },
+  data: newItem,
+  success(res) {
+    console.log(res);
+  }
+});
+
+```
+
+
+总结：传递对象数据即可
+

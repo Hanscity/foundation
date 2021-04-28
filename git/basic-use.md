@@ -111,3 +111,16 @@ Sometimes you dont need to use git reset command, if you known this command
 
 当你将文件放入了暂存区（也就是所使用了 git add），那么这个命令就不行了
 
+
+## Window 平台的换行符
+
+```
+warning: LF will be replaced by CRLF in file..
+The file will have its original line endings in your working directory
+
+```
+
+```
+git config --global core.autocrlf true
+
+```
