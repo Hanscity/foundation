@@ -703,3 +703,26 @@ array (
 ```
 
 结论： 当 header 是 "Content-Type:application/json" 的时候，不要使用 php://input
+
+
+
+
+
+
+## 模板
+
+
+开启模板和关闭模板的方法
+
+```
+
+ Yaf\Dispatcher::getInstance()->autoRender(true);
+ Yaf\Dispatcher::getInstance()->autoRender(false);
+ Yaf\Dispatcher::getInstance()->enableView();
+ Yaf\Dispatcher::getInstance()->disableView();
+
+
+```
+
+
+

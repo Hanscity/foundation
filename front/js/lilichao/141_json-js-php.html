@@ -15,7 +15,7 @@ var_export(json_encode($b)); // 结果二： '{"1":"rice","2":"wheel","3":"corn"
 
 // JS 代码
 let a = '{"1":"rice","2":"wheel","3":"corn"}';
-console.log(JSON.parse(a)); // '{"1":"rice","2":"wheel","3":"corn"}'
+console.log(JSON.parse(a)); // {1: "rice", 2: "wheel", 3: "corn"}
 
 
 // Php 代码
@@ -34,7 +34,13 @@ console.log(JSON.parse(b)); // ["rice", "wheel", "corn"]
 
     <script>
 
-        
+        let a = '{"1":"rice","2":"wheel","3":"corn"}';
+        console.log(JSON.parse(a)); // {1: "rice", 2: "wheel", 3: "corn"}
+
+        let b = '["rice","wheel","corn"]';
+        console.log(JSON.parse(b)); // ["rice", "wheel", "corn"]
+
+
     </script>
 </body>
 </html>
