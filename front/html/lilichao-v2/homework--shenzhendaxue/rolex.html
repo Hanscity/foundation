@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        html {
+            /*
+                一般，基础的透视设置为 800px~1200px, 设置给 HTML 元素
+            */
+            perspective: 800px;
+        }
+
+        .outer {
+            width: 300px;
+            height: 300px;
+            margin: 100px auto;
+            border-radius: 50%;
+            /* border: 1px solid black; */
+            position: relative;
+            /*
+                旋转的其实是盒子容器，秒针更随着。
+                需要将秒针的起点设置在中心位置
+                
+            */
+            background-image: url("123_rolex.png");
+            background-size: cover;
+
+        }
+
+        .outer > div {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+
+        .outer .hour_box {
+
+            width: 60%;
+            height: 60%;
+            animation: run 36000s infinite linear;
+        }
+
+        .outer .min_box {
+
+            width: 80%;
+            height: 80%;
+            animation: run 3600s infinite steps(60);
+        }
+
+        .outer .second_box {
+            width: 90%;
+            height: 90%;
+            animation: run 60s infinite steps(60);
+
+        }
+
+        .outer .hour_box .hour {
+        
+            width: 6px;
+            height: 50%;
+            background-color: orange;
+            margin: 0 auto;
+
+        }
+
+        .outer .min_box .min {
+        
+            width: 4px;
+            height: 50%;
+            background-color: green;
+            margin: 0 auto;
+        }
+
+        .outer .second_box .second {
+        
+            width: 2px;
+            height: 50%;
+            background-color: #232323;
+            margin: 0 auto;
+        }
+
+
+        @keyframes run {
+            from {
+                transform: rotateZ(0deg);
+            }
+
+            to {
+                transform: rotateZ(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    
+
+
+    <div class="outer">
+
+        <div class="hour_box">
+            <div class="hour">
+
+            </div>
+        </div>
+
+        <div class="min_box">
+            <div class="min">
+
+            </div>
+        </div>
+
+
+        <div class="second_box">
+            <div class="second">
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <div class="introduce">
+
+        <h2>作品簡介</h2>
+        <p>
+            hi，老师你好，这是我的作品，一块劳力士手表。
+
+        </p>
+
+        <p>
+            时光飞逝，一学期马上就结束了，所以选择了象征时间的手表动画。为何是劳力士呢， 劳力士腕表常备受珍视，它不仅具备物质价值，更蕴藏深远的意义。
+            不论是作为家传之宝、成功路上的里程碑或赠礼，劳力士腕表常象征着生命旅途上的非凡时刻。哈哈说实话吧，其实是因为在搜索到的图片中，个人认为这一张最好看。
+        </p>
+
+        <p>
+            我是一个后台程序员，会接触到 HTML，所以选择的技术是离工作稍微接近的 H5 动画，还望老师谅解。
+        </p>
+
+        
+    </div>
+</body>
+</html>
