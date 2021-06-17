@@ -8,5 +8,7 @@ int main()
                  // *p: 当拿来应用的时候，*p = i;
                  
     // int *q = 0;
+    int *q = NULL;    // 很多的编译器，不喜欢用户看到 0 地址，用 NULL 来表示
+    printf("*q address value is: %p \n", q);
 
 }
