@@ -5,7 +5,8 @@ struct point {
         int y;
 };
 
-void getStruct(struct point);
+struct point getStruct(void);
+
 void output(struct point);
 
 
@@ -13,15 +14,17 @@ int main(int argc, const char *argv[])
 {
     
     struct point y = {0, 0};
-    getStruct(y); // 传入的是 y 的值，故改变不了 y 的值
+    y = getStruct();
     output(y);
 }
 
-void getStruct(struct point p)
+struct point getStruct()
 {
+    struct point p;
     scanf("%d", &p.x);
     scanf("%d", &p.y);
     printf("%d %d\n", p.x, p.y);
+    return p;
 }
 
 void output(struct point p)
