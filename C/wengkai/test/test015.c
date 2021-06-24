@@ -3,12 +3,18 @@
 int main()
 {
 
-    do
-    {
-        /* code */
-    } while (/* condition */);
+    int x;
+    printf("请输入一个整数\n");
+    scanf("%d", &x);
 
-    while ()
+    if (x % 2 == 1)
     {
+        printf("是奇数\n");
     }
+    else 
+    {
+        printf("不是奇数\n");
+    }
+
+    return 0;
 }

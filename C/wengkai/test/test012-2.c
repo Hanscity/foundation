@@ -2,7 +2,7 @@
 
 double getPI()
 {
-    double direct = 1000000;
+    double direct = 10e6;
     double sum = 0;
     int n = 0;
     int flag = 1;

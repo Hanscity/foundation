@@ -21,6 +21,7 @@ int main(int argc, const char *argv[])
 struct point getStruct()
 {
     struct point p;
+    printf("请输入两个数字\n");
     scanf("%d", &p.x);
     scanf("%d", &p.y);
     printf("%d %d\n", p.x, p.y);
