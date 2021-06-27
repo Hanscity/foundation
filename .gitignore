@@ -6,3 +6,4 @@ c/wengkai/first-week/*.o
 C/wengkai/*.out
 C/wengkai/test/*.out
 C/wengkai/p1231/*.out
+C/web-server/*.out
